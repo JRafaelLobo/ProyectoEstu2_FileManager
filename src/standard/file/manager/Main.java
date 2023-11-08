@@ -1,5 +1,6 @@
 package standard.file.manager;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -15,16 +16,14 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Portadita.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
-
-        this.setLocationRelativeTo(null);
-        this.setVisible(false);
         Music = playMusic("./Musica\\SonidoBoton.wav");
         Music.start();
         //Music.loop(Clip.LOOP_CONTINUOUSLY);
-        CambiarPantallaTiempo CPT = new CambiarPantallaTiempo(Portadita, this, 0);
-        CPT.start();
+        Portadita.pack();
+        Portadita.setLocationRelativeTo(null);
+        Portadita.setVisible(true);
         CambiarPantallaTiempo CPT2 = new CambiarPantallaTiempo(this, Portadita, 4000);
-        CPT2.set(this, Portadita, 4000);
+        CPT2.set(this, Portadita, 4000, 700, 400);
         CPT2.start();
     }
 
@@ -33,8 +32,8 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         Portadita = new javax.swing.JFrame();
-        PortadaFondo = new FondoPanel("./Imagenes\\Portada.jpg");
-        Icono_Main = new FondoPanel("./Imagenes\\Icono.jpeg");
+        I_PortadaFondo = new FondoPanel("./Imagenes\\Portada.jpg");
+        I_Icono_Main = new FondoPanel("./Imagenes\\Icono.jpeg");
         B_Archivos = new javax.swing.JButton();
         B_Campos = new javax.swing.JButton();
         B_Registros = new javax.swing.JButton();
@@ -45,14 +44,14 @@ public class Main extends javax.swing.JFrame {
         Portadita.setTitle("Standard File Manager");
         Portadita.setResizable(false);
 
-        javax.swing.GroupLayout PortadaFondoLayout = new javax.swing.GroupLayout(PortadaFondo);
-        PortadaFondo.setLayout(PortadaFondoLayout);
-        PortadaFondoLayout.setHorizontalGroup(
-            PortadaFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout I_PortadaFondoLayout = new javax.swing.GroupLayout(I_PortadaFondo);
+        I_PortadaFondo.setLayout(I_PortadaFondoLayout);
+        I_PortadaFondoLayout.setHorizontalGroup(
+            I_PortadaFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 700, Short.MAX_VALUE)
         );
-        PortadaFondoLayout.setVerticalGroup(
-            PortadaFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        I_PortadaFondoLayout.setVerticalGroup(
+            I_PortadaFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -60,124 +59,101 @@ public class Main extends javax.swing.JFrame {
         Portadita.getContentPane().setLayout(PortaditaLayout);
         PortaditaLayout.setHorizontalGroup(
             PortaditaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PortadaFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(I_PortadaFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PortaditaLayout.setVerticalGroup(
             PortaditaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PortadaFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(I_PortadaFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
+        setMinimumSize(new java.awt.Dimension(400, 400));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
+        getContentPane().setLayout(null);
 
-        javax.swing.GroupLayout Icono_MainLayout = new javax.swing.GroupLayout(Icono_Main);
-        Icono_Main.setLayout(Icono_MainLayout);
-        Icono_MainLayout.setHorizontalGroup(
-            Icono_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout I_Icono_MainLayout = new javax.swing.GroupLayout(I_Icono_Main);
+        I_Icono_Main.setLayout(I_Icono_MainLayout);
+        I_Icono_MainLayout.setHorizontalGroup(
+            I_Icono_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
         );
-        Icono_MainLayout.setVerticalGroup(
-            Icono_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        I_Icono_MainLayout.setVerticalGroup(
+            I_Icono_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 199, Short.MAX_VALUE)
         );
 
+        getContentPane().add(I_Icono_Main);
+        I_Icono_Main.setBounds(242, 31, 200, 199);
+
         B_Archivos.setText("Archivos");
-        B_Archivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_ArchivosActionPerformed(evt);
-            }
-        });
+        getContentPane().add(B_Archivos);
+        B_Archivos.setBounds(77, 268, 109, 25);
 
         B_Campos.setText("Campos");
-        B_Campos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_CamposActionPerformed(evt);
-            }
-        });
+        getContentPane().add(B_Campos);
+        B_Campos.setBounds(278, 268, 109, 25);
 
         B_Registros.setText("Registros");
-        B_Registros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_RegistrosActionPerformed(evt);
-            }
-        });
+        getContentPane().add(B_Registros);
+        B_Registros.setBounds(514, 268, 109, 25);
 
         B_Indices.setText("Indices");
-        B_Indices.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_IndicesActionPerformed(evt);
-            }
-        });
+        getContentPane().add(B_Indices);
+        B_Indices.setBounds(153, 335, 112, 25);
 
         B_Estandarizacion.setText("Estandarizacion");
-        B_Estandarizacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_EstandarizacionActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(242, 242, 242)
-                .addComponent(Icono_Main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(B_Archivos, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92)
-                .addComponent(B_Campos, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-                .addComponent(B_Registros, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(B_Indices, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106)
-                .addComponent(B_Estandarizacion)
-                .addGap(196, 196, 196))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(Icono_Main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(B_Archivos)
-                    .addComponent(B_Campos)
-                    .addComponent(B_Registros))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(B_Indices)
-                    .addComponent(B_Estandarizacion))
-                .addGap(40, 40, 40))
-        );
+        getContentPane().add(B_Estandarizacion);
+        B_Estandarizacion.setBounds(382, 335, 112, 25);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void B_ArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_ArchivosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_ArchivosActionPerformed
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        // Este metodo es para hacer la ventana principal relativa
+        int y = this.getHeight();
+        int x = this.getWidth();
 
-    private void B_CamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_CamposActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_CamposActionPerformed
+        //localidad de icono y su tamano
+        //se usa esa condicional para setear el tamano de los botones
+        Font f;
+        if (x > y) {
+            I_Icono_Main.setSize((int) (y / 2.2), (int) (y / 2.2));
+            f = new Font("Dialog", 0, (int) y / 33);
 
-    private void B_RegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_RegistrosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_RegistrosActionPerformed
+        } else {
+            I_Icono_Main.setSize((int) (x / 2.2), (int) (x / 2.2));
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+        I_Icono_Main.setLocation((x / 2) - (I_Icono_Main.getWidth() / 2), (y / 3) - (I_Icono_Main.getHeight() / 2));
 
-    private void B_IndicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_IndicesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_IndicesActionPerformed
+        //tamano de boton
+        B_Archivos.setSize(x / 5, y / 9);
+        B_Campos.setSize(x / 5, y / 9);
+        B_Registros.setSize(x / 5, y / 9);
+        B_Indices.setSize(x / 5, y / 9);
+        B_Estandarizacion.setSize(x / 5, y / 9);
 
-    private void B_EstandarizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_EstandarizacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_EstandarizacionActionPerformed
+        //Poniendo los Fonts
+        B_Archivos.setFont(f);
+        B_Campos.setFont(f);
+        B_Registros.setFont(f);
+        B_Indices.setFont(f);
+        B_Estandarizacion.setFont(f);
+
+        //localidad de Botones
+        B_Archivos.setLocation((x / 6) - (B_Archivos.getWidth() / 2), (4 * y / 6) - (B_Archivos.getHeight() / 2));
+        B_Campos.setLocation((3 * x / 6) - (B_Campos.getWidth() / 2), (4 * y / 6) - (B_Campos.getHeight() / 2));
+        B_Registros.setLocation((5 * x / 6) - (B_Registros.getWidth() / 2), (4 * y / 6) - (B_Registros.getHeight() / 2));
+        B_Indices.setLocation((1 * x / 3) - (B_Indices.getWidth() / 2), (5 * y / 6) - (B_Indices.getHeight() / 2));
+        B_Estandarizacion.setLocation((2 * x / 3) - (B_Estandarizacion.getWidth() / 2), (5 * y / 6) - (B_Estandarizacion.getHeight() / 2));
+
+
+    }//GEN-LAST:event_formComponentResized
 
     public static void main(String args[]) {
         try {
@@ -201,7 +177,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new Main().setVisible(false);
             }
         });
     }
@@ -212,8 +188,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_Estandarizacion;
     private javax.swing.JButton B_Indices;
     private javax.swing.JButton B_Registros;
-    private javax.swing.JPanel Icono_Main;
-    private javax.swing.JPanel PortadaFondo;
+    private javax.swing.JPanel I_Icono_Main;
+    private javax.swing.JPanel I_PortadaFondo;
     private javax.swing.JFrame Portadita;
     // End of variables declaration//GEN-END:variables
 
