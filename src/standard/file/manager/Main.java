@@ -12,6 +12,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class Main extends javax.swing.JFrame {
+    //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
+    //Campo: Nombre,Tipo,Tamano
+    //Registro: Lista de Campus
+    //Indices:
+    //Estandarizacion
 
     public Main() {
         initComponents();
