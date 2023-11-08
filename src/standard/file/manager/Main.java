@@ -1,5 +1,6 @@
 package standard.file.manager;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -39,6 +40,7 @@ public class Main extends javax.swing.JFrame {
         B_Registros = new javax.swing.JButton();
         B_Indices = new javax.swing.JButton();
         B_Estandarizacion = new javax.swing.JButton();
+        I_Fondo_Main = new javax.swing.JPanel();
 
         Portadita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Portadita.setTitle("Standard File Manager");
@@ -110,6 +112,22 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(B_Estandarizacion);
         B_Estandarizacion.setBounds(382, 335, 112, 25);
 
+        I_Fondo_Main.setBackground(new java.awt.Color(204, 255, 255));
+
+        javax.swing.GroupLayout I_Fondo_MainLayout = new javax.swing.GroupLayout(I_Fondo_Main);
+        I_Fondo_Main.setLayout(I_Fondo_MainLayout);
+        I_Fondo_MainLayout.setHorizontalGroup(
+            I_Fondo_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        I_Fondo_MainLayout.setVerticalGroup(
+            I_Fondo_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(I_Fondo_Main);
+        I_Fondo_Main.setBounds(0, 0, 100, 100);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -117,7 +135,6 @@ public class Main extends javax.swing.JFrame {
         // Este metodo es para hacer la ventana principal relativa
         int y = this.getHeight();
         int x = this.getWidth();
-
         //localidad de icono y su tamano
         //se usa esa condicional para setear el tamano de los botones
         Font f;
@@ -131,6 +148,8 @@ public class Main extends javax.swing.JFrame {
         }
         I_Icono_Main.setLocation((x / 2) - (I_Icono_Main.getWidth() / 2), (y / 3) - (I_Icono_Main.getHeight() / 2));
 
+        I_Fondo_Main.setSize(x, y);
+        
         //tamano de boton
         B_Archivos.setSize(x / 5, y / 9);
         B_Campos.setSize(x / 5, y / 9);
@@ -188,6 +207,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_Estandarizacion;
     private javax.swing.JButton B_Indices;
     private javax.swing.JButton B_Registros;
+    private javax.swing.JPanel I_Fondo_Main;
     private javax.swing.JPanel I_Icono_Main;
     private javax.swing.JPanel I_PortadaFondo;
     private javax.swing.JFrame Portadita;
