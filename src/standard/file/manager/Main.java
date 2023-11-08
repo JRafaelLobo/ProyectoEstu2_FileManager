@@ -146,16 +146,16 @@ public class Main extends javax.swing.JFrame {
             I_Icono_Main.setSize((int) (x / 2.2), (int) (x / 2.2));
             f = new Font("Dialog", 0, (int) x / 33);
         }
-        I_Icono_Main.setLocation((x / 2) - (I_Icono_Main.getWidth() / 2), (y / 3) - (I_Icono_Main.getHeight() / 2));
+        I_Icono_Main.setLocation((int) ((x / 2) - (I_Icono_Main.getWidth() / 2)), (int) ((y / 3) - (I_Icono_Main.getHeight() / 2)));
 
         I_Fondo_Main.setSize(x, y);
-        
+
         //tamano de boton
-        B_Archivos.setSize(x / 5, y / 9);
-        B_Campos.setSize(x / 5, y / 9);
-        B_Registros.setSize(x / 5, y / 9);
-        B_Indices.setSize(x / 5, y / 9);
-        B_Estandarizacion.setSize(x / 5, y / 9);
+        B_Archivos.setSize((int) (x / 5), (int) (y / 9));
+        B_Campos.setSize((int) (x / 5), (int) (y / 9));
+        B_Registros.setSize((int) (x / 5), (int) (y / 9));
+        B_Indices.setSize((int) (x / 5), (int) (y / 9));
+        B_Estandarizacion.setSize((int) (x / 5), (int) (y / 9));
 
         //Poniendo los Fonts
         B_Archivos.setFont(f);
@@ -165,11 +165,11 @@ public class Main extends javax.swing.JFrame {
         B_Estandarizacion.setFont(f);
 
         //localidad de Botones
-        B_Archivos.setLocation((x / 6) - (B_Archivos.getWidth() / 2), (4 * y / 6) - (B_Archivos.getHeight() / 2));
-        B_Campos.setLocation((3 * x / 6) - (B_Campos.getWidth() / 2), (4 * y / 6) - (B_Campos.getHeight() / 2));
-        B_Registros.setLocation((5 * x / 6) - (B_Registros.getWidth() / 2), (4 * y / 6) - (B_Registros.getHeight() / 2));
-        B_Indices.setLocation((1 * x / 3) - (B_Indices.getWidth() / 2), (5 * y / 6) - (B_Indices.getHeight() / 2));
-        B_Estandarizacion.setLocation((2 * x / 3) - (B_Estandarizacion.getWidth() / 2), (5 * y / 6) - (B_Estandarizacion.getHeight() / 2));
+        B_Archivos.setLocation((int) ((x / 6) - (B_Archivos.getWidth() / 2)), (int) ((4 * y / 6) - (B_Archivos.getHeight() / 2)));
+        B_Campos.setLocation((int) ((3 * x / 6) - (B_Campos.getWidth() / 2)), (int) ((4 * y / 6) - (B_Campos.getHeight() / 2)));
+        B_Registros.setLocation((int) ((5 * x / 6) - (B_Registros.getWidth() / 2)), (int) ((4 * y / 6) - (B_Registros.getHeight() / 2)));
+        B_Indices.setLocation((int) ((1 * x / 3) - (B_Indices.getWidth() / 2)), (int) ((5 * y / 6) - (B_Indices.getHeight() / 2)));
+        B_Estandarizacion.setLocation((int) ((2 * x / 3) - (B_Estandarizacion.getWidth() / 2)), (int) ((5 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
 
 
     }//GEN-LAST:event_formComponentResized
