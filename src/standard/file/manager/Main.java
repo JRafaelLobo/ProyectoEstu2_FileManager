@@ -9,6 +9,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Main extends javax.swing.JFrame {
@@ -21,6 +22,9 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         this.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        JF_Archivos.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        
+        
         Portadita.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Music = playMusic("./Musica\\SonidoBoton.wav");
         Music.start();
@@ -39,16 +43,19 @@ public class Main extends javax.swing.JFrame {
 
         Portadita = new javax.swing.JFrame();
         I_PortadaFondo = new FondoPanel("./Imagenes\\Portada.jpg");
+        JF_Archivos = new javax.swing.JFrame();
+        I_Fondo_Archivos = new javax.swing.JPanel();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono.jpeg");
-        B_Archivos = new javax.swing.JButton();
         B_Campos = new javax.swing.JButton();
         B_Registros = new javax.swing.JButton();
         B_Indices = new javax.swing.JButton();
         B_Estandarizacion = new javax.swing.JButton();
+        B_Archivos = new javax.swing.JButton();
         I_Fondo_Main = new javax.swing.JPanel();
 
         Portadita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Portadita.setTitle("Standard File Manager");
+        Portadita.setUndecorated(true);
         Portadita.setResizable(false);
 
         javax.swing.GroupLayout I_PortadaFondoLayout = new javax.swing.GroupLayout(I_PortadaFondo);
@@ -72,6 +79,31 @@ public class Main extends javax.swing.JFrame {
             PortaditaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(I_PortadaFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        JF_Archivos.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        JF_Archivos.setTitle("Standard File Manager");
+        JF_Archivos.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                JF_ArchivosComponentResized(evt);
+            }
+        });
+        JF_Archivos.getContentPane().setLayout(null);
+
+        I_Fondo_Archivos.setBackground(new java.awt.Color(204, 255, 255));
+
+        javax.swing.GroupLayout I_Fondo_ArchivosLayout = new javax.swing.GroupLayout(I_Fondo_Archivos);
+        I_Fondo_Archivos.setLayout(I_Fondo_ArchivosLayout);
+        I_Fondo_ArchivosLayout.setHorizontalGroup(
+            I_Fondo_ArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        I_Fondo_ArchivosLayout.setVerticalGroup(
+            I_Fondo_ArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        JF_Archivos.getContentPane().add(I_Fondo_Archivos);
+        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
@@ -97,10 +129,6 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(I_Icono_Main);
         I_Icono_Main.setBounds(242, 31, 200, 199);
 
-        B_Archivos.setText("Archivos");
-        getContentPane().add(B_Archivos);
-        B_Archivos.setBounds(77, 268, 109, 25);
-
         B_Campos.setText("Campos");
         getContentPane().add(B_Campos);
         B_Campos.setBounds(278, 268, 109, 25);
@@ -116,6 +144,15 @@ public class Main extends javax.swing.JFrame {
         B_Estandarizacion.setText("Estandarizacion");
         getContentPane().add(B_Estandarizacion);
         B_Estandarizacion.setBounds(382, 335, 112, 25);
+
+        B_Archivos.setText("Archivos");
+        B_Archivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_ArchivosMouseClicked(evt);
+            }
+        });
+        getContentPane().add(B_Archivos);
+        B_Archivos.setBounds(100, 270, 110, 25);
 
         I_Fondo_Main.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -164,6 +201,11 @@ public class Main extends javax.swing.JFrame {
 
         //Poniendo los Fonts
         B_Archivos.setFont(f);
+        //B_Archivos.setForeground(Color.white);
+        //B_Archivos_Texto.setLocation(0,0);
+        //B_Archivos_Texto.setSize(B_Archivos.getWidth(), B_Archivos.getHeight());
+        //B_Archivos_Texto.setHorizontalAlignment(10);
+        //B_Archivos_Texto.setLocation((int)(B_Archivos.getWidth()-B_Archivos_Texto.getWidth()/2), (int)(B_Archivos.getHeight()-B_Archivos_Texto.getHeight()/2));
         B_Campos.setFont(f);
         B_Registros.setFont(f);
         B_Indices.setFont(f);
@@ -178,6 +220,23 @@ public class Main extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_formComponentResized
+
+    private void B_ArchivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ArchivosMouseClicked
+        // TODO add your handling code here:
+        
+        JF_Archivos.pack();
+        JF_Archivos.setVisible(true);
+        JF_Archivos.setSize(this.getWidth(), this.getHeight());
+        JF_Archivos.setLocationRelativeTo(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_B_ArchivosMouseClicked
+
+    private void JF_ArchivosComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_ArchivosComponentResized
+        // TODO add your handling code here:
+        int x=JF_Archivos.getWidth();
+        int y = JF_Archivos.getHeight();
+        I_Fondo_Archivos.setSize(x, y);
+    }//GEN-LAST:event_JF_ArchivosComponentResized
 
     public static void main(String args[]) {
         try {
@@ -212,9 +271,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_Estandarizacion;
     private javax.swing.JButton B_Indices;
     private javax.swing.JButton B_Registros;
+    private javax.swing.JPanel I_Fondo_Archivos;
     private javax.swing.JPanel I_Fondo_Main;
     private javax.swing.JPanel I_Icono_Main;
     private javax.swing.JPanel I_PortadaFondo;
+    private javax.swing.JFrame JF_Archivos;
     private javax.swing.JFrame Portadita;
     // End of variables declaration//GEN-END:variables
 
