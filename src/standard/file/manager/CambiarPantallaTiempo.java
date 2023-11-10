@@ -13,7 +13,7 @@ public class CambiarPantallaTiempo extends Thread {
     private int milisegundos;
     private Clip Music;
     private boolean CambiarTam = false;
-    int x, y;
+    private int x, y;
 
     public CambiarPantallaTiempo(JFrame Cambio, JFrame Anterior, int milisegundos) {
         this.Cambio = Cambio;
