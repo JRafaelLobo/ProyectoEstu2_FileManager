@@ -50,7 +50,7 @@ public class Main extends javax.swing.JFrame {
         B_Registros = new javax.swing.JButton();
         B_Indices = new javax.swing.JButton();
         B_Estandarizacion = new javax.swing.JButton();
-        B_Archivos = new javax.swing.JButton();
+        B_Archivos = new boton();
         I_Fondo_Main = new javax.swing.JPanel();
 
         Portadita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
