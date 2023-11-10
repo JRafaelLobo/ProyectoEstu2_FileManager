@@ -33,7 +33,7 @@ public class Main extends javax.swing.JFrame {
         Portadita.setLocationRelativeTo(null);
         Portadita.setVisible(true);
         CambiarPantallaTiempo CPT2 = new CambiarPantallaTiempo(this, Portadita, 4000);
-        CPT2.set(this, Portadita, 4000, 700, 400);
+        CPT2.set(this, Portadita, 100, 700, 400);
         CPT2.start();
     }
 
@@ -44,6 +44,18 @@ public class Main extends javax.swing.JFrame {
         Portadita = new javax.swing.JFrame();
         I_PortadaFondo = new FondoPanel("./Imagenes\\Portada.jpg");
         JF_Archivos = new javax.swing.JFrame();
+        lb_Archivo_Titulo = new javax.swing.JLabel();
+        Datos_Achivos = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        B_CrearArchivo = new javax.swing.JButton();
+        B_AbrirArchivo = new javax.swing.JButton();
+        B_SalvarArchivo = new javax.swing.JButton();
+        B_CerrarArchivo = new javax.swing.JButton();
+        B_SalirArchivo = new javax.swing.JButton();
+        B_CrearCampo = new javax.swing.JButton();
+        B_ListarCampo = new javax.swing.JButton();
+        B_ModificarCampo = new javax.swing.JButton();
+        B_BorrarCampo = new javax.swing.JButton();
         I_Fondo_Archivos = new javax.swing.JPanel();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono.jpeg");
         B_Campos = new javax.swing.JButton();
@@ -88,6 +100,61 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Archivos.getContentPane().setLayout(null);
+
+        lb_Archivo_Titulo.setText("Datos Del Archivo");
+        JF_Archivos.getContentPane().add(lb_Archivo_Titulo);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        Datos_Achivos.setViewportView(jList1);
+
+        JF_Archivos.getContentPane().add(Datos_Achivos);
+        Datos_Achivos.setBounds(310, 80, 220, 160);
+
+        B_CrearArchivo.setText("Crear Archivo");
+        JF_Archivos.getContentPane().add(B_CrearArchivo);
+        B_CrearArchivo.setBounds(130, 30, 102, 25);
+
+        B_AbrirArchivo.setText("Abrir Archivo");
+        JF_Archivos.getContentPane().add(B_AbrirArchivo);
+        B_AbrirArchivo.setBounds(230, 30, 98, 25);
+
+        B_SalvarArchivo.setText("Salvar Archivo");
+        JF_Archivos.getContentPane().add(B_SalvarArchivo);
+        B_SalvarArchivo.setBounds(330, 30, 104, 25);
+
+        B_CerrarArchivo.setText("Cerrar Archivo");
+        JF_Archivos.getContentPane().add(B_CerrarArchivo);
+        B_CerrarArchivo.setBounds(430, 30, 106, 25);
+
+        B_SalirArchivo.setText("Salir");
+        B_SalirArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_SalirArchivoMouseClicked(evt);
+            }
+        });
+        JF_Archivos.getContentPane().add(B_SalirArchivo);
+        B_SalirArchivo.setBounds(130, 80, 56, 25);
+
+        B_CrearCampo.setText("Crear");
+        JF_Archivos.getContentPane().add(B_CrearCampo);
+        B_CrearCampo.setBounds(180, 260, 62, 25);
+
+        B_ListarCampo.setText("Listar");
+        JF_Archivos.getContentPane().add(B_ListarCampo);
+        B_ListarCampo.setBounds(270, 260, 61, 25);
+
+        B_ModificarCampo.setText("Modificar");
+        JF_Archivos.getContentPane().add(B_ModificarCampo);
+        B_ModificarCampo.setBounds(370, 260, 79, 25);
+
+        B_BorrarCampo.setText("Borrar Campo");
+        JF_Archivos.getContentPane().add(B_BorrarCampo);
+        B_BorrarCampo.setBounds(460, 260, 103, 25);
 
         I_Fondo_Archivos.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -200,7 +267,12 @@ public class Main extends javax.swing.JFrame {
         B_Estandarizacion.setSize((int) (x / 5), (int) (y / 9));
 
         //Poniendo los Fonts
-        B_Archivos.setFont(f);
+//        for(int i=0;i<this.getComponentCount();i++){
+//            if(this.getComponent(i) instanceof javax.swing.JButton){
+//                this.getComponent(i).setFont(f);
+//            }
+//        }
+       B_Archivos.setFont(f);
         //B_Archivos.setForeground(Color.white);
         //B_Archivos_Texto.setLocation(0,0);
         //B_Archivos_Texto.setSize(B_Archivos.getWidth(), B_Archivos.getHeight());
@@ -233,10 +305,70 @@ public class Main extends javax.swing.JFrame {
 
     private void JF_ArchivosComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_ArchivosComponentResized
         // TODO add your handling code here:
+        
         int x=JF_Archivos.getWidth();
         int y = JF_Archivos.getHeight();
+        Font f;
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+//        for(int i=0;i<JF_Archivos.getComponentCount();i++){
+//            if(JF_Archivos.getComponent(i) instanceof javax.swing.JButton){
+//                JF_Archivos.getComponent(i).setFont(f);
+//            }
+//        }
+
+        B_CrearArchivo.setFont(f);
+        B_AbrirArchivo.setFont(f);
+        B_CerrarArchivo.setFont(f);
+        B_SalirArchivo.setFont(f);
+        B_SalvarArchivo.setFont(f);
+        B_CrearCampo.setFont(f);
+        B_ModificarCampo.setFont(f);
+        B_ListarCampo.setFont(f);
+        B_BorrarCampo.setFont(f);
+        
+        
         I_Fondo_Archivos.setSize(x, y);
+        
+        
+        //Botones de Archivo
+        B_CrearArchivo.setSize(2*x/12, 2*y/20);
+        B_CrearArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((2*y / 13) - (B_CrearArchivo.getHeight() / 2)));
+        B_AbrirArchivo.setSize(2*x/12, 2*y/20);
+        B_AbrirArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((4*y / 13) - (B_CrearArchivo.getHeight() / 2)));
+        B_CerrarArchivo.setSize(2*x/12, 2*y/20);
+        B_CerrarArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((6*y / 13) - (B_CrearArchivo.getHeight() / 2)));
+        B_SalvarArchivo.setSize(2*x/12, 2*y/20);
+        B_SalvarArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((8*y / 13) - (B_CrearArchivo.getHeight() / 2)));
+        B_SalirArchivo.setSize(2*x/12, 2*y/20);
+        B_SalirArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((10*y / 13) - (B_CrearArchivo.getHeight() / 2)));
+        
+        
+        //Botones de la lista
+        Datos_Achivos.setSize(x/2, y/2);
+        Datos_Achivos.setLocation((int) ((2*x / 3) - (Datos_Achivos.getWidth() / 2)), (int) ((5*y / 12) - (Datos_Achivos.getHeight() / 2)));
+        lb_Archivo_Titulo.setSize(x/2, y/2);
+        lb_Archivo_Titulo.setFont(f);
+        lb_Archivo_Titulo.setLocation((int) ((5*x / 6) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
+        
+        //Botones Campo
+         B_CrearCampo.setSize(2*x/15, 2*y/20);
+         B_ModificarCampo.setSize(2*x/15, 2*y/20);
+         B_BorrarCampo.setSize(2*x/15, 2*y/20);
+         B_ListarCampo.setSize(2*x/15, 2*y/20);
+         B_CrearCampo.setLocation((int) ((5*x / 12) - (B_CrearCampo.getWidth() / 2)), (int) ((10*y / 13) - (B_CrearCampo.getHeight() / 2)));
+
+        
     }//GEN-LAST:event_JF_ArchivosComponentResized
+
+    private void B_SalirArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SalirArchivoMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_B_SalirArchivoMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -266,17 +398,29 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton B_AbrirArchivo;
     private javax.swing.JButton B_Archivos;
+    private javax.swing.JButton B_BorrarCampo;
     private javax.swing.JButton B_Campos;
+    private javax.swing.JButton B_CerrarArchivo;
+    private javax.swing.JButton B_CrearArchivo;
+    private javax.swing.JButton B_CrearCampo;
     private javax.swing.JButton B_Estandarizacion;
     private javax.swing.JButton B_Indices;
+    private javax.swing.JButton B_ListarCampo;
+    private javax.swing.JButton B_ModificarCampo;
     private javax.swing.JButton B_Registros;
+    private javax.swing.JButton B_SalirArchivo;
+    private javax.swing.JButton B_SalvarArchivo;
+    private javax.swing.JScrollPane Datos_Achivos;
     private javax.swing.JPanel I_Fondo_Archivos;
     private javax.swing.JPanel I_Fondo_Main;
     private javax.swing.JPanel I_Icono_Main;
     private javax.swing.JPanel I_PortadaFondo;
     private javax.swing.JFrame JF_Archivos;
     private javax.swing.JFrame Portadita;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel lb_Archivo_Titulo;
     // End of variables declaration//GEN-END:variables
 
     //Este metodo es para reproducir sonidos en el programa
