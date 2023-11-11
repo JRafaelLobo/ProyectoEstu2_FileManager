@@ -35,8 +35,11 @@ public class Main extends javax.swing.JFrame {
         Portadita.setVisible(true);
 
         CambiarPantallaTiempo CPT2 = new CambiarPantallaTiempo(this, Portadita, 4000);
-        CPT2.set(this, Portadita, 100, 700, 400);
+        CPT2.set(this, Portadita, 4000, 700, 400);
         CPT2.start();
+        //05172d
+        //FF7048
+        //font Moncerath,Bethicai
     }
 
     @SuppressWarnings("unchecked")
@@ -44,7 +47,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         Portadita = new javax.swing.JFrame();
-        I_PortadaFondo = new FondoPanel("./Imagenes\\Portada.jpg");
+        I_PortadaFondo = new FondoPanel("./Imagenes\\Portada_inicial.png");
         JF_Campos = new javax.swing.JFrame();
         lb_Archivo_Titulo = new javax.swing.JLabel();
         Datos_Achivos = new javax.swing.JScrollPane();
@@ -55,7 +58,7 @@ public class Main extends javax.swing.JFrame {
         B_BorrarCampo = new boton();
         I_Campo_Decoracion = new FondoPanel("./Imagenes\\Icono.jpeg");
         I_Fondo_Archivos = new javax.swing.JPanel();
-        I_Icono_Main = new FondoPanel("./Imagenes\\Icono.jpeg");
+        I_Icono_Main = new FondoPanel("./Imagenes\\Icono2.png");
         B_Campos = new boton();
         B_Registros = new boton();
         B_Indices = new boton();
@@ -120,6 +123,11 @@ public class Main extends javax.swing.JFrame {
         Datos_Achivos.setBounds(310, 80, 220, 160);
 
         B_CrearCampo.setText("Crear");
+        B_CrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_CrearCampoMouseClicked(evt);
+            }
+        });
         JF_Campos.getContentPane().add(B_CrearCampo);
         B_CrearCampo.setBounds(180, 260, 62, 25);
 
@@ -210,7 +218,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(B_Estandarizacion);
         B_Estandarizacion.setBounds(382, 335, 112, 25);
 
-        I_Fondo_Main.setBackground(new java.awt.Color(204, 255, 255));
+        I_Fondo_Main.setBackground(new java.awt.Color(5, 23, 45));
 
         javax.swing.GroupLayout I_Fondo_MainLayout = new javax.swing.GroupLayout(I_Fondo_Main);
         I_Fondo_Main.setLayout(I_Fondo_MainLayout);
@@ -225,6 +233,8 @@ public class Main extends javax.swing.JFrame {
 
         getContentPane().add(I_Fondo_Main);
         I_Fondo_Main.setBounds(0, 0, 100, 100);
+
+        jMenuBar1.setFont(new java.awt.Font("Century", 1, 11)); // NOI18N
 
         jMenu1.setText("Archivos");
 
@@ -389,6 +399,15 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_B_Archivo_SalirActionPerformed
+
+    private void B_CrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CrearCampoMouseClicked
+        // TODO add your handling code here:
+        javax.swing.JFrame frame;
+        frame = new javax.swing.JFrame();
+        javax.swing.JPanel Fondo;
+        Fondo = new javax.swing.JPanel();
+        frame.getContentPane().add(Fondo);
+    }//GEN-LAST:event_B_CrearCampoMouseClicked
 
     public static void main(String args[]) {
         try {
