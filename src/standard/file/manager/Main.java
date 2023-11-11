@@ -11,8 +11,11 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JDialog;
 
 public class Main extends javax.swing.JFrame {
+
+    private String OpenFileName = "";
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
     //Campo: Nombre,Tipo,Tamano
     //Registro: Lista de Campus
@@ -23,7 +26,6 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         JF_Campos.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
-
         Portadita.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Music = playMusic("./Musica\\SonidoBoton.wav");
         Music.start();
@@ -51,6 +53,9 @@ public class Main extends javax.swing.JFrame {
         B_ModificarCampo = new javax.swing.JButton();
         B_BorrarCampo = new javax.swing.JButton();
         I_Fondo_Archivos = new javax.swing.JPanel();
+        Dialog_Abrir = new javax.swing.JDialog(this, "Abrir", true);
+        ListOfFiles = new javax.swing.JComboBox<>();
+        D_Abrir_Archivo = new javax.swing.JButton();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono.jpeg");
         B_Campos = new boton();
         B_Registros = new boton();
@@ -127,9 +132,9 @@ public class Main extends javax.swing.JFrame {
         JF_Campos.getContentPane().add(B_ModificarCampo);
         B_ModificarCampo.setBounds(370, 260, 81, 23);
 
-        B_BorrarCampo.setText("Borrar Campo");
+        B_BorrarCampo.setText("Borrar");
         JF_Campos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 104, 23);
+        B_BorrarCampo.setBounds(460, 260, 72, 23);
 
         I_Fondo_Archivos.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -145,7 +150,40 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
-        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
+        I_Fondo_Archivos.setBounds(0, 0, 0, 0);
+
+        ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        D_Abrir_Archivo.setText("Abrir Archivo");
+        D_Abrir_Archivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                D_Abrir_ArchivoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Dialog_AbrirLayout = new javax.swing.GroupLayout(Dialog_Abrir.getContentPane());
+        Dialog_Abrir.getContentPane().setLayout(Dialog_AbrirLayout);
+        Dialog_AbrirLayout.setHorizontalGroup(
+            Dialog_AbrirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Dialog_AbrirLayout.createSequentialGroup()
+                .addGroup(Dialog_AbrirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Dialog_AbrirLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(ListOfFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Dialog_AbrirLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(D_Abrir_Archivo)))
+                .addContainerGap(221, Short.MAX_VALUE))
+        );
+        Dialog_AbrirLayout.setVerticalGroup(
+            Dialog_AbrirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Dialog_AbrirLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(ListOfFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(D_Abrir_Archivo)
+                .addContainerGap(217, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
@@ -211,14 +249,19 @@ public class Main extends javax.swing.JFrame {
         jMenu1.setText("Archivos");
 
         B_Archivo_Nuevo.setText("Nuevo");
-        B_Archivo_Nuevo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_Archivo_NuevoMouseClicked(evt);
+        B_Archivo_Nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_Archivo_NuevoActionPerformed(evt);
             }
         });
         jMenu1.add(B_Archivo_Nuevo);
 
         B_Archivo_Abrir.setText("Abrir");
+        B_Archivo_Abrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_Archivo_AbrirActionPerformed(evt);
+            }
+        });
         jMenu1.add(B_Archivo_Abrir);
 
         B_Archivo_Guardar.setText("Guardar");
@@ -289,6 +332,11 @@ public class Main extends javax.swing.JFrame {
         B_Indices.setLocation((int) ((3.6 * x / 6) - (B_Indices.getWidth() / 2)), (int) ((4 * y / 6) - (B_Indices.getHeight() / 2)));
         B_Estandarizacion.setLocation((int) ((4.9 * x / 6) - (B_Estandarizacion.getWidth() / 2)), (int) ((4 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
 
+        //Desactivando los botones
+        B_Campos.setEnabled(false);
+        B_Registros.setEnabled(false);
+        B_Indices.setEnabled(false);
+        B_Estandarizacion.setEnabled(false);
 
     }//GEN-LAST:event_formComponentResized
 
@@ -336,6 +384,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CamposMouseClicked
         // TODO add your handling code here:
+        if(!B_Campos.isEnabled()) return;
         this.setVisible(false);
         JF_Campos.setJMenuBar(jMenuBar1);
         JF_Campos.pack();
@@ -344,14 +393,49 @@ public class Main extends javax.swing.JFrame {
         JF_Campos.setLocationRelativeTo(this);
     }//GEN-LAST:event_B_CamposMouseClicked
 
-    private void B_Archivo_NuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_Archivo_NuevoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_Archivo_NuevoMouseClicked
-
     private void B_Archivo_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_SalirActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_B_Archivo_SalirActionPerformed
+
+    private void B_Archivo_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_NuevoActionPerformed
+        // TODO add your handling code here:
+        String nameOfFile = JOptionPane.showInputDialog(rootPane, "Ingrese el nombre o identidad del archivo ha crear");
+        if(nameOfFile == null) return;
+        Archivos files = new Archivos();
+        boolean isCreated = files.Nuevo(nameOfFile);
+        if (isCreated)
+            JOptionPane.showMessageDialog(null, "El archivo se creo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(null, "Hubo un error el archivo no se pudo crear o el archivo ya existe", "Notificación", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_B_Archivo_NuevoActionPerformed
+
+    private void B_Archivo_AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_AbrirActionPerformed
+        // TODO add your handling code here:
+        if (!this.isVisible()) return;
+        Archivos files = new Archivos();
+        String[] namesFiles = files.getNameFiles();
+        ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(namesFiles));
+        Dialog_Abrir.setSize(300, 150);
+        int x = (Dialog_Abrir.getWidth() - ListOfFiles.getPreferredSize().width) / 2;
+        int y = (Dialog_Abrir.getHeight() - ListOfFiles.getPreferredSize().height) / 2;
+        ListOfFiles.setLocation(x, y);
+        Dialog_Abrir.setLocationRelativeTo(null);
+        Dialog_Abrir.setResizable(false);
+        Dialog_Abrir.setVisible(true);
+    }//GEN-LAST:event_B_Archivo_AbrirActionPerformed
+
+    private void D_Abrir_ArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D_Abrir_ArchivoMouseClicked
+        // TODO add your handling code here:
+        OpenFileName = (String)ListOfFiles.getSelectedItem();
+        System.out.println(OpenFileName);
+        Dialog_Abrir.setVisible(false);
+        //Activando los botones
+        B_Campos.setEnabled(true);
+        B_Registros.setEnabled(true);
+        B_Indices.setEnabled(true);
+        B_Estandarizacion.setEnabled(true);
+    }//GEN-LAST:event_D_Abrir_ArchivoMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -394,12 +478,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_ListarCampo;
     private javax.swing.JButton B_ModificarCampo;
     private javax.swing.JButton B_Registros;
+    private javax.swing.JButton D_Abrir_Archivo;
     private javax.swing.JScrollPane Datos_Achivos;
+    private javax.swing.JDialog Dialog_Abrir;
     private javax.swing.JPanel I_Fondo_Archivos;
     private javax.swing.JPanel I_Fondo_Main;
     private javax.swing.JPanel I_Icono_Main;
     private javax.swing.JPanel I_PortadaFondo;
     private javax.swing.JFrame JF_Campos;
+    private javax.swing.JComboBox<String> ListOfFiles;
     private javax.swing.JFrame Portadita;
     private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
