@@ -542,9 +542,12 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha realizado ningun cambio", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        //usar Campos en el parametro newCampos
-        boolean IsSaved = files.Guardar(OpenFileName, Campos);
+
+        boolean IsSaved = false;
         
+        if(JF_Campos.isVisible()){
+            IsSaved = files.GuardarCampos(OpenFileName, Campos);
+        }
         if(IsSaved){
             JOptionPane.showMessageDialog(null, "El archivo se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;

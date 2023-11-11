@@ -29,7 +29,7 @@ public class Archivos {
                 return "Hubo un error al leer campos";
             }
     }
-    public boolean Guardar(String FileName, String newCampos){
+    public boolean GuardarCampos(String FileName, String newCampos){
         String appData = System.getenv("APPDATA");
         String carpetaEnAppData = appData + File.separator + "Files_StructData";
         String rutaArchivo = carpetaEnAppData + File.separator + FileName;
