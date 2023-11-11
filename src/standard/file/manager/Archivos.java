@@ -8,11 +8,50 @@ package standard.file.manager;
  *
  * @author ADMIN
  */
-import java.io.File;
-import java.io.IOException;
-import java.io.FilenameFilter;
+import java.io.*;
 
 public class Archivos {
+    public String LecturaCampos(String FileName){
+        String appData = System.getenv("APPDATA");
+        String carpetaEnAppData = appData + File.separator + "Files_StructData";
+        String rutaArchivo = carpetaEnAppData + File.separator + FileName;
+        try {
+                // Leer la primera línea del archivo
+                BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
+                String primeraLinea = lector.readLine();
+                lector.close();
+                if (primeraLinea == null){
+                    return "";
+                }
+                return primeraLinea;
+            } catch (IOException e) {
+                System.err.println("Hubo un error al leer campos: " + e.getMessage());
+                return "Hubo un error al leer campos";
+            }
+    }
+    public boolean Guardar(String FileName, String newCampos){
+        String appData = System.getenv("APPDATA");
+        String carpetaEnAppData = appData + File.separator + "Files_StructData";
+        String rutaArchivo = carpetaEnAppData + File.separator + FileName;
+        if(!newCampos.equals("")){
+            try {
+                // Leer la primera línea del archivo
+                BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
+                String primeraLinea = lector.readLine();
+                lector.close();
+                BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));
+                escritor.write(newCampos);
+                escritor.newLine();
+                escritor.close();
+                return true;
+            } catch (IOException e) {
+                System.err.println("Hubo un error al escribir los campos: " + e.getMessage());
+                return false;
+            }
+        }
+        //Este return solo es para que no tire error
+        return false;
+    }
     public String[] getNameFiles(){
         String appData = System.getenv("APPDATA");
         String carpetaEnAppData = appData + File.separator + "Files_StructData";
@@ -23,9 +62,6 @@ public class Archivos {
             }
         };
         String[] archivos = carpeta.list(filtro);
-        for (String archivo : archivos) {
-            System.out.println(archivo);
-        }
 
         return archivos;
     }
@@ -52,7 +88,7 @@ public class Archivos {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("El archivo no se pudo crear");
+            System.err.println("El archivo no se pudo crear");
             return false;
         }
     }
