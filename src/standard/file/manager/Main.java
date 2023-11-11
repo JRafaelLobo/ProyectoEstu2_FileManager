@@ -1,7 +1,9 @@
 package standard.file.manager;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -47,10 +49,11 @@ public class Main extends javax.swing.JFrame {
         lb_Archivo_Titulo = new javax.swing.JLabel();
         Datos_Achivos = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        B_CrearCampo = new javax.swing.JButton();
-        B_ListarCampo = new javax.swing.JButton();
-        B_ModificarCampo = new javax.swing.JButton();
-        B_BorrarCampo = new javax.swing.JButton();
+        B_CrearCampo = new boton();
+        B_ListarCampo = new boton();
+        B_ModificarCampo = new boton();
+        B_BorrarCampo = new boton();
+        I_Campo_Decoracion = new FondoPanel("./Imagenes\\Icono.jpeg");
         I_Fondo_Archivos = new javax.swing.JPanel();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono.jpeg");
         B_Campos = new boton();
@@ -104,7 +107,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Archivo_Titulo.setText("Datos Del Archivo");
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
-        lb_Archivo_Titulo.setBounds(60, 260, 150, 16);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -118,19 +121,33 @@ public class Main extends javax.swing.JFrame {
 
         B_CrearCampo.setText("Crear");
         JF_Campos.getContentPane().add(B_CrearCampo);
-        B_CrearCampo.setBounds(180, 260, 72, 23);
+        B_CrearCampo.setBounds(180, 260, 62, 25);
 
         B_ListarCampo.setText("Listar");
         JF_Campos.getContentPane().add(B_ListarCampo);
-        B_ListarCampo.setBounds(270, 260, 72, 23);
+        B_ListarCampo.setBounds(270, 260, 61, 25);
 
         B_ModificarCampo.setText("Modificar");
         JF_Campos.getContentPane().add(B_ModificarCampo);
-        B_ModificarCampo.setBounds(370, 260, 81, 23);
+        B_ModificarCampo.setBounds(370, 260, 79, 25);
 
-        B_BorrarCampo.setText("Borrar Campo");
+        B_BorrarCampo.setText("Borrar");
         JF_Campos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 104, 23);
+        B_BorrarCampo.setBounds(460, 260, 65, 25);
+
+        javax.swing.GroupLayout I_Campo_DecoracionLayout = new javax.swing.GroupLayout(I_Campo_Decoracion);
+        I_Campo_Decoracion.setLayout(I_Campo_DecoracionLayout);
+        I_Campo_DecoracionLayout.setHorizontalGroup(
+            I_Campo_DecoracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        I_Campo_DecoracionLayout.setVerticalGroup(
+            I_Campo_DecoracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        JF_Campos.getContentPane().add(I_Campo_Decoracion);
+        I_Campo_Decoracion.setBounds(130, 130, 70, 60);
 
         I_Fondo_Archivos.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -179,19 +196,19 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Campos);
-        B_Campos.setBounds(278, 268, 109, 23);
+        B_Campos.setBounds(278, 268, 109, 25);
 
         B_Registros.setText("Registros");
         getContentPane().add(B_Registros);
-        B_Registros.setBounds(514, 268, 109, 23);
+        B_Registros.setBounds(514, 268, 109, 25);
 
         B_Indices.setText("Indices");
         getContentPane().add(B_Indices);
-        B_Indices.setBounds(153, 335, 112, 23);
+        B_Indices.setBounds(153, 335, 112, 25);
 
         B_Estandarizacion.setText("Estandarizacion");
         getContentPane().add(B_Estandarizacion);
-        B_Estandarizacion.setBounds(382, 335, 112, 23);
+        B_Estandarizacion.setBounds(382, 335, 112, 25);
 
         I_Fondo_Main.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -290,14 +307,16 @@ public class Main extends javax.swing.JFrame {
         B_Indices.setLocation((int) ((3.6 * x / 6) - (B_Indices.getWidth() / 2)), (int) ((4 * y / 6) - (B_Indices.getHeight() / 2)));
         B_Estandarizacion.setLocation((int) ((4.9 * x / 6) - (B_Estandarizacion.getWidth() / 2)), (int) ((4 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
         System.out.println("x=" + x + " , y= " + y);
-        
+
     }//GEN-LAST:event_formComponentResized
 
     private void JF_CamposComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CamposComponentResized
         // TODO add your handling code here:
 
-        int x = JF_Campos.getWidth();
-        int y = JF_Campos.getHeight();
+        int y_decorated = JF_Campos.getInsets().top + JF_Campos.getInsets().bottom;
+        int y_JFMenuBar = JF_Campos.getJMenuBar().getHeight();
+        int x = JF_Campos.getWidth() - JF_Campos.getInsets().right - JF_Campos.getInsets().left;
+        int y = JF_Campos.getHeight() - y_decorated - y_JFMenuBar;
         Font f;
         if (x > y) {
             f = new Font("Dialog", 0, (int) y / 33);
@@ -311,6 +330,7 @@ public class Main extends javax.swing.JFrame {
 //            }
 //        }
 //Hola amigo
+
         B_CrearCampo.setFont(f);
         B_ModificarCampo.setFont(f);
         B_ListarCampo.setFont(f);
@@ -319,21 +339,36 @@ public class Main extends javax.swing.JFrame {
         I_Fondo_Archivos.setSize(x, y);
 
         //Botones de la lista
-        Datos_Achivos.setSize(x / 2, y / 2);
+        Datos_Achivos.setSize(3 * x / 4, y / 2);
         Datos_Achivos.setLocation((int) ((x / 2) - (Datos_Achivos.getWidth() / 2)), (int) ((5 * y / 12) - (Datos_Achivos.getHeight() / 2)));
-        lb_Archivo_Titulo.setSize(x / 2, y / 2);
-        lb_Archivo_Titulo.setFont(f);
-        lb_Archivo_Titulo.setLocation((int) ((x / 2) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
 
         //Botones Campo
-        B_CrearCampo.setSize(2 * x / 15, 2 * y / 20);
-        B_ModificarCampo.setSize(2 * x / 15, 2 * y / 20);
-        B_BorrarCampo.setSize(2 * x / 15, 2 * y / 20);
-        B_ListarCampo.setSize(2 * x / 15, 2 * y / 20);
-        B_CrearCampo.setLocation((int) ((5 * x / 12) - (B_CrearCampo.getWidth() / 2)), (int) ((10 * y / 13) - (B_CrearCampo.getHeight() / 2)));
-        
-        B_CrearCampo.setLocation(1*x/6,(y*5)/6);
-        System.out.println("x=" + x + " , y= " + y);
+        B_CrearCampo.setSize(3 * x / 16, 2 * y / 18);
+        B_ModificarCampo.setSize(3 * x / 16, 2 * y / 18);
+        B_BorrarCampo.setSize(3 * x / 16, 2 * y / 18);
+        B_ListarCampo.setSize(3 * x / 16, 2 * y / 18);
+
+        B_CrearCampo.setLocation((int) ((1 * x / 8) - (B_CrearCampo.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearCampo.getHeight() / 2)));
+        B_ModificarCampo.setLocation((int) ((3 * x / 8) - (B_CrearCampo.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearCampo.getHeight() / 2)));
+        B_BorrarCampo.setLocation((int) ((5 * x / 8) - (B_CrearCampo.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearCampo.getHeight() / 2)));
+        B_ListarCampo.setLocation((int) ((7 * x / 8) - (B_CrearCampo.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearCampo.getHeight() / 2)));
+
+        //titulo
+        if (x > y) {
+            f = new Font("Dialog", 1, (int) y / 16);
+
+        } else {
+            f = new Font("Dialog", 1, (int) x / 16);
+        }
+        lb_Archivo_Titulo.setFont(f);
+        FontMetrics fontMetrics = lb_Archivo_Titulo.getFontMetrics(lb_Archivo_Titulo.getFont());
+        int anchoTexto = fontMetrics.stringWidth(lb_Archivo_Titulo.getText());
+        lb_Archivo_Titulo.setSize(anchoTexto, y / 2);
+        lb_Archivo_Titulo.setLocation((int) ((x / 2) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
+
+        //logito de al lado
+        I_Campo_Decoracion.setSize(lb_Archivo_Titulo.getHeight() / 4, lb_Archivo_Titulo.getHeight() / 4);
+        I_Campo_Decoracion.setLocation((int) ((x / 2) - (I_Campo_Decoracion.getWidth() / 2)) + lb_Archivo_Titulo.getWidth(), (int) ((y / 12) - (I_Campo_Decoracion.getHeight() / 2)));
     }//GEN-LAST:event_JF_CamposComponentResized
 
     private void B_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CamposMouseClicked
@@ -397,6 +432,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_ModificarCampo;
     private javax.swing.JButton B_Registros;
     private javax.swing.JScrollPane Datos_Achivos;
+    private javax.swing.JPanel I_Campo_Decoracion;
     private javax.swing.JPanel I_Fondo_Archivos;
     private javax.swing.JPanel I_Fondo_Main;
     private javax.swing.JPanel I_Icono_Main;
@@ -410,7 +446,7 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Este metodo es para reproducir sonidos en el programa
-    public Clip Music;
+    private Clip Music;
 
     public static Clip playMusic(String filepath) {
         try {
