@@ -38,6 +38,7 @@ public class boton extends javax.swing.JButton {
     }
 
     @Override
+    //Metodo para los botones a modificar
     protected void paintComponent(java.awt.Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
 //        String direccion="/";   
