@@ -328,7 +328,7 @@ public class Main extends javax.swing.JFrame {
         Datos_Achivos.setLocation((int) ((x / 2) - (Datos_Achivos.getWidth() / 2)), (int) ((5*y / 12) - (Datos_Achivos.getHeight() / 2)));
         lb_Archivo_Titulo.setSize(x/2, y/2);
         lb_Archivo_Titulo.setFont(f);
-        lb_Archivo_Titulo.setLocation((int) ((5*x / 6) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
+        lb_Archivo_Titulo.setLocation((int) ((x / 2) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
         
         //Botones Campo
          B_CrearCampo.setSize(2*x/15, 2*y/20);
