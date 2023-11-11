@@ -130,11 +130,6 @@ public class Main extends javax.swing.JFrame {
         Datos_Achivos.setBounds(310, 80, 220, 160);
 
         B_CrearCampo.setText("Crear");
-        B_CrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_CrearCampoMouseClicked(evt);
-            }
-        });
         JF_Campos.getContentPane().add(B_CrearCampo);
         B_CrearCampo.setBounds(180, 260, 72, 23);
 
@@ -178,7 +173,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
-        I_Fondo_Archivos.setBounds(0, 0, 0, 0);
+        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
 
         ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
