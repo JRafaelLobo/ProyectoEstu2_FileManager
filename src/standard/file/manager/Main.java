@@ -152,9 +152,9 @@ public class Main extends javax.swing.JFrame {
         JF_Archivos.getContentPane().add(B_ModificarCampo);
         B_ModificarCampo.setBounds(370, 260, 79, 25);
 
-        B_BorrarCampo.setText("Borrar Campo");
+        B_BorrarCampo.setText("Borrar");
         JF_Archivos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 103, 25);
+        B_BorrarCampo.setBounds(460, 260, 65, 25);
 
         I_Fondo_Archivos.setBackground(new java.awt.Color(204, 255, 255));
 

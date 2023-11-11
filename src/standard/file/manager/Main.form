@@ -181,7 +181,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="B_BorrarCampo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Borrar Campo"/>
+            <Property name="text" type="java.lang.String" value="Borrar"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
