@@ -22,7 +22,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         this.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
-        JF_Archivos.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        JF_Campos.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         
         
         Portadita.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
@@ -43,27 +43,28 @@ public class Main extends javax.swing.JFrame {
 
         Portadita = new javax.swing.JFrame();
         I_PortadaFondo = new FondoPanel("./Imagenes\\Portada.jpg");
-        JF_Archivos = new javax.swing.JFrame();
+        JF_Campos = new javax.swing.JFrame();
         lb_Archivo_Titulo = new javax.swing.JLabel();
         Datos_Achivos = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        B_CrearArchivo = new javax.swing.JButton();
-        B_AbrirArchivo = new javax.swing.JButton();
-        B_SalvarArchivo = new javax.swing.JButton();
-        B_CerrarArchivo = new javax.swing.JButton();
-        B_SalirArchivo = new javax.swing.JButton();
         B_CrearCampo = new javax.swing.JButton();
         B_ListarCampo = new javax.swing.JButton();
         B_ModificarCampo = new javax.swing.JButton();
         B_BorrarCampo = new javax.swing.JButton();
         I_Fondo_Archivos = new javax.swing.JPanel();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono.jpeg");
-        B_Campos = new javax.swing.JButton();
-        B_Registros = new javax.swing.JButton();
-        B_Indices = new javax.swing.JButton();
-        B_Estandarizacion = new javax.swing.JButton();
-        B_Archivos = new boton();
+        B_Campos = new boton();
+        B_Registros = new boton();
+        B_Indices = new boton();
+        B_Estandarizacion = new boton();
         I_Fondo_Main = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        B_Archivo_Nuevo = new javax.swing.JMenuItem();
+        B_Archivo_Abrir = new javax.swing.JMenuItem();
+        B_Archivo_Guardar = new javax.swing.JMenuItem();
+        B_Archivo_Cerrar = new javax.swing.JMenuItem();
+        B_Archivo_Salir = new javax.swing.JMenuItem();
 
         Portadita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Portadita.setTitle("Standard File Manager");
@@ -92,18 +93,18 @@ public class Main extends javax.swing.JFrame {
             .addComponent(I_PortadaFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        JF_Archivos.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        JF_Archivos.setTitle("Standard File Manager");
-        JF_Archivos.addComponentListener(new java.awt.event.ComponentAdapter() {
+        JF_Campos.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        JF_Campos.setTitle("Standard File Manager");
+        JF_Campos.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                JF_ArchivosComponentResized(evt);
+                JF_CamposComponentResized(evt);
             }
         });
-        JF_Archivos.getContentPane().setLayout(null);
+        JF_Campos.getContentPane().setLayout(null);
 
         lb_Archivo_Titulo.setText("Datos Del Archivo");
-        JF_Archivos.getContentPane().add(lb_Archivo_Titulo);
-        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
+        JF_Campos.getContentPane().add(lb_Archivo_Titulo);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 16);
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -112,49 +113,24 @@ public class Main extends javax.swing.JFrame {
         });
         Datos_Achivos.setViewportView(jList1);
 
-        JF_Archivos.getContentPane().add(Datos_Achivos);
+        JF_Campos.getContentPane().add(Datos_Achivos);
         Datos_Achivos.setBounds(310, 80, 220, 160);
 
-        B_CrearArchivo.setText("Crear Archivo");
-        JF_Archivos.getContentPane().add(B_CrearArchivo);
-        B_CrearArchivo.setBounds(130, 30, 102, 25);
-
-        B_AbrirArchivo.setText("Abrir Archivo");
-        JF_Archivos.getContentPane().add(B_AbrirArchivo);
-        B_AbrirArchivo.setBounds(230, 30, 98, 25);
-
-        B_SalvarArchivo.setText("Salvar Archivo");
-        JF_Archivos.getContentPane().add(B_SalvarArchivo);
-        B_SalvarArchivo.setBounds(330, 30, 104, 25);
-
-        B_CerrarArchivo.setText("Cerrar Archivo");
-        JF_Archivos.getContentPane().add(B_CerrarArchivo);
-        B_CerrarArchivo.setBounds(430, 30, 106, 25);
-
-        B_SalirArchivo.setText("Salir");
-        B_SalirArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_SalirArchivoMouseClicked(evt);
-            }
-        });
-        JF_Archivos.getContentPane().add(B_SalirArchivo);
-        B_SalirArchivo.setBounds(130, 80, 56, 25);
-
         B_CrearCampo.setText("Crear");
-        JF_Archivos.getContentPane().add(B_CrearCampo);
-        B_CrearCampo.setBounds(180, 260, 62, 25);
+        JF_Campos.getContentPane().add(B_CrearCampo);
+        B_CrearCampo.setBounds(180, 260, 72, 23);
 
         B_ListarCampo.setText("Listar");
-        JF_Archivos.getContentPane().add(B_ListarCampo);
-        B_ListarCampo.setBounds(270, 260, 61, 25);
+        JF_Campos.getContentPane().add(B_ListarCampo);
+        B_ListarCampo.setBounds(270, 260, 72, 23);
 
         B_ModificarCampo.setText("Modificar");
-        JF_Archivos.getContentPane().add(B_ModificarCampo);
-        B_ModificarCampo.setBounds(370, 260, 79, 25);
+        JF_Campos.getContentPane().add(B_ModificarCampo);
+        B_ModificarCampo.setBounds(370, 260, 81, 23);
 
-        B_BorrarCampo.setText("Borrar");
-        JF_Archivos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 65, 25);
+        B_BorrarCampo.setText("Borrar Campo");
+        JF_Campos.getContentPane().add(B_BorrarCampo);
+        B_BorrarCampo.setBounds(460, 260, 104, 23);
 
         I_Fondo_Archivos.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -169,7 +145,7 @@ public class Main extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        JF_Archivos.getContentPane().add(I_Fondo_Archivos);
+        JF_Campos.getContentPane().add(I_Fondo_Archivos);
         I_Fondo_Archivos.setBounds(0, 0, 100, 100);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -197,29 +173,25 @@ public class Main extends javax.swing.JFrame {
         I_Icono_Main.setBounds(242, 31, 200, 199);
 
         B_Campos.setText("Campos");
+        B_Campos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_CamposMouseClicked(evt);
+            }
+        });
         getContentPane().add(B_Campos);
-        B_Campos.setBounds(278, 268, 109, 25);
+        B_Campos.setBounds(278, 268, 109, 23);
 
         B_Registros.setText("Registros");
         getContentPane().add(B_Registros);
-        B_Registros.setBounds(514, 268, 109, 25);
+        B_Registros.setBounds(514, 268, 109, 23);
 
         B_Indices.setText("Indices");
         getContentPane().add(B_Indices);
-        B_Indices.setBounds(153, 335, 112, 25);
+        B_Indices.setBounds(153, 335, 112, 23);
 
         B_Estandarizacion.setText("Estandarizacion");
         getContentPane().add(B_Estandarizacion);
-        B_Estandarizacion.setBounds(382, 335, 112, 25);
-
-        B_Archivos.setText("Archivos");
-        B_Archivos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_ArchivosMouseClicked(evt);
-            }
-        });
-        getContentPane().add(B_Archivos);
-        B_Archivos.setBounds(100, 270, 110, 25);
+        B_Estandarizacion.setBounds(382, 335, 112, 23);
 
         I_Fondo_Main.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -236,6 +208,37 @@ public class Main extends javax.swing.JFrame {
 
         getContentPane().add(I_Fondo_Main);
         I_Fondo_Main.setBounds(0, 0, 100, 100);
+
+        jMenu1.setText("Archivos");
+
+        B_Archivo_Nuevo.setText("Nuevo");
+        B_Archivo_Nuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_Archivo_NuevoMouseClicked(evt);
+            }
+        });
+        jMenu1.add(B_Archivo_Nuevo);
+
+        B_Archivo_Abrir.setText("Abrir");
+        jMenu1.add(B_Archivo_Abrir);
+
+        B_Archivo_Guardar.setText("Guardar");
+        jMenu1.add(B_Archivo_Guardar);
+
+        B_Archivo_Cerrar.setText("Cerrar");
+        jMenu1.add(B_Archivo_Cerrar);
+
+        B_Archivo_Salir.setText("Salir");
+        B_Archivo_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_Archivo_SalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(B_Archivo_Salir);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -260,7 +263,6 @@ public class Main extends javax.swing.JFrame {
         I_Fondo_Main.setSize(x, y);
 
         //tamano de boton
-        B_Archivos.setSize((int) (x / 5), (int) (y / 9));
         B_Campos.setSize((int) (x / 5), (int) (y / 9));
         B_Registros.setSize((int) (x / 5), (int) (y / 9));
         B_Indices.setSize((int) (x / 5), (int) (y / 9));
@@ -272,7 +274,6 @@ public class Main extends javax.swing.JFrame {
 //                this.getComponent(i).setFont(f);
 //            }
 //        }
-       B_Archivos.setFont(f);
         //B_Archivos.setForeground(Color.white);
         //B_Archivos_Texto.setLocation(0,0);
         //B_Archivos_Texto.setSize(B_Archivos.getWidth(), B_Archivos.getHeight());
@@ -284,30 +285,19 @@ public class Main extends javax.swing.JFrame {
         B_Estandarizacion.setFont(f);
 
         //localidad de Botones
-        B_Archivos.setLocation((int) ((x / 6) - (B_Archivos.getWidth() / 2)), (int) ((4 * y / 6) - (B_Archivos.getHeight() / 2)));
-        B_Campos.setLocation((int) ((3 * x / 6) - (B_Campos.getWidth() / 2)), (int) ((4 * y / 6) - (B_Campos.getHeight() / 2)));
-        B_Registros.setLocation((int) ((5 * x / 6) - (B_Registros.getWidth() / 2)), (int) ((4 * y / 6) - (B_Registros.getHeight() / 2)));
-        B_Indices.setLocation((int) ((1 * x / 3) - (B_Indices.getWidth() / 2)), (int) ((5 * y / 6) - (B_Indices.getHeight() / 2)));
-        B_Estandarizacion.setLocation((int) ((2 * x / 3) - (B_Estandarizacion.getWidth() / 2)), (int) ((5 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
+        B_Campos.setLocation((int) ((x / 6) - (B_Campos.getWidth() / 2)), (int) ((4 * y / 6) - (B_Campos.getHeight() / 2)));
+        B_Registros.setLocation((int) ((2.3 * x / 6) - (B_Registros.getWidth() / 2)), (int) ((4 * y / 6) - (B_Registros.getHeight() / 2)));
+        B_Indices.setLocation((int) ((3.6 * x / 6) - (B_Indices.getWidth() / 2)), (int) ((4 * y / 6) - (B_Indices.getHeight() / 2)));
+        B_Estandarizacion.setLocation((int) ((4.9* x / 6) - (B_Estandarizacion.getWidth() / 2)), (int) ((4 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
 
 
     }//GEN-LAST:event_formComponentResized
 
-    private void B_ArchivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ArchivosMouseClicked
+    private void JF_CamposComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CamposComponentResized
         // TODO add your handling code here:
         
-        JF_Archivos.pack();
-        JF_Archivos.setVisible(true);
-        JF_Archivos.setSize(this.getWidth(), this.getHeight());
-        JF_Archivos.setLocationRelativeTo(this);
-        this.setVisible(false);
-    }//GEN-LAST:event_B_ArchivosMouseClicked
-
-    private void JF_ArchivosComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_ArchivosComponentResized
-        // TODO add your handling code here:
-        
-        int x=JF_Archivos.getWidth();
-        int y = JF_Archivos.getHeight();
+        int x=JF_Campos.getWidth();
+        int y = JF_Campos.getHeight();
         Font f;
         if (x > y) {
             f = new Font("Dialog", 0, (int) y / 33);
@@ -321,11 +311,6 @@ public class Main extends javax.swing.JFrame {
 //            }
 //        }
 
-        B_CrearArchivo.setFont(f);
-        B_AbrirArchivo.setFont(f);
-        B_CerrarArchivo.setFont(f);
-        B_SalirArchivo.setFont(f);
-        B_SalvarArchivo.setFont(f);
         B_CrearCampo.setFont(f);
         B_ModificarCampo.setFont(f);
         B_ListarCampo.setFont(f);
@@ -335,22 +320,12 @@ public class Main extends javax.swing.JFrame {
         I_Fondo_Archivos.setSize(x, y);
         
         
-        //Botones de Archivo
-        B_CrearArchivo.setSize(2*x/12, 2*y/20);
-        B_CrearArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((2*y / 13) - (B_CrearArchivo.getHeight() / 2)));
-        B_AbrirArchivo.setSize(2*x/12, 2*y/20);
-        B_AbrirArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((4*y / 13) - (B_CrearArchivo.getHeight() / 2)));
-        B_CerrarArchivo.setSize(2*x/12, 2*y/20);
-        B_CerrarArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((6*y / 13) - (B_CrearArchivo.getHeight() / 2)));
-        B_SalvarArchivo.setSize(2*x/12, 2*y/20);
-        B_SalvarArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((8*y / 13) - (B_CrearArchivo.getHeight() / 2)));
-        B_SalirArchivo.setSize(2*x/12, 2*y/20);
-        B_SalirArchivo.setLocation((int) ((2*x / 12) - (B_CrearArchivo.getWidth() / 2)), (int) ((10*y / 13) - (B_CrearArchivo.getHeight() / 2)));
+
         
         
         //Botones de la lista
         Datos_Achivos.setSize(x/2, y/2);
-        Datos_Achivos.setLocation((int) ((2*x / 3) - (Datos_Achivos.getWidth() / 2)), (int) ((5*y / 12) - (Datos_Achivos.getHeight() / 2)));
+        Datos_Achivos.setLocation((int) ((x / 2) - (Datos_Achivos.getWidth() / 2)), (int) ((5*y / 12) - (Datos_Achivos.getHeight() / 2)));
         lb_Archivo_Titulo.setSize(x/2, y/2);
         lb_Archivo_Titulo.setFont(f);
         lb_Archivo_Titulo.setLocation((int) ((5*x / 6) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
@@ -363,12 +338,26 @@ public class Main extends javax.swing.JFrame {
          B_CrearCampo.setLocation((int) ((5*x / 12) - (B_CrearCampo.getWidth() / 2)), (int) ((10*y / 13) - (B_CrearCampo.getHeight() / 2)));
 
         
-    }//GEN-LAST:event_JF_ArchivosComponentResized
+    }//GEN-LAST:event_JF_CamposComponentResized
 
-    private void B_SalirArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SalirArchivoMouseClicked
+    private void B_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CamposMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        JF_Campos.setJMenuBar(jMenuBar1);
+        JF_Campos.pack();
+        JF_Campos.setVisible(true);
+        JF_Campos.setSize(this.getWidth(), this.getHeight());
+        JF_Campos.setLocationRelativeTo(this);
+    }//GEN-LAST:event_B_CamposMouseClicked
+
+    private void B_Archivo_NuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_Archivo_NuevoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_Archivo_NuevoMouseClicked
+
+    private void B_Archivo_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_SalirActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_B_SalirArchivoMouseClicked
+    }//GEN-LAST:event_B_Archivo_SalirActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -398,28 +387,29 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton B_AbrirArchivo;
-    private javax.swing.JButton B_Archivos;
+    private javax.swing.JMenuItem B_Archivo_Abrir;
+    private javax.swing.JMenuItem B_Archivo_Cerrar;
+    private javax.swing.JMenuItem B_Archivo_Guardar;
+    private javax.swing.JMenuItem B_Archivo_Nuevo;
+    private javax.swing.JMenuItem B_Archivo_Salir;
     private javax.swing.JButton B_BorrarCampo;
     private javax.swing.JButton B_Campos;
-    private javax.swing.JButton B_CerrarArchivo;
-    private javax.swing.JButton B_CrearArchivo;
     private javax.swing.JButton B_CrearCampo;
     private javax.swing.JButton B_Estandarizacion;
     private javax.swing.JButton B_Indices;
     private javax.swing.JButton B_ListarCampo;
     private javax.swing.JButton B_ModificarCampo;
     private javax.swing.JButton B_Registros;
-    private javax.swing.JButton B_SalirArchivo;
-    private javax.swing.JButton B_SalvarArchivo;
     private javax.swing.JScrollPane Datos_Achivos;
     private javax.swing.JPanel I_Fondo_Archivos;
     private javax.swing.JPanel I_Fondo_Main;
     private javax.swing.JPanel I_Icono_Main;
     private javax.swing.JPanel I_PortadaFondo;
-    private javax.swing.JFrame JF_Archivos;
+    private javax.swing.JFrame JF_Campos;
     private javax.swing.JFrame Portadita;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lb_Archivo_Titulo;
     // End of variables declaration//GEN-END:variables
 
