@@ -310,7 +310,7 @@ public class Main extends javax.swing.JFrame {
 //                JF_Archivos.getComponent(i).setFont(f);
 //            }
 //        }
-
+//Hola amigo
         B_CrearCampo.setFont(f);
         B_ModificarCampo.setFont(f);
         B_ListarCampo.setFont(f);
