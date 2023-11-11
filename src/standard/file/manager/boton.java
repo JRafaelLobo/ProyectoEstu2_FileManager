@@ -62,7 +62,7 @@ public class boton extends javax.swing.JButton {
         // Llamada al método paintComponent de la clase padre
         super.paintComponent(g2);
     }
-
+//Hola que tal
     public void setAlpha(float alpha) {
         this.alpha = alpha;
         repaint();
