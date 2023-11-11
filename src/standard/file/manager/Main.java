@@ -23,8 +23,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         JF_Campos.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
-        
-        
+
         Portadita.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Music = playMusic("./Musica\\SonidoBoton.wav");
         Music.start();
@@ -288,15 +287,15 @@ public class Main extends javax.swing.JFrame {
         B_Campos.setLocation((int) ((x / 6) - (B_Campos.getWidth() / 2)), (int) ((4 * y / 6) - (B_Campos.getHeight() / 2)));
         B_Registros.setLocation((int) ((2.3 * x / 6) - (B_Registros.getWidth() / 2)), (int) ((4 * y / 6) - (B_Registros.getHeight() / 2)));
         B_Indices.setLocation((int) ((3.6 * x / 6) - (B_Indices.getWidth() / 2)), (int) ((4 * y / 6) - (B_Indices.getHeight() / 2)));
-        B_Estandarizacion.setLocation((int) ((4.9* x / 6) - (B_Estandarizacion.getWidth() / 2)), (int) ((4 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
+        B_Estandarizacion.setLocation((int) ((4.9 * x / 6) - (B_Estandarizacion.getWidth() / 2)), (int) ((4 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
 
 
     }//GEN-LAST:event_formComponentResized
 
     private void JF_CamposComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CamposComponentResized
         // TODO add your handling code here:
-        
-        int x=JF_Campos.getWidth();
+
+        int x = JF_Campos.getWidth();
         int y = JF_Campos.getHeight();
         Font f;
         if (x > y) {
@@ -315,29 +314,24 @@ public class Main extends javax.swing.JFrame {
         B_ModificarCampo.setFont(f);
         B_ListarCampo.setFont(f);
         B_BorrarCampo.setFont(f);
-        
-        
-        I_Fondo_Archivos.setSize(x, y);
-        
-        
 
-        
-        
+        I_Fondo_Archivos.setSize(x, y);
+
         //Botones de la lista
-        Datos_Achivos.setSize(x/2, y/2);
-        Datos_Achivos.setLocation((int) ((x / 2) - (Datos_Achivos.getWidth() / 2)), (int) ((5*y / 12) - (Datos_Achivos.getHeight() / 2)));
-        lb_Archivo_Titulo.setSize(x/2, y/2);
+        Datos_Achivos.setSize(x / 2, y / 2);
+        Datos_Achivos.setLocation((int) ((x / 2) - (Datos_Achivos.getWidth() / 2)), (int) ((5 * y / 12) - (Datos_Achivos.getHeight() / 2)));
+        lb_Archivo_Titulo.setSize(x / 2, y / 2);
         lb_Archivo_Titulo.setFont(f);
         lb_Archivo_Titulo.setLocation((int) ((x / 2) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
-        
-        //Botones Campo
-         B_CrearCampo.setSize(2*x/15, 2*y/20);
-         B_ModificarCampo.setSize(2*x/15, 2*y/20);
-         B_BorrarCampo.setSize(2*x/15, 2*y/20);
-         B_ListarCampo.setSize(2*x/15, 2*y/20);
-         B_CrearCampo.setLocation((int) ((5*x / 12) - (B_CrearCampo.getWidth() / 2)), (int) ((10*y / 13) - (B_CrearCampo.getHeight() / 2)));
 
-        
+        //Botones Campo
+        B_CrearCampo.setSize(2 * x / 15, 2 * y / 20);
+        B_ModificarCampo.setSize(2 * x / 15, 2 * y / 20);
+        B_BorrarCampo.setSize(2 * x / 15, 2 * y / 20);
+        B_ListarCampo.setSize(2 * x / 15, 2 * y / 20);
+        B_CrearCampo.setLocation((int) ((5 * x / 12) - (B_CrearCampo.getWidth() / 2)), (int) ((10 * y / 13) - (B_CrearCampo.getHeight() / 2)));
+
+
     }//GEN-LAST:event_JF_CamposComponentResized
 
     private void B_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CamposMouseClicked
