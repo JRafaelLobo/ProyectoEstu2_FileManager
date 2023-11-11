@@ -13,18 +13,11 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.util.ArrayList;
 import javax.swing.JDialog;
+import javax.swing.UIDefaults;
 
 public class Main extends javax.swing.JFrame {
-
-    private String OpenFileName = "";
-    private Archivos files = new Archivos();
-    private String Campos = "";
-    //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
-    //Campo: Nombre,Tipo,Tamano
-    //Registro: Lista de Campus
-    //Indices:
-    //Estandarizacion
 
     public Main() {
         initComponents();
@@ -37,7 +30,6 @@ public class Main extends javax.swing.JFrame {
         Portadita.pack();
         Portadita.setLocationRelativeTo(null);
         Portadita.setVisible(true);
-
         CambiarPantallaTiempo CPT2 = new CambiarPantallaTiempo(this, Portadita, 4000);
         CPT2.set(this, Portadita, 4000, 700, 400);
         CPT2.start();
@@ -117,7 +109,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Archivo_Titulo.setText("Datos Del Archivo");
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
-        lb_Archivo_Titulo.setBounds(60, 260, 150, 16);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -130,20 +122,25 @@ public class Main extends javax.swing.JFrame {
         Datos_Achivos.setBounds(310, 80, 220, 160);
 
         B_CrearCampo.setText("Crear");
+        B_CrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_CrearCampoMouseClicked(evt);
+            }
+        });
         JF_Campos.getContentPane().add(B_CrearCampo);
-        B_CrearCampo.setBounds(180, 260, 72, 23);
+        B_CrearCampo.setBounds(180, 260, 62, 25);
 
         B_ListarCampo.setText("Listar");
         JF_Campos.getContentPane().add(B_ListarCampo);
-        B_ListarCampo.setBounds(270, 260, 72, 23);
+        B_ListarCampo.setBounds(270, 260, 61, 25);
 
         B_ModificarCampo.setText("Modificar");
         JF_Campos.getContentPane().add(B_ModificarCampo);
-        B_ModificarCampo.setBounds(370, 260, 81, 23);
+        B_ModificarCampo.setBounds(370, 260, 79, 25);
 
         B_BorrarCampo.setText("Borrar");
         JF_Campos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 72, 23);
+        B_BorrarCampo.setBounds(460, 260, 65, 25);
 
         javax.swing.GroupLayout I_Campo_DecoracionLayout = new javax.swing.GroupLayout(I_Campo_Decoracion);
         I_Campo_Decoracion.setLayout(I_Campo_DecoracionLayout);
@@ -239,19 +236,19 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Campos);
-        B_Campos.setBounds(278, 268, 109, 23);
+        B_Campos.setBounds(278, 268, 109, 25);
 
         B_Registros.setText("Registros");
         getContentPane().add(B_Registros);
-        B_Registros.setBounds(514, 268, 109, 23);
+        B_Registros.setBounds(514, 268, 109, 25);
 
         B_Indices.setText("Indices");
         getContentPane().add(B_Indices);
-        B_Indices.setBounds(153, 335, 112, 23);
+        B_Indices.setBounds(153, 335, 112, 25);
 
         B_Estandarizacion.setText("Estandarizacion");
         getContentPane().add(B_Estandarizacion);
-        B_Estandarizacion.setBounds(382, 335, 112, 23);
+        B_Estandarizacion.setBounds(382, 335, 112, 25);
 
         I_Fondo_Main.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -269,8 +266,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(I_Fondo_Main);
         I_Fondo_Main.setBounds(0, 0, 100, 100);
 
+        jMenuBar1.setBackground(new java.awt.Color(19, 73, 60));
+        jMenuBar1.setForeground(new java.awt.Color(19, 73, 60));
         jMenuBar1.setFont(new java.awt.Font("Century", 1, 11)); // NOI18N
 
+        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
         jMenu1.setText("Archivos");
 
         B_Archivo_Nuevo.setText("Nuevo");
@@ -439,7 +439,9 @@ public class Main extends javax.swing.JFrame {
 
     private void B_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CamposMouseClicked
         // TODO add your handling code here:
-        if(!B_Campos.isEnabled()) return;
+        if (!B_Campos.isEnabled()) {
+            return;
+        }
         this.setVisible(false);
         JF_Campos.setJMenuBar(jMenuBar1);
         JF_Campos.pack();
@@ -456,7 +458,9 @@ public class Main extends javax.swing.JFrame {
     private void B_Archivo_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_NuevoActionPerformed
         // TODO add your handling code here:
         String nameOfFile = JOptionPane.showInputDialog(rootPane, "Ingrese el nombre o identidad del archivo ha crear");
-        if(nameOfFile == null) return;
+        if (nameOfFile == null) {
+            return;
+        }
         boolean isCreated = files.Nuevo(nameOfFile);
         if (isCreated)
             JOptionPane.showMessageDialog(null, "El archivo se creo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -466,7 +470,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_Archivo_AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_AbrirActionPerformed
         // TODO add your handling code here:
-        if (!this.isVisible() || !this.OpenFileName.equals("")){
+        if (!this.isVisible() || !this.OpenFileName.equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor antes de abrir un archivo cierre el actual", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -480,9 +484,9 @@ public class Main extends javax.swing.JFrame {
 
     private void D_Abrir_ArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D_Abrir_ArchivoMouseClicked
         // TODO add your handling code here:
-        OpenFileName = (String)ListOfFiles.getSelectedItem();
+        OpenFileName = (String) ListOfFiles.getSelectedItem();
         Campos = files.LecturaCampos(OpenFileName);
-        if(Campos.equals("Hubo un error al leer campos")){
+        if (Campos.equals("Hubo un error al leer campos")) {
             JOptionPane.showMessageDialog(null, "Hubo un error no se pudo leer campos", "Notificación", JOptionPane.ERROR_MESSAGE);
             Campos = "";
             return;
@@ -497,11 +501,11 @@ public class Main extends javax.swing.JFrame {
 
     private void B_Archivo_CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_CerrarActionPerformed
         // TODO add your handling code here:
-        if(OpenFileName.equals("")){
+        if (OpenFileName.equals("")) {
             JOptionPane.showMessageDialog(null, "No hay ningun archivo abierto para cerrar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        if(this.isVisible()){
+        if (this.isVisible()) {
             Campos = "";
             OpenFileName = "";
             B_Campos.setEnabled(false);
@@ -511,55 +515,60 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Se ha cerrado el archivo", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         int option = JOptionPane.showOptionDialog(null,
-                    "Esta seguro de cerrar el archivo",
-                    "Cerrar el archivo",
-                    JOptionPane.OK_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    new Object[]{"OK", "Cancel"},
-                    "OK");
+                "Esta seguro de cerrar el archivo",
+                "Cerrar el archivo",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[]{"OK", "Cancel"},
+                "OK");
         if (option == JOptionPane.OK_OPTION) {
-                OpenFileName = "";
-                Campos = "";
-                //Desactivando JFrames
-                JF_Campos.setVisible(false);
-                
-                this.setVisible(true);
-                this.setJMenuBar(jMenuBar1);
-                //Desactivando
-                B_Campos.setEnabled(false);
-                B_Registros.setEnabled(false);
-                B_Indices.setEnabled(false);
-                B_Estandarizacion.setEnabled(false);
-            }
+            OpenFileName = "";
+            Campos = "";
+            //Desactivando JFrames
+            JF_Campos.setVisible(false);
+
+            this.setVisible(true);
+            this.setJMenuBar(jMenuBar1);
+            //Desactivando
+            B_Campos.setEnabled(false);
+            B_Registros.setEnabled(false);
+            B_Indices.setEnabled(false);
+            B_Estandarizacion.setEnabled(false);
+        }
 
     }//GEN-LAST:event_B_Archivo_CerrarActionPerformed
 
     private void B_Archivo_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_GuardarActionPerformed
         // TODO add your handling code here:
-        if(OpenFileName.equals("")){
+        if (OpenFileName.equals("")) {
             JOptionPane.showMessageDialog(null, "No hay ningun archivo abierto para guardar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        if(this.isVisible()){
+        if (this.isVisible()) {
             JOptionPane.showMessageDialog(null, "No se ha realizado ningun cambio", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
         boolean IsSaved = false;
-        
-        if(JF_Campos.isVisible()){
+
+        if (JF_Campos.isVisible()) {
             IsSaved = files.GuardarCampos(OpenFileName, Campos);
         }
-        if(IsSaved){
+        if (IsSaved) {
             JOptionPane.showMessageDialog(null, "El archivo se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         JOptionPane.showMessageDialog(null, "El archivo no se guardo o no hubo un cambio realizado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-        
+
     }//GEN-LAST:event_B_Archivo_GuardarActionPerformed
+
+    private void B_CrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CrearCampoMouseClicked
+        // TODO add your handling code here:
+        String nombre;
+    }//GEN-LAST:event_B_CrearCampoMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -618,10 +627,20 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lb_Archivo_Titulo;
     // End of variables declaration//GEN-END:variables
+//variables personales
+
+    private String OpenFileName = "";
+    private Archivos files = new Archivos();
+    private String Campos = "";
+    private ArrayList<Campo> campos;
+    private Clip Music;
+    //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
+    //Campo: Nombre,Tipo,Tamano
+    //Registro: Lista de Campus
+    //Indices:
+    //Estandarizacion
 
     //Este metodo es para reproducir sonidos en el programa
-    private Clip Music;
-
     public static Clip playMusic(String filepath) {
         try {
             File music = new File(filepath);
