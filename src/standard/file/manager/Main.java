@@ -31,6 +31,7 @@ public class Main extends javax.swing.JFrame {
         Portadita.pack();
         Portadita.setLocationRelativeTo(null);
         Portadita.setVisible(true);
+
         CambiarPantallaTiempo CPT2 = new CambiarPantallaTiempo(this, Portadita, 4000);
         CPT2.set(this, Portadita, 100, 700, 400);
         CPT2.start();
@@ -288,8 +289,8 @@ public class Main extends javax.swing.JFrame {
         B_Registros.setLocation((int) ((2.3 * x / 6) - (B_Registros.getWidth() / 2)), (int) ((4 * y / 6) - (B_Registros.getHeight() / 2)));
         B_Indices.setLocation((int) ((3.6 * x / 6) - (B_Indices.getWidth() / 2)), (int) ((4 * y / 6) - (B_Indices.getHeight() / 2)));
         B_Estandarizacion.setLocation((int) ((4.9 * x / 6) - (B_Estandarizacion.getWidth() / 2)), (int) ((4 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
-
-
+        System.out.println("x=" + x + " , y= " + y);
+        
     }//GEN-LAST:event_formComponentResized
 
     private void JF_CamposComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CamposComponentResized
@@ -330,8 +331,9 @@ public class Main extends javax.swing.JFrame {
         B_BorrarCampo.setSize(2 * x / 15, 2 * y / 20);
         B_ListarCampo.setSize(2 * x / 15, 2 * y / 20);
         B_CrearCampo.setLocation((int) ((5 * x / 12) - (B_CrearCampo.getWidth() / 2)), (int) ((10 * y / 13) - (B_CrearCampo.getHeight() / 2)));
-
-
+        
+        B_CrearCampo.setLocation(1*x/6,(y*5)/6);
+        System.out.println("x=" + x + " , y= " + y);
     }//GEN-LAST:event_JF_CamposComponentResized
 
     private void B_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CamposMouseClicked
