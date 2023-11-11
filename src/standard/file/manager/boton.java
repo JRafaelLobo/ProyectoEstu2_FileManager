@@ -36,17 +36,27 @@ public class boton extends javax.swing.JButton {
     }
 
     @Override
-    protected void paintComponent(java.awt.Graphics grphcs) {
-        Graphics2D g2 = (Graphics2D) grphcs;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(Linea);
-        g2.fillRect(0, 0, getWidth(), getHeight());
-        GradientPaint gradient = new GradientPaint(0.0F, 0.0F, this.Color1, 0.0F, getHeight(), this.Color2, false);
-        g2.setPaint(gradient);
-        g2.fillRect(0, 3, getWidth(), getHeight() - 3);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-        super.paintComponent(g2);
-    }
+protected void paintComponent(java.awt.Graphics grphcs) {
+    Graphics2D g2 = (Graphics2D) grphcs;
+
+    // Antialiasing para bordes suaves
+    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+    // Fondo sólido
+    g2.setColor(new Color(173, 216, 230)); // Azul claro
+    g2.fillRect(0, 0, getWidth(), getHeight());
+
+    // Gradiente
+    GradientPaint gradient = new GradientPaint(0, 0, new Color(135, 206, 250), 0, getHeight(), new Color(70, 130, 180));
+    g2.setPaint(gradient);
+    g2.fillRect(0, 0, getWidth(), getHeight());
+
+    // Transparencia
+    g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+
+    // Llamada al método paintComponent de la clase padre
+    super.paintComponent(g2);
+}
 
     public void setAlpha(float alpha) {
         this.alpha = alpha;
