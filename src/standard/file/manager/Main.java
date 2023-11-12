@@ -753,8 +753,8 @@ public class Main extends javax.swing.JFrame {
         
         DefaultListModel<String> modeloLista = new DefaultListModel<>();
         
-        for (int i = 0; i < listaCampos.size(); i++) {
-            modeloLista.addElement(file.getListaCampos().get(i).getNombre());
+        for (int i = 0; i < file.getListaCampos().size(); i++) {
+            modeloLista.addElement(file.getListaCampos().get(i).toString());
         }
         JLista_Campos.setModel(modeloLista);
         
@@ -851,8 +851,8 @@ public class Main extends javax.swing.JFrame {
             String nombreNuevo = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo nombre: ");
             //Codigo para Modificar
             boolean modificado = false;
-            for (int i = 0; i < listaCampos.size(); i++) {
-                listaCampos.get(index).setNombre(nombreNuevo);
+            for (int i = 0; i < file.getListaCampos().size(); i++) {
+                file.getListaCampos().get(index).setNombre(nombreNuevo);
                 modificado = true;
             }
 
@@ -861,14 +861,31 @@ public class Main extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Error! El nombre del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
             }
+            
         }
 
         if (modificacion.equals("Tipo") || Integer.parseInt(modificacion) == 2) {
             int tipoNuevo = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo Tipo:\n 1. int\n 2. double\n 3. char\n 4. String "));
             //Codigo para Modificar
+            String tipo;
+            switch (tipoNuevo) {
+                case 1:
+                    tipo = "int";
+                    break;
+                case 2:
+                    tipo = "Double";
+                    break;
+                case 3:
+                    tipo = "char";
+                    break;
+                
+                default:
+                    tipo = "Unknown";
+            }
+
             boolean modificado = false;
-            for (int i = 0; i < listaCampos.size(); i++) {
-                listaCampos.get(index).setTipo(tipoNuevo);
+            for (int i = 0; i < file.getListaCampos().size(); i++) {
+                file.getListaCampos().get(index).setTipo(tipo);
                 modificado = true;
             }
             
@@ -883,8 +900,8 @@ public class Main extends javax.swing.JFrame {
             int longitudNueva = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese la nueva Longitud: "));
             //Codigo para Modificar
             boolean modificado = false;
-            for (int i = 0; i < listaCampos.size(); i++) {
-                listaCampos.get(index).setTamano(longitudNueva);
+            for (int i = 0; i < file.getListaCampos().size(); i++) {
+                file.getListaCampos().get(index).setTamano(longitudNueva);
                 modificado = true;
             }
             
@@ -894,6 +911,11 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error! La longitud del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
             }
         }
+        DefaultListModel<String> modeloLista = new DefaultListModel<>();
+        for (Campo campo : file.getListaCampos()) {
+            modeloLista.addElement(campo.toString());
+        }
+        JLista_Campos.setModel(modeloLista);
     }//GEN-LAST:event_B_ModificarCampoMouseClicked
 
     private void B_ListarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarCampoMouseClicked
@@ -1004,7 +1026,7 @@ public class Main extends javax.swing.JFrame {
     private String OpenFileName = "";
     private Archivos file = new Archivos();
     private String Campos = "";
-    public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
+    //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     public Campo campo;
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
