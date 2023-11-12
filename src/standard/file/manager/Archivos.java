@@ -9,31 +9,39 @@ package standard.file.manager;
  * @author ADMIN
  */
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Archivos {
-    public String LecturaCampos(String FileName){
+
+    private String nombre;
+    private ArrayList<Campo> listaCampos = new ArrayList();
+
+    public String LecturaCampos(String FileName) {
+
         String appData = System.getenv("APPDATA");
         String carpetaEnAppData = appData + File.separator + "Files_StructData";
         String rutaArchivo = carpetaEnAppData + File.separator + FileName;
         try {
-                // Leer la primera línea del archivo
-                BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
-                String primeraLinea = lector.readLine();
-                lector.close();
-                if (primeraLinea == null){
-                    return "";
-                }
-                return primeraLinea;
-            } catch (IOException e) {
-                System.err.println("Hubo un error al leer campos: " + e.getMessage());
-                return "Hubo un error al leer campos";
+            // Leer la primera línea del archivo
+            BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
+            String primeraLinea = lector.readLine();
+            lector.close();
+            if (primeraLinea == null) {
+                return "";
             }
+            return primeraLinea;
+        } catch (IOException e) {
+            System.err.println("Hubo un error al leer campos: " + e.getMessage());
+            return "Hubo un error al leer campos";
+        }
     }
-    public boolean GuardarCampos(String FileName, String newCampos){
+
+    public boolean GuardarCampos(String FileName, String newCampos) {
         String appData = System.getenv("APPDATA");
         String carpetaEnAppData = appData + File.separator + "Files_StructData";
         String rutaArchivo = carpetaEnAppData + File.separator + FileName;
-        if(!newCampos.equals("")){
+        if (!newCampos.equals("")) {
             try {
                 // Leer la primera línea del archivo
                 BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
@@ -52,7 +60,103 @@ public class Archivos {
         //Este return solo es para que no tire error
         return false;
     }
-    public String[] getNameFiles(){
+
+    public boolean Guardar(String FileName) {
+        String appData = System.getenv("APPDATA");
+        String carpetaEnAppData = appData + File.separator + "Files_StructData";
+        String rutaArchivo = carpetaEnAppData + File.separator + FileName;
+        if (!listaCampos.isEmpty()) {
+            try {
+                // Leer la primera línea del archivo
+                BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
+                String primeraLinea = lector.readLine();
+                lector.close();
+                BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));
+
+                String temp = "{";
+                for (int i = 0; i < listaCampos.size(); i++) {
+                    temp += listaCampos.get(i).toString();
+                    if (i != listaCampos.size() - 1) {
+                        temp += ",";
+                    }
+                }
+                temp += "}";
+                escritor.write(temp);
+                escritor.newLine();
+                escritor.close();
+                return true;
+            } catch (IOException e) {
+                System.err.println("Hubo un error al escribir los campos: " + e.getMessage());
+                return false;
+            }
+        }
+        //Este return solo es para que no tire error
+        return false;
+    }
+
+    public String Abrir(String FileName) {
+
+        String appData = System.getenv("APPDATA");
+        String carpetaEnAppData = appData + File.separator + "Files_StructData";
+        String rutaArchivo = carpetaEnAppData + File.separator + FileName;
+        try {
+            // Leer la primera línea del archivo
+            BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
+            String primeraLinea = lector.readLine();
+            lector.close();
+            if (primeraLinea == null) {
+                return "";
+            }
+
+            //metodo para leer archivo
+            primeraLinea=primeraLinea.replace("{", "");
+            primeraLinea = primeraLinea.replace("}", "");
+            String[] divicion = primeraLinea.split(",");
+            String nombre = "", tipo = "", numero = "";
+
+            listaCampos.clear();
+            for (int i = 0; i < divicion.length; i++) {
+                String cadena = divicion[i];
+                boolean esNombre = true, esTipo = false, esNumero = false;
+                int j = 0;
+                while (j < cadena.length()) {
+                    if (esNombre && cadena.charAt(i) != ':') {
+                        nombre += cadena.charAt(i);
+                    } else {
+                        j += 2;
+                        esNombre = false;
+                        esTipo = true;
+                        continue;
+                    }
+                    if (esTipo && cadena.charAt(i + 1) != '[') {
+                        tipo += cadena.charAt(i);
+                    } else {
+                        j += 2;
+                        esTipo = false;
+                        esNumero = true;
+                        continue;
+                    }
+                    if (esNumero && cadena.charAt(i) != ']') {
+                        numero += cadena.charAt(i);
+                    } else {
+                        break;
+                    }
+                    j++;
+                }
+                listaCampos.add(new Campo(nombre, Integer.valueOf(numero), tipo));
+                numero = "";
+                nombre = "";
+                tipo = "";
+            }
+
+            return primeraLinea;
+        } catch (IOException e) {
+            System.err.println("Hubo un error al leer campos: " + e.getMessage());
+            return "Hubo un error al leer campos";
+        }
+    }
+
+    public String[] getNameFiles() {
         String appData = System.getenv("APPDATA");
         String carpetaEnAppData = appData + File.separator + "Files_StructData";
         File carpeta = new File(carpetaEnAppData);
@@ -65,10 +169,11 @@ public class Archivos {
 
         return archivos;
     }
-    public boolean Nuevo(String nameOfFile){
+
+    public boolean Nuevo(String nameOfFile) {
         String appData = System.getenv("APPDATA");
         String carpetaEnAppData = appData + File.separator + "Files_StructData";
-        String rutaCompleta = carpetaEnAppData + File.separator + nameOfFile+".txt";
+        String rutaCompleta = carpetaEnAppData + File.separator + nameOfFile + ".txt";
         File directorio = new File(carpetaEnAppData);
         File archivo = new File(rutaCompleta);
         try {
@@ -92,4 +197,21 @@ public class Archivos {
             return false;
         }
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public ArrayList<Campo> getListaCampos() {
+        return listaCampos;
+    }
+
+    public void setListaCampos(ArrayList<Campo> listaCampos) {
+        this.listaCampos = listaCampos;
+    }
+
 }
