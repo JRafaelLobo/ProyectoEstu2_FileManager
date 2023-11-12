@@ -109,44 +109,46 @@ public class Archivos {
             }
 
             //metodo para leer archivo
-            primeraLinea=primeraLinea.replace("{", "");
+            primeraLinea = primeraLinea.replace("{", "");
             primeraLinea = primeraLinea.replace("}", "");
             String[] divicion = primeraLinea.split(",");
-            String nombre = "", tipo = "", numero = "";
 
             listaCampos.clear();
             for (int i = 0; i < divicion.length; i++) {
                 String cadena = divicion[i];
                 boolean esNombre = true, esTipo = false, esNumero = false;
                 int j = 0;
-                while (j < cadena.length()) {
-                    if (esNombre && cadena.charAt(i) != ':') {
-                        nombre += cadena.charAt(i);
-                    } else {
+                String nombre = "", tipo = "", numero = "";
+                while (j < cadena.length() - 1) {
+                    char letra = cadena.charAt(j);
+                    if (letra == ':') {
                         j += 2;
                         esNombre = false;
                         esTipo = true;
                         continue;
                     }
-                    if (esTipo && cadena.charAt(i + 1) != '[') {
-                        tipo += cadena.charAt(i);
-                    } else {
-                        j += 2;
+                    if (letra == '[') {
+                        j++;
                         esTipo = false;
                         esNumero = true;
                         continue;
                     }
-                    if (esNumero && cadena.charAt(i) != ']') {
-                        numero += cadena.charAt(i);
-                    } else {
+                    if (letra == ']') {
                         break;
+                    }
+                    if (esNombre) {
+                        nombre += cadena.charAt(j);
+
+                    }
+                    if (esTipo) {
+                        tipo += cadena.charAt(j);
+                    }
+                    if (esNumero) {
+                        numero += cadena.charAt(j);
                     }
                     j++;
                 }
                 listaCampos.add(new Campo(nombre, Integer.valueOf(numero), tipo));
-                numero = "";
-                nombre = "";
-                tipo = "";
             }
 
             return primeraLinea;
