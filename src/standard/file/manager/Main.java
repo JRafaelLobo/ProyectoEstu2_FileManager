@@ -14,6 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.util.ArrayList;
+import java.util.Collection;
+import javax.swing.DefaultListModel;
 
 import javax.swing.JDialog;
 import javax.swing.UIDefaults;
@@ -59,17 +61,17 @@ public class Main extends javax.swing.JFrame {
         ListOfFiles = new javax.swing.JComboBox<>();
         D_Abrir_Archivo = new javax.swing.JButton();
         JF_CrearCampo = new javax.swing.JFrame();
+        P_CrearCapo_Decoracion = new javax.swing.JPanel();
         PanelCrearCampo = new javax.swing.JPanel();
-        JL_Nombre = new javax.swing.JLabel();
         nombreCampo = new javax.swing.JTextField();
-        JL_Tipo = new javax.swing.JLabel();
-        tipoCampo = new javax.swing.JComboBox<>();
-        JL_Longitud = new javax.swing.JLabel();
         longitudCampo = new javax.swing.JTextField();
-        BotonGuardarCampo = new javax.swing.JButton();
-        BotonRegresar = new javax.swing.JButton();
+        B_RegresarCrearCampo = new javax.swing.JButton();
+        B_GuardadCrearCampo = new javax.swing.JButton();
         TituloCrear = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        JL_Longitud = new javax.swing.JLabel();
+        tipoCampo = new javax.swing.JComboBox<>();
+        JL_Nombre = new javax.swing.JLabel();
+        JL_Tipo = new javax.swing.JLabel();
         JF_ModificarCampo = new javax.swing.JFrame();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -145,15 +147,15 @@ public class Main extends javax.swing.JFrame {
                 B_CrearCampoMouseClicked(evt);
             }
         });
-        B_CrearCampo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_CrearCampoActionPerformed(evt);
-            }
-        });
         JF_Campos.getContentPane().add(B_CrearCampo);
         B_CrearCampo.setBounds(180, 260, 62, 25);
 
         B_ListarCampo.setText("Listar");
+        B_ListarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_ListarCampoMouseClicked(evt);
+            }
+        });
         JF_Campos.getContentPane().add(B_ListarCampo);
         B_ListarCampo.setBounds(270, 260, 61, 25);
 
@@ -163,15 +165,15 @@ public class Main extends javax.swing.JFrame {
                 B_ModificarCampoMouseClicked(evt);
             }
         });
-        B_ModificarCampo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_ModificarCampoActionPerformed(evt);
-            }
-        });
         JF_Campos.getContentPane().add(B_ModificarCampo);
         B_ModificarCampo.setBounds(370, 260, 79, 25);
 
         B_BorrarCampo.setText("Borrar");
+        B_BorrarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_BorrarCampoMouseClicked(evt);
+            }
+        });
         JF_Campos.getContentPane().add(B_BorrarCampo);
         B_BorrarCampo.setBounds(460, 260, 65, 25);
 
@@ -246,123 +248,76 @@ public class Main extends javax.swing.JFrame {
         });
         JF_CrearCampo.getContentPane().setLayout(null);
 
-        PanelCrearCampo.setBackground(new java.awt.Color(204, 255, 255));
+        P_CrearCapo_Decoracion.setBackground(new java.awt.Color(19, 73, 60));
+        P_CrearCapo_Decoracion.setForeground(new java.awt.Color(51, 102, 0));
 
-        JL_Nombre.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
-        JL_Nombre.setText("Nombre del Campo:");
+        javax.swing.GroupLayout P_CrearCapo_DecoracionLayout = new javax.swing.GroupLayout(P_CrearCapo_Decoracion);
+        P_CrearCapo_Decoracion.setLayout(P_CrearCapo_DecoracionLayout);
+        P_CrearCapo_DecoracionLayout.setHorizontalGroup(
+            P_CrearCapo_DecoracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 670, Short.MAX_VALUE)
+        );
+        P_CrearCapo_DecoracionLayout.setVerticalGroup(
+            P_CrearCapo_DecoracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
 
-        nombreCampo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreCampoActionPerformed(evt);
-            }
-        });
+        JF_CrearCampo.getContentPane().add(P_CrearCapo_Decoracion);
+        P_CrearCapo_Decoracion.setBounds(0, 0, 670, 40);
 
-        JL_Tipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
-        JL_Tipo.setText("Tipo de Dato:");
+        PanelCrearCampo.setBackground(new java.awt.Color(5, 23, 45));
+        PanelCrearCampo.setLayout(null);
+        PanelCrearCampo.add(nombreCampo);
+        nombreCampo.setBounds(200, 100, 290, 19);
+        PanelCrearCampo.add(longitudCampo);
+        longitudCampo.setBounds(200, 220, 280, 19);
 
-        tipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "String", "Char", "Int", "Double", " " }));
-        tipoCampo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoCampoActionPerformed(evt);
-            }
-        });
+        B_RegresarCrearCampo.setBackground(new java.awt.Color(0, 153, 255));
+        B_RegresarCrearCampo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        B_RegresarCrearCampo.setForeground(new java.awt.Color(0, 0, 204));
+        B_RegresarCrearCampo.setText("Regresar");
+        PanelCrearCampo.add(B_RegresarCrearCampo);
+        B_RegresarCrearCampo.setBounds(70, 310, 82, 26);
 
-        JL_Longitud.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
-        JL_Longitud.setText("Longitud:");
-
-        BotonGuardarCampo.setBackground(new java.awt.Color(0, 153, 255));
-        BotonGuardarCampo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
-        BotonGuardarCampo.setForeground(new java.awt.Color(0, 0, 204));
-        BotonGuardarCampo.setText("Guardar");
-        BotonGuardarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
+        B_GuardadCrearCampo.setBackground(new java.awt.Color(0, 153, 255));
+        B_GuardadCrearCampo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        B_GuardadCrearCampo.setForeground(new java.awt.Color(0, 0, 204));
+        B_GuardadCrearCampo.setText("Guardar");
+        B_GuardadCrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonGuardarCampoMouseClicked(evt);
+                B_GuardadCrearCampoMouseClicked(evt);
             }
         });
-
-        BotonRegresar.setBackground(new java.awt.Color(0, 153, 255));
-        BotonRegresar.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
-        BotonRegresar.setForeground(new java.awt.Color(0, 0, 204));
-        BotonRegresar.setText("Regresar");
+        PanelCrearCampo.add(B_GuardadCrearCampo);
+        B_GuardadCrearCampo.setBounds(560, 310, 80, 26);
 
         TituloCrear.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 24)); // NOI18N
         TituloCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TituloCrear.setText("Crear Campo");
+        PanelCrearCampo.add(TituloCrear);
+        TituloCrear.setBounds(280, 50, 115, 26);
 
-        javax.swing.GroupLayout PanelCrearCampoLayout = new javax.swing.GroupLayout(PanelCrearCampo);
-        PanelCrearCampo.setLayout(PanelCrearCampoLayout);
-        PanelCrearCampoLayout.setHorizontalGroup(
-            PanelCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelCrearCampoLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(BotonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
-                .addComponent(TituloCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(PanelCrearCampoLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(JL_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(PanelCrearCampoLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(JL_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(tipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(PanelCrearCampoLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(JL_Longitud, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(longitudCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(PanelCrearCampoLayout.createSequentialGroup()
-                .addGap(245, 245, 245)
-                .addComponent(BotonGuardarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        PanelCrearCampoLayout.setVerticalGroup(
-            PanelCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelCrearCampoLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(PanelCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BotonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TituloCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(PanelCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelCrearCampoLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(JL_Nombre))
-                    .addComponent(nombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addGroup(PanelCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JL_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(112, 112, 112)
-                .addGroup(PanelCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelCrearCampoLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(JL_Longitud))
-                    .addComponent(longitudCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(BotonGuardarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        JL_Longitud.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        JL_Longitud.setText("Longitud:");
+        PanelCrearCampo.add(JL_Longitud);
+        JL_Longitud.setBounds(100, 220, 49, 16);
+
+        tipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Int", "Double", "Char", " " }));
+        PanelCrearCampo.add(tipoCampo);
+        tipoCampo.setBounds(200, 160, 61, 24);
+
+        JL_Nombre.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        JL_Nombre.setText("Nombre del Campo:");
+        PanelCrearCampo.add(JL_Nombre);
+        JL_Nombre.setBounds(60, 100, 105, 16);
+
+        JL_Tipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        JL_Tipo.setText("Tipo de Dato:");
+        PanelCrearCampo.add(JL_Tipo);
+        JL_Tipo.setBounds(80, 160, 68, 16);
 
         JF_CrearCampo.getContentPane().add(PanelCrearCampo);
-        PanelCrearCampo.setBounds(0, 40, 670, 440);
-
-        jPanel1.setBackground(new java.awt.Color(51, 102, 0));
-        jPanel1.setForeground(new java.awt.Color(51, 102, 0));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        JF_CrearCampo.getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 620, 40);
+        PanelCrearCampo.setBounds(0, 40, 690, 350);
 
         JF_ModificarCampo.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         JF_ModificarCampo.setBackground(new java.awt.Color(240, 240, 24));
@@ -566,8 +521,6 @@ public class Main extends javax.swing.JFrame {
         B_Registros.setEnabled(false);
         B_Indices.setEnabled(false);
         B_Estandarizacion.setEnabled(false);
-        System.out.println("x=" + x + " , y= " + y);
-
     }//GEN-LAST:event_formComponentResized
 
     private void JF_CamposComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CamposComponentResized
@@ -769,28 +722,15 @@ public class Main extends javax.swing.JFrame {
         //JF_CrearCampo.setJMenuBar(jMenuBar1);
         JF_CrearCampo.pack();
         JF_CrearCampo.setVisible(true);
-        JF_CrearCampo.setSize(this.getWidth(), this.getHeight());
-        JF_CrearCampo.setLocationRelativeTo(this);
+        JF_CrearCampo.setSize(JF_Campos.getWidth() * 2 / 3, JF_Campos.getHeight() * 2 / 3);
+        JF_CrearCampo.setLocationRelativeTo(JF_Campos);
         //JF_CrearCampo.setSize([701, 514]);
     }//GEN-LAST:event_B_CrearCampoMouseClicked
 
-    private void B_CrearCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_CrearCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_CrearCampoActionPerformed
-
-    private void nombreCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreCampoActionPerformed
-
-    private void tipoCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCampoActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_tipoCampoActionPerformed
-
-    private void BotonGuardarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonGuardarCampoMouseClicked
+    private void B_GuardadCrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardadCrearCampoMouseClicked
         // TODO add your handling code here:
         String nombre = nombreCampo.getText();
-        Object tipo = tipoCampo.getSelectedItem();
+        int tipo = tipoCampo.getSelectedIndex();
         int longitud = Integer.parseInt(longitudCampo.getText());
 
         Campo campoNuevo = new Campo(nombre, longitud, tipo);
@@ -799,57 +739,71 @@ public class Main extends javax.swing.JFrame {
         longitudCampo.setText("");
         tipoCampo.setSelectedIndex(0);
         JOptionPane.showMessageDialog(this, "Campo agregado con exito!");
-    }//GEN-LAST:event_BotonGuardarCampoMouseClicked
+    }//GEN-LAST:event_B_GuardadCrearCampoMouseClicked
 
     private void JF_CrearCampoComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CrearCampoComponentResized
         // TODO add your handling code here:
-//        int x = JF_CrearCampo.getWidth();
-//        int y = JF_CrearCampo.getHeight();
-//        Font f;
-//        if (x > y) {
-//            f = new Font("Dialog", 0, (int) y / 33);
-//
-//        } else {
-//            f = new Font("Dialog", 0, (int) x / 33);
-//        }
-//        
-//        
-//
-//        Botones Campo
-//        BotonGuardarCampo.setSize(3 * x / 16, 2 * y / 18);
-//        BotonRegresar.setSize(3 * x / 16, 2 * y / 18);
-//        
-//        BotonGuardarCampo.setLocation((int) ((1 * x / 8) - (BotonGuardarCampo.getWidth() / 2)), (int) ((11 * y / 13) - (BotonGuardarCampo.getHeight() / 2)));
-//        BotonRegresar.setLocation((int) ((3 * x / 8) - (BotonRegresar.getWidth() / 2)), (int) ((11 * y / 13) - (BotonRegresar.getHeight() / 2)));
-//
-//        titulo
-//        if (x > y) {
-//            f = new Font("Dialog", 1, (int) y / 16);
-//
-//        } else {
-//            f = new Font("Dialog", 1, (int) x / 16);
-//        }
-//        BotonGuardarCampo.setFont(f);
-//        BotonRegresar.setFont(f);
-//        TituloCrear.setFont(f);
-//        FontMetrics fontMetrics = TituloCrear.getFontMetrics(TituloCrear.getFont());
-//        int anchoTexto = fontMetrics.stringWidth(TituloCrear.getText());
-//        TituloCrear.setSize(anchoTexto, y / 2);
-//        TituloCrear.setLocation((int) ((x / 2) - (TituloCrear.getWidth() / 2)), (int) ((y / 12) - (TituloCrear.getHeight() / 2)));
-//
-//        tamano de boton
-//        BotonGuardarCampo.setSize((int) (x / 5), (int) (y / 9));
-//        BotonRegresar.setSize((int) (x / 5), (int) (y / 9));
-//        
-//        localidad de Botones
-//        BotonGuardarCampo.setLocation((int) ((x / 6) - (B_Campos.getWidth() / 2)), (int) ((4 * y / 6) - (B_Campos.getHeight() / 2)));
-//        BotonRegresar.setLocation((int) ((2.3 * x / 6) - (B_Registros.getWidth() / 2)), (int) ((4 * y / 6) - (B_Registros.getHeight() / 2)));
-//        
-    }//GEN-LAST:event_JF_CrearCampoComponentResized
 
-    private void B_ModificarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_ModificarCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_ModificarCampoActionPerformed
+        int y_decorated = JF_CrearCampo.getInsets().top + JF_CrearCampo.getInsets().bottom;
+        int x_original = JF_CrearCampo.getWidth() - JF_CrearCampo.getInsets().right - JF_CrearCampo.getInsets().left;
+        int y_original = JF_CrearCampo.getHeight() - y_decorated;
+
+        PanelCrearCampo.setLocation(0, y_original / 8);
+        PanelCrearCampo.setSize(x_original, y_original * 7 / 8);
+        P_CrearCapo_Decoracion.setLocation(0, 0);
+        P_CrearCapo_Decoracion.setSize(x_original, y_original / 8);
+
+        int x = PanelCrearCampo.getWidth();
+        int y = PanelCrearCampo.getHeight();
+
+        Font f;
+        int anchoTexto;
+
+        //titulo
+        if (x > y) {
+            f = new Font("Dialog", 1, (int) y_original / 16);
+
+        } else {
+            f = new Font("Dialog", 1, (int) x_original / 16);
+        }
+        TituloCrear.setFont(f);
+        FontMetrics fontMetrics = TituloCrear.getFontMetrics(TituloCrear.getFont());
+        anchoTexto = fontMetrics.stringWidth(TituloCrear.getText());
+        TituloCrear.setForeground(Color.white);
+        TituloCrear.setSize(anchoTexto, y * 2 / 3);
+        TituloCrear.setLocation((int) (x / 2) - (TituloCrear.getWidth() / 2), (int) ((y / 8) - (TituloCrear.getHeight() / 2)));
+
+        if (x > y) {
+            f = new Font("Dialog", 1, (int) y_original / 33);
+
+        } else {
+            f = new Font("Dialog", 1, (int) x_original / 33);
+        }
+        JL_Nombre.setFont(f);
+        fontMetrics = JL_Nombre.getFontMetrics(JL_Nombre.getFont());
+        anchoTexto = fontMetrics.stringWidth(JL_Nombre.getText());
+        JL_Nombre.setForeground(Color.white);
+        JL_Nombre.setSize(anchoTexto, y * 2 / 3);
+        JL_Nombre.setLocation((int) (x / 4) - (JL_Nombre.getWidth() / 2), (int) ((4 * y / 16) - (JL_Nombre.getHeight() / 2)));
+
+        JL_Tipo.setFont(f);
+        fontMetrics = JL_Tipo.getFontMetrics(JL_Tipo.getFont());
+        anchoTexto = fontMetrics.stringWidth(JL_Tipo.getText());
+        JL_Tipo.setForeground(Color.white);
+        JL_Tipo.setSize(anchoTexto, y * 2 / 3);
+        JL_Tipo.setLocation((int) (x / 4) - (JL_Tipo.getWidth() / 2), (int) ((7 * y / 16) - (JL_Tipo.getHeight() / 2)));
+
+        JL_Longitud.setFont(f);
+        fontMetrics = JL_Longitud.getFontMetrics(JL_Longitud.getFont());
+        anchoTexto = fontMetrics.stringWidth(JL_Longitud.getText());
+        JL_Longitud.setForeground(Color.white);
+        JL_Longitud.setSize(anchoTexto, y * 2 / 3);
+        JL_Longitud.setLocation((int) (x / 4) - (JL_Longitud.getWidth() / 2), (int) ((10 * y / 16) - (JL_Longitud.getHeight() / 2)));
+
+        B_GuardadCrearCampo.setSize(2 * x_original / 16, 2 * y_original / 18);
+        B_GuardadCrearCampo.setLocation((int) (x * 7 / 9), (int) ((y * 15 / 16) - (B_CrearCampo.getWidth() / 2)));
+
+    }//GEN-LAST:event_JF_CrearCampoComponentResized
 
     private void B_ModificarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarCampoMouseClicked
         // TODO add your handling code here:
@@ -891,6 +845,30 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_B_ModificarCampoMouseClicked
 
+    private void B_ListarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarCampoMouseClicked
+        // TODO add your handling code here:
+        DefaultListModel<String> modeloLista = new DefaultListModel<>();
+//        modeloLista = (DefaultListModel<String>) JLista_Campos.getModel();
+//        modeloLista.removeAllElements();
+        for (Campo campo : listaCampos) {
+            modeloLista.addElement(campo.toString());
+        }
+        JLista_Campos.setModel(modeloLista);
+
+    }//GEN-LAST:event_B_ListarCampoMouseClicked
+
+    private void B_BorrarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarCampoMouseClicked
+        // TODO add your handling code here:
+        DefaultListModel<String> modeloLista = new DefaultListModel<>();
+        for (int i = 0; i < JLista_Campos.getModel().getSize(); i++) {
+            if (i != JLista_Campos.getSelectedIndex()) {
+                modeloLista.addElement(JLista_Campos.getModel().getElementAt(i));
+            }
+        }
+        JLista_Campos.setModel(modeloLista);
+
+    }//GEN-LAST:event_B_BorrarCampoMouseClicked
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -928,12 +906,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_Campos;
     private javax.swing.JButton B_CrearCampo;
     private javax.swing.JButton B_Estandarizacion;
+    private javax.swing.JButton B_GuardadCrearCampo;
     private javax.swing.JButton B_Indices;
     private javax.swing.JButton B_ListarCampo;
     private javax.swing.JButton B_ModificarCampo;
     private javax.swing.JButton B_Registros;
-    private javax.swing.JButton BotonGuardarCampo;
-    private javax.swing.JButton BotonRegresar;
+    private javax.swing.JButton B_RegresarCrearCampo;
     private javax.swing.JButton D_Abrir_Archivo;
     private javax.swing.JScrollPane Datos_Achivos;
     private javax.swing.JDialog Dialog_Abrir;
@@ -950,6 +928,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel JL_Tipo;
     private javax.swing.JList<String> JLista_Campos;
     private javax.swing.JComboBox<String> ListOfFiles;
+    private javax.swing.JPanel P_CrearCapo_Decoracion;
     private javax.swing.JPanel PanelCrearCampo;
     private javax.swing.JFrame Portadita;
     private javax.swing.JLabel TituloCrear;
@@ -957,7 +936,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lb_Archivo_Titulo;
