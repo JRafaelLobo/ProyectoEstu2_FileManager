@@ -250,7 +250,7 @@ public class Main extends javax.swing.JFrame {
         P_CrearCapo_Decoracion.setLayout(P_CrearCapo_DecoracionLayout);
         P_CrearCapo_DecoracionLayout.setHorizontalGroup(
             P_CrearCapo_DecoracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 740, Short.MAX_VALUE)
         );
         P_CrearCapo_DecoracionLayout.setVerticalGroup(
             P_CrearCapo_DecoracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +258,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_CrearCampo.getContentPane().add(P_CrearCapo_Decoracion);
-        P_CrearCapo_Decoracion.setBounds(0, 0, 670, 40);
+        P_CrearCapo_Decoracion.setBounds(0, 0, 740, 40);
 
         PanelCrearCampo.setBackground(new java.awt.Color(5, 23, 45));
         PanelCrearCampo.setLayout(null);
@@ -270,11 +270,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
         PanelCrearCampo.add(nombreCampo);
-        nombreCampo.setBounds(200, 100, 290, 22);
+        nombreCampo.setBounds(230, 100, 280, 30);
 
         longitudCampo.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
         PanelCrearCampo.add(longitudCampo);
-        longitudCampo.setBounds(200, 220, 280, 22);
+        longitudCampo.setBounds(230, 230, 280, 30);
 
         B_RegresarCrearCampo.setBackground(new java.awt.Color(0, 153, 255));
         B_RegresarCrearCampo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
@@ -309,25 +309,25 @@ public class Main extends javax.swing.JFrame {
         JL_Longitud.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         JL_Longitud.setText("Longitud:");
         PanelCrearCampo.add(JL_Longitud);
-        JL_Longitud.setBounds(100, 220, 52, 16);
+        JL_Longitud.setBounds(90, 240, 90, 20);
 
         tipoCampo.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
         tipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "double", "char", "String", " " }));
         PanelCrearCampo.add(tipoCampo);
-        tipoCampo.setBounds(200, 160, 61, 22);
+        tipoCampo.setBounds(230, 160, 280, 30);
 
         JL_Nombre.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         JL_Nombre.setText("Nombre del Campo:");
         PanelCrearCampo.add(JL_Nombre);
-        JL_Nombre.setBounds(60, 100, 105, 16);
+        JL_Nombre.setBounds(60, 100, 140, 20);
 
         JL_Tipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         JL_Tipo.setText("Tipo de Dato:");
         PanelCrearCampo.add(JL_Tipo);
-        JL_Tipo.setBounds(80, 160, 73, 16);
+        JL_Tipo.setBounds(80, 160, 100, 20);
 
         JF_CrearCampo.getContentPane().add(PanelCrearCampo);
-        PanelCrearCampo.setBounds(0, 40, 690, 350);
+        PanelCrearCampo.setBounds(0, 40, 740, 450);
 
         JF_ModificarCampo.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         JF_ModificarCampo.setBackground(new java.awt.Color(240, 240, 24));
@@ -743,27 +743,38 @@ public class Main extends javax.swing.JFrame {
 
     private void B_GuardadCrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardadCrearCampoMouseClicked
         // TODO add your handling code here:
-        String nombre = nombreCampo.getText();
-        String tipo = tipoCampo.getSelectedItem().toString();
-        int longitud = Integer.parseInt(longitudCampo.getText());
+        try {
+            String nombre = nombreCampo.getText();
+            String tipo = tipoCampo.getSelectedItem().toString();
+            int longitud = Integer.parseInt(longitudCampo.getText());
+            if (longitud < 0) {
+                JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        Campo campoNuevo = new Campo(nombre, longitud, tipo);
-        //listaCampos.add(campoNuevo);
-        file.getListaCampos().add(campoNuevo);
-        
-        DefaultListModel<String> modeloLista = new DefaultListModel<>();
-        
-        for (int i = 0; i < file.getListaCampos().size(); i++) {
-            modeloLista.addElement(file.getListaCampos().get(i).toString());
+            Campo campoNuevo = new Campo(nombre, longitud, tipo);
+            //listaCampos.add(campoNuevo);
+            file.getListaCampos().add(campoNuevo);
+
+            DefaultListModel<String> modeloLista = new DefaultListModel<>();
+
+            for (int i = 0; i < file.getListaCampos().size(); i++) {
+                modeloLista.addElement(file.getListaCampos().get(i).toString());
+            }
+            JLista_Campos.setModel(modeloLista);
+
+            nombreCampo.setText("");
+            longitudCampo.setText("");
+            tipoCampo.setSelectedIndex(0);
+            JOptionPane.showMessageDialog(this, "Campo agregado con exito!");
+            JF_CrearCampo.setVisible(false);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
-        JLista_Campos.setModel(modeloLista);
-        
-        
-        nombreCampo.setText("");
-        longitudCampo.setText("");
-        tipoCampo.setSelectedIndex(0);
-        JOptionPane.showMessageDialog(this, "Campo agregado con exito!");
-        JF_CrearCampo.setVisible(false);
+
+
     }//GEN-LAST:event_B_GuardadCrearCampoMouseClicked
 
     private void JF_CrearCampoComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CrearCampoComponentResized
@@ -810,7 +821,7 @@ public class Main extends javax.swing.JFrame {
         JL_Nombre.setForeground(Color.white);
         JL_Nombre.setSize(anchoTexto, y * 2 / 3);
         JL_Nombre.setLocation((int) (x / 4) - (JL_Nombre.getWidth() / 2), (int) ((4 * y / 16) - (JL_Nombre.getHeight() / 2)));
-        
+
 //        nombreCampo.setForeground(Color.white);
 //        nombreCampo.setSize(anchoTexto, y * 2 / 3);
 //        nombreCampo.setLocation((int) (x / 4) - (nombreCampo.getWidth() / 2), (int) ((4 * y / 16) - (nombreCampo.getHeight() / 2)));
@@ -822,7 +833,6 @@ public class Main extends javax.swing.JFrame {
 //        tipoCampo.setForeground(Color.white);
 //        tipoCampo.setSize(anchoTexto, y * 2 / 3);
 //        tipoCampo.setLocation((int) (x / 4) - (tipoCampo.getWidth() / 2), (int) ((4 * y / 16) - (tipoCampo.getHeight() / 2)));
-        
         JL_Tipo.setFont(f);
         fontMetrics = JL_Tipo.getFontMetrics(JL_Tipo.getFont());
         anchoTexto = fontMetrics.stringWidth(JL_Tipo.getText());
@@ -844,78 +854,102 @@ public class Main extends javax.swing.JFrame {
 
     private void B_ModificarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarCampoMouseClicked
         // TODO add your handling code here:
-        int index = JLista_Campos.getSelectedIndex();
-        String modificacion = JOptionPane.showInputDialog(rootPane, "Que desea modificar?\n 1. Nombre\n 2. Tipo\n 3. Longitud");
-
-        if (modificacion.equals("Nombre") || Integer.parseInt(modificacion) == 1) {
-            String nombreNuevo = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo nombre: ");
-            //Codigo para Modificar
-            boolean modificado = false;
-            for (int i = 0; i < file.getListaCampos().size(); i++) {
-                file.getListaCampos().get(index).setNombre(nombreNuevo);
-                modificado = true;
-            }
-
-            if (modificado == true) {
-                JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            if (JLista_Campos.isSelectionEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de la lista.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Error! El nombre del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-            }
-            
-        }
+                int index = JLista_Campos.getSelectedIndex();
+                String modificacion = JOptionPane.showInputDialog(rootPane, "Que desea modificar?\n 1. Nombre\n 2. Tipo\n 3. Longitud");
+                if (Integer.parseInt(modificacion) != 1 && Integer.parseInt(modificacion) != 2 && Integer.parseInt(modificacion) != 3) {
+                    JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-        if (modificacion.equals("Tipo") || Integer.parseInt(modificacion) == 2) {
-            int tipoNuevo = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo Tipo:\n 1. int\n 2. double\n 3. char\n 4. String "));
-            //Codigo para Modificar
-            String tipo;
-            switch (tipoNuevo) {
-                case 1:
-                    tipo = "int";
-                    break;
-                case 2:
-                    tipo = "Double";
-                    break;
-                case 3:
-                    tipo = "char";
-                    break;
-                
-                default:
-                    tipo = "Unknown";
-            }
+                if (modificacion.equals("Nombre") || Integer.parseInt(modificacion) == 1) {
+                    String nombreNuevo = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo nombre: ");
+                    //Codigo para Modificar
+                    boolean modificado = false;
+                    for (int i = 0; i < file.getListaCampos().size(); i++) {
+                        file.getListaCampos().get(index).setNombre(nombreNuevo);
+                        modificado = true;
+                    }
 
-            boolean modificado = false;
-            for (int i = 0; i < file.getListaCampos().size(); i++) {
-                file.getListaCampos().get(index).setTipo(tipo);
-                modificado = true;
-            }
-            
-            if (modificado == true) {
-                JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error! El tipo del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+                    if (modificado == true) {
+                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error! El nombre del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
+                    }
 
-        if (modificacion.equals("Longitud") || Integer.parseInt(modificacion) == 3) {
-            int longitudNueva = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese la nueva Longitud: "));
-            //Codigo para Modificar
-            boolean modificado = false;
-            for (int i = 0; i < file.getListaCampos().size(); i++) {
-                file.getListaCampos().get(index).setTamano(longitudNueva);
-                modificado = true;
+                }
+
+                if (modificacion.equals("Tipo") || Integer.parseInt(modificacion) == 2) {
+                    int tipoNuevo = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo Tipo:\n 1. int\n 2. double\n 3. char\n"));
+                    //Codigo para Modificar
+                    String tipo;
+                    if (tipoNuevo != 1 && tipoNuevo != 2 && tipoNuevo != 3) {
+                        JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    switch (tipoNuevo) {
+                        case 1:
+                            tipo = "int";
+                            break;
+                        case 2:
+                            tipo = "Double";
+                            break;
+                        case 3:
+                            tipo = "char";
+                            break;
+
+                        default:
+                            tipo = "Unknown";
+                    }
+
+                    boolean modificado = false;
+                    for (int i = 0; i < file.getListaCampos().size(); i++) {
+                        file.getListaCampos().get(index).setTipo(tipo);
+                        modificado = true;
+                    }
+
+                    if (modificado == true) {
+                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error! El tipo del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+                if (modificacion.equals("Longitud") || Integer.parseInt(modificacion) == 3) {
+                    int longitudNueva = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese la nueva Longitud: "));
+                    //Codigo para Modificar
+                    if (longitudNueva < 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    boolean modificado = false;
+
+                    for (int i = 0; i < file.getListaCampos().size(); i++) {
+                        file.getListaCampos().get(index).setTamano(longitudNueva);
+                        modificado = true;
+                    }
+
+                    if (modificado == true) {
+                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error! La longitud del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+                DefaultListModel<String> modeloLista = new DefaultListModel<>();
+                for (Campo campo : file.getListaCampos()) {
+                    modeloLista.addElement(campo.toString());
+                }
+                JLista_Campos.setModel(modeloLista);
+
             }
-            
-            if (modificado == true) {
-                JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error! La longitud del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
-        DefaultListModel<String> modeloLista = new DefaultListModel<>();
-        for (Campo campo : file.getListaCampos()) {
-            modeloLista.addElement(campo.toString());
-        }
-        JLista_Campos.setModel(modeloLista);
     }//GEN-LAST:event_B_ModificarCampoMouseClicked
 
     private void B_ListarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarCampoMouseClicked
@@ -930,12 +964,20 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BorrarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarCampoMouseClicked
         // TODO add your handling code here:
-        file.getListaCampos().remove(JLista_Campos.getSelectedIndex());
-        DefaultListModel<String> modeloLista = new DefaultListModel<>();
-        for (Campo campo : file.getListaCampos()) {
-            modeloLista.addElement(campo.toString());
+        try {
+            if (JLista_Campos.isSelectionEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de la lista.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                file.getListaCampos().remove(JLista_Campos.getSelectedIndex());
+                DefaultListModel<String> modeloLista = new DefaultListModel<>();
+                for (Campo campo : file.getListaCampos()) {
+                    modeloLista.addElement(campo.toString());
+                }
+                JLista_Campos.setModel(modeloLista);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        JLista_Campos.setModel(modeloLista);
     }//GEN-LAST:event_B_BorrarCampoMouseClicked
 
     private void B_RegresarCrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_RegresarCrearCampoMouseClicked
