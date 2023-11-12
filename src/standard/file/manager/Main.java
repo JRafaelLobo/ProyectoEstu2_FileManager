@@ -131,11 +131,6 @@ public class Main extends javax.swing.JFrame {
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
         lb_Archivo_Titulo.setBounds(60, 260, 150, 14);
 
-        JLista_Campos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         Datos_Achivos.setViewportView(JLista_Campos);
 
         JF_Campos.getContentPane().add(Datos_Achivos);
@@ -602,6 +597,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CamposMouseClicked
         // TODO add your handling code here:
+
         if (!B_Campos.isEnabled()) {
             return;
         }
@@ -624,7 +620,7 @@ public class Main extends javax.swing.JFrame {
         if (nameOfFile == null) {
             return;
         }
-        boolean isCreated = files.Nuevo(nameOfFile);
+        boolean isCreated = file.Nuevo(nameOfFile);
         if (isCreated)
             JOptionPane.showMessageDialog(null, "El archivo se creo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         else
@@ -637,7 +633,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor antes de abrir un archivo cierre el actual", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        String[] namesFiles = files.getNameFiles();
+        String[] namesFiles = file.getNameFiles();
         ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(namesFiles));
         Dialog_Abrir.setSize(300, 150);
         Dialog_Abrir.setLocationRelativeTo(null);
@@ -648,12 +644,14 @@ public class Main extends javax.swing.JFrame {
     private void D_Abrir_ArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D_Abrir_ArchivoMouseClicked
         // TODO add your handling code here:
         OpenFileName = (String) ListOfFiles.getSelectedItem();
-        Campos = files.LecturaCampos(OpenFileName);
+        Campos = file.LecturaCampos(OpenFileName);
         if (Campos.equals("Hubo un error al leer campos")) {
             JOptionPane.showMessageDialog(null, "Hubo un error no se pudo leer campos", "Notificación", JOptionPane.ERROR_MESSAGE);
             Campos = "";
             return;
         }
+        file.Abrir(OpenFileName);
+
         Dialog_Abrir.setVisible(false);
         //Activando los botones
         B_Campos.setEnabled(true);
@@ -718,7 +716,8 @@ public class Main extends javax.swing.JFrame {
         boolean IsSaved = false;
 
         if (JF_Campos.isVisible()) {
-            IsSaved = files.GuardarCampos(OpenFileName, Campos);
+            IsSaved = file.Guardar(OpenFileName);
+
         }
         if (IsSaved) {
             JOptionPane.showMessageDialog(null, "El archivo se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -745,18 +744,20 @@ public class Main extends javax.swing.JFrame {
     private void B_GuardadCrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardadCrearCampoMouseClicked
         // TODO add your handling code here:
         String nombre = nombreCampo.getText();
-        int tipo = tipoCampo.getSelectedIndex();
+        String tipo = tipoCampo.getSelectedItem().toString();
         int longitud = Integer.parseInt(longitudCampo.getText());
 
         Campo campoNuevo = new Campo(nombre, longitud, tipo);
-        listaCampos.add(campoNuevo);
+        //listaCampos.add(campoNuevo);
+        file.getListaCampos().add(campoNuevo);
         
         DefaultListModel<String> modeloLista = new DefaultListModel<>();
         
         for (int i = 0; i < listaCampos.size(); i++) {
-            modeloLista.addElement(listaCampos.get(i).getNombre());
+            modeloLista.addElement(file.getListaCampos().get(i).getNombre());
         }
         JLista_Campos.setModel(modeloLista);
+        
         
         nombreCampo.setText("");
         longitudCampo.setText("");
@@ -898,9 +899,7 @@ public class Main extends javax.swing.JFrame {
     private void B_ListarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarCampoMouseClicked
         // TODO add your handling code here:
         DefaultListModel<String> modeloLista = new DefaultListModel<>();
-//        modeloLista = (DefaultListModel<String>) JLista_Campos.getModel();
-//        modeloLista.removeAllElements();
-        for (Campo campo : listaCampos) {
+        for (Campo campo : file.getListaCampos()) {
             modeloLista.addElement(campo.toString());
         }
         JLista_Campos.setModel(modeloLista);
@@ -909,14 +908,12 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BorrarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarCampoMouseClicked
         // TODO add your handling code here:
+        file.getListaCampos().remove(JLista_Campos.getSelectedIndex());
         DefaultListModel<String> modeloLista = new DefaultListModel<>();
-        for (int i = 0; i < JLista_Campos.getModel().getSize(); i++) {
-            if (i != JLista_Campos.getSelectedIndex()) {
-                modeloLista.addElement(JLista_Campos.getModel().getElementAt(i));
-            }
+        for (Campo campo : file.getListaCampos()) {
+            modeloLista.addElement(campo.toString());
         }
         JLista_Campos.setModel(modeloLista);
-
     }//GEN-LAST:event_B_BorrarCampoMouseClicked
 
     private void B_RegresarCrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_RegresarCrearCampoMouseClicked
@@ -1005,7 +1002,7 @@ public class Main extends javax.swing.JFrame {
 //variables personales
 
     private String OpenFileName = "";
-    private Archivos files = new Archivos();
+    private Archivos file = new Archivos();
     private String Campos = "";
     public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;

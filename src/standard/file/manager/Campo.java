@@ -2,15 +2,15 @@ package standard.file.manager;
 
 public class Campo {
 
-    private String Nombre;
-    private int Tamano, Tipo;
+    private String Nombre, Tipo;
+    private int Tamano;
 
     /*tipos
     1:int
     2:double o float
     3:caracter
      */
-    public Campo(String Nombre, int Tamano, int Tipo) {
+    public Campo(String Nombre, int Tamano, String Tipo) {
         this.Nombre = Nombre;
         this.Tamano = Tamano;
         this.Tipo = Tipo;
@@ -36,30 +36,13 @@ public class Campo {
         return Tipo;
     }
 
-    public void setTipo(int Tipo) {
+    public void setTipo(String Tipo) {
         this.Tipo = Tipo;
     }
     
     @Override
     public String toString() {
-        String tipo;
-        switch (Tipo) {
-            case 1:
-                tipo = "int";
-                break;
-            case 2:
-                tipo = "double";
-                break;
-            case 3:
-                tipo = "char";
-                break;
-            case 4:
-                tipo = "String";
-                break;
-            default:
-                tipo = "Unknown";
-        }
-        return Nombre + ": " + tipo +"["+Tamano+"]";
+        return Nombre + ": " + Tipo + "[" + Tamano + "]";
     }
 
 }
