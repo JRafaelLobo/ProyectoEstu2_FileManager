@@ -129,7 +129,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Archivo_Titulo.setText("Datos Del Archivo");
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
-        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 14);
 
         Datos_Achivos.setViewportView(JLista_Campos);
 
@@ -143,7 +143,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_CrearCampo);
-        B_CrearCampo.setBounds(180, 260, 62, 25);
+        B_CrearCampo.setBounds(180, 260, 59, 23);
 
         B_ListarCampo.setText("Listar");
         B_ListarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,7 +152,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_ListarCampo);
-        B_ListarCampo.setBounds(270, 260, 61, 25);
+        B_ListarCampo.setBounds(270, 260, 59, 23);
 
         B_ModificarCampo.setText("Modificar");
         B_ModificarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,7 +161,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_ModificarCampo);
-        B_ModificarCampo.setBounds(370, 260, 79, 25);
+        B_ModificarCampo.setBounds(370, 260, 75, 23);
 
         B_BorrarCampo.setText("Borrar");
         B_BorrarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,7 +170,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 65, 25);
+        B_BorrarCampo.setBounds(460, 260, 63, 23);
 
         javax.swing.GroupLayout I_Campo_DecoracionLayout = new javax.swing.GroupLayout(I_Campo_Decoracion);
         I_Campo_Decoracion.setLayout(I_Campo_DecoracionLayout);
@@ -200,7 +200,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
-        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
+        I_Fondo_Archivos.setBounds(0, 0, 0, 0);
 
         ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -262,17 +262,31 @@ public class Main extends javax.swing.JFrame {
 
         PanelCrearCampo.setBackground(new java.awt.Color(5, 23, 45));
         PanelCrearCampo.setLayout(null);
+
+        nombreCampo.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        nombreCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreCampoActionPerformed(evt);
+            }
+        });
         PanelCrearCampo.add(nombreCampo);
-        nombreCampo.setBounds(200, 100, 290, 19);
+        nombreCampo.setBounds(200, 100, 290, 22);
+
+        longitudCampo.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
         PanelCrearCampo.add(longitudCampo);
-        longitudCampo.setBounds(200, 220, 280, 19);
+        longitudCampo.setBounds(200, 220, 280, 22);
 
         B_RegresarCrearCampo.setBackground(new java.awt.Color(0, 153, 255));
         B_RegresarCrearCampo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         B_RegresarCrearCampo.setForeground(new java.awt.Color(0, 0, 204));
         B_RegresarCrearCampo.setText("Regresar");
+        B_RegresarCrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_RegresarCrearCampoMouseClicked(evt);
+            }
+        });
         PanelCrearCampo.add(B_RegresarCrearCampo);
-        B_RegresarCrearCampo.setBounds(70, 310, 82, 26);
+        B_RegresarCrearCampo.setBounds(70, 310, 82, 25);
 
         B_GuardadCrearCampo.setBackground(new java.awt.Color(0, 153, 255));
         B_GuardadCrearCampo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
@@ -284,22 +298,23 @@ public class Main extends javax.swing.JFrame {
             }
         });
         PanelCrearCampo.add(B_GuardadCrearCampo);
-        B_GuardadCrearCampo.setBounds(560, 310, 80, 26);
+        B_GuardadCrearCampo.setBounds(560, 310, 80, 25);
 
         TituloCrear.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 24)); // NOI18N
         TituloCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TituloCrear.setText("Crear Campo");
         PanelCrearCampo.add(TituloCrear);
-        TituloCrear.setBounds(280, 50, 115, 26);
+        TituloCrear.setBounds(280, 50, 114, 26);
 
         JL_Longitud.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         JL_Longitud.setText("Longitud:");
         PanelCrearCampo.add(JL_Longitud);
-        JL_Longitud.setBounds(100, 220, 49, 16);
+        JL_Longitud.setBounds(100, 220, 52, 16);
 
-        tipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Int", "Double", "Char", " " }));
+        tipoCampo.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 14)); // NOI18N
+        tipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "double", "char", "String", " " }));
         PanelCrearCampo.add(tipoCampo);
-        tipoCampo.setBounds(200, 160, 61, 24);
+        tipoCampo.setBounds(200, 160, 61, 22);
 
         JL_Nombre.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         JL_Nombre.setText("Nombre del Campo:");
@@ -309,7 +324,7 @@ public class Main extends javax.swing.JFrame {
         JL_Tipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         JL_Tipo.setText("Tipo de Dato:");
         PanelCrearCampo.add(JL_Tipo);
-        JL_Tipo.setBounds(80, 160, 68, 16);
+        JL_Tipo.setBounds(80, 160, 73, 16);
 
         JF_CrearCampo.getContentPane().add(PanelCrearCampo);
         PanelCrearCampo.setBounds(0, 40, 690, 350);
@@ -347,7 +362,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_ModificarCampo.getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 672, 478);
+        jPanel2.setBounds(0, 0, 0, 0);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
@@ -380,19 +395,19 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Campos);
-        B_Campos.setBounds(278, 268, 109, 25);
+        B_Campos.setBounds(278, 268, 109, 23);
 
         B_Registros.setText("Registros");
         getContentPane().add(B_Registros);
-        B_Registros.setBounds(514, 268, 109, 25);
+        B_Registros.setBounds(514, 268, 109, 23);
 
         B_Indices.setText("Indices");
         getContentPane().add(B_Indices);
-        B_Indices.setBounds(153, 335, 112, 25);
+        B_Indices.setBounds(153, 335, 112, 23);
 
         B_Estandarizacion.setText("Estandarizacion");
         getContentPane().add(B_Estandarizacion);
-        B_Estandarizacion.setBounds(382, 335, 112, 25);
+        B_Estandarizacion.setBounds(382, 335, 107, 23);
 
         I_Fondo_Main.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -733,11 +748,22 @@ public class Main extends javax.swing.JFrame {
         int longitud = Integer.parseInt(longitudCampo.getText());
 
         Campo campoNuevo = new Campo(nombre, longitud, tipo);
+        //listaCampos.add(campoNuevo);
         file.getListaCampos().add(campoNuevo);
+        
+        DefaultListModel<String> modeloLista = new DefaultListModel<>();
+        
+        for (int i = 0; i < file.getListaCampos().size(); i++) {
+            modeloLista.addElement(file.getListaCampos().get(i).toString());
+        }
+        JLista_Campos.setModel(modeloLista);
+        
+        
         nombreCampo.setText("");
         longitudCampo.setText("");
         tipoCampo.setSelectedIndex(0);
         JOptionPane.showMessageDialog(this, "Campo agregado con exito!");
+        JF_CrearCampo.setVisible(false);
     }//GEN-LAST:event_B_GuardadCrearCampoMouseClicked
 
     private void JF_CrearCampoComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CrearCampoComponentResized
@@ -784,7 +810,19 @@ public class Main extends javax.swing.JFrame {
         JL_Nombre.setForeground(Color.white);
         JL_Nombre.setSize(anchoTexto, y * 2 / 3);
         JL_Nombre.setLocation((int) (x / 4) - (JL_Nombre.getWidth() / 2), (int) ((4 * y / 16) - (JL_Nombre.getHeight() / 2)));
-
+        
+//        nombreCampo.setForeground(Color.white);
+//        nombreCampo.setSize(anchoTexto, y * 2 / 3);
+//        nombreCampo.setLocation((int) (x / 4) - (nombreCampo.getWidth() / 2), (int) ((4 * y / 16) - (nombreCampo.getHeight() / 2)));
+//        
+//        longitudCampo.setForeground(Color.white);
+//        longitudCampo.setSize(anchoTexto, y * 2 / 3);
+//        longitudCampo.setLocation((int) (x / 4) - (longitudCampo.getWidth() / 2), (int) ((4 * y / 16) - (longitudCampo.getHeight() / 2)));
+//        
+//        tipoCampo.setForeground(Color.white);
+//        tipoCampo.setSize(anchoTexto, y * 2 / 3);
+//        tipoCampo.setLocation((int) (x / 4) - (tipoCampo.getWidth() / 2), (int) ((4 * y / 16) - (tipoCampo.getHeight() / 2)));
+        
         JL_Tipo.setFont(f);
         fontMetrics = JL_Tipo.getFontMetrics(JL_Tipo.getFont());
         anchoTexto = fontMetrics.stringWidth(JL_Tipo.getText());
@@ -812,19 +850,45 @@ public class Main extends javax.swing.JFrame {
         if (modificacion.equals("Nombre") || Integer.parseInt(modificacion) == 1) {
             String nombreNuevo = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo nombre: ");
             //Codigo para Modificar
+            boolean modificado = false;
+            for (int i = 0; i < file.getListaCampos().size(); i++) {
+                file.getListaCampos().get(index).setNombre(nombreNuevo);
+                modificado = true;
+            }
 
-            boolean modificado = true;
             if (modificado == true) {
                 JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Error! El nombre del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
             }
+            
         }
 
         if (modificacion.equals("Tipo") || Integer.parseInt(modificacion) == 2) {
-            String tipoNuevo = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo Tipo: ");
+            int tipoNuevo = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo Tipo:\n 1. int\n 2. double\n 3. char\n 4. String "));
             //Codigo para Modificar
-            boolean modificado = true;
+            String tipo;
+            switch (tipoNuevo) {
+                case 1:
+                    tipo = "int";
+                    break;
+                case 2:
+                    tipo = "Double";
+                    break;
+                case 3:
+                    tipo = "char";
+                    break;
+                
+                default:
+                    tipo = "Unknown";
+            }
+
+            boolean modificado = false;
+            for (int i = 0; i < file.getListaCampos().size(); i++) {
+                file.getListaCampos().get(index).setTipo(tipo);
+                modificado = true;
+            }
+            
             if (modificado == true) {
                 JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -833,15 +897,25 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (modificacion.equals("Longitud") || Integer.parseInt(modificacion) == 3) {
-            String longitudNueva = JOptionPane.showInputDialog(rootPane, "Ingrese la nueva Longitud: ");
+            int longitudNueva = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese la nueva Longitud: "));
             //Codigo para Modificar
-            boolean modificado = true;
+            boolean modificado = false;
+            for (int i = 0; i < file.getListaCampos().size(); i++) {
+                file.getListaCampos().get(index).setTamano(longitudNueva);
+                modificado = true;
+            }
+            
             if (modificado == true) {
                 JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Error! La longitud del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
             }
         }
+        DefaultListModel<String> modeloLista = new DefaultListModel<>();
+        for (Campo campo : file.getListaCampos()) {
+            modeloLista.addElement(campo.toString());
+        }
+        JLista_Campos.setModel(modeloLista);
     }//GEN-LAST:event_B_ModificarCampoMouseClicked
 
     private void B_ListarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarCampoMouseClicked
@@ -863,6 +937,15 @@ public class Main extends javax.swing.JFrame {
         }
         JLista_Campos.setModel(modeloLista);
     }//GEN-LAST:event_B_BorrarCampoMouseClicked
+
+    private void B_RegresarCrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_RegresarCrearCampoMouseClicked
+        // TODO add your handling code here:
+        JF_CrearCampo.setVisible(false);
+    }//GEN-LAST:event_B_RegresarCrearCampoMouseClicked
+
+    private void nombreCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreCampoActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -943,7 +1026,7 @@ public class Main extends javax.swing.JFrame {
     private String OpenFileName = "";
     private Archivos file = new Archivos();
     private String Campos = "";
-
+    //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     public Campo campo;
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)

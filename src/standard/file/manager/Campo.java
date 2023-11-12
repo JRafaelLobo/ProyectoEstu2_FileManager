@@ -39,7 +39,7 @@ public class Campo {
     public void setTipo(String Tipo) {
         this.Tipo = Tipo;
     }
-
+    
     @Override
     public String toString() {
         return Nombre + ": " + Tipo + "[" + Tamano + "]";
