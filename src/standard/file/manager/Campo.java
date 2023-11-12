@@ -39,7 +39,7 @@ public class Campo {
     public void setTipo(int Tipo) {
         this.Tipo = Tipo;
     }
-
+    
     @Override
     public String toString() {
         String tipo;
@@ -48,13 +48,16 @@ public class Campo {
                 tipo = "int";
                 break;
             case 2:
-                tipo = "Double";
+                tipo = "double";
                 break;
             case 3:
                 tipo = "char";
                 break;
+            case 4:
+                tipo = "String";
+                break;
             default:
-                tipo="Unknown";
+                tipo = "Unknown";
         }
         return Nombre + ": " + tipo +"["+Tamano+"]";
     }
