@@ -1,7 +1,8 @@
 package standard.file.manager;
 public class Campo {
-    private String Nombre;
-    private int Tamano,Tipo;
+    public String Nombre;
+    public int Tamano;
+    public Object Tipo;
     /*tipos
     1:int
     2:String
@@ -9,7 +10,7 @@ public class Campo {
     4:caracter
     */
 
-    public Campo(String Nombre, int Tamano, int Tipo) {
+    public Campo(String Nombre, int Tamano, Object Tipo) {
         this.Nombre = Nombre;
         this.Tamano = Tamano;
         this.Tipo = Tipo;
