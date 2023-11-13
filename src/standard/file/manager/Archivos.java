@@ -65,15 +65,16 @@ public class Archivos {
         String appData = System.getenv("APPDATA");
         String carpetaEnAppData = appData + File.separator + "Files_StructData";
         String rutaArchivo = carpetaEnAppData + File.separator + FileName;
-        if (!listaCampos.isEmpty()) {
-            try {
-                // Leer la primera línea del archivo
-                BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
-                String primeraLinea = lector.readLine();
-                lector.close();
-                BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));
+        try {
+            // Leer la primera línea del archivo
+            BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
+            String primeraLinea = lector.readLine();
+            lector.close();
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));
 
-                String temp = "{";
+            String temp = "";
+            if (!listaCampos.isEmpty()) {
+                temp += "{";
                 for (int i = 0; i < listaCampos.size(); i++) {
                     temp += listaCampos.get(i).toString();
                     if (i != listaCampos.size() - 1) {
@@ -81,17 +82,16 @@ public class Archivos {
                     }
                 }
                 temp += "}";
-                escritor.write(temp);
-                escritor.newLine();
-                escritor.close();
-                return true;
-            } catch (IOException e) {
-                System.err.println("Hubo un error al escribir los campos: " + e.getMessage());
-                return false;
             }
+            
+            escritor.write(temp);
+            //escritor.newLine();
+            escritor.close();
+            return true;
+        } catch (IOException e) {
+            System.err.println("Hubo un error al escribir los campos: " + e.getMessage());
+            return false;
         }
-        //Este return solo es para que no tire error
-        return false;
     }
 
     public String Abrir(String FileName) {

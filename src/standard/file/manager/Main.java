@@ -37,6 +37,11 @@ public class Main extends javax.swing.JFrame {
         CambiarPantallaTiempo CPT2 = new CambiarPantallaTiempo(this, Portadita, 4000);
         CPT2.set(this, Portadita, 4000, 700, 400);
         CPT2.start();
+        //Desactivando los botones
+        B_Campos.setEnabled(false);
+        B_Registros.setEnabled(false);
+        B_Indices.setEnabled(false);
+        B_Estandarizacion.setEnabled(false);
         //05172d
         //FF7048
         //font Moncerath,Bethicai
@@ -494,11 +499,6 @@ public class Main extends javax.swing.JFrame {
         B_Indices.setLocation((int) ((3.6 * x / 6) - (B_Indices.getWidth() / 2)), (int) ((4 * y / 6) - (B_Indices.getHeight() / 2)));
         B_Estandarizacion.setLocation((int) ((4.9 * x / 6) - (B_Estandarizacion.getWidth() / 2)), (int) ((4 * y / 6) - (B_Estandarizacion.getHeight() / 2)));
 
-        //Desactivando los botones
-        B_Campos.setEnabled(false);
-        B_Registros.setEnabled(false);
-        B_Indices.setEnabled(false);
-        B_Estandarizacion.setEnabled(false);
     }//GEN-LAST:event_formComponentResized
 
     private void JF_CamposComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_CamposComponentResized
@@ -691,7 +691,6 @@ public class Main extends javax.swing.JFrame {
 
         if (JF_Campos.isVisible()) {
             IsSaved = file.Guardar(OpenFileName);
-
         }
         if (IsSaved) {
             JOptionPane.showMessageDialog(null, "El archivo se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -722,6 +721,10 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             String nombre = nombreCampo.getText();
+            if(!nombre.matches("^[^,\\\\{\\\\} ]+$")){
+                JOptionPane.showMessageDialog(rootPane, "En nombre por favor no ingresar espacios, llaves ni comas", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             String tipo = tipoCampo.getSelectedItem().toString();
             int longitud = Integer.parseInt(longitudCampo.getText());
             if (longitud < 0) {
