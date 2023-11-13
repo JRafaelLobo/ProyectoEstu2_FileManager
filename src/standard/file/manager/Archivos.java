@@ -10,9 +10,7 @@ package standard.file.manager;
  */
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Archivos {
 
@@ -22,7 +20,6 @@ public class Archivos {
     public String LecturaPath() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar archivo de texto");
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt"));
         int userSelection = fileChooser.showOpenDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
@@ -60,7 +57,7 @@ public class Archivos {
         try {
             // Leer la primera línea del archivo
             BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
-            String primeraLinea = lector.readLine();
+            lector.readLine();
             lector.close();
             BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));
 
@@ -151,15 +148,12 @@ public class Archivos {
     public char Nuevo() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Guardar archivo de texto");
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt"));
 
         int userSelection = fileChooser.showSaveDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             String filePath = fileToSave.getAbsolutePath();
-            if (!filePath.toLowerCase().endsWith(".txt")) {
-                fileToSave = new File(filePath + ".txt");
-            }
+
  
             try {
                 if (fileToSave.createNewFile()) {

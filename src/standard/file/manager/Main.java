@@ -608,6 +608,9 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         OpenFileName = file.LecturaPath();
+        if(OpenFileName.equals("")){
+            return;
+        }
         Campos = file.Abrir(OpenFileName);
         if (Campos.equals("Hubo un error al leer campos")) {
             JOptionPane.showMessageDialog(null, "Hubo un error no se pudo leer campos", "Notificación", JOptionPane.ERROR_MESSAGE);
@@ -720,7 +723,7 @@ public class Main extends javax.swing.JFrame {
         JF_CrearCampo.pack();
         JF_Campos.setVisible(false);
         JF_CrearCampo.setVisible(true);
-        JF_CrearCampo.setSize(750, 500);
+        JF_CrearCampo.setSize(700, 450);
         JF_CrearCampo.setResizable(false);
         //JF_CrearCampo.setSize(JF_Campos.getWidth() * 2 / 3, JF_Campos.getHeight() * 2 / 3);
         JF_CrearCampo.setLocationRelativeTo(JF_Campos);
