@@ -10,30 +10,22 @@ package standard.file.manager;
  */
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+import javax.swing.JFileChooser;
 
 public class Archivos {
 
     private String nombre;
     private ArrayList<Campo> listaCampos = new ArrayList();
 
-    public String LecturaCampos(String FileName) {
-
-        String appData = System.getenv("APPDATA");
-        String carpetaEnAppData = appData + File.separator + "Files_StructData";
-        String rutaArchivo = carpetaEnAppData + File.separator + FileName;
-        try {
-            // Leer la primera línea del archivo
-            BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
-            String primeraLinea = lector.readLine();
-            lector.close();
-            if (primeraLinea == null) {
-                return "";
-            }
-            return primeraLinea;
-        } catch (IOException e) {
-            System.err.println("Hubo un error al leer campos: " + e.getMessage());
-            return "Hubo un error al leer campos";
+    public String LecturaPath() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar archivo de texto");
+        int userSelection = fileChooser.showOpenDialog(null);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            return selectedFile.getAbsolutePath();
+        }else{
+            return "";
         }
     }
 
@@ -61,14 +53,11 @@ public class Archivos {
         return false;
     }
 
-    public boolean Guardar(String FileName) {
-        String appData = System.getenv("APPDATA");
-        String carpetaEnAppData = appData + File.separator + "Files_StructData";
-        String rutaArchivo = carpetaEnAppData + File.separator + FileName;
+    public boolean Guardar(String rutaArchivo) {
         try {
             // Leer la primera línea del archivo
             BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
-            String primeraLinea = lector.readLine();
+            lector.readLine();
             lector.close();
             BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));
 
@@ -83,7 +72,7 @@ public class Archivos {
                 }
                 temp += "}";
             }
-            
+
             escritor.write(temp);
             //escritor.newLine();
             escritor.close();
@@ -94,11 +83,8 @@ public class Archivos {
         }
     }
 
-    public String Abrir(String FileName) {
+    public String Abrir(String rutaArchivo) {
 
-        String appData = System.getenv("APPDATA");
-        String carpetaEnAppData = appData + File.separator + "Files_StructData";
-        String rutaArchivo = carpetaEnAppData + File.separator + FileName;
         try {
             // Leer la primera línea del archivo
             BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
@@ -158,46 +144,32 @@ public class Archivos {
         }
     }
 
-    public String[] getNameFiles() {
-        String appData = System.getenv("APPDATA");
-        String carpetaEnAppData = appData + File.separator + "Files_StructData";
-        File carpeta = new File(carpetaEnAppData);
-        FilenameFilter filtro = new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".txt");
+
+    public char Nuevo() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar archivo de texto");
+
+        int userSelection = fileChooser.showSaveDialog(null);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String filePath = fileToSave.getAbsolutePath();
+
+ 
+            try {
+                if (fileToSave.createNewFile()) {
+                    System.out.println("Archivo creado con éxito en: " + filePath);
+                    return 'T';
+                } else {
+                    System.out.println("El archivo ya existe en: " + filePath);
+                    return 'E';
+                }
+
+            } catch (IOException e) {
+                System.err.println("El archivo no se pudo crear " + e.getMessage());
+                return 'F';
             }
-        };
-        String[] archivos = carpeta.list(filtro);
-
-        return archivos;
-    }
-
-    public boolean Nuevo(String nameOfFile) {
-        String appData = System.getenv("APPDATA");
-        String carpetaEnAppData = appData + File.separator + "Files_StructData";
-        String rutaCompleta = carpetaEnAppData + File.separator + nameOfFile + ".txt";
-        File directorio = new File(carpetaEnAppData);
-        File archivo = new File(rutaCompleta);
-        try {
-            // Crear el directorio si no existe
-            if (!directorio.exists()) {
-                directorio.mkdirs();
-            }
-
-            // Crear el archivo si no existe
-            if (archivo.createNewFile()) {
-                System.out.println("Archivo creado con éxito en: " + rutaCompleta);
-
-                return true;
-            } else {
-                System.out.println("El archivo ya existe en: " + rutaCompleta);
-                return false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("El archivo no se pudo crear");
-            return false;
         }
+        return 'C';
     }
 
     public String getNombre() {

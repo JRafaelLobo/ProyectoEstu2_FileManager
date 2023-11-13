@@ -587,15 +587,18 @@ public class Main extends javax.swing.JFrame {
 
     private void B_Archivo_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_NuevoActionPerformed
         // TODO add your handling code here:
-        String nameOfFile = JOptionPane.showInputDialog(rootPane, "Ingrese el nombre o identidad del archivo ha crear");
-        if (nameOfFile == null) {
-            return;
+        char isCreated = file.Nuevo();
+        switch (isCreated) {
+            case 'T':
+                JOptionPane.showMessageDialog(null, "El archivo se creo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case 'F':
+                JOptionPane.showMessageDialog(null, "Hubo un error el archivo no se pudo crear", "Notificación", JOptionPane.ERROR_MESSAGE);
+                break;
+            case 'E':
+                JOptionPane.showMessageDialog(null, "El archivo ya existe", "Notificación", JOptionPane.ERROR_MESSAGE);
+                break;
         }
-        boolean isCreated = file.Nuevo(nameOfFile);
-        if (isCreated)
-            JOptionPane.showMessageDialog(null, "El archivo se creo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-        else
-            JOptionPane.showMessageDialog(null, "Hubo un error el archivo no se pudo crear o el archivo ya existe", "Notificación", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_B_Archivo_NuevoActionPerformed
 
     private void B_Archivo_AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_AbrirActionPerformed
@@ -604,31 +607,41 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor antes de abrir un archivo cierre el actual", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        String[] namesFiles = file.getNameFiles();
-        ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(namesFiles));
-        Dialog_Abrir.setSize(300, 150);
-        Dialog_Abrir.setLocationRelativeTo(null);
-        Dialog_Abrir.setResizable(false);
-        Dialog_Abrir.setVisible(true);
-    }//GEN-LAST:event_B_Archivo_AbrirActionPerformed
-
-    private void D_Abrir_ArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D_Abrir_ArchivoMouseClicked
-        // TODO add your handling code here:
-        OpenFileName = (String) ListOfFiles.getSelectedItem();
-        Campos = file.LecturaCampos(OpenFileName);
+        OpenFileName = file.LecturaPath();
+        if(OpenFileName.equals("")){
+            return;
+        }
+        Campos = file.Abrir(OpenFileName);
         if (Campos.equals("Hubo un error al leer campos")) {
             JOptionPane.showMessageDialog(null, "Hubo un error no se pudo leer campos", "Notificación", JOptionPane.ERROR_MESSAGE);
             Campos = "";
             return;
         }
-        file.Abrir(OpenFileName);
-
-        Dialog_Abrir.setVisible(false);
         //Activando los botones
         B_Campos.setEnabled(true);
         B_Registros.setEnabled(true);
         B_Indices.setEnabled(true);
         B_Estandarizacion.setEnabled(true);
+        //Buen dias
+    }//GEN-LAST:event_B_Archivo_AbrirActionPerformed
+
+    private void D_Abrir_ArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D_Abrir_ArchivoMouseClicked
+        // TODO add your handling code here:
+//        OpenFileName = (String) ListOfFiles.getSelectedItem();
+//        Campos = file.LecturaCampos(OpenFileName);
+//        if (Campos.equals("Hubo un error al leer campos")) {
+//            JOptionPane.showMessageDialog(null, "Hubo un error no se pudo leer campos", "Notificación", JOptionPane.ERROR_MESSAGE);
+//            Campos = "";
+//            return;
+//        }
+//        file.Abrir(OpenFileName);
+//
+//        Dialog_Abrir.setVisible(false);
+//        //Activando los botones
+//        B_Campos.setEnabled(true);
+//        B_Registros.setEnabled(true);
+//        B_Indices.setEnabled(true);
+//        B_Estandarizacion.setEnabled(true);
 
     }//GEN-LAST:event_D_Abrir_ArchivoMouseClicked
 
@@ -710,7 +723,7 @@ public class Main extends javax.swing.JFrame {
         JF_CrearCampo.pack();
         JF_Campos.setVisible(false);
         JF_CrearCampo.setVisible(true);
-        JF_CrearCampo.setSize(750, 500);
+        JF_CrearCampo.setSize(700, 450);
         JF_CrearCampo.setResizable(false);
         //JF_CrearCampo.setSize(JF_Campos.getWidth() * 2 / 3, JF_Campos.getHeight() * 2 / 3);
         JF_CrearCampo.setLocationRelativeTo(JF_Campos);
@@ -721,7 +734,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             String nombre = nombreCampo.getText();
-            if(!nombre.matches("^[^,\\\\{\\\\} ]+$")){
+            if (!nombre.matches("^[^,\\\\{\\\\} ]+$")) {
                 JOptionPane.showMessageDialog(rootPane, "En nombre por favor no ingresar espacios, llaves ni comas", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -841,7 +854,9 @@ public class Main extends javax.swing.JFrame {
             } else {
                 int index = JLista_Campos.getSelectedIndex();
                 String modificacion = JOptionPane.showInputDialog(rootPane, "Que desea modificar?\n 1. Nombre\n 2. Tipo\n 3. Longitud");
-                if(modificacion == null) return;
+                if (modificacion == null) {
+                    return;
+                }
                 if (Integer.parseInt(modificacion) != 1 && Integer.parseInt(modificacion) != 2 && Integer.parseInt(modificacion) != 3) {
                     JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -849,7 +864,9 @@ public class Main extends javax.swing.JFrame {
 
                 if (modificacion.equals("Nombre") || Integer.parseInt(modificacion) == 1) {
                     String nombreNuevo = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo nombre: ");
-                    if(nombreNuevo == null) return;
+                    if (nombreNuevo == null) {
+                        return;
+                    }
                     //Codigo para Modificar
                     boolean modificado = false;
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
@@ -867,7 +884,9 @@ public class Main extends javax.swing.JFrame {
 
                 if (modificacion.equals("Tipo") || Integer.parseInt(modificacion) == 2) {
                     String tipoIngresado = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo Tipo:\n 1. int\n 2. double\n 3. char\n");
-                    if(tipoIngresado == null) return;
+                    if (tipoIngresado == null) {
+                        return;
+                    }
                     int tipoNuevo = Integer.parseInt(tipoIngresado);
                     //Codigo para Modificar
                     String tipo;
@@ -905,7 +924,9 @@ public class Main extends javax.swing.JFrame {
 
                 if (modificacion.equals("Longitud") || Integer.parseInt(modificacion) == 3) {
                     String longitudIngresada = JOptionPane.showInputDialog(rootPane, "Ingrese la nueva Longitud: ");
-                    if(longitudIngresada == null) return;
+                    if (longitudIngresada == null) {
+                        return;
+                    }
                     int longitudNueva = Integer.parseInt(longitudIngresada);
                     //Codigo para Modificar
                     if (longitudNueva < 0) {
