@@ -619,6 +619,7 @@ public class Main extends javax.swing.JFrame {
         B_Registros.setEnabled(true);
         B_Indices.setEnabled(true);
         B_Estandarizacion.setEnabled(true);
+        //Buen dias
     }//GEN-LAST:event_B_Archivo_AbrirActionPerformed
 
     private void D_Abrir_ArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D_Abrir_ArchivoMouseClicked
