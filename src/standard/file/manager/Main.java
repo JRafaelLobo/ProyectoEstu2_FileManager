@@ -42,6 +42,7 @@ public class Main extends javax.swing.JFrame {
         B_Registros.setEnabled(false);
         B_Indices.setEnabled(false);
         B_Estandarizacion.setEnabled(false);
+        
         //05172d
         //FF7048
         //font Moncerath,Bethicai
@@ -71,8 +72,8 @@ public class Main extends javax.swing.JFrame {
         PanelCrearCampo = new javax.swing.JPanel();
         nombreCampo = new javax.swing.JTextField();
         longitudCampo = new javax.swing.JTextField();
-        B_RegresarCrearCampo = new javax.swing.JButton();
-        B_GuardadCrearCampo = new javax.swing.JButton();
+        B_RegresarCrearCampo = new boton();
+        B_GuardadCrearCampo = new boton();
         TituloCrear = new javax.swing.JLabel();
         JL_Longitud = new javax.swing.JLabel();
         tipoCampo = new javax.swing.JComboBox<>();
@@ -130,7 +131,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Archivo_Titulo.setText("Datos Del Archivo");
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
-        lb_Archivo_Titulo.setBounds(60, 260, 150, 16);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
 
         Datos_Achivos.setViewportView(JLista_Campos);
 
@@ -138,40 +139,48 @@ public class Main extends javax.swing.JFrame {
         Datos_Achivos.setBounds(310, 80, 220, 160);
 
         B_CrearCampo.setText("Crear");
+        B_CrearCampo.setBorderPainted(false);
+        B_CrearCampo.setFocusPainted(false);
         B_CrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_CrearCampoMouseClicked(evt);
             }
         });
         JF_Campos.getContentPane().add(B_CrearCampo);
-        B_CrearCampo.setBounds(180, 260, 72, 23);
+        B_CrearCampo.setBounds(180, 260, 62, 25);
 
         B_ListarCampo.setText("Listar");
+        B_ListarCampo.setBorderPainted(false);
+        B_ListarCampo.setFocusPainted(false);
         B_ListarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_ListarCampoMouseClicked(evt);
             }
         });
         JF_Campos.getContentPane().add(B_ListarCampo);
-        B_ListarCampo.setBounds(270, 260, 72, 23);
+        B_ListarCampo.setBounds(270, 260, 61, 25);
 
         B_ModificarCampo.setText("Modificar");
+        B_ModificarCampo.setBorderPainted(false);
+        B_ModificarCampo.setFocusPainted(false);
         B_ModificarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_ModificarCampoMouseClicked(evt);
             }
         });
         JF_Campos.getContentPane().add(B_ModificarCampo);
-        B_ModificarCampo.setBounds(370, 260, 81, 23);
+        B_ModificarCampo.setBounds(370, 260, 79, 25);
 
         B_BorrarCampo.setText("Borrar");
+        B_BorrarCampo.setBorderPainted(false);
+        B_BorrarCampo.setFocusPainted(false);
         B_BorrarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_BorrarCampoMouseClicked(evt);
             }
         });
         JF_Campos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 72, 23);
+        B_BorrarCampo.setBounds(460, 260, 65, 25);
 
         javax.swing.GroupLayout I_Campo_DecoracionLayout = new javax.swing.GroupLayout(I_Campo_Decoracion);
         I_Campo_Decoracion.setLayout(I_Campo_DecoracionLayout);
@@ -280,10 +289,12 @@ public class Main extends javax.swing.JFrame {
         PanelCrearCampo.add(longitudCampo);
         longitudCampo.setBounds(230, 230, 280, 30);
 
-        B_RegresarCrearCampo.setBackground(new java.awt.Color(0, 153, 255));
+        B_RegresarCrearCampo.setBackground(new java.awt.Color(255, 51, 51));
         B_RegresarCrearCampo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
-        B_RegresarCrearCampo.setForeground(new java.awt.Color(0, 0, 204));
+        B_RegresarCrearCampo.setForeground(new java.awt.Color(255, 255, 255));
         B_RegresarCrearCampo.setText("Regresar");
+        B_RegresarCrearCampo.setBorderPainted(false);
+        B_RegresarCrearCampo.setFocusPainted(false);
         B_RegresarCrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_RegresarCrearCampoMouseClicked(evt);
@@ -294,8 +305,10 @@ public class Main extends javax.swing.JFrame {
 
         B_GuardadCrearCampo.setBackground(new java.awt.Color(0, 153, 255));
         B_GuardadCrearCampo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
-        B_GuardadCrearCampo.setForeground(new java.awt.Color(0, 0, 204));
+        B_GuardadCrearCampo.setForeground(new java.awt.Color(255, 255, 255));
         B_GuardadCrearCampo.setText("Guardar");
+        B_GuardadCrearCampo.setBorderPainted(false);
+        B_GuardadCrearCampo.setFocusPainted(false);
         B_GuardadCrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_GuardadCrearCampoMouseClicked(evt);
@@ -362,25 +375,35 @@ public class Main extends javax.swing.JFrame {
         I_Icono_Main.setBounds(242, 31, 200, 199);
 
         B_Campos.setText("Campos");
+        B_Campos.setBorderPainted(false);
+        B_Campos.setFocusPainted(false);
         B_Campos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_CamposMouseClicked(evt);
             }
         });
         getContentPane().add(B_Campos);
-        B_Campos.setBounds(278, 268, 109, 23);
+        B_Campos.setBounds(278, 268, 109, 25);
 
         B_Registros.setText("Registros");
+        B_Registros.setBorderPainted(false);
+        B_Registros.setFocusPainted(false);
         getContentPane().add(B_Registros);
-        B_Registros.setBounds(514, 268, 109, 23);
+        B_Registros.setBounds(514, 268, 109, 25);
 
+        B_Indices.setBackground(new java.awt.Color(102, 102, 102));
         B_Indices.setText("Indices");
+        B_Indices.setBorderPainted(false);
+        B_Indices.setContentAreaFilled(false);
+        B_Indices.setFocusPainted(false);
         getContentPane().add(B_Indices);
-        B_Indices.setBounds(153, 335, 112, 23);
+        B_Indices.setBounds(153, 335, 112, 25);
 
         B_Estandarizacion.setText("Estandarizacion");
+        B_Estandarizacion.setBorderPainted(false);
+        B_Estandarizacion.setFocusPainted(false);
         getContentPane().add(B_Estandarizacion);
-        B_Estandarizacion.setBounds(382, 335, 112, 23);
+        B_Estandarizacion.setBounds(382, 335, 112, 25);
 
         I_Fondo_Main.setBackground(new java.awt.Color(5, 23, 45));
 
