@@ -14,6 +14,7 @@ import javax.swing.JFileChooser;
 
 public class Archivos {
 
+    int Cabezal;
     private String nombre;
     private ArrayList<Campo> listaCampos = new ArrayList();
 
