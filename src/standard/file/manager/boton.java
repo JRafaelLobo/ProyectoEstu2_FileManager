@@ -160,7 +160,7 @@ public class boton extends javax.swing.JButton {
                 public void run() {
                     for (float i = 1f; i >= 0.7f; i -= .1f) {
                         setAlpha(i);
-                        Linea = Color.yellow;
+                        //Linea = Color.yellow;
                         try {
                             Thread.sleep(1);
                         } catch (Exception e) {
