@@ -2,15 +2,20 @@
 package standard.file.manager;
 
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.RoundRectangle2D;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -32,30 +37,61 @@ public class boton extends javax.swing.JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         this.setFont(new Font("Tahoma", 0, 18));
-        this.setForeground(Color.black);
+        this.setForeground(Color.WHITE);
         this.setText("");
         //addMouseListener( new Adaptador());
+//        this.setBackground(Color.RED);
+//        this.setForeground(Color.WHITE);
     }
 
     @Override
     //Metodo para los botones a modificar
     protected void paintComponent(java.awt.Graphics grphcs) {
+        //int y_Relativo = this.getHeight()/;
         Graphics2D g2 = (Graphics2D) grphcs;
+        int margen = 1; // Margen entre el botón y el rectángulo
+        int anchoBoton = getWidth() - 2 * margen;
+        int alturaBoton = getHeight() - 2 * margen;
+
+        int anchoRectangulo = anchoBoton*3 / 4;
+        int alturaRectangulo = alturaBoton*3 / 4;
+
+        int x = margen + (anchoBoton - anchoRectangulo) / 2;
+        int y = margen + (alturaBoton - alturaRectangulo) / 2;
+
+        int arcWidth = 10; // Ancho del arco para los bordes circulares del rectángulo
+        int arcHeight = 10; // Altura del arco para los bordes circulares del rectángulo
+
+        RoundRectangle2D rectangulo = new RoundRectangle2D.Double(x, y, anchoRectangulo, alturaRectangulo, arcWidth, arcHeight);
+
+        //[5,23,45]
+        g2.setColor(new java.awt.Color(5, 23, 45));
+        g2.fill(rectangulo);
+        float grosorTrazo = 2.0f;
+        g2.setStroke(new BasicStroke(grosorTrazo));
+        g2.setColor(Color.WHITE);
+        g2.draw(rectangulo);
 //        String direccion="/";   
 //        Image imagen;
 //        imagen = new ImageIcon(direccion).getImage();
 //        g2.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
         // Antialiasing para bordes suaves
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Fondo sólido
-        g2.setColor(new Color(173, 216, 230)); // Azul claro
-        g2.fillRect(0, 0, getWidth(), getHeight());
-
-        // Gradiente
-        GradientPaint gradient = new GradientPaint(0, 0, new Color(135, 206, 250), 0, getHeight(), new Color(70, 130, 180));
-        g2.setPaint(gradient);
-        g2.fillRect(0, 0, getWidth(), getHeight());
+//        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g2.setColor(Color.white);
+//        RoundRectangle2D rectangulo = new RoundRectangle2D.Double(0, 0, this.getWidth(), this.getHeight(), this.getWidth() / 4, this.getHeight() / 4);
+//        g2.draw(rectangulo);
+        //g2.drawRect(0, 0, this.getWidth(), getHeight());
+        //g2.draw
+//
+//        // Fondo sólido
+//        g2.setColor(new Color(173, 216, 230)); // Azul claro
+//        g2.fillRect(0, 0, getWidth(), getHeight());
+//
+//        // Gradiente
+//        GradientPaint gradient = new GradientPaint(0, 0, new Color(135, 206, 250), 0, getHeight(), new Color(70, 130, 180));
+//        g2.setPaint(gradient);
+//        g2.fillRect(0, 0, getWidth(), getHeight());
 
         // Transparencia
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
@@ -63,7 +99,7 @@ public class boton extends javax.swing.JButton {
         // Llamada al método paintComponent de la clase padre
         super.paintComponent(g2);
     }
-//Hola que tal
+
     public void setAlpha(float alpha) {
         this.alpha = alpha;
         repaint();
@@ -123,6 +159,7 @@ public class boton extends javax.swing.JButton {
         }
     }*/
 }
+
 
 /*public class panel extends javax.swing.JPanel {
 
