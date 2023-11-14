@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
@@ -24,11 +25,16 @@ import javax.swing.ImageIcon;
  */
 public class boton extends javax.swing.JButton {
 
-    private Color Linea = Color.yellow;
-    private Color colorLinea = new Color(0, 0, 255);
+    private Color Linea = Color.WHITE;
+    private Color relleno = new java.awt.Color(5, 23, 45);
+    private Color colorLinea = Color.white;
     private java.awt.Color Color1 = new java.awt.Color(255, 0, 0);
     private java.awt.Color Color2 = new java.awt.Color(0, 255, 0);
     private float alpha = 1.0f;
+
+    public boton GetAncestor() {
+        return this;
+    }
 
     public boton() {
         this.setOpaque(true);
@@ -39,7 +45,7 @@ public class boton extends javax.swing.JButton {
         this.setFont(new Font("Tahoma", 0, 18));
         this.setForeground(Color.WHITE);
         this.setText("");
-        //addMouseListener( new Adaptador());
+        this.addMouseListener(new Adaptador());
 //        this.setBackground(Color.RED);
 //        this.setForeground(Color.WHITE);
     }
@@ -53,8 +59,8 @@ public class boton extends javax.swing.JButton {
         int anchoBoton = getWidth() - 2 * margen;
         int alturaBoton = getHeight() - 2 * margen;
 
-        int anchoRectangulo = anchoBoton*3 / 4;
-        int alturaRectangulo = alturaBoton*3 / 4;
+        int anchoRectangulo = anchoBoton * 3 / 4;
+        int alturaRectangulo = alturaBoton * 3 / 4;
 
         int x = margen + (anchoBoton - anchoRectangulo) / 2;
         int y = margen + (alturaBoton - alturaRectangulo) / 2;
@@ -65,11 +71,11 @@ public class boton extends javax.swing.JButton {
         RoundRectangle2D rectangulo = new RoundRectangle2D.Double(x, y, anchoRectangulo, alturaRectangulo, arcWidth, arcHeight);
 
         //[5,23,45]
-        g2.setColor(new java.awt.Color(5, 23, 45));
+        g2.setColor(relleno);
         g2.fill(rectangulo);
         float grosorTrazo = 2.0f;
         g2.setStroke(new BasicStroke(grosorTrazo));
-        g2.setColor(Color.WHITE);
+        g2.setColor(Linea);
         g2.draw(rectangulo);
 //        String direccion="/";   
 //        Image imagen;
@@ -92,7 +98,6 @@ public class boton extends javax.swing.JButton {
 //        GradientPaint gradient = new GradientPaint(0, 0, new Color(135, 206, 250), 0, getHeight(), new Color(70, 130, 180));
 //        g2.setPaint(gradient);
 //        g2.fillRect(0, 0, getWidth(), getHeight());
-
         // Transparencia
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
 
@@ -105,15 +110,17 @@ public class boton extends javax.swing.JButton {
         repaint();
     }
 
-    /*public class Adaptador extends MouseAdapter {
+    public class Adaptador extends MouseAdapter {
 
         @Override
         public void mouseExited(MouseEvent me) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+
                     for (float i = 1f; i >= .7f; i -= .03f) {
                         setAlpha(i);
+
                         Linea = colorLinea;
                         try {
                             Thread.sleep(10);
@@ -129,9 +136,14 @@ public class boton extends javax.swing.JButton {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    boton origen = (boton) me.getSource();
                     for (float i = .7f; i <= 1f; i += .03f) {
                         setAlpha(i);
-                        Linea = Color.yellow;
+                        if (origen.isEnabled()) {
+                            Linea = Color.yellow;
+                        } else {
+                            Linea = Color.RED;
+                        }
                         try {
                             Thread.sleep(10);
                         } catch (Exception e) {
@@ -157,7 +169,7 @@ public class boton extends javax.swing.JButton {
                 }
             }).start();
         }
-    }*/
+    }
 }
 
 
