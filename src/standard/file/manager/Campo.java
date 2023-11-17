@@ -4,6 +4,7 @@ public class Campo {
 
     private String Nombre, Tipo;
     private int Tamano;
+    private boolean esLLave;
 
     /*tipos
     1:int
@@ -14,6 +15,14 @@ public class Campo {
         this.Nombre = Nombre;
         this.Tamano = Tamano;
         this.Tipo = Tipo;
+        esLLave = false;
+    }
+
+    public Campo(String Nombre, String Tipo, int Tamano, boolean esLLave) {
+        this.Nombre = Nombre;
+        this.Tipo = Tipo;
+        this.Tamano = Tamano;
+        this.esLLave = esLLave;
     }
 
     public String getNombre() {
@@ -39,10 +48,18 @@ public class Campo {
     public void setTipo(String Tipo) {
         this.Tipo = Tipo;
     }
-    
+
+    public boolean isEsLLave() {
+        return esLLave;
+    }
+
+    public void setEsLLave(boolean esLLave) {
+        this.esLLave = esLLave;
+    }
+
     @Override
     public String toString() {
-        return Nombre + ": " + Tipo + "[" + Tamano + "]";
+        return Nombre + "," + Tipo + "," + Tamano + "," + esLLave;
     }
 
 }

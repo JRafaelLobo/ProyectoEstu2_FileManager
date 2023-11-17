@@ -19,6 +19,8 @@ import javax.swing.DefaultListModel;
 
 import javax.swing.JDialog;
 import javax.swing.UIDefaults;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class Main extends javax.swing.JFrame {
 
@@ -42,7 +44,7 @@ public class Main extends javax.swing.JFrame {
         B_Registros.setEnabled(false);
         B_Indices.setEnabled(false);
         B_Estandarizacion.setEnabled(false);
-        
+
         //05172d
         //FF7048
         //font Moncerath,Bethicai
@@ -55,9 +57,9 @@ public class Main extends javax.swing.JFrame {
         Portadita = new javax.swing.JFrame();
         I_PortadaFondo = new FondoPanel("./Imagenes\\Portada_inicial.png");
         JF_Campos = new javax.swing.JFrame();
+        Tabla_Camps = new javax.swing.JScrollPane();
+        Datos_Campos = new javax.swing.JTable();
         lb_Archivo_Titulo = new javax.swing.JLabel();
-        Datos_Achivos = new javax.swing.JScrollPane();
-        JLista_Campos = new javax.swing.JList<>();
         B_CrearCampo = new boton();
         B_ListarCampo = new boton();
         B_ModificarCampo = new boton();
@@ -129,14 +131,37 @@ public class Main extends javax.swing.JFrame {
         });
         JF_Campos.getContentPane().setLayout(null);
 
+        Datos_Campos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Tipo", "Tamano", "Es llave"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tabla_Camps.setViewportView(Datos_Campos);
+
+        JF_Campos.getContentPane().add(Tabla_Camps);
+        Tabla_Camps.setBounds(210, 30, 260, 200);
+
         lb_Archivo_Titulo.setText("Datos Del Archivo");
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
         lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
-
-        Datos_Achivos.setViewportView(JLista_Campos);
-
-        JF_Campos.getContentPane().add(Datos_Achivos);
-        Datos_Achivos.setBounds(310, 80, 220, 160);
 
         B_CrearCampo.setText("Crear");
         B_CrearCampo.setBorderPainted(false);
@@ -553,8 +578,8 @@ public class Main extends javax.swing.JFrame {
         I_Fondo_Archivos.setSize(x, y);
 
         //Botones de la lista
-        Datos_Achivos.setSize(3 * x / 4, y / 2);
-        Datos_Achivos.setLocation((int) ((x / 2) - (Datos_Achivos.getWidth() / 2)), (int) ((5 * y / 12) - (Datos_Achivos.getHeight() / 2)));
+        Tabla_Camps.setSize(3 * x / 4, y / 2);
+        Tabla_Camps.setLocation((int) ((x / 2) - (Tabla_Camps.getWidth() / 2)), (int) ((5 * y / 12) - (Tabla_Camps.getHeight() / 2)));
 
         //Botones Campo
         B_CrearCampo.setSize(3 * x / 16, 2 * y / 18);
@@ -588,7 +613,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CamposMouseClicked
         // TODO add your handling code here:
-
+        lb_Archivo_Titulo.setText(file.getNombre());
         if (!B_Campos.isEnabled()) {
             return;
         }
@@ -598,9 +623,11 @@ public class Main extends javax.swing.JFrame {
         JF_Campos.setVisible(true);
         JF_Campos.setSize(this.getWidth(), this.getHeight());
         JF_Campos.setLocationRelativeTo(this);
+
         //Limpia la lista
-        DefaultListModel<String> modeloLista = new DefaultListModel<>();
-        JLista_Campos.setModel(modeloLista);
+        DefaultTableModel T = (DefaultTableModel) Datos_Campos.getModel();
+        T.setRowCount(0);
+
     }//GEN-LAST:event_B_CamposMouseClicked
 
     private void B_Archivo_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_SalirActionPerformed
@@ -631,7 +658,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         OpenFileName = file.LecturaPath();
-        if(OpenFileName.equals("")){
+        if (OpenFileName.equals("")) {
             return;
         }
         Campos = file.Abrir(OpenFileName);
@@ -726,6 +753,26 @@ public class Main extends javax.swing.JFrame {
         boolean IsSaved = false;
 
         if (JF_Campos.isVisible()) {
+            //metodo anadido
+            ArrayList<Campo> C = file.getListaCampos();
+            DefaultTableModel D = (DefaultTableModel) Datos_Campos.getModel();
+            boolean solo1 = false;
+            for (int i = 0; i < C.size(); i++) {
+                if (solo1) {
+                    JOptionPane.showMessageDialog(JF_Campos, "No se puede guardar el Archivo con multiples llaves", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                if (Boolean.parseBoolean(D.getValueAt(i, 3).toString())) {
+                    C.get(i).setEsLLave(true);
+                    solo1 = true;
+                    continue;
+                }
+                C.get(i).setEsLLave(false);
+            }
+            if (!solo1) {
+                JOptionPane.showMessageDialog(JF_Campos, "Ocupa una llave para Guardar el Archivo", "Error", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
             IsSaved = file.Guardar(OpenFileName);
         }
         if (IsSaved) {
@@ -768,16 +815,11 @@ public class Main extends javax.swing.JFrame {
                 return;
             }
 
-            Campo campoNuevo = new Campo(nombre, longitud, tipo);
+            Campo campoNuevo = new Campo(nombre, tipo, longitud, false);
             //listaCampos.add(campoNuevo);
             file.getListaCampos().add(campoNuevo);
 
-            DefaultListModel<String> modeloLista = new DefaultListModel<>();
-
-            for (int i = 0; i < file.getListaCampos().size(); i++) {
-                modeloLista.addElement(file.getListaCampos().get(i).toString());
-            }
-            JLista_Campos.setModel(modeloLista);
+            listarTabla();
 
             nombreCampo.setText("");
             longitudCampo.setText("");
@@ -872,10 +914,10 @@ public class Main extends javax.swing.JFrame {
     private void B_ModificarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarCampoMouseClicked
         // TODO add your handling code here:
         try {
-            if (JLista_Campos.isSelectionEmpty()) {
+            if (Datos_Campos.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de la lista.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                int index = JLista_Campos.getSelectedIndex();
+                int index = Datos_Campos.getSelectedRowCount() - 1;
                 String modificacion = JOptionPane.showInputDialog(rootPane, "Que desea modificar?\n 1. Nombre\n 2. Tipo\n 3. Longitud");
                 if (modificacion == null) {
                     return;
@@ -970,11 +1012,8 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
 
-                DefaultListModel<String> modeloLista = new DefaultListModel<>();
-                for (Campo campo : file.getListaCampos()) {
-                    modeloLista.addElement(campo.toString());
-                }
-                JLista_Campos.setModel(modeloLista);
+                //listar
+                listarTabla();
 
             }
         } catch (Exception ex) {
@@ -985,26 +1024,20 @@ public class Main extends javax.swing.JFrame {
 
     private void B_ListarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarCampoMouseClicked
         // TODO add your handling code here:
-        DefaultListModel<String> modeloLista = new DefaultListModel<>();
-        for (Campo campo : file.getListaCampos()) {
-            modeloLista.addElement(campo.toString());
-        }
-        JLista_Campos.setModel(modeloLista);
-
+        listarTabla();
     }//GEN-LAST:event_B_ListarCampoMouseClicked
 
     private void B_BorrarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarCampoMouseClicked
         // TODO add your handling code here:
         try {
-            if (JLista_Campos.isSelectionEmpty()) {
+            if (Datos_Campos.getModel().getRowCount() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de la lista.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                file.getListaCampos().remove(JLista_Campos.getSelectedIndex());
-                DefaultListModel<String> modeloLista = new DefaultListModel<>();
-                for (Campo campo : file.getListaCampos()) {
-                    modeloLista.addElement(campo.toString());
-                }
-                JLista_Campos.setModel(modeloLista);
+                file.getListaCampos().remove(Datos_Campos.getSelectedRowCount() - 1);
+
+                //listar
+                listarTabla();
+
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1065,7 +1098,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_Registros;
     private javax.swing.JButton B_RegresarCrearCampo;
     private javax.swing.JButton D_Abrir_Archivo;
-    private javax.swing.JScrollPane Datos_Achivos;
+    private javax.swing.JTable Datos_Campos;
     private javax.swing.JDialog Dialog_Abrir;
     private javax.swing.JPanel I_Campo_Decoracion;
     private javax.swing.JPanel I_Fondo_Archivos;
@@ -1077,11 +1110,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel JL_Longitud;
     private javax.swing.JLabel JL_Nombre;
     private javax.swing.JLabel JL_Tipo;
-    private javax.swing.JList<String> JLista_Campos;
     private javax.swing.JComboBox<String> ListOfFiles;
     private javax.swing.JPanel P_CrearCapo_Decoracion;
     private javax.swing.JPanel PanelCrearCampo;
     private javax.swing.JFrame Portadita;
+    private javax.swing.JScrollPane Tabla_Camps;
     private javax.swing.JLabel TituloCrear;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1103,6 +1136,28 @@ public class Main extends javax.swing.JFrame {
     //Registro: Lista de Campus
     //Indices:
     //Estandarizacion
+
+    public void listarTabla() {
+        DefaultTableModel T = (DefaultTableModel) Datos_Campos.getModel();
+
+        // Limpiar la tabla
+        T.setRowCount(0);
+
+        ArrayList<Campo> C = file.getListaCampos();
+        if (!C.isEmpty()) {
+
+            for (Campo campo : C) {
+                Object[] fila = {
+                    campo.getNombre(),
+                    campo.getTipo(),
+                    campo.getTamano(),
+                    campo.isEsLLave()
+                };
+                //T.setColumnClass(3, Boolean.class);
+                T.addRow(fila);
+            }
+        }
+    }
 
     //Este metodo es para reproducir sonidos en el programa
     public static Clip playMusic(String filepath) {
