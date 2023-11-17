@@ -14,7 +14,6 @@ import javax.swing.JFileChooser;
 
 public class Archivos {
 
-    int Cabezal;
     private String nombre;
     private ArrayList<Campo> listaCampos = new ArrayList();
 
@@ -24,8 +23,9 @@ public class Archivos {
         int userSelection = fileChooser.showOpenDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+            nombre = fileChooser.getName(selectedFile);
             return selectedFile.getAbsolutePath();
-        }else{
+        } else {
             return "";
         }
     }
@@ -68,7 +68,7 @@ public class Archivos {
                 for (int i = 0; i < listaCampos.size(); i++) {
                     temp += listaCampos.get(i).toString();
                     if (i != listaCampos.size() - 1) {
-                        temp += ",";
+                        temp += "|";
                     }
                 }
                 temp += "}";
@@ -96,55 +96,24 @@ public class Archivos {
             }
 
             //metodo para leer archivo
+            if (primeraLinea.charAt(0) != '{') {
+                return "";
+            }
             primeraLinea = primeraLinea.replace("{", "");
             primeraLinea = primeraLinea.replace("}", "");
-            String[] divicion = primeraLinea.split(",");
+            String[] divicion = primeraLinea.split("\\|");
 
             listaCampos.clear();
             for (int i = 0; i < divicion.length; i++) {
-                String cadena = divicion[i];
-                boolean esNombre = true, esTipo = false, esNumero = false;
-                int j = 0;
-                String nombre = "", tipo = "", numero = "";
-                while (j < cadena.length() - 1) {
-                    char letra = cadena.charAt(j);
-                    if (letra == ':') {
-                        j += 2;
-                        esNombre = false;
-                        esTipo = true;
-                        continue;
-                    }
-                    if (letra == '[') {
-                        j++;
-                        esTipo = false;
-                        esNumero = true;
-                        continue;
-                    }
-                    if (letra == ']') {
-                        break;
-                    }
-                    if (esNombre) {
-                        nombre += cadena.charAt(j);
-
-                    }
-                    if (esTipo) {
-                        tipo += cadena.charAt(j);
-                    }
-                    if (esNumero) {
-                        numero += cadena.charAt(j);
-                    }
-                    j++;
-                }
-                listaCampos.add(new Campo(nombre, Integer.valueOf(numero), tipo));
+                String[] arregloCampo = divicion[i].split(",");
+                listaCampos.add(new Campo(arregloCampo[0], arregloCampo[1], Integer.valueOf(arregloCampo[2]), Boolean.parseBoolean(arregloCampo[3])));
             }
-
             return primeraLinea;
         } catch (IOException e) {
             System.err.println("Hubo un error al leer campos: " + e.getMessage());
             return "Hubo un error al leer campos";
         }
     }
-
 
     public char Nuevo() {
         JFileChooser fileChooser = new JFileChooser();
@@ -155,7 +124,6 @@ public class Archivos {
             File fileToSave = fileChooser.getSelectedFile();
             String filePath = fileToSave.getAbsolutePath();
 
- 
             try {
                 if (fileToSave.createNewFile()) {
                     System.out.println("Archivo creado con éxito en: " + filePath);
