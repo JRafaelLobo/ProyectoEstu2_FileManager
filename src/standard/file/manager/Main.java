@@ -769,7 +769,7 @@ public class Main extends javax.swing.JFrame {
                 }
                 C.get(i).setEsLLave(false);
             }
-            if (!solo1) {
+            if (!solo1 && !C.isEmpty()) {
                 JOptionPane.showMessageDialog(JF_Campos, "Ocupa una llave para Guardar el Archivo", "Error", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
