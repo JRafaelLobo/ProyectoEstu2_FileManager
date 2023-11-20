@@ -758,7 +758,7 @@ public class Main extends javax.swing.JFrame {
             DefaultTableModel D = (DefaultTableModel) Datos_Campos.getModel();
             boolean solo1 = false;
             for (int i = 0; i < C.size(); i++) {
-                if (solo1) {
+                if (solo1 && C.size()!=1) {
                     JOptionPane.showMessageDialog(JF_Campos, "No se puede guardar el Archivo con multiples llaves", "Error", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
