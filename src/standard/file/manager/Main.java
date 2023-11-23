@@ -171,7 +171,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Archivo_Titulo.setText("Datos Del Archivo");
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
-        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 16);
 
         B_CrearCampo.setText("Crear");
         B_CrearCampo.setBorderPainted(false);
@@ -182,7 +182,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_CrearCampo);
-        B_CrearCampo.setBounds(180, 260, 62, 25);
+        B_CrearCampo.setBounds(180, 260, 72, 23);
 
         B_ListarCampo.setText("Listar");
         B_ListarCampo.setBorderPainted(false);
@@ -193,7 +193,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_ListarCampo);
-        B_ListarCampo.setBounds(270, 260, 61, 25);
+        B_ListarCampo.setBounds(270, 260, 72, 23);
 
         B_ModificarCampo.setText("Modificar");
         B_ModificarCampo.setBorderPainted(false);
@@ -204,7 +204,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_ModificarCampo);
-        B_ModificarCampo.setBounds(370, 260, 79, 25);
+        B_ModificarCampo.setBounds(370, 260, 81, 23);
 
         B_BorrarCampo.setText("Borrar");
         B_BorrarCampo.setBorderPainted(false);
@@ -215,7 +215,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 65, 25);
+        B_BorrarCampo.setBounds(460, 260, 72, 23);
 
         javax.swing.GroupLayout I_Campo_DecoracionLayout = new javax.swing.GroupLayout(I_Campo_Decoracion);
         I_Campo_Decoracion.setLayout(I_Campo_DecoracionLayout);
@@ -245,7 +245,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
-        I_Fondo_Archivos.setBounds(0, 0, 0, 0);
+        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
 
         ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -533,7 +533,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Campos);
-        B_Campos.setBounds(278, 268, 109, 25);
+        B_Campos.setBounds(278, 268, 109, 23);
 
         B_Registros.setText("Registros");
         B_Registros.setBorderPainted(false);
@@ -544,7 +544,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Registros);
-        B_Registros.setBounds(514, 268, 109, 25);
+        B_Registros.setBounds(514, 268, 109, 23);
 
         B_Indices.setBackground(new java.awt.Color(102, 102, 102));
         B_Indices.setText("Indices");
@@ -552,13 +552,13 @@ public class Main extends javax.swing.JFrame {
         B_Indices.setContentAreaFilled(false);
         B_Indices.setFocusPainted(false);
         getContentPane().add(B_Indices);
-        B_Indices.setBounds(153, 335, 112, 25);
+        B_Indices.setBounds(153, 335, 112, 23);
 
         B_Estandarizacion.setText("Estandarizacion");
         B_Estandarizacion.setBorderPainted(false);
         B_Estandarizacion.setFocusPainted(false);
         getContentPane().add(B_Estandarizacion);
-        B_Estandarizacion.setBounds(382, 335, 112, 25);
+        B_Estandarizacion.setBounds(382, 335, 113, 23);
 
         I_Fondo_Main.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -886,22 +886,31 @@ public class Main extends javax.swing.JFrame {
             //metodo anadido
             ArrayList<Campo> C = file.getListaCampos();
             DefaultTableModel D = (DefaultTableModel) Datos_Campos.getModel();
-            boolean solo1 = false;
+            int count = 0;
+            int pos = -1;
             for (int i = 0; i < C.size(); i++) {
-                if (solo1) {
-                    JOptionPane.showMessageDialog(JF_Campos, "No se puede guardar el Archivo con multiples llaves", "Error", JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }
                 if (Boolean.parseBoolean(D.getValueAt(i, 3).toString())) {
-                    C.get(i).setEsLLave(true);
-                    solo1 = true;
-                    continue;
+                    count++;
+                    pos = i;
                 }
-                C.get(i).setEsLLave(false);
+
             }
-            if (!solo1) {
+            if (count > 1) {
+                JOptionPane.showMessageDialog(JF_Campos, "No se puede guardar el Archivo con multiples llaves", "Error", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if (count == 0 && !C.isEmpty()) {
                 JOptionPane.showMessageDialog(JF_Campos, "Ocupa una llave para Guardar el Archivo", "Error", JOptionPane.INFORMATION_MESSAGE);
                 return;
+            }
+            if (pos != -1) {
+                for (int i = 0; i < C.size(); i++) {
+                    if (pos == i) {
+                        C.get(i).setEsLLave(true);
+                    } else {
+                        C.get(i).setEsLLave(false);
+                    }
+                }
             }
             IsSaved = file.Guardar(OpenFileName);
         }
@@ -918,24 +927,37 @@ public class Main extends javax.swing.JFrame {
         if (!B_CrearCampo.isEnabled()) {
             return;
         }
+<<<<<<< HEAD
         this.setVisible(false);
         
         JF_CrearCampo.pack();
+=======
+        //this.setVisible(false);
+>>>>>>> 66b491bc628f9984af2a5a76ad8340b5013f34aa
         JF_Campos.setVisible(false);
-        JF_CrearCampo.setVisible(true);
+        JF_CrearCampo.pack();
         JF_CrearCampo.setSize(700, 450);
         JF_CrearCampo.setResizable(false);
         //JF_CrearCampo.setSize(JF_Campos.getWidth() * 2 / 3, JF_Campos.getHeight() * 2 / 3);
         JF_CrearCampo.setLocationRelativeTo(JF_Campos);
+        JF_CrearCampo.setVisible(true);
+
 
     }//GEN-LAST:event_B_CrearCampoMouseClicked
 
     private void B_GuardadCrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardadCrearCampoMouseClicked
         // TODO add your handling code here:
         try {
+            for (int i = 0; i < file.getListaCampos().size(); i++) {
+                if (file.getListaCampos().get(i).getNombre().toLowerCase().equals(nombreCampo.getText().toLowerCase())) {
+                    JOptionPane.showMessageDialog(rootPane, "El nombre de ese campo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
             String nombre = nombreCampo.getText();
-            if (!nombre.matches("^[^,\\\\{\\\\} ]+$")) {
-                JOptionPane.showMessageDialog(rootPane, "En nombre por favor no ingresar espacios, llaves ni comas", "Error", JOptionPane.ERROR_MESSAGE);
+            if (!nombre.matches("^[^,\\\\{\\\\} \\[\\]\\|]+$")) {
+                JOptionPane.showMessageDialog(rootPane, "En nombre por favor no ingresar espacios, llaves, corchetes ni comas", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             String tipo = tipoCampo.getSelectedItem().toString();
@@ -1047,7 +1069,7 @@ public class Main extends javax.swing.JFrame {
             if (Datos_Campos.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de la lista.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                int index = Datos_Campos.getSelectedRowCount() - 1;
+                int index = Datos_Campos.getSelectedRow();
                 String modificacion = JOptionPane.showInputDialog(rootPane, "Que desea modificar?\n 1. Nombre\n 2. Tipo\n 3. Longitud");
                 if (modificacion == null) {
                     return;
@@ -1062,6 +1084,7 @@ public class Main extends javax.swing.JFrame {
                     if (nombreNuevo == null) {
                         return;
                     }
+<<<<<<< HEAD
                     //Codigo para Modificar
                     boolean modificado = false;
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
@@ -1075,6 +1098,23 @@ public class Main extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Error! El nombre del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
                     }
                     
+=======
+
+                    //Codigo para Modificar
+                    if (!nombreNuevo.matches("^[^,\\\\{\\\\} \\[\\]\\|]+$")) {
+                        JOptionPane.showMessageDialog(rootPane, "En nombre por favor no ingresar espacios, llaves, corchetes ni comas", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    for (int i = 0; i < file.getListaCampos().size(); i++) {
+                        if (file.getListaCampos().get(i).getNombre().toLowerCase().equals(nombreNuevo.toLowerCase())) {
+                            JOptionPane.showMessageDialog(rootPane, "El nombre de ese campo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    }
+                    file.getListaCampos().get(index).setNombre(nombreNuevo);
+                    JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+
+>>>>>>> 66b491bc628f9984af2a5a76ad8340b5013f34aa
                 }
                 
                 if (modificacion.equals("Tipo") || Integer.parseInt(modificacion) == 2) {
@@ -1105,11 +1145,17 @@ public class Main extends javax.swing.JFrame {
                     }
                     
                     boolean modificado = false;
+<<<<<<< HEAD
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
                         file.getListaCampos().get(index).setTipo(tipo);
                         modificado = true;
                     }
                     
+=======
+                    file.getListaCampos().get(index).setTipo(tipo);
+                    modificado = true;
+
+>>>>>>> 66b491bc628f9984af2a5a76ad8340b5013f34aa
                     if (modificado == true) {
                         JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -1129,12 +1175,19 @@ public class Main extends javax.swing.JFrame {
                         return;
                     }
                     boolean modificado = false;
+<<<<<<< HEAD
                     
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
                         file.getListaCampos().get(index).setTamano(longitudNueva);
                         modificado = true;
                     }
                     
+=======
+
+                    file.getListaCampos().get(index).setTamano(longitudNueva);
+                    modificado = true;
+
+>>>>>>> 66b491bc628f9984af2a5a76ad8340b5013f34aa
                     if (modificado == true) {
                         JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -1154,16 +1207,20 @@ public class Main extends javax.swing.JFrame {
 
     private void B_ListarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarCampoMouseClicked
         // TODO add your handling code here:
+        if (file.getListaCampos().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "El archivo esta vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         listarTabla();
     }//GEN-LAST:event_B_ListarCampoMouseClicked
 
     private void B_BorrarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarCampoMouseClicked
         // TODO add your handling code here:
         try {
-            if (Datos_Campos.getModel().getRowCount() == 0) {
+            if (Datos_Campos.getSelectedRowCount() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de la lista.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                file.getListaCampos().remove(Datos_Campos.getSelectedRowCount() - 1);
+                file.getListaCampos().remove(Datos_Campos.getSelectedRow());
 
                 //listar
                 listarTabla();
