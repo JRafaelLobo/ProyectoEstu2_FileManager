@@ -17,6 +17,7 @@ public class Archivos {
     private String nombre;
     private ArrayList<Campo> listaCampos = new ArrayList();
     private ArrayList<Registro> registros = new ArrayList();
+    private LinkedList availist = new LinkedList(-1);
 
     public String LecturaPath() {
         JFileChooser fileChooser = new JFileChooser();
@@ -29,30 +30,6 @@ public class Archivos {
         } else {
             return "";
         }
-    }
-
-    public boolean GuardarCampos(String FileName, String newCampos) {
-        String appData = System.getenv("APPDATA");
-        String carpetaEnAppData = appData + File.separator + "Files_StructData";
-        String rutaArchivo = carpetaEnAppData + File.separator + FileName;
-        if (!newCampos.equals("")) {
-            try {
-                // Leer la primera línea del archivo
-                BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
-                String primeraLinea = lector.readLine();
-                lector.close();
-                BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));
-                escritor.write(newCampos);
-                escritor.newLine();
-                escritor.close();
-                return true;
-            } catch (IOException e) {
-                System.err.println("Hubo un error al escribir los campos: " + e.getMessage());
-                return false;
-            }
-        }
-        //Este return solo es para que no tire error
-        return false;
     }
 
     public boolean Guardar(String rutaArchivo) {
@@ -85,7 +62,7 @@ public class Archivos {
         }
     }
 
-    public String Abrir(String rutaArchivo) {
+    public boolean Abrir(String rutaArchivo) {
 
         try {
             // Leer la primera línea del archivo
@@ -93,12 +70,12 @@ public class Archivos {
             String primeraLinea = lector.readLine();
             lector.close();
             if (primeraLinea == null) {
-                return "";
+                return true;
             }
 
             //metodo para leer archivo
             if (primeraLinea.charAt(0) != '{') {
-                return "";
+                return true;
             }
             primeraLinea = primeraLinea.replace("{", "");
             primeraLinea = primeraLinea.replace("}", "");
@@ -109,10 +86,10 @@ public class Archivos {
                 String[] arregloCampo = divicion[i].split(",");
                 listaCampos.add(new Campo(arregloCampo[0], arregloCampo[1], Integer.valueOf(arregloCampo[2]), Boolean.parseBoolean(arregloCampo[3])));
             }
-            return primeraLinea;
+            return true;
         } catch (IOException e) {
-            System.err.println("Hubo un error al leer campos: " + e.getMessage());
-            return "Hubo un error al leer campos";
+            System.err.println("Hubo un error al cargar el archivo: " + e.getMessage());
+            return false;
         }
     }
 
@@ -156,6 +133,9 @@ public class Archivos {
 
     public void setListaCampos(ArrayList<Campo> listaCampos) {
         this.listaCampos = listaCampos;
+    }
+    public LinkedList getAvailist(){
+        return this.availist;
     }
 
 }

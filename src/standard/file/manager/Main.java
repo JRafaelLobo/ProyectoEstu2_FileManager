@@ -791,10 +791,9 @@ public class Main extends javax.swing.JFrame {
         if (OpenFileName.equals("")) {
             return;
         }
-        Campos = file.Abrir(OpenFileName);
-        if (Campos.equals("Hubo un error al leer campos")) {
-            JOptionPane.showMessageDialog(null, "Hubo un error no se pudo leer campos", "Notificación", JOptionPane.ERROR_MESSAGE);
-            Campos = "";
+        boolean isOpen = file.Abrir(OpenFileName);
+        if (isOpen == false) {
+            JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
             return;
         }
         //Activando los botones
@@ -832,7 +831,6 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         if (this.isVisible()) {
-            Campos = "";
             OpenFileName = "";
             B_Campos.setEnabled(false);
             B_Registros.setEnabled(false);
@@ -852,7 +850,6 @@ public class Main extends javax.swing.JFrame {
                 "OK");
         if (option == JOptionPane.OK_OPTION) {
             OpenFileName = "";
-            Campos = "";
             file.getListaCampos().clear();
             //Desactivando JFrames
             JF_Campos.setVisible(false);
@@ -1079,30 +1076,17 @@ public class Main extends javax.swing.JFrame {
                     if (nombreNuevo == null) {
                         return;
                     }
-                    //Codigo para Modificar
-                    boolean modificado = false;
-                    for (int i = 0; i < file.getListaCampos().size(); i++) {
-                        file.getListaCampos().get(index).setNombre(nombreNuevo);
-                        modificado = true;
-                    }
-
-                    if (modificado == true) {
-                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error! El nombre del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                    //Codigo para Modificar
                     if (!nombreNuevo.matches("^[^,\\\\{\\\\} \\[\\]\\|]+$")) {
                         JOptionPane.showMessageDialog(rootPane, "En nombre por favor no ingresar espacios, llaves, corchetes ni comas", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
-                        if (file.getListaCampos().get(i).getNombre().toLowerCase().equals(nombreNuevo.toLowerCase())) {
+                        if (file.getListaCampos().get(i).getNombre().equals(nombreNuevo)) {
                             JOptionPane.showMessageDialog(rootPane, "El nombre de ese campo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
                     }
+                    //Codigo para Modificar
                     file.getListaCampos().get(index).setNombre(nombreNuevo);
                     JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 
@@ -1135,20 +1119,9 @@ public class Main extends javax.swing.JFrame {
                             tipo = "Unknown";
                     }
 
-                    boolean modificado = false;
-                    for (int i = 0; i < file.getListaCampos().size(); i++) {
-                        file.getListaCampos().get(index).setTipo(tipo);
-                        modificado = true;
-                    }
-
                     file.getListaCampos().get(index).setTipo(tipo);
-                    modificado = true;
+                    JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 
-                    if (modificado == true) {
-                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error! El tipo del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-                    }
                 }
 
                 if (modificacion.equals("Longitud") || Integer.parseInt(modificacion) == 3) {
@@ -1162,20 +1135,10 @@ public class Main extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    boolean modificado = false;
-                    for (int i = 0; i < file.getListaCampos().size(); i++) {
-                        file.getListaCampos().get(index).setTamano(longitudNueva);
-                        modificado = true;
-                    }
 
                     file.getListaCampos().get(index).setTamano(longitudNueva);
-                    modificado = true;
+                    JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 
-                    if (modificado == true) {
-                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error! La longitud del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-                    }
                 }
 
                 //listar
@@ -1405,7 +1368,6 @@ public class Main extends javax.swing.JFrame {
 
     private String OpenFileName = "";
     private Archivos file = new Archivos();
-    private String Campos = "";
     //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     public Campo campo;
