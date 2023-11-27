@@ -16,6 +16,7 @@ public class Archivos {
 
     private String nombre;
     private ArrayList<Campo> listaCampos = new ArrayList();
+    private ArrayList<Registro> registros = new ArrayList();
 
     public String LecturaPath() {
         JFileChooser fileChooser = new JFileChooser();
