@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class Main extends javax.swing.JFrame {
-    
+
     public Main() {
         initComponents();
         this.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
@@ -49,7 +49,7 @@ public class Main extends javax.swing.JFrame {
         //FF7048
         //font Moncerath,Bethicai
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -640,13 +640,13 @@ public class Main extends javax.swing.JFrame {
         if (x > y) {
             I_Icono_Main.setSize((int) (y / 2.2), (int) (y / 2.2));
             f = new Font("Dialog", 0, (int) y / 33);
-            
+
         } else {
             I_Icono_Main.setSize((int) (x / 2.2), (int) (x / 2.2));
             f = new Font("Dialog", 0, (int) x / 33);
         }
         I_Icono_Main.setLocation((int) ((x / 2) - (I_Icono_Main.getWidth() / 2)), (int) ((y / 3) - (I_Icono_Main.getHeight() / 2)));
-        
+
         I_Fondo_Main.setSize(x, y);
 
         //tamano de boton
@@ -689,7 +689,7 @@ public class Main extends javax.swing.JFrame {
         Font f;
         if (x > y) {
             f = new Font("Dialog", 0, (int) y / 33);
-            
+
         } else {
             f = new Font("Dialog", 0, (int) x / 33);
         }
@@ -704,7 +704,7 @@ public class Main extends javax.swing.JFrame {
         B_ModificarCampo.setFont(f);
         B_ListarCampo.setFont(f);
         B_BorrarCampo.setFont(f);
-        
+
         I_Fondo_Archivos.setSize(x, y);
 
         //Botones de la lista
@@ -716,7 +716,7 @@ public class Main extends javax.swing.JFrame {
         B_ModificarCampo.setSize(3 * x / 16, 2 * y / 18);
         B_BorrarCampo.setSize(3 * x / 16, 2 * y / 18);
         B_ListarCampo.setSize(3 * x / 16, 2 * y / 18);
-        
+
         B_CrearCampo.setLocation((int) ((1 * x / 8) - (B_CrearCampo.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearCampo.getHeight() / 2)));
         B_ModificarCampo.setLocation((int) ((3 * x / 8) - (B_CrearCampo.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearCampo.getHeight() / 2)));
         B_BorrarCampo.setLocation((int) ((5 * x / 8) - (B_CrearCampo.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearCampo.getHeight() / 2)));
@@ -725,7 +725,7 @@ public class Main extends javax.swing.JFrame {
         //titulo
         if (x > y) {
             f = new Font("Dialog", 1, (int) y / 16);
-            
+
         } else {
             f = new Font("Dialog", 1, (int) x / 16);
         }
@@ -841,7 +841,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Se ha cerrado el archivo", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         int option = JOptionPane.showOptionDialog(null,
                 "Esta seguro de cerrar el archivo",
                 "Cerrar el archivo",
@@ -857,7 +857,7 @@ public class Main extends javax.swing.JFrame {
             //Desactivando JFrames
             JF_Campos.setVisible(false);
             JF_CrearCampo.setVisible(false);
-            
+
             this.setVisible(true);
             this.setJMenuBar(jMenuBar1);
             //Desactivando
@@ -879,9 +879,9 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha realizado ningun cambio", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         boolean IsSaved = false;
-        
+
         if (JF_Campos.isVisible()) {
             //metodo anadido
             ArrayList<Campo> C = file.getListaCampos();
@@ -927,13 +927,8 @@ public class Main extends javax.swing.JFrame {
         if (!B_CrearCampo.isEnabled()) {
             return;
         }
-<<<<<<< HEAD
-        this.setVisible(false);
-        
+
         JF_CrearCampo.pack();
-=======
-        //this.setVisible(false);
->>>>>>> 66b491bc628f9984af2a5a76ad8340b5013f34aa
         JF_Campos.setVisible(false);
         JF_CrearCampo.pack();
         JF_CrearCampo.setSize(700, 450);
@@ -966,25 +961,25 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             Campo campoNuevo = new Campo(nombre, tipo, longitud, false);
             //listaCampos.add(campoNuevo);
             file.getListaCampos().add(campoNuevo);
-            
+
             listarTabla();
-            
+
             nombreCampo.setText("");
             longitudCampo.setText("");
             tipoCampo.setSelectedIndex(0);
             JOptionPane.showMessageDialog(this, "Campo agregado con exito!");
             JF_CrearCampo.setVisible(false);
             JF_Campos.setVisible(true);
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
-        
+
 
     }//GEN-LAST:event_B_GuardadCrearCampoMouseClicked
 
@@ -1078,27 +1073,24 @@ public class Main extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                
+
                 if (modificacion.equals("Nombre") || Integer.parseInt(modificacion) == 1) {
                     String nombreNuevo = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo nombre: ");
                     if (nombreNuevo == null) {
                         return;
                     }
-<<<<<<< HEAD
                     //Codigo para Modificar
                     boolean modificado = false;
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
                         file.getListaCampos().get(index).setNombre(nombreNuevo);
                         modificado = true;
                     }
-                    
+
                     if (modificado == true) {
                         JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "Error! El nombre del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
                     }
-                    
-=======
 
                     //Codigo para Modificar
                     if (!nombreNuevo.matches("^[^,\\\\{\\\\} \\[\\]\\|]+$")) {
@@ -1114,9 +1106,8 @@ public class Main extends javax.swing.JFrame {
                     file.getListaCampos().get(index).setNombre(nombreNuevo);
                     JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 
->>>>>>> 66b491bc628f9984af2a5a76ad8340b5013f34aa
                 }
-                
+
                 if (modificacion.equals("Tipo") || Integer.parseInt(modificacion) == 2) {
                     String tipoIngresado = JOptionPane.showInputDialog(rootPane, "Ingrese el nuevo Tipo:\n 1. int\n 2. double\n 3. char\n");
                     if (tipoIngresado == null) {
@@ -1139,30 +1130,27 @@ public class Main extends javax.swing.JFrame {
                         case 3:
                             tipo = "char";
                             break;
-                        
+
                         default:
                             tipo = "Unknown";
                     }
-                    
+
                     boolean modificado = false;
-<<<<<<< HEAD
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
                         file.getListaCampos().get(index).setTipo(tipo);
                         modificado = true;
                     }
-                    
-=======
+
                     file.getListaCampos().get(index).setTipo(tipo);
                     modificado = true;
 
->>>>>>> 66b491bc628f9984af2a5a76ad8340b5013f34aa
                     if (modificado == true) {
                         JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "Error! El tipo del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-                
+
                 if (modificacion.equals("Longitud") || Integer.parseInt(modificacion) == 3) {
                     String longitudIngresada = JOptionPane.showInputDialog(rootPane, "Ingrese la nueva Longitud: ");
                     if (longitudIngresada == null) {
@@ -1175,19 +1163,14 @@ public class Main extends javax.swing.JFrame {
                         return;
                     }
                     boolean modificado = false;
-<<<<<<< HEAD
-                    
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
                         file.getListaCampos().get(index).setTamano(longitudNueva);
                         modificado = true;
                     }
-                    
-=======
 
                     file.getListaCampos().get(index).setTamano(longitudNueva);
                     modificado = true;
 
->>>>>>> 66b491bc628f9984af2a5a76ad8340b5013f34aa
                     if (modificado == true) {
                         JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -1197,7 +1180,7 @@ public class Main extends javax.swing.JFrame {
 
                 //listar
                 listarTabla();
-                
+
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1224,7 +1207,7 @@ public class Main extends javax.swing.JFrame {
 
                 //listar
                 listarTabla();
-                
+
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1260,7 +1243,7 @@ public class Main extends javax.swing.JFrame {
         JF_Registros.setVisible(true);
         JF_Registros.setSize(this.getWidth(), this.getHeight());
         JF_Registros.setLocationRelativeTo(this);
-        
+
     }//GEN-LAST:event_B_RegistrosMouseClicked
 
     private void B_CrearRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CrearRegistroMouseClicked
@@ -1281,7 +1264,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_B_BorrarRegistroMouseClicked
 
     private void JF_RegistrosComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_RegistrosComponentResized
-        
+
         int y_decorated = JF_Registros.getInsets().top + JF_Registros.getInsets().bottom;
         int y_JFMenuBar = JF_Registros.getJMenuBar().getHeight();
         int x = JF_Registros.getWidth() - JF_Registros.getInsets().right - JF_Registros.getInsets().left;
@@ -1289,7 +1272,7 @@ public class Main extends javax.swing.JFrame {
         Font f;
         if (x > y) {
             f = new Font("Dialog", 0, (int) y / 33);
-            
+
         } else {
             f = new Font("Dialog", 0, (int) x / 33);
         }
@@ -1302,7 +1285,7 @@ public class Main extends javax.swing.JFrame {
         B_ModificarRegistro.setFont(f);
         B_ListarRegistro.setFont(f);
         B_BorrarRegistro.setFont(f);
-        
+
         I_Fondo_Registro.setSize(x, y);
 
         //Botones de la lista
@@ -1314,7 +1297,7 @@ public class Main extends javax.swing.JFrame {
         B_ModificarRegistro.setSize(3 * x / 16, 2 * y / 18);
         B_BorrarRegistro.setSize(3 * x / 16, 2 * y / 18);
         B_ListarRegistro.setSize(3 * x / 16, 2 * y / 18);
-        
+
         B_CrearRegistro.setLocation((int) ((1 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
         B_ModificarRegistro.setLocation((int) ((3 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
         B_BorrarRegistro.setLocation((int) ((5 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
@@ -1323,7 +1306,7 @@ public class Main extends javax.swing.JFrame {
         //titulo
         if (x > y) {
             f = new Font("Dialog", 1, (int) y / 16);
-            
+
         } else {
             f = new Font("Dialog", 1, (int) x / 16);
         }
@@ -1338,7 +1321,7 @@ public class Main extends javax.swing.JFrame {
         I_Registro_Decoracion.setSize(lb_Registro_Titulo.getHeight() / 4, lb_Registro_Titulo.getHeight() / 4);
         I_Registro_Decoracion.setLocation((int) ((x / 2) - (I_Registro_Decoracion.getWidth() / 2)) + lb_Registro_Titulo.getWidth(), (int) ((y / 12) - (I_Registro_Decoracion.getHeight() / 2)));
     }//GEN-LAST:event_JF_RegistrosComponentResized
-    
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1437,10 +1420,10 @@ public class Main extends javax.swing.JFrame {
 
         // Limpiar la tabla
         T.setRowCount(0);
-        
+
         ArrayList<Campo> C = file.getListaCampos();
         if (!C.isEmpty()) {
-            
+
             for (Campo campo : C) {
                 Object[] fila = {
                     campo.getNombre(),
@@ -1471,14 +1454,14 @@ public class Main extends javax.swing.JFrame {
 
     //Esta Clase se utiliza para Poner Imagenes dentro de paneles
     class FondoPanel extends JPanel {
-        
+
         public FondoPanel(String direccion) {
             this.direccion = direccion;
         }
-        
+
         private String direccion;
         private Image imagen;
-        
+
         public void paint(Graphics g) {
             imagen = new ImageIcon(direccion).getImage();
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
