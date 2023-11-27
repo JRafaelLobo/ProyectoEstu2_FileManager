@@ -41,7 +41,7 @@ public class Campo {
         this.Tamano = Tamano;
     }
 
-    public Object getTipo() {
+    public String getTipo() {
         return Tipo;
     }
 
