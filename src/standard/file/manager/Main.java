@@ -44,7 +44,6 @@ public class Main extends javax.swing.JFrame {
         B_Registros.setEnabled(false);
         B_Indices.setEnabled(false);
         B_Estandarizacion.setEnabled(false);
-
         //05172d
         //FF7048
         //font Moncerath,Bethicai
@@ -791,6 +790,11 @@ public class Main extends javax.swing.JFrame {
         if (OpenFileName.equals("")) {
             return;
         }
+        if (OpenFileName.equals("F")) {
+            JOptionPane.showMessageDialog(null, "Hubo un error esta abriendo un archivo no permitido", "Error", JOptionPane.ERROR_MESSAGE);
+            OpenFileName = "";
+            return;
+        }
         boolean isOpen = file.Abrir(OpenFileName);
         if (isOpen == false) {
             JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
@@ -909,7 +913,7 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
             }
-            IsSaved = file.Guardar(OpenFileName);
+            IsSaved = file.Guardar(OpenFileName, true);
         }
         if (IsSaved) {
             JOptionPane.showMessageDialog(null, "El archivo se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
