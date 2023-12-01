@@ -84,10 +84,12 @@ public class Main extends javax.swing.JFrame {
         Tabla_Registro = new javax.swing.JScrollPane();
         Datos_Registro = new javax.swing.JTable();
         lb_Registro_Titulo = new javax.swing.JLabel();
-        B_CrearRegistro = new boton();
-        B_ListarRegistro = new boton();
+        B_CruzarRegistro = new boton();
         B_ModificarRegistro = new boton();
+        B_BuscarRegistro = new boton();
         B_BorrarRegistro = new boton();
+        B_IntroducirRegistro1 = new boton();
+        B_ListarRegistro = new boton();
         I_Registro_Decoracion = new FondoPanel("./Imagenes\\Icono2.png");
         I_Fondo_Registro = new javax.swing.JPanel();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono2.png");
@@ -244,7 +246,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
-        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
+        I_Fondo_Archivos.setBounds(0, 0, 0, 0);
 
         ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -423,29 +425,18 @@ public class Main extends javax.swing.JFrame {
 
         lb_Registro_Titulo.setText("Datos Del Archivo");
         JF_Registros.getContentPane().add(lb_Registro_Titulo);
-        lb_Registro_Titulo.setBounds(60, 260, 150, 15);
+        lb_Registro_Titulo.setBounds(60, 260, 150, 16);
 
-        B_CrearRegistro.setText("Crear");
-        B_CrearRegistro.setBorderPainted(false);
-        B_CrearRegistro.setFocusPainted(false);
-        B_CrearRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+        B_CruzarRegistro.setText("Cruzar");
+        B_CruzarRegistro.setBorderPainted(false);
+        B_CruzarRegistro.setFocusPainted(false);
+        B_CruzarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_CrearRegistroMouseClicked(evt);
+                B_CruzarRegistroMouseClicked(evt);
             }
         });
-        JF_Registros.getContentPane().add(B_CrearRegistro);
-        B_CrearRegistro.setBounds(180, 260, 62, 25);
-
-        B_ListarRegistro.setText("Listar");
-        B_ListarRegistro.setBorderPainted(false);
-        B_ListarRegistro.setFocusPainted(false);
-        B_ListarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_ListarRegistroMouseClicked(evt);
-            }
-        });
-        JF_Registros.getContentPane().add(B_ListarRegistro);
-        B_ListarRegistro.setBounds(270, 260, 61, 25);
+        JF_Registros.getContentPane().add(B_CruzarRegistro);
+        B_CruzarRegistro.setBounds(270, 290, 72, 23);
 
         B_ModificarRegistro.setText("Modificar");
         B_ModificarRegistro.setBorderPainted(false);
@@ -456,7 +447,18 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_ModificarRegistro);
-        B_ModificarRegistro.setBounds(370, 260, 79, 25);
+        B_ModificarRegistro.setBounds(370, 260, 81, 23);
+
+        B_BuscarRegistro.setText("Buscar");
+        B_BuscarRegistro.setBorderPainted(false);
+        B_BuscarRegistro.setFocusPainted(false);
+        B_BuscarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_BuscarRegistroMouseClicked(evt);
+            }
+        });
+        JF_Registros.getContentPane().add(B_BuscarRegistro);
+        B_BuscarRegistro.setBounds(370, 290, 72, 23);
 
         B_BorrarRegistro.setText("Borrar");
         B_BorrarRegistro.setBorderPainted(false);
@@ -467,7 +469,34 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_BorrarRegistro);
-        B_BorrarRegistro.setBounds(460, 260, 65, 25);
+        B_BorrarRegistro.setBounds(460, 260, 72, 23);
+
+        B_IntroducirRegistro1.setText("Introducir");
+        B_IntroducirRegistro1.setBorderPainted(false);
+        B_IntroducirRegistro1.setFocusPainted(false);
+        B_IntroducirRegistro1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_IntroducirRegistro1MouseClicked(evt);
+            }
+        });
+        JF_Registros.getContentPane().add(B_IntroducirRegistro1);
+        B_IntroducirRegistro1.setBounds(180, 260, 81, 23);
+
+        B_ListarRegistro.setText("Listar");
+        B_ListarRegistro.setBorderPainted(false);
+        B_ListarRegistro.setFocusPainted(false);
+        B_ListarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_ListarRegistroMouseClicked(evt);
+            }
+        });
+        B_ListarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_ListarRegistroActionPerformed(evt);
+            }
+        });
+        JF_Registros.getContentPane().add(B_ListarRegistro);
+        B_ListarRegistro.setBounds(270, 260, 72, 23);
 
         javax.swing.GroupLayout I_Registro_DecoracionLayout = new javax.swing.GroupLayout(I_Registro_Decoracion);
         I_Registro_Decoracion.setLayout(I_Registro_DecoracionLayout);
@@ -497,7 +526,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Registros.getContentPane().add(I_Fondo_Registro);
-        I_Fondo_Registro.setBounds(0, 0, 0, 0);
+        I_Fondo_Registro.setBounds(0, 0, 100, 100);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
@@ -1213,10 +1242,10 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_B_RegistrosMouseClicked
 
-    private void B_CrearRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CrearRegistroMouseClicked
+    private void B_IntroducirRegistro1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IntroducirRegistro1MouseClicked
         // TODO add your handling code here:
         System.out.println("XD");
-    }//GEN-LAST:event_B_CrearRegistroMouseClicked
+    }//GEN-LAST:event_B_IntroducirRegistro1MouseClicked
 
     private void B_ListarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarRegistroMouseClicked
         // TODO add your handling code here:
@@ -1248,10 +1277,12 @@ public class Main extends javax.swing.JFrame {
 //                JF_Archivos.getComponent(i).setFont(f);
 //            }
 //        }
-        B_CrearRegistro.setFont(f);
+        B_IntroducirRegistro1.setFont(f);
         B_ModificarRegistro.setFont(f);
         B_ListarRegistro.setFont(f);
         B_BorrarRegistro.setFont(f);
+        B_CruzarRegistro.setFont(f);
+        B_BuscarRegistro.setFont(f);
 
         I_Fondo_Registro.setSize(x, y);
 
@@ -1260,15 +1291,19 @@ public class Main extends javax.swing.JFrame {
         Tabla_Registro.setLocation((int) ((x / 2) - (Tabla_Registro.getWidth() / 2)), (int) ((5 * y / 12) - (Tabla_Registro.getHeight() / 2)));
 
         //Botones Campo
-        B_CrearRegistro.setSize(3 * x / 16, 2 * y / 18);
-        B_ModificarRegistro.setSize(3 * x / 16, 2 * y / 18);
-        B_BorrarRegistro.setSize(3 * x / 16, 2 * y / 18);
-        B_ListarRegistro.setSize(3 * x / 16, 2 * y / 18);
+        B_IntroducirRegistro1.setSize(3 * x / 18, 2 * y / 20);
+        B_ModificarRegistro.setSize(3 * x / 18, 2 * y / 20);
+        B_BorrarRegistro.setSize(3 * x / 18, 2 * y / 20);
+        B_ListarRegistro.setSize(3 * x / 18, 2 * y / 20);
+        B_CruzarRegistro.setSize(3 * x / 18, 2 * y / 20);
+        B_BuscarRegistro.setSize(3 * x / 18, 2 * y / 20);
 
-        B_CrearRegistro.setLocation((int) ((1 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
-        B_ModificarRegistro.setLocation((int) ((3 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
-        B_BorrarRegistro.setLocation((int) ((5 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
-        B_ListarRegistro.setLocation((int) ((7 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
+        B_IntroducirRegistro1.setLocation((int) ((1 * x / 8) - (B_IntroducirRegistro1.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro1.getHeight() / 2)));
+        B_ModificarRegistro.setLocation((int) ((2.16 * x / 8) - (B_IntroducirRegistro1.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro1.getHeight() / 2)));
+        B_BuscarRegistro.setLocation((int) ((3.32 * x / 8) - (B_IntroducirRegistro1.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro1.getHeight() / 2)));
+        B_ListarRegistro.setLocation((int) ((4.48 * x / 8) - (B_IntroducirRegistro1.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro1.getHeight() / 2)));
+        B_CruzarRegistro.setLocation((int) ((5.64 * x / 8) - (B_IntroducirRegistro1.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro1.getHeight() / 2)));
+        B_BorrarRegistro.setLocation((int) ((6.8 * x / 8) - (B_IntroducirRegistro1.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro1.getHeight() / 2)));
 
         //titulo
         if (x > y) {
@@ -1288,6 +1323,18 @@ public class Main extends javax.swing.JFrame {
         I_Registro_Decoracion.setSize(lb_Registro_Titulo.getHeight() / 4, lb_Registro_Titulo.getHeight() / 4);
         I_Registro_Decoracion.setLocation((int) ((x / 2) - (I_Registro_Decoracion.getWidth() / 2)) + lb_Registro_Titulo.getWidth(), (int) ((y / 12) - (I_Registro_Decoracion.getHeight() / 2)));
     }//GEN-LAST:event_JF_RegistrosComponentResized
+
+    private void B_CruzarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CruzarRegistroMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_CruzarRegistroMouseClicked
+
+    private void B_BuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BuscarRegistroMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_BuscarRegistroMouseClicked
+
+    private void B_ListarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_ListarRegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_ListarRegistroActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -1324,12 +1371,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem B_Archivo_Salir;
     private javax.swing.JButton B_BorrarCampo;
     private javax.swing.JButton B_BorrarRegistro;
+    private javax.swing.JButton B_BuscarRegistro;
     private javax.swing.JButton B_Campos;
     private javax.swing.JButton B_CrearCampo;
-    private javax.swing.JButton B_CrearRegistro;
+    private javax.swing.JButton B_CruzarRegistro;
     private javax.swing.JButton B_Estandarizacion;
     private javax.swing.JButton B_GuardadCrearCampo;
     private javax.swing.JButton B_Indices;
+    private javax.swing.JButton B_IntroducirRegistro1;
     private javax.swing.JButton B_ListarCampo;
     private javax.swing.JButton B_ListarRegistro;
     private javax.swing.JButton B_ModificarCampo;
