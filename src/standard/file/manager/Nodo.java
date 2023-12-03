@@ -9,17 +9,17 @@ package standard.file.manager;
  * @author 307000400
  */
 public class Nodo {
-    private int slot;
+    private Object slot;
     private Nodo siguiente;
     private Nodo anterior;
     
-    public Nodo(int slot){
+    public Nodo(Object slot){
         this.slot = slot;
         this.anterior =  null;
         this.siguiente = null;
     }
 
-    public int getSlot() {
+    public Object getSlot() {
         return this.slot;
     }
 
@@ -31,7 +31,7 @@ public class Nodo {
         return this.anterior;
     }
 
-    public void setSlot(int slot) {
+    public void setSlot(Object slot) {
         this.slot = slot;
     }
 

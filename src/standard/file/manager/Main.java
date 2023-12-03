@@ -31,6 +31,14 @@ public class Main extends javax.swing.JFrame {
         JF_Campos.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         JF_CrearCampo.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Portadita.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        Dialog_Introducir.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        Dialog_Modificar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        Dialog_Buscar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        Dialog_Listar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        Dialog_Borrar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        Dialog_Cruzar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        
+        
         Music = playMusic("./Musica\\SonidoBoton.wav");
         Music.start();
         //Music.loop(Clip.LOOP_CONTINUOUSLY);
@@ -45,7 +53,6 @@ public class Main extends javax.swing.JFrame {
         B_Registros.setEnabled(false);
         B_Indices.setEnabled(false);
         B_Estandarizacion.setEnabled(false);
-
         //05172d
         //FF7048
         //font Moncerath,Bethicai
@@ -86,12 +93,44 @@ public class Main extends javax.swing.JFrame {
         Tabla_Registro = new javax.swing.JScrollPane();
         Datos_Registro = new javax.swing.JTable();
         lb_Registro_Titulo = new javax.swing.JLabel();
-        B_CrearRegistro = new boton();
-        B_ListarRegistro = new boton();
+        B_CruzarRegistro = new boton();
         B_ModificarRegistro = new boton();
+        B_BuscarRegistro = new boton();
         B_BorrarRegistro = new boton();
+        B_IntroducirRegistro = new boton();
+        B_ListarRegistro = new boton();
         I_Registro_Decoracion = new FondoPanel("./Imagenes\\Icono2.png");
         I_Fondo_Registro = new javax.swing.JPanel();
+        Dialog_Introducir = new javax.swing.JDialog();
+        Panel_Decoracion_Introducir = new javax.swing.JPanel();
+        Titulo_Introducir = new javax.swing.JLabel();
+        Panel_Introducir = new javax.swing.JPanel();
+        Regresar_Introducir = new javax.swing.JButton();
+        Dialog_Modificar = new javax.swing.JDialog();
+        Panel_Decoracion_Modificar = new javax.swing.JPanel();
+        Titulo_Modificar = new javax.swing.JLabel();
+        Panel_Modificar = new javax.swing.JPanel();
+        Regresar_Modificar = new javax.swing.JButton();
+        Dialog_Buscar = new javax.swing.JDialog();
+        Panel_Decoracion_Buscar = new javax.swing.JPanel();
+        Titulo_Buscar = new javax.swing.JLabel();
+        Panel_Buscar = new javax.swing.JPanel();
+        Regresar_Buscar = new javax.swing.JButton();
+        Dialog_Listar = new javax.swing.JDialog();
+        Panel_Decoracion_Listar = new javax.swing.JPanel();
+        Titulo_Listar = new javax.swing.JLabel();
+        Panel_Listar = new javax.swing.JPanel();
+        Regresar_Listar = new javax.swing.JButton();
+        Dialog_Borrar = new javax.swing.JDialog();
+        Panel_Decoracion_Borrar = new javax.swing.JPanel();
+        Titulo_Borrar = new javax.swing.JLabel();
+        Panel_Borrar = new javax.swing.JPanel();
+        Regresar_Borrar = new javax.swing.JButton();
+        Dialog_Cruzar = new javax.swing.JDialog();
+        Panel_Decoracion_Cruzar = new javax.swing.JPanel();
+        Titulo_Cruzar = new javax.swing.JLabel();
+        Panel_Cruzar = new javax.swing.JPanel();
+        Regresar_Cruzar = new javax.swing.JButton();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono2.png");
         B_Campos = new boton();
         B_Registros = new boton();
@@ -425,29 +464,18 @@ public class Main extends javax.swing.JFrame {
 
         lb_Registro_Titulo.setText("Datos Del Archivo");
         JF_Registros.getContentPane().add(lb_Registro_Titulo);
-        lb_Registro_Titulo.setBounds(60, 260, 150, 15);
+        lb_Registro_Titulo.setBounds(60, 260, 150, 16);
 
-        B_CrearRegistro.setText("Crear");
-        B_CrearRegistro.setBorderPainted(false);
-        B_CrearRegistro.setFocusPainted(false);
-        B_CrearRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+        B_CruzarRegistro.setText("Cruzar");
+        B_CruzarRegistro.setBorderPainted(false);
+        B_CruzarRegistro.setFocusPainted(false);
+        B_CruzarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_CrearRegistroMouseClicked(evt);
+                B_CruzarRegistroMouseClicked(evt);
             }
         });
-        JF_Registros.getContentPane().add(B_CrearRegistro);
-        B_CrearRegistro.setBounds(180, 260, 62, 25);
-
-        B_ListarRegistro.setText("Listar");
-        B_ListarRegistro.setBorderPainted(false);
-        B_ListarRegistro.setFocusPainted(false);
-        B_ListarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_ListarRegistroMouseClicked(evt);
-            }
-        });
-        JF_Registros.getContentPane().add(B_ListarRegistro);
-        B_ListarRegistro.setBounds(270, 260, 61, 25);
+        JF_Registros.getContentPane().add(B_CruzarRegistro);
+        B_CruzarRegistro.setBounds(270, 290, 72, 23);
 
         B_ModificarRegistro.setText("Modificar");
         B_ModificarRegistro.setBorderPainted(false);
@@ -458,7 +486,18 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_ModificarRegistro);
-        B_ModificarRegistro.setBounds(370, 260, 79, 25);
+        B_ModificarRegistro.setBounds(370, 260, 81, 23);
+
+        B_BuscarRegistro.setText("Buscar");
+        B_BuscarRegistro.setBorderPainted(false);
+        B_BuscarRegistro.setFocusPainted(false);
+        B_BuscarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_BuscarRegistroMouseClicked(evt);
+            }
+        });
+        JF_Registros.getContentPane().add(B_BuscarRegistro);
+        B_BuscarRegistro.setBounds(370, 290, 72, 23);
 
         B_BorrarRegistro.setText("Borrar");
         B_BorrarRegistro.setBorderPainted(false);
@@ -469,7 +508,34 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_BorrarRegistro);
-        B_BorrarRegistro.setBounds(460, 260, 65, 25);
+        B_BorrarRegistro.setBounds(460, 260, 72, 23);
+
+        B_IntroducirRegistro.setText("Introducir");
+        B_IntroducirRegistro.setBorderPainted(false);
+        B_IntroducirRegistro.setFocusPainted(false);
+        B_IntroducirRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_IntroducirRegistroMouseClicked(evt);
+            }
+        });
+        JF_Registros.getContentPane().add(B_IntroducirRegistro);
+        B_IntroducirRegistro.setBounds(170, 260, 81, 23);
+
+        B_ListarRegistro.setText("Listar");
+        B_ListarRegistro.setBorderPainted(false);
+        B_ListarRegistro.setFocusPainted(false);
+        B_ListarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_ListarRegistroMouseClicked(evt);
+            }
+        });
+        B_ListarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_ListarRegistroActionPerformed(evt);
+            }
+        });
+        JF_Registros.getContentPane().add(B_ListarRegistro);
+        B_ListarRegistro.setBounds(270, 260, 72, 23);
 
         javax.swing.GroupLayout I_Registro_DecoracionLayout = new javax.swing.GroupLayout(I_Registro_Decoracion);
         I_Registro_Decoracion.setLayout(I_Registro_DecoracionLayout);
@@ -499,7 +565,387 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Registros.getContentPane().add(I_Fondo_Registro);
-        I_Fondo_Registro.setBounds(0, 0, 0, 0);
+        I_Fondo_Registro.setBounds(0, 0, 100, 100);
+
+        Dialog_Introducir.getContentPane().setLayout(null);
+
+        Panel_Decoracion_Introducir.setBackground(new java.awt.Color(19, 73, 60));
+        Panel_Decoracion_Introducir.setForeground(new java.awt.Color(51, 102, 0));
+
+        Titulo_Introducir.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 28)); // NOI18N
+        Titulo_Introducir.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo_Introducir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo_Introducir.setText("Introducir Registro");
+
+        javax.swing.GroupLayout Panel_Decoracion_IntroducirLayout = new javax.swing.GroupLayout(Panel_Decoracion_Introducir);
+        Panel_Decoracion_Introducir.setLayout(Panel_Decoracion_IntroducirLayout);
+        Panel_Decoracion_IntroducirLayout.setHorizontalGroup(
+            Panel_Decoracion_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_Decoracion_IntroducirLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Titulo_Introducir, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        Panel_Decoracion_IntroducirLayout.setVerticalGroup(
+            Panel_Decoracion_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Decoracion_IntroducirLayout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(Titulo_Introducir)
+                .addContainerGap())
+        );
+
+        Dialog_Introducir.getContentPane().add(Panel_Decoracion_Introducir);
+        Panel_Decoracion_Introducir.setBounds(0, 0, 600, 50);
+
+        Panel_Introducir.setBackground(new java.awt.Color(5, 23, 45));
+
+        Regresar_Introducir.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        Regresar_Introducir.setText("Regresar");
+        Regresar_Introducir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Regresar_IntroducirMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_IntroducirLayout = new javax.swing.GroupLayout(Panel_Introducir);
+        Panel_Introducir.setLayout(Panel_IntroducirLayout);
+        Panel_IntroducirLayout.setHorizontalGroup(
+            Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_IntroducirLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(Regresar_Introducir)
+                .addContainerGap(479, Short.MAX_VALUE))
+        );
+        Panel_IntroducirLayout.setVerticalGroup(
+            Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_IntroducirLayout.createSequentialGroup()
+                .addContainerGap(306, Short.MAX_VALUE)
+                .addComponent(Regresar_Introducir)
+                .addGap(68, 68, 68))
+        );
+
+        Dialog_Introducir.getContentPane().add(Panel_Introducir);
+        Panel_Introducir.setBounds(0, 50, 600, 400);
+
+        Dialog_Modificar.getContentPane().setLayout(null);
+
+        Panel_Decoracion_Modificar.setBackground(new java.awt.Color(19, 73, 60));
+        Panel_Decoracion_Modificar.setForeground(new java.awt.Color(51, 102, 0));
+
+        Titulo_Modificar.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 28)); // NOI18N
+        Titulo_Modificar.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo_Modificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo_Modificar.setText("Modificar Registro");
+
+        javax.swing.GroupLayout Panel_Decoracion_ModificarLayout = new javax.swing.GroupLayout(Panel_Decoracion_Modificar);
+        Panel_Decoracion_Modificar.setLayout(Panel_Decoracion_ModificarLayout);
+        Panel_Decoracion_ModificarLayout.setHorizontalGroup(
+            Panel_Decoracion_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_ModificarLayout.createSequentialGroup()
+                    .addGap(0, 202, Short.MAX_VALUE)
+                    .addComponent(Titulo_Modificar)
+                    .addGap(0, 203, Short.MAX_VALUE)))
+        );
+        Panel_Decoracion_ModificarLayout.setVerticalGroup(
+            Panel_Decoracion_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_ModificarLayout.createSequentialGroup()
+                    .addGap(0, 9, Short.MAX_VALUE)
+                    .addComponent(Titulo_Modificar)
+                    .addGap(0, 10, Short.MAX_VALUE)))
+        );
+
+        Dialog_Modificar.getContentPane().add(Panel_Decoracion_Modificar);
+        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 50);
+
+        Panel_Modificar.setBackground(new java.awt.Color(5, 23, 45));
+
+        Regresar_Modificar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        Regresar_Modificar.setText("Regresar");
+        Regresar_Modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Regresar_ModificarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_ModificarLayout = new javax.swing.GroupLayout(Panel_Modificar);
+        Panel_Modificar.setLayout(Panel_ModificarLayout);
+        Panel_ModificarLayout.setHorizontalGroup(
+            Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_ModificarLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(Regresar_Modificar)
+                .addContainerGap(478, Short.MAX_VALUE))
+        );
+        Panel_ModificarLayout.setVerticalGroup(
+            Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
+                .addContainerGap(301, Short.MAX_VALUE)
+                .addComponent(Regresar_Modificar)
+                .addGap(73, 73, 73))
+        );
+
+        Dialog_Modificar.getContentPane().add(Panel_Modificar);
+        Panel_Modificar.setBounds(0, 50, 600, 400);
+
+        Dialog_Buscar.getContentPane().setLayout(null);
+
+        Panel_Decoracion_Buscar.setBackground(new java.awt.Color(19, 73, 60));
+        Panel_Decoracion_Buscar.setForeground(new java.awt.Color(51, 102, 0));
+
+        Titulo_Buscar.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 28)); // NOI18N
+        Titulo_Buscar.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo_Buscar.setText("Buscar Registro");
+
+        javax.swing.GroupLayout Panel_Decoracion_BuscarLayout = new javax.swing.GroupLayout(Panel_Decoracion_Buscar);
+        Panel_Decoracion_Buscar.setLayout(Panel_Decoracion_BuscarLayout);
+        Panel_Decoracion_BuscarLayout.setHorizontalGroup(
+            Panel_Decoracion_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_BuscarLayout.createSequentialGroup()
+                    .addGap(0, 218, Short.MAX_VALUE)
+                    .addComponent(Titulo_Buscar)
+                    .addGap(0, 218, Short.MAX_VALUE)))
+        );
+        Panel_Decoracion_BuscarLayout.setVerticalGroup(
+            Panel_Decoracion_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_BuscarLayout.createSequentialGroup()
+                    .addGap(0, 9, Short.MAX_VALUE)
+                    .addComponent(Titulo_Buscar)
+                    .addGap(0, 10, Short.MAX_VALUE)))
+        );
+
+        Dialog_Buscar.getContentPane().add(Panel_Decoracion_Buscar);
+        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 50);
+
+        Panel_Buscar.setBackground(new java.awt.Color(5, 23, 45));
+
+        Regresar_Buscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        Regresar_Buscar.setText("Regresar");
+        Regresar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Regresar_BuscarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_BuscarLayout = new javax.swing.GroupLayout(Panel_Buscar);
+        Panel_Buscar.setLayout(Panel_BuscarLayout);
+        Panel_BuscarLayout.setHorizontalGroup(
+            Panel_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_BuscarLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(Regresar_Buscar)
+                .addContainerGap(482, Short.MAX_VALUE))
+        );
+        Panel_BuscarLayout.setVerticalGroup(
+            Panel_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_BuscarLayout.createSequentialGroup()
+                .addContainerGap(298, Short.MAX_VALUE)
+                .addComponent(Regresar_Buscar)
+                .addGap(76, 76, 76))
+        );
+
+        Dialog_Buscar.getContentPane().add(Panel_Buscar);
+        Panel_Buscar.setBounds(0, 50, 600, 400);
+
+        Dialog_Listar.getContentPane().setLayout(null);
+
+        Panel_Decoracion_Listar.setBackground(new java.awt.Color(19, 73, 60));
+        Panel_Decoracion_Listar.setForeground(new java.awt.Color(51, 102, 0));
+
+        Titulo_Listar.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 28)); // NOI18N
+        Titulo_Listar.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo_Listar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo_Listar.setText("Listar Registros");
+
+        javax.swing.GroupLayout Panel_Decoracion_ListarLayout = new javax.swing.GroupLayout(Panel_Decoracion_Listar);
+        Panel_Decoracion_Listar.setLayout(Panel_Decoracion_ListarLayout);
+        Panel_Decoracion_ListarLayout.setHorizontalGroup(
+            Panel_Decoracion_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_ListarLayout.createSequentialGroup()
+                    .addGap(0, 218, Short.MAX_VALUE)
+                    .addComponent(Titulo_Listar)
+                    .addGap(0, 219, Short.MAX_VALUE)))
+        );
+        Panel_Decoracion_ListarLayout.setVerticalGroup(
+            Panel_Decoracion_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_ListarLayout.createSequentialGroup()
+                    .addGap(0, 9, Short.MAX_VALUE)
+                    .addComponent(Titulo_Listar)
+                    .addGap(0, 10, Short.MAX_VALUE)))
+        );
+
+        Dialog_Listar.getContentPane().add(Panel_Decoracion_Listar);
+        Panel_Decoracion_Listar.setBounds(0, 0, 600, 50);
+
+        Panel_Listar.setBackground(new java.awt.Color(5, 23, 45));
+
+        Regresar_Listar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        Regresar_Listar.setText("Regresar");
+        Regresar_Listar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Regresar_ListarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_ListarLayout = new javax.swing.GroupLayout(Panel_Listar);
+        Panel_Listar.setLayout(Panel_ListarLayout);
+        Panel_ListarLayout.setHorizontalGroup(
+            Panel_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_ListarLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(Regresar_Listar)
+                .addContainerGap(483, Short.MAX_VALUE))
+        );
+        Panel_ListarLayout.setVerticalGroup(
+            Panel_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ListarLayout.createSequentialGroup()
+                .addContainerGap(306, Short.MAX_VALUE)
+                .addComponent(Regresar_Listar)
+                .addGap(68, 68, 68))
+        );
+
+        Dialog_Listar.getContentPane().add(Panel_Listar);
+        Panel_Listar.setBounds(0, 50, 600, 400);
+
+        Dialog_Borrar.getContentPane().setLayout(null);
+
+        Panel_Decoracion_Borrar.setBackground(new java.awt.Color(19, 73, 60));
+        Panel_Decoracion_Borrar.setForeground(new java.awt.Color(51, 102, 0));
+
+        Titulo_Borrar.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 28)); // NOI18N
+        Titulo_Borrar.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo_Borrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo_Borrar.setText("Borrar Registros");
+
+        javax.swing.GroupLayout Panel_Decoracion_BorrarLayout = new javax.swing.GroupLayout(Panel_Decoracion_Borrar);
+        Panel_Decoracion_Borrar.setLayout(Panel_Decoracion_BorrarLayout);
+        Panel_Decoracion_BorrarLayout.setHorizontalGroup(
+            Panel_Decoracion_BorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_BorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_BorrarLayout.createSequentialGroup()
+                    .addGap(0, 212, Short.MAX_VALUE)
+                    .addComponent(Titulo_Borrar)
+                    .addGap(0, 213, Short.MAX_VALUE)))
+        );
+        Panel_Decoracion_BorrarLayout.setVerticalGroup(
+            Panel_Decoracion_BorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_BorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_BorrarLayout.createSequentialGroup()
+                    .addGap(0, 9, Short.MAX_VALUE)
+                    .addComponent(Titulo_Borrar)
+                    .addGap(0, 10, Short.MAX_VALUE)))
+        );
+
+        Dialog_Borrar.getContentPane().add(Panel_Decoracion_Borrar);
+        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 50);
+
+        Panel_Borrar.setBackground(new java.awt.Color(5, 23, 45));
+
+        Regresar_Borrar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        Regresar_Borrar.setText("Regresar");
+        Regresar_Borrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Regresar_BorrarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_BorrarLayout = new javax.swing.GroupLayout(Panel_Borrar);
+        Panel_Borrar.setLayout(Panel_BorrarLayout);
+        Panel_BorrarLayout.setHorizontalGroup(
+            Panel_BorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_BorrarLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(Regresar_Borrar)
+                .addContainerGap(481, Short.MAX_VALUE))
+        );
+        Panel_BorrarLayout.setVerticalGroup(
+            Panel_BorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_BorrarLayout.createSequentialGroup()
+                .addContainerGap(324, Short.MAX_VALUE)
+                .addComponent(Regresar_Borrar)
+                .addGap(50, 50, 50))
+        );
+
+        Dialog_Borrar.getContentPane().add(Panel_Borrar);
+        Panel_Borrar.setBounds(0, 50, 600, 400);
+
+        Dialog_Cruzar.getContentPane().setLayout(null);
+
+        Panel_Decoracion_Cruzar.setBackground(new java.awt.Color(19, 73, 60));
+        Panel_Decoracion_Cruzar.setForeground(new java.awt.Color(51, 102, 0));
+
+        Titulo_Cruzar.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 28)); // NOI18N
+        Titulo_Cruzar.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo_Cruzar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo_Cruzar.setText("Cruzar Archivos");
+
+        javax.swing.GroupLayout Panel_Decoracion_CruzarLayout = new javax.swing.GroupLayout(Panel_Decoracion_Cruzar);
+        Panel_Decoracion_Cruzar.setLayout(Panel_Decoracion_CruzarLayout);
+        Panel_Decoracion_CruzarLayout.setHorizontalGroup(
+            Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_CruzarLayout.createSequentialGroup()
+                    .addGap(0, 217, Short.MAX_VALUE)
+                    .addComponent(Titulo_Cruzar)
+                    .addGap(0, 217, Short.MAX_VALUE)))
+        );
+        Panel_Decoracion_CruzarLayout.setVerticalGroup(
+            Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_Decoracion_CruzarLayout.createSequentialGroup()
+                    .addGap(0, 9, Short.MAX_VALUE)
+                    .addComponent(Titulo_Cruzar)
+                    .addGap(0, 10, Short.MAX_VALUE)))
+        );
+
+        Dialog_Cruzar.getContentPane().add(Panel_Decoracion_Cruzar);
+        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 50);
+
+        Panel_Cruzar.setBackground(new java.awt.Color(5, 23, 45));
+
+        Regresar_Cruzar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        Regresar_Cruzar.setText("Regresar");
+        Regresar_Cruzar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Regresar_CruzarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_CruzarLayout = new javax.swing.GroupLayout(Panel_Cruzar);
+        Panel_Cruzar.setLayout(Panel_CruzarLayout);
+        Panel_CruzarLayout.setHorizontalGroup(
+            Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_CruzarLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(Regresar_Cruzar)
+                .addContainerGap(484, Short.MAX_VALUE))
+        );
+        Panel_CruzarLayout.setVerticalGroup(
+            Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_CruzarLayout.createSequentialGroup()
+                .addContainerGap(312, Short.MAX_VALUE)
+                .addComponent(Regresar_Cruzar)
+                .addGap(62, 62, 62))
+        );
+
+        Dialog_Cruzar.getContentPane().add(Panel_Cruzar);
+        Panel_Cruzar.setBounds(0, 50, 600, 400);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
@@ -542,6 +988,11 @@ public class Main extends javax.swing.JFrame {
         B_Registros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_RegistrosMouseClicked(evt);
+            }
+        });
+        B_Registros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_RegistrosActionPerformed(evt);
             }
         });
         getContentPane().add(B_Registros);
@@ -736,6 +1187,7 @@ public class Main extends javax.swing.JFrame {
         lb_Archivo_Titulo.setForeground(Color.white);
         lb_Archivo_Titulo.setSize(anchoTexto, y / 2);
         lb_Archivo_Titulo.setLocation((int) ((x / 2) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
+        
 
         //logito de al lado
         I_Campo_Decoracion.setSize(lb_Archivo_Titulo.getHeight() / 4, lb_Archivo_Titulo.getHeight() / 4);
@@ -792,10 +1244,14 @@ public class Main extends javax.swing.JFrame {
         if (OpenFileName.equals("")) {
             return;
         }
-        Campos = file.Abrir(OpenFileName);
-        if (Campos.equals("Hubo un error al leer campos")) {
-            JOptionPane.showMessageDialog(null, "Hubo un error no se pudo leer campos", "Notificación", JOptionPane.ERROR_MESSAGE);
-            Campos = "";
+        if (OpenFileName.equals("F")) {
+            JOptionPane.showMessageDialog(null, "Hubo un error esta abriendo un archivo no permitido", "Error", JOptionPane.ERROR_MESSAGE);
+            OpenFileName = "";
+            return;
+        }
+        boolean isOpen = file.Abrir(OpenFileName);
+        if (isOpen == false) {
+            JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
             return;
         }
         //Activando los botones
@@ -833,7 +1289,6 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         if (this.isVisible()) {
-            Campos = "";
             OpenFileName = "";
             B_Campos.setEnabled(false);
             B_Registros.setEnabled(false);
@@ -853,7 +1308,6 @@ public class Main extends javax.swing.JFrame {
                 "OK");
         if (option == JOptionPane.OK_OPTION) {
             OpenFileName = "";
-            Campos = "";
             file.getListaCampos().clear();
             //Desactivando JFrames
             JF_Campos.setVisible(false);
@@ -913,7 +1367,7 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
             }
-            IsSaved = file.Guardar(OpenFileName);
+            IsSaved = file.Guardar(OpenFileName, true);
         }
         if (IsSaved) {
             JOptionPane.showMessageDialog(null, "El archivo se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -1080,30 +1534,17 @@ public class Main extends javax.swing.JFrame {
                     if (nombreNuevo == null) {
                         return;
                     }
-                    //Codigo para Modificar
-                    boolean modificado = false;
-                    for (int i = 0; i < file.getListaCampos().size(); i++) {
-                        file.getListaCampos().get(index).setNombre(nombreNuevo);
-                        modificado = true;
-                    }
-
-                    if (modificado == true) {
-                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error! El nombre del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                    //Codigo para Modificar
                     if (!nombreNuevo.matches("^[^,\\\\{\\\\} \\[\\]\\|]+$")) {
                         JOptionPane.showMessageDialog(rootPane, "En nombre por favor no ingresar espacios, llaves, corchetes ni comas", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     for (int i = 0; i < file.getListaCampos().size(); i++) {
-                        if (file.getListaCampos().get(i).getNombre().toLowerCase().equals(nombreNuevo.toLowerCase())) {
+                        if (file.getListaCampos().get(i).getNombre().equals(nombreNuevo)) {
                             JOptionPane.showMessageDialog(rootPane, "El nombre de ese campo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
                     }
+                    //Codigo para Modificar
                     file.getListaCampos().get(index).setNombre(nombreNuevo);
                     JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 
@@ -1136,20 +1577,9 @@ public class Main extends javax.swing.JFrame {
                             tipo = "Unknown";
                     }
 
-                    boolean modificado = false;
-                    for (int i = 0; i < file.getListaCampos().size(); i++) {
-                        file.getListaCampos().get(index).setTipo(tipo);
-                        modificado = true;
-                    }
-
                     file.getListaCampos().get(index).setTipo(tipo);
-                    modificado = true;
+                    JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 
-                    if (modificado == true) {
-                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error! El tipo del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-                    }
                 }
 
                 if (modificacion.equals("Longitud") || Integer.parseInt(modificacion) == 3) {
@@ -1163,20 +1593,10 @@ public class Main extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    boolean modificado = false;
-                    for (int i = 0; i < file.getListaCampos().size(); i++) {
-                        file.getListaCampos().get(index).setTamano(longitudNueva);
-                        modificado = true;
-                    }
 
                     file.getListaCampos().get(index).setTamano(longitudNueva);
-                    modificado = true;
+                    JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
 
-                    if (modificado == true) {
-                        JOptionPane.showMessageDialog(null, "El campo se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error! La longitud del campo no se pudo modificar", "Notificación", JOptionPane.ERROR_MESSAGE);
-                    }
                 }
 
                 //listar
@@ -1247,24 +1667,105 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_B_RegistrosMouseClicked
 
-    private void B_CrearRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CrearRegistroMouseClicked
+    private void B_IntroducirRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IntroducirRegistroMouseClicked
         // TODO add your handling code here:
+<<<<<<< HEAD
         System.out.println("XD");
         NodoArbol A = new NodoArbol(5);
        //Nodo
         //A.Insertar(A);
     }//GEN-LAST:event_B_CrearRegistroMouseClicked
+=======
+        JF_Registros.setVisible(false);
+        Dialog_Introducir.setTitle("Standard File Manager");
+        Dialog_Introducir.pack();
+        Dialog_Introducir.setVisible(true);
+        Dialog_Introducir.setSize(600, 450);
+        Dialog_Introducir.setResizable(false);
+        Dialog_Introducir.setLocationRelativeTo(this);
+        
+        Font f;
+        int x = Dialog_Introducir.getWidth();
+        int y = Dialog_Introducir.getHeight();
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+        Regresar_Introducir.setSize(90, 25);
+        Regresar_Introducir.setFont(f);
+        
+    }//GEN-LAST:event_B_IntroducirRegistroMouseClicked
+>>>>>>> 47eb6ff46bd193e89dd69e22925555cf0cbe884c
 
     private void B_ListarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarRegistroMouseClicked
         // TODO add your handling code here:
+        JF_Registros.setVisible(false);
+        Dialog_Listar.setTitle("Standard File Manager");
+        Dialog_Listar.pack();
+        Dialog_Listar.setVisible(true);
+        Dialog_Listar.setSize(600, 450);
+        Dialog_Listar.setResizable(false);
+        Dialog_Listar.setLocationRelativeTo(this);
+        
+        Font f;
+        int x = Dialog_Listar.getWidth();
+        int y = Dialog_Listar.getHeight();
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+        Regresar_Listar.setSize(90, 25);
+        Regresar_Listar.setFont(f);
     }//GEN-LAST:event_B_ListarRegistroMouseClicked
 
     private void B_ModificarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarRegistroMouseClicked
         // TODO add your handling code here:
+        JF_Registros.setVisible(false);
+        Dialog_Modificar.setTitle("Standard File Manager");
+        Dialog_Modificar.pack();
+        Dialog_Modificar.setVisible(true);
+        Dialog_Modificar.setSize(600, 450);
+        Dialog_Modificar.setResizable(false);
+        Dialog_Modificar.setLocationRelativeTo(this);
+        
+        Font f;
+        int x = Dialog_Modificar.getWidth();
+        int y = Dialog_Modificar.getHeight();
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+        Regresar_Modificar.setSize(90, 25);
+        Regresar_Modificar.setFont(f);
     }//GEN-LAST:event_B_ModificarRegistroMouseClicked
 
     private void B_BorrarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarRegistroMouseClicked
         // TODO add your handling code here:
+        JF_Registros.setVisible(false);
+        Dialog_Borrar.setTitle("Standard File Manager");
+        Dialog_Borrar.pack();
+        Dialog_Borrar.setVisible(true);
+        Dialog_Borrar.setSize(600, 450);
+        Dialog_Borrar.setResizable(false);
+        Dialog_Borrar.setLocationRelativeTo(this);
+        
+        Font f;
+        int x = Dialog_Borrar.getWidth();
+        int y = Dialog_Borrar.getHeight();
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+        Regresar_Borrar.setSize(90, 25);
+        Regresar_Borrar.setFont(f);
     }//GEN-LAST:event_B_BorrarRegistroMouseClicked
 
     private void JF_RegistrosComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_RegistrosComponentResized
@@ -1286,10 +1787,13 @@ public class Main extends javax.swing.JFrame {
 //                JF_Archivos.getComponent(i).setFont(f);
 //            }
 //        }
-        B_CrearRegistro.setFont(f);
+        B_IntroducirRegistro.setFont(f);
         B_ModificarRegistro.setFont(f);
         B_ListarRegistro.setFont(f);
         B_BorrarRegistro.setFont(f);
+        B_CruzarRegistro.setFont(f);
+        B_BuscarRegistro.setFont(f);
+        //B_Regresar.setFont(f);
 
         I_Fondo_Registro.setSize(x, y);
 
@@ -1298,15 +1802,21 @@ public class Main extends javax.swing.JFrame {
         Tabla_Registro.setLocation((int) ((x / 2) - (Tabla_Registro.getWidth() / 2)), (int) ((5 * y / 12) - (Tabla_Registro.getHeight() / 2)));
 
         //Botones Campo
-        B_CrearRegistro.setSize(3 * x / 16, 2 * y / 18);
-        B_ModificarRegistro.setSize(3 * x / 16, 2 * y / 18);
-        B_BorrarRegistro.setSize(3 * x / 16, 2 * y / 18);
-        B_ListarRegistro.setSize(3 * x / 16, 2 * y / 18);
+        B_IntroducirRegistro.setSize(3 * x / 17, 2 * y / 19);
+        B_ModificarRegistro.setSize(3 * x / 17, 2 * y / 19);
+        B_BorrarRegistro.setSize(3 * x / 17, 2 * y / 19);
+        B_ListarRegistro.setSize(3 * x / 17, 2 * y / 19);
+        B_CruzarRegistro.setSize(3 * x / 17, 2 * y / 19);
+        B_BuscarRegistro.setSize(3 * x / 17, 2 * y / 19);
+        //B_Regresar.setSize(3 * x / 15, 2 * y /16);
 
-        B_CrearRegistro.setLocation((int) ((1 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
-        B_ModificarRegistro.setLocation((int) ((3 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
-        B_BorrarRegistro.setLocation((int) ((5 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
-        B_ListarRegistro.setLocation((int) ((7 * x / 8) - (B_CrearRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_CrearRegistro.getHeight() / 2)));
+        B_IntroducirRegistro.setLocation((int) ((1 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_ModificarRegistro.setLocation((int) ((2.16 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_BuscarRegistro.setLocation((int) ((3.32 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_ListarRegistro.setLocation((int) ((4.48 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_CruzarRegistro.setLocation((int) ((5.64 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_BorrarRegistro.setLocation((int) ((6.8 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        //B_Regresar.setLocation((int) ((1.5 * x / 8) - (lb_Registro_Titulo.getWidth())), (int) ((y / 10) - (lb_Registro_Titulo.getHeight() / 2)));
 
         //titulo
         if (x > y) {
@@ -1315,17 +1825,110 @@ public class Main extends javax.swing.JFrame {
         } else {
             f = new Font("Dialog", 1, (int) x / 16);
         }
-        lb_Archivo_Titulo.setFont(f);
-        FontMetrics fontMetrics = lb_Archivo_Titulo.getFontMetrics(lb_Archivo_Titulo.getFont());
-        int anchoTexto = fontMetrics.stringWidth(lb_Archivo_Titulo.getText());
+        
+        lb_Registro_Titulo.setFont(f);
+        FontMetrics fontMetrics = lb_Registro_Titulo.getFontMetrics(lb_Registro_Titulo.getFont());
+        int anchoTexto = fontMetrics.stringWidth(lb_Registro_Titulo.getText());
         lb_Registro_Titulo.setForeground(Color.white);
         lb_Registro_Titulo.setSize(anchoTexto, y / 2);
         lb_Registro_Titulo.setLocation((int) ((x / 2) - (lb_Registro_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Registro_Titulo.getHeight() / 2)));
+        lb_Registro_Titulo.setText(file.getNombre());
 
         //logito de al lado
         I_Registro_Decoracion.setSize(lb_Registro_Titulo.getHeight() / 4, lb_Registro_Titulo.getHeight() / 4);
         I_Registro_Decoracion.setLocation((int) ((x / 2) - (I_Registro_Decoracion.getWidth() / 2)) + lb_Registro_Titulo.getWidth(), (int) ((y / 12) - (I_Registro_Decoracion.getHeight() / 2)));
     }//GEN-LAST:event_JF_RegistrosComponentResized
+
+    private void B_CruzarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CruzarRegistroMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(false);
+        Dialog_Cruzar.setTitle("Standard File Manager");
+        Dialog_Cruzar.pack();
+        Dialog_Cruzar.setVisible(true);
+        Dialog_Cruzar.setSize(600, 450);
+        Dialog_Cruzar.setResizable(false);
+        Dialog_Cruzar.setLocationRelativeTo(this);
+        
+        Font f;
+        int x = Dialog_Cruzar.getWidth();
+        int y = Dialog_Cruzar.getHeight();
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+        Regresar_Cruzar.setSize(90, 25);
+        Regresar_Cruzar.setFont(f);
+    }//GEN-LAST:event_B_CruzarRegistroMouseClicked
+
+    private void B_BuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BuscarRegistroMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(false);
+        Dialog_Buscar.setTitle("Standard File Manager");
+        Dialog_Buscar.pack();
+        Dialog_Buscar.setVisible(true);
+        Dialog_Buscar.setSize(600, 450);
+        Dialog_Buscar.setResizable(false);
+        Dialog_Buscar.setLocationRelativeTo(this);
+        
+        Font f;
+        int x = Dialog_Buscar.getWidth();
+        int y = Dialog_Buscar.getHeight();
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+        Regresar_Buscar.setSize(90, 25);
+        Regresar_Buscar.setFont(f);
+    }//GEN-LAST:event_B_BuscarRegistroMouseClicked
+
+    private void B_ListarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_ListarRegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_ListarRegistroActionPerformed
+
+    private void B_RegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_RegistrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_RegistrosActionPerformed
+
+    private void Regresar_CruzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_CruzarMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(true);
+        Dialog_Cruzar.setVisible(false);
+        
+    }//GEN-LAST:event_Regresar_CruzarMouseClicked
+
+    private void Regresar_BorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_BorrarMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(true);
+        Dialog_Borrar.setVisible(false);
+    }//GEN-LAST:event_Regresar_BorrarMouseClicked
+
+    private void Regresar_ListarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_ListarMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(true);
+        Dialog_Listar.setVisible(false);
+    }//GEN-LAST:event_Regresar_ListarMouseClicked
+
+    private void Regresar_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_BuscarMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(true);
+        Dialog_Buscar.setVisible(false);
+    }//GEN-LAST:event_Regresar_BuscarMouseClicked
+
+    private void Regresar_ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_ModificarMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(true);
+        Dialog_Modificar.setVisible(false);
+    }//GEN-LAST:event_Regresar_ModificarMouseClicked
+
+    private void Regresar_IntroducirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_IntroducirMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(true);
+        Dialog_Introducir.setVisible(false);
+    }//GEN-LAST:event_Regresar_IntroducirMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -1362,12 +1965,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem B_Archivo_Salir;
     private javax.swing.JButton B_BorrarCampo;
     private javax.swing.JButton B_BorrarRegistro;
+    private javax.swing.JButton B_BuscarRegistro;
     private javax.swing.JButton B_Campos;
     private javax.swing.JButton B_CrearCampo;
-    private javax.swing.JButton B_CrearRegistro;
+    private javax.swing.JButton B_CruzarRegistro;
     private javax.swing.JButton B_Estandarizacion;
     private javax.swing.JButton B_GuardadCrearCampo;
     private javax.swing.JButton B_Indices;
+    private javax.swing.JButton B_IntroducirRegistro;
     private javax.swing.JButton B_ListarCampo;
     private javax.swing.JButton B_ListarRegistro;
     private javax.swing.JButton B_ModificarCampo;
@@ -1378,6 +1983,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable Datos_Campos;
     private javax.swing.JTable Datos_Registro;
     private javax.swing.JDialog Dialog_Abrir;
+    private javax.swing.JDialog Dialog_Borrar;
+    private javax.swing.JDialog Dialog_Buscar;
+    private javax.swing.JDialog Dialog_Cruzar;
+    private javax.swing.JDialog Dialog_Introducir;
+    private javax.swing.JDialog Dialog_Listar;
+    private javax.swing.JDialog Dialog_Modificar;
     private javax.swing.JPanel I_Campo_Decoracion;
     private javax.swing.JPanel I_Fondo_Archivos;
     private javax.swing.JPanel I_Fondo_Main;
@@ -1394,10 +2005,34 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ListOfFiles;
     private javax.swing.JPanel P_CrearCapo_Decoracion;
     private javax.swing.JPanel PanelCrearCampo;
+    private javax.swing.JPanel Panel_Borrar;
+    private javax.swing.JPanel Panel_Buscar;
+    private javax.swing.JPanel Panel_Cruzar;
+    private javax.swing.JPanel Panel_Decoracion_Borrar;
+    private javax.swing.JPanel Panel_Decoracion_Buscar;
+    private javax.swing.JPanel Panel_Decoracion_Cruzar;
+    private javax.swing.JPanel Panel_Decoracion_Introducir;
+    private javax.swing.JPanel Panel_Decoracion_Listar;
+    private javax.swing.JPanel Panel_Decoracion_Modificar;
+    private javax.swing.JPanel Panel_Introducir;
+    private javax.swing.JPanel Panel_Listar;
+    private javax.swing.JPanel Panel_Modificar;
     private javax.swing.JFrame Portadita;
+    private javax.swing.JButton Regresar_Borrar;
+    private javax.swing.JButton Regresar_Buscar;
+    private javax.swing.JButton Regresar_Cruzar;
+    private javax.swing.JButton Regresar_Introducir;
+    private javax.swing.JButton Regresar_Listar;
+    private javax.swing.JButton Regresar_Modificar;
     private javax.swing.JScrollPane Tabla_Camps;
     private javax.swing.JScrollPane Tabla_Registro;
     private javax.swing.JLabel TituloCrear;
+    private javax.swing.JLabel Titulo_Borrar;
+    private javax.swing.JLabel Titulo_Buscar;
+    private javax.swing.JLabel Titulo_Cruzar;
+    private javax.swing.JLabel Titulo_Introducir;
+    private javax.swing.JLabel Titulo_Listar;
+    private javax.swing.JLabel Titulo_Modificar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lb_Archivo_Titulo;
@@ -1410,10 +2045,10 @@ public class Main extends javax.swing.JFrame {
 
     private String OpenFileName = "";
     private Archivos file = new Archivos();
-    private String Campos = "";
     //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     public Campo campo;
+    
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
     //Campo: Nombre,Tipo,Tamano
     //Registro: Lista de Campus

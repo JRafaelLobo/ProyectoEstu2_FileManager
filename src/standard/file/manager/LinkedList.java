@@ -9,10 +9,14 @@ public class LinkedList {
     private Nodo cabeza;
     private Nodo last;
 
-    public LinkedList() {
-        this.cabeza = this.last = new Nodo(-1);
+    public LinkedList(Object initialSlot) {
+        this.cabeza = this.last = new Nodo(initialSlot);
     }
-
+    
+    public LinkedList() {
+        this.cabeza = this.last = new Nodo(null);
+    }
+    
     public Nodo getCabeza() {
         return this.cabeza;
     }
@@ -20,14 +24,13 @@ public class LinkedList {
     public Nodo getLast() {
         return this.last;
     }
-    
 
-    public void addForConstruction(int newSlot) {
-        if (newSlot < 0) {
+    public void constructionAvai(Object newSlot) {
+        if (newSlot.equals(-1)) {
             return;
         }
-        if (this.cabeza.getSlot() == -1) {
-            this.add(newSlot);
+        if (this.cabeza.getSlot().equals(-1)) {
+            this.addNewCabezaAvai(newSlot);
             return;
         }
         Nodo newNodo = new Nodo(newSlot);
@@ -40,8 +43,8 @@ public class LinkedList {
 
     }
 
-    public void add(int newSlot) {
-        if (newSlot < 0) {
+    public void addNewCabezaAvai(Object newSlot) {
+        if (newSlot.equals(-1)) {
             return;
         }
         Nodo newNodo = new Nodo(newSlot);
@@ -68,17 +71,17 @@ public class LinkedList {
         System.out.println();
     }
 
-    public void remove(int slotDelete) {
-        if (this.cabeza.getSlot() == -1) {
-            System.out.println("La lista esta vacia");
+    public void removeAvai(Object slotDelete) {
+        if (this.cabeza.getSlot().equals(-1)) {
+            System.err.println("La lista esta vacia");
             return;
         }
         Nodo temp = this.cabeza;
-        while (temp != null && temp.getSlot() != slotDelete) {
+        while (temp != null && !temp.getSlot().equals(slotDelete)) {
             temp = temp.getSiguiente();
         }
         if (temp == null) {
-            System.out.println("La lista esta vacia");
+            System.err.println("La lista esta vacia");
             return;
         }
 
@@ -87,8 +90,9 @@ public class LinkedList {
         } else {
             temp.getAnterior().setSiguiente(temp.getSiguiente());
         }
-
-        temp.getSiguiente().setAnterior(temp.getAnterior());
+        if (temp.getSiguiente() != null) {
+            temp.getSiguiente().setAnterior(temp.getAnterior());
+        }
 
     }
 }
