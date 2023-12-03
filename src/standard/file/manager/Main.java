@@ -1669,13 +1669,6 @@ public class Main extends javax.swing.JFrame {
 
     private void B_IntroducirRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IntroducirRegistroMouseClicked
         // TODO add your handling code here:
-<<<<<<< HEAD
-        System.out.println("XD");
-        NodoArbol A = new NodoArbol(5);
-       //Nodo
-        //A.Insertar(A);
-    }//GEN-LAST:event_B_CrearRegistroMouseClicked
-=======
         JF_Registros.setVisible(false);
         Dialog_Introducir.setTitle("Standard File Manager");
         Dialog_Introducir.pack();
@@ -1697,7 +1690,6 @@ public class Main extends javax.swing.JFrame {
         Regresar_Introducir.setFont(f);
         
     }//GEN-LAST:event_B_IntroducirRegistroMouseClicked
->>>>>>> 47eb6ff46bd193e89dd69e22925555cf0cbe884c
 
     private void B_ListarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarRegistroMouseClicked
         // TODO add your handling code here:
