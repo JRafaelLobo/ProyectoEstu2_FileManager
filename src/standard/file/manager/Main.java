@@ -21,6 +21,7 @@ import javax.swing.JDialog;
 import javax.swing.UIDefaults;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class Main extends javax.swing.JFrame {
 
@@ -1249,6 +1250,9 @@ public class Main extends javax.swing.JFrame {
     private void B_CrearRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CrearRegistroMouseClicked
         // TODO add your handling code here:
         System.out.println("XD");
+        NodoArbol A = new NodoArbol(5);
+       //Nodo
+        //A.Insertar(A);
     }//GEN-LAST:event_B_CrearRegistroMouseClicked
 
     private void B_ListarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarRegistroMouseClicked
@@ -1265,6 +1269,7 @@ public class Main extends javax.swing.JFrame {
 
     private void JF_RegistrosComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_RegistrosComponentResized
 
+        DefaultMutableTreeNode J;
         int y_decorated = JF_Registros.getInsets().top + JF_Registros.getInsets().bottom;
         int y_JFMenuBar = JF_Registros.getJMenuBar().getHeight();
         int x = JF_Registros.getWidth() - JF_Registros.getInsets().right - JF_Registros.getInsets().left;
