@@ -1493,6 +1493,7 @@ public class Main extends javax.swing.JFrame {
             B_Indices.setEnabled(false);
             B_Estandarizacion.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Se ha cerrado el archivo", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            file.getAvailist().clearAvai();
             return;
         }
 
@@ -1518,6 +1519,8 @@ public class Main extends javax.swing.JFrame {
             B_Registros.setEnabled(false);
             B_Indices.setEnabled(false);
             B_Estandarizacion.setEnabled(false);
+            
+            file.getAvailist().clearAvai();
         }
 
     }//GEN-LAST:event_B_Archivo_CerrarActionPerformed

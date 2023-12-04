@@ -19,7 +19,9 @@ public class Archivos {
     private ArrayList<Campo> listaCampos = new ArrayList();
     private ArrayList<Registro> registros = new ArrayList();
     private LinkedList availist = new LinkedList(-1);
-    
+    private int longitudTotalRegistro = 0;
+    private int longitudTotalCampos = 0;
+
     public String LecturaPath() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar archivo de texto");
@@ -63,9 +65,20 @@ public class Archivos {
             }
 
             escritor.write(temp);
-            if(!temp.equals("")){
+            if (!temp.equals("")) {
+                this.longitudTotalCampos = temp.length();
                 escritor.newLine();
-                escritor.write("-1");
+                this.longitudTotalRegistro = 0;
+                for (int i = 0; i < this.listaCampos.size(); i++) {
+                    this.longitudTotalRegistro += listaCampos.get(i).getTamano() + 1;
+                }
+                String cabeza = "*-1";
+                for (int i = cabeza.length(); i < this.longitudTotalRegistro; i++) {
+                    cabeza += " ";
+                }
+
+                escritor.write(cabeza);
+                escritor.newLine();
             }
             escritor.close();
             return true;
@@ -76,10 +89,10 @@ public class Archivos {
     }
 
     public boolean Guardar(String rutaArchivo, boolean isGuardarCampos) {
-        if (isGuardarCampos){
+        if (isGuardarCampos) {
             return this.GuardarCampos(rutaArchivo);
         }
-        
+
         return false;
     }
 
@@ -87,8 +100,9 @@ public class Archivos {
         try {
             // Leer la primera línea del archivo
             BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
-            String primeraLinea = lector.readLine();
-            lector.close();
+            String primeraLinea = lector.readLine();                   
+            lector.close();            
+         
             if (primeraLinea == null) {
                 return true;
             }
@@ -102,10 +116,13 @@ public class Archivos {
             String[] divicion = primeraLinea.split("\\|");
 
             listaCampos.clear();
+            this.longitudTotalRegistro = 0;
             for (int i = 0; i < divicion.length; i++) {
                 String[] arregloCampo = divicion[i].split(",");
                 listaCampos.add(new Campo(arregloCampo[0], arregloCampo[1], Integer.valueOf(arregloCampo[2]), Boolean.parseBoolean(arregloCampo[3])));
+                this.longitudTotalRegistro += Integer.valueOf(arregloCampo[2]) + 1;
             }
+            this.longitudTotalCampos = primeraLinea.length();
             return true;
         } catch (IOException e) {
             System.err.println("Hubo un error al cargar los campos: " + e.getMessage());
@@ -113,9 +130,43 @@ public class Archivos {
         }
     }
 
+    public boolean ConstruirAvailist(String rutaArchivo, boolean isReadCabeza, int pos) {
+        try (RandomAccessFile file = new RandomAccessFile(rutaArchivo, "rw")) {
+            byte[] buffer;
+            int bytesRead;
+            if (isReadCabeza) {
+                file.seek(this.longitudTotalCampos + 2);
+                buffer = new byte[longitudTotalRegistro+2];
+                bytesRead = file.read(buffer);
+            }else{
+                file.seek((this.longitudTotalCampos + 2 +this.longitudTotalRegistro+4)+((this.longitudTotalRegistro)*pos));
+                buffer = new byte[this.longitudTotalRegistro];
+                bytesRead = file.read(buffer);
+            }
+
+            if (bytesRead == -1) {
+                return isReadCabeza || false;
+            }
+            
+            String contenido = new String(buffer, 0, bytesRead);
+            int slot = Integer.parseInt(contenido.trim().replace("*", ""));
+            if(slot == -1){
+                return true;
+            }
+            this.availist.constructionAvai(slot);
+            this.ConstruirAvailist(rutaArchivo, false, slot);
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al construir la availist: "+e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
     public boolean Abrir(String rutaArchivo) {
         boolean campoIsOpen = this.AbrirCampos(rutaArchivo);
-        return campoIsOpen;
+        boolean isContructionAvai = this.ConstruirAvailist(rutaArchivo, true, -1);
+        this.availist.printList();
+        return campoIsOpen && isContructionAvai;
     }
 
     public char Nuevo() {
