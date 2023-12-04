@@ -1434,26 +1434,26 @@ public class Main extends javax.swing.JFrame {
 
     private void B_Archivo_AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_AbrirActionPerformed
         // TODO add your handling code here:
-        if (!this.isVisible() || !this.OpenFileName.equals("")) {
+        if (!this.isVisible() || !file.getRutaArchivo().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor antes de abrir un archivo cierre el actual", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        OpenFileName = file.LecturaPath();
-        if (OpenFileName.equals("")) {
+        file.LecturaPath();
+        if (file.getRutaArchivo().equals("")) {
             return;
         }
-        if (OpenFileName.equals("F")) {
+        if (file.getRutaArchivo().equals("F")) {
             JOptionPane.showMessageDialog(null, "Hubo un error esta abriendo un archivo no permitido", "Error", JOptionPane.ERROR_MESSAGE);
-            OpenFileName = "";
+            file.setRutaArchivo("");
             return;
         }
-        boolean isOpen = file.Abrir(OpenFileName);
+        boolean isOpen = file.Abrir();
         if (isOpen == false) {
             JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
             return;
         }
         //Activando los botones
-        B_Campos.setEnabled(true);
+        B_Campos.setEnabled(file.canBeEnableCampos());
         B_Registros.setEnabled(true);
         B_Indices.setEnabled(true);
         B_Estandarizacion.setEnabled(true);
@@ -1482,18 +1482,18 @@ public class Main extends javax.swing.JFrame {
 
     private void B_Archivo_CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_CerrarActionPerformed
         // TODO add your handling code here:
-        if (OpenFileName.equals("")) {
+        if (file.getRutaArchivo().equals("")) {
             JOptionPane.showMessageDialog(null, "No hay ningun archivo abierto para cerrar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (this.isVisible()) {
-            OpenFileName = "";
+            file.setRutaArchivo("");
             B_Campos.setEnabled(false);
             B_Registros.setEnabled(false);
             B_Indices.setEnabled(false);
             B_Estandarizacion.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Se ha cerrado el archivo", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-            file.getAvailist().clearAvai();
+            file.clear();
             return;
         }
 
@@ -1506,8 +1506,7 @@ public class Main extends javax.swing.JFrame {
                 new Object[]{"OK", "Cancel"},
                 "OK");
         if (option == JOptionPane.OK_OPTION) {
-            OpenFileName = "";
-            file.getListaCampos().clear();
+            file.setRutaArchivo("");
             //Desactivando JFrames
             JF_Campos.setVisible(false);
             JF_CrearCampo.setVisible(false);
@@ -1519,15 +1518,14 @@ public class Main extends javax.swing.JFrame {
             B_Registros.setEnabled(false);
             B_Indices.setEnabled(false);
             B_Estandarizacion.setEnabled(false);
-            
-            file.getAvailist().clearAvai();
+            file.clear();
         }
 
     }//GEN-LAST:event_B_Archivo_CerrarActionPerformed
 
     private void B_Archivo_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_GuardarActionPerformed
         // TODO add your handling code here:
-        if (OpenFileName.equals("")) {
+        if (file.getRutaArchivo().equals("")) {
             JOptionPane.showMessageDialog(null, "No hay ningun archivo abierto para guardar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -1568,7 +1566,7 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
             }
-            IsSaved = file.Guardar(OpenFileName, true);
+            IsSaved = file.Guardar( true);
         }
         if (IsSaved) {
             JOptionPane.showMessageDialog(null, "El archivo se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -2047,7 +2045,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_CruzarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CruzarRegistroMouseClicked
         // TODO add your handling code here:
-        ArchivoCruzado = cruzado.LecturaPath();
+        //ArchivoCruzado = cruzado.LecturaPath();
         
         JF_Registros.setVisible(false);
         Dialog_Cruzar.setTitle("Standard File Manager");
@@ -2290,7 +2288,6 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 //variables personales
 
-    private String OpenFileName = "";
     private String ArchivoCruzado = "";
     private Archivos file = new Archivos();
     private Archivos cruzado = new Archivos();

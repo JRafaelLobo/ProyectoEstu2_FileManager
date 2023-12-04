@@ -18,11 +18,13 @@ public class Archivos {
     private String nombre;
     private ArrayList<Campo> listaCampos = new ArrayList();
     private ArrayList<Registro> registros = new ArrayList();
-    private LinkedList availist = new LinkedList(-1);
+    private final LinkedList availist = new LinkedList(-1);
     private int longitudTotalRegistro = 0;
     private int longitudTotalCampos = 0;
+    private int longitudTotalDeMetadata = 0;
+    private String rutaArchivo = "";
 
-    public String LecturaPath() {
+    public void LecturaPath() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar archivo de texto");
 
@@ -37,21 +39,70 @@ public class Archivos {
             // Verificar si el archivo seleccionado tiene la extensión .txt
             if (selectedFile.getName().toLowerCase().endsWith(".txt")) {
                 nombre = fileChooser.getName(selectedFile);
-                return selectedFile.getAbsolutePath();
+                this.rutaArchivo = selectedFile.getAbsolutePath();
             } else {
                 System.out.println("Selecciona un archivo con extensión .txt");
                 // Puedes mostrar un mensaje al usuario indicando que seleccione un archivo .txt
-                return "F";
+                this.rutaArchivo = "F";
             }
         } else {
-            return "";
+            this.rutaArchivo = "";
         }
     }
+    
+    private boolean ReEscribirCabeza(){
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+           file.seek(this.longitudTotalCampos+4);
+           String newCabeza = "*";
+           newCabeza += String.valueOf(this.availist.getCabeza().getSlot());
+           newCabeza = String.format("%-" + this.longitudTotalRegistro + "s", newCabeza);
+           file.writeBytes(newCabeza);
+           
+           if(this.availist.getCabeza().getSiguiente() == null) return true;
+           
+           file.seek((this.longitudTotalDeMetadata)+((this.longitudTotalRegistro)*(int)this.availist.getCabeza().getSlot()));
+           String newSlot = "*";
+           newSlot += String.valueOf(this.availist.getCabeza().getSiguiente().getSlot());
+           newSlot = String.format("%-" + this.longitudTotalRegistro + "s", newSlot);
+           file.writeBytes(newSlot);
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al reescribir la cabeza de la metadata: "+e.getMessage());
+            return false;
+        } 
+        return true;
+    }
+    
+    public boolean insertarRegistro(String Registro){
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+           if(Registro.length() > this.longitudTotalRegistro) return false;
+           
+           if(Registro.length() < this.longitudTotalRegistro){
+               Registro = String.format("%-" + longitudTotalRegistro + "s", Registro);
+           }
+           
+           if(this.availist.getCabeza().getSlot().equals(-1)){
+               file.seek(file.length());
+           }else{
+               file.seek((this.longitudTotalDeMetadata)+((this.longitudTotalRegistro)*(int)this.availist.getCabeza().getSlot()));
+           }
+           
+           file.writeBytes(Registro);
+           if(!this.availist.getCabeza().getSlot().equals(-1)){
+               this.availist.removeAvai(this.availist.getCabeza().getSlot());
+               return this.ReEscribirCabeza();
+           }
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al insertar registros: "+e.getMessage());
+            return false;
+        } 
+        
+        return true;
+    }
 
-    private boolean GuardarCampos(String rutaArchivo) {
+    private boolean GuardarCampos() {
         try {
             // Leer la primera línea del archivo
-            BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(this.rutaArchivo));
             String temp = "";
             if (!listaCampos.isEmpty()) {
                 temp += "{";
@@ -88,18 +139,18 @@ public class Archivos {
         }
     }
 
-    public boolean Guardar(String rutaArchivo, boolean isGuardarCampos) {
+    public boolean Guardar( boolean isGuardarCampos) {
         if (isGuardarCampos) {
-            return this.GuardarCampos(rutaArchivo);
+            return this.GuardarCampos();
         }
 
         return false;
     }
 
-    private boolean AbrirCampos(String rutaArchivo) {
+    private boolean AbrirCampos() {
         try {
             // Leer la primera línea del archivo
-            BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
+            BufferedReader lector = new BufferedReader(new FileReader(this.rutaArchivo));
             String primeraLinea = lector.readLine();                   
             lector.close();            
          
@@ -130,8 +181,8 @@ public class Archivos {
         }
     }
 
-    public boolean ConstruirAvailist(String rutaArchivo, boolean isReadCabeza, int pos) {
-        try (RandomAccessFile file = new RandomAccessFile(rutaArchivo, "rw")) {
+    private boolean ConstruirAvailist(boolean isReadCabeza, int pos) {
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
             byte[] buffer;
             int bytesRead;
             if (isReadCabeza) {
@@ -139,7 +190,7 @@ public class Archivos {
                 buffer = new byte[longitudTotalRegistro+2];
                 bytesRead = file.read(buffer);
             }else{
-                file.seek((this.longitudTotalCampos + 2 +this.longitudTotalRegistro+4)+((this.longitudTotalRegistro)*pos));
+                file.seek((this.longitudTotalDeMetadata)+((this.longitudTotalRegistro)*pos));
                 buffer = new byte[this.longitudTotalRegistro];
                 bytesRead = file.read(buffer);
             }
@@ -154,7 +205,7 @@ public class Archivos {
                 return true;
             }
             this.availist.constructionAvai(slot);
-            this.ConstruirAvailist(rutaArchivo, false, slot);
+            this.ConstruirAvailist(false, slot);
         } catch (IOException e) {
             System.err.println("Sucedio un error al construir la availist: "+e.getMessage());
             return false;
@@ -162,10 +213,11 @@ public class Archivos {
         return true;
     }
 
-    public boolean Abrir(String rutaArchivo) {
-        boolean campoIsOpen = this.AbrirCampos(rutaArchivo);
-        boolean isContructionAvai = this.ConstruirAvailist(rutaArchivo, true, -1);
-        this.availist.printList();
+    public boolean Abrir() {
+        boolean campoIsOpen = this.AbrirCampos();
+        this.longitudTotalDeMetadata = this.longitudTotalCampos + 2 +this.longitudTotalRegistro+4;
+        boolean isContructionAvai = this.ConstruirAvailist(true, -1);
+        //insertarRegistro("1234567890123|1234567890123456789012345678901234|1234567890123456789012345678901234567890123|123456789012|");
         return campoIsOpen && isContructionAvai;
     }
 
@@ -229,5 +281,30 @@ public class Archivos {
 
     public LinkedList getAvailist() {
         return this.availist;
+    }
+    
+    public void clear(){
+        this.listaCampos.clear();
+        this.availist.clearAvai();
+        this.longitudTotalRegistro = 0;
+        this.longitudTotalCampos = 0;
+        this.longitudTotalDeMetadata = 0;
+    }
+    
+    public boolean canBeEnableCampos (){
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+           return file.length() == 0 || file.length() == longitudTotalDeMetadata;
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al reescribir la cabeza de la metadata: "+e.getMessage());
+            return false;
+        } 
+    }
+    
+    public void setRutaArchivo(String rutaArchivo){
+        this.rutaArchivo = rutaArchivo;
+    }
+    
+    public String getRutaArchivo(){
+        return this.rutaArchivo;
     }
 }
