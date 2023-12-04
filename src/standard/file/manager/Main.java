@@ -21,6 +21,7 @@ import javax.swing.JDialog;
 import javax.swing.UIDefaults;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class Main extends javax.swing.JFrame {
 
@@ -1972,6 +1973,7 @@ public class Main extends javax.swing.JFrame {
 
     private void JF_RegistrosComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_RegistrosComponentResized
 
+        DefaultMutableTreeNode J;
         int y_decorated = JF_Registros.getInsets().top + JF_Registros.getInsets().bottom;
         int y_JFMenuBar = JF_Registros.getJMenuBar().getHeight();
         int x = JF_Registros.getWidth() - JF_Registros.getInsets().right - JF_Registros.getInsets().left;

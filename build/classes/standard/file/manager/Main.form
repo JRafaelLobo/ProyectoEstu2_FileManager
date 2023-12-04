@@ -787,6 +787,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="Regresar_Introducir" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="479" max="32767" attributes="0"/>
+=======
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -807,12 +813,16 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="145" max="32767" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
+                      <EmptySpace pref="306" max="32767" attributes="0"/>
+=======
                       <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                       <Component id="Titulo_InstruccionIntroducir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
@@ -820,6 +830,7 @@
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="TF_NuevoRegistro" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace pref="81" max="32767" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                       <Component id="Regresar_Introducir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
@@ -838,6 +849,8 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Regresar_IntroducirMouseClicked"/>
               </Events>
             </Component>
+<<<<<<< HEAD
+=======
             <Component class="javax.swing.JTextField" name="TF_NuevoRegistro">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TF_NuevoRegistroActionPerformed"/>
@@ -865,6 +878,7 @@
                 <Property name="text" type="java.lang.String" value="Ingrese el nuevo registro en el siguiente orden:"/>
               </Properties>
             </Component>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
           </SubComponents>
         </Container>
       </SubComponents>
@@ -947,6 +961,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="Regresar_Modificar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="478" max="32767" attributes="0"/>
+=======
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
@@ -975,12 +994,16 @@
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="Regresar_Modificar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
+                      <EmptySpace pref="301" max="32767" attributes="0"/>
+=======
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="J_RegistroAnterior" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -993,6 +1016,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="TF_Modificacion" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace pref="74" max="32767" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                       <Component id="Regresar_Modificar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                   </Group>
@@ -1011,6 +1035,8 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Regresar_ModificarMouseClicked"/>
               </Events>
             </Component>
+<<<<<<< HEAD
+=======
             <Component class="javax.swing.JTextField" name="TF_Modificacion">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TF_ModificacionActionPerformed"/>
@@ -1060,6 +1086,7 @@
                 <Property name="text" type="java.lang.String" value="Registro anterior:"/>
               </Properties>
             </Component>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
           </SubComponents>
         </Container>
       </SubComponents>
@@ -1141,6 +1168,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="Regresar_Buscar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="482" max="32767" attributes="0"/>
+=======
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -1158,17 +1191,22 @@
                       <EmptySpace min="0" pref="182" max="32767" attributes="0"/>
                       <Component id="Instruccion8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
+                      <EmptySpace pref="298" max="32767" attributes="0"/>
+=======
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="Instruccion7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Instruccion8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="171" max="32767" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                       <Component id="Regresar_Buscar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                   </Group>
@@ -1187,6 +1225,8 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Regresar_BuscarMouseClicked"/>
               </Events>
             </Component>
+<<<<<<< HEAD
+=======
             <Component class="javax.swing.JLabel" name="Instruccion7">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1209,6 +1249,7 @@
                 <Property name="text" type="java.lang.String" value="Impresion formateada del registro*"/>
               </Properties>
             </Component>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
           </SubComponents>
         </Container>
       </SubComponents>
@@ -1290,6 +1331,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="Regresar_Listar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="483" max="32767" attributes="0"/>
+=======
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -1306,17 +1353,22 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="135" max="32767" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
+                      <EmptySpace pref="306" max="32767" attributes="0"/>
+=======
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="Instruccion9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="Instruccion10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="187" max="32767" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                       <Component id="Regresar_Listar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
@@ -1335,6 +1387,8 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Regresar_ListarMouseClicked"/>
               </Events>
             </Component>
+<<<<<<< HEAD
+=======
             <Component class="javax.swing.JLabel" name="Instruccion9">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1357,6 +1411,7 @@
                 <Property name="text" type="java.lang.String" value="Impresion formateada de los registros encontrados*"/>
               </Properties>
             </Component>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
           </SubComponents>
         </Container>
       </SubComponents>
@@ -1548,6 +1603,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="Regresar_Cruzar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="484" max="32767" attributes="0"/>
+=======
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -1574,12 +1635,18 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="65" max="32767" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
+                      <EmptySpace pref="312" max="32767" attributes="0"/>
+                      <Component id="Regresar_Cruzar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+=======
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="Instruccion11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
@@ -1594,6 +1661,7 @@
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="Regresar_Cruzar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1610,6 +1678,8 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Regresar_CruzarMouseClicked"/>
               </Events>
             </Component>
+<<<<<<< HEAD
+=======
             <Component class="javax.swing.JLabel" name="Instruccion11">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1666,6 +1736,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B_EnviarCamposTercerArchivoMouseClicked"/>
               </Events>
             </Component>
+>>>>>>> 2e691e7bccaa872d3f353611acd22cfb173dcad7
           </SubComponents>
         </Container>
       </SubComponents>
