@@ -23,32 +23,6 @@ public class Archivos {
     private int longitudTotalCampos = 0;
     private int longitudTotalDeMetadata = 0;
     private String rutaArchivo = "";
-
-    public void LecturaPath() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Seleccionar archivo de texto");
-
-        // Añadir un filtro para mostrar solo archivos con extensión .txt
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt");
-        fileChooser.setFileFilter(filter);
-
-        int userSelection = fileChooser.showOpenDialog(null);
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-
-            // Verificar si el archivo seleccionado tiene la extensión .txt
-            if (selectedFile.getName().toLowerCase().endsWith(".txt")) {
-                nombre = fileChooser.getName(selectedFile);
-                this.rutaArchivo = selectedFile.getAbsolutePath();
-            } else {
-                System.out.println("Selecciona un archivo con extensión .txt");
-                // Puedes mostrar un mensaje al usuario indicando que seleccione un archivo .txt
-                this.rutaArchivo = "F";
-            }
-        } else {
-            this.rutaArchivo = "";
-        }
-    }
     
     private boolean ReEscribirCabeza(){
         try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
@@ -98,7 +72,56 @@ public class Archivos {
         
         return true;
     }
+    
+    public boolean deleteRegistro(int rnn){
+        this.availist.addNewCabezaAvai(rnn);
+        return this.ReEscribirCabeza();
+    }
+    
+    public boolean modificarRegistro(String RegistroMod, int rnn){
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+           if(RegistroMod.length() > this.longitudTotalRegistro) return false;
+           
+           if(RegistroMod.length() < this.longitudTotalRegistro){
+               RegistroMod = String.format("%-" + longitudTotalRegistro + "s", RegistroMod);
+           }
+           
+           file.seek((this.longitudTotalDeMetadata)+((this.longitudTotalRegistro)*rnn));
+           
+           file.writeBytes(RegistroMod);
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al modificar registros: "+e.getMessage());
+            return false;
+        } 
+        return true;
+    }
 
+    public void LecturaPath() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar archivo de texto");
+
+        // Añadir un filtro para mostrar solo archivos con extensión .txt
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt");
+        fileChooser.setFileFilter(filter);
+
+        int userSelection = fileChooser.showOpenDialog(null);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            // Verificar si el archivo seleccionado tiene la extensión .txt
+            if (selectedFile.getName().toLowerCase().endsWith(".txt")) {
+                nombre = fileChooser.getName(selectedFile);
+                this.rutaArchivo = selectedFile.getAbsolutePath();
+            } else {
+                System.out.println("Selecciona un archivo con extensión .txt");
+                // Puedes mostrar un mensaje al usuario indicando que seleccione un archivo .txt
+                this.rutaArchivo = "F";
+            }
+        } else {
+            this.rutaArchivo = "";
+        }
+    }
+    
     private boolean GuardarCampos() {
         try {
             // Leer la primera línea del archivo
@@ -217,7 +240,6 @@ public class Archivos {
         boolean campoIsOpen = this.AbrirCampos();
         this.longitudTotalDeMetadata = this.longitudTotalCampos + 2 +this.longitudTotalRegistro+4;
         boolean isContructionAvai = this.ConstruirAvailist(true, -1);
-        //insertarRegistro("1234567890123|1234567890123456789012345678901234|1234567890123456789012345678901234567890123|123456789012|");
         return campoIsOpen && isContructionAvai;
     }
 
