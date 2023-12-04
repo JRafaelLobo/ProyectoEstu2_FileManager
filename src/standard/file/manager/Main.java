@@ -1453,7 +1453,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         //Activando los botones
-        B_Campos.setEnabled(true);
+        B_Campos.setEnabled(file.canBeEnableCampos(OpenFileName));
         B_Registros.setEnabled(true);
         B_Indices.setEnabled(true);
         B_Estandarizacion.setEnabled(true);
@@ -1493,7 +1493,7 @@ public class Main extends javax.swing.JFrame {
             B_Indices.setEnabled(false);
             B_Estandarizacion.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Se ha cerrado el archivo", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-            file.getAvailist().clearAvai();
+            file.clear();
             return;
         }
 
@@ -1507,7 +1507,6 @@ public class Main extends javax.swing.JFrame {
                 "OK");
         if (option == JOptionPane.OK_OPTION) {
             OpenFileName = "";
-            file.getListaCampos().clear();
             //Desactivando JFrames
             JF_Campos.setVisible(false);
             JF_CrearCampo.setVisible(false);
@@ -1519,8 +1518,7 @@ public class Main extends javax.swing.JFrame {
             B_Registros.setEnabled(false);
             B_Indices.setEnabled(false);
             B_Estandarizacion.setEnabled(false);
-            
-            file.getAvailist().clearAvai();
+            file.clear();
         }
 
     }//GEN-LAST:event_B_Archivo_CerrarActionPerformed

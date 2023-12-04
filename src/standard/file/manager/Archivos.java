@@ -21,6 +21,7 @@ public class Archivos {
     private LinkedList availist = new LinkedList(-1);
     private int longitudTotalRegistro = 0;
     private int longitudTotalCampos = 0;
+    private int longitudTotalDeMetadata = 0;
 
     public String LecturaPath() {
         JFileChooser fileChooser = new JFileChooser();
@@ -46,6 +47,55 @@ public class Archivos {
         } else {
             return "";
         }
+    }
+    
+    private boolean ReEscribirCabeza(String rutaArchivo){
+        try (RandomAccessFile file = new RandomAccessFile(rutaArchivo, "rw")) {
+           file.seek(this.longitudTotalCampos+4);
+           String newCabeza = "*";
+           newCabeza += String.valueOf(this.availist.getCabeza().getSlot());
+           newCabeza = String.format("%-" + this.longitudTotalRegistro + "s", newCabeza);
+           file.writeBytes(newCabeza);
+           
+           if(this.availist.getCabeza().getSiguiente() == null) return true;
+           
+           file.seek((this.longitudTotalDeMetadata)+((this.longitudTotalRegistro)*(int)this.availist.getCabeza().getSlot()));
+           String newSlot = "*";
+           newSlot += String.valueOf(this.availist.getCabeza().getSiguiente().getSlot());
+           newSlot = String.format("%-" + this.longitudTotalRegistro + "s", newSlot);
+           file.writeBytes(newSlot);
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al reescribir la cabeza de la metadata: "+e.getMessage());
+            return false;
+        } 
+        return true;
+    }
+    
+    public boolean insertarRegistro(String Registro, String rutaArchivo){
+        try (RandomAccessFile file = new RandomAccessFile(rutaArchivo, "rw")) {
+           if(Registro.length() > this.longitudTotalRegistro) return false;
+           
+           if(Registro.length() < this.longitudTotalRegistro){
+               Registro = String.format("%-" + longitudTotalRegistro + "s", Registro);
+           }
+           
+           if(this.availist.getCabeza().getSlot().equals(-1)){
+               file.seek(file.length());
+           }else{
+               file.seek((this.longitudTotalDeMetadata)+((this.longitudTotalRegistro)*(int)this.availist.getCabeza().getSlot()));
+           }
+           
+           file.writeBytes(Registro);
+           if(!this.availist.getCabeza().getSlot().equals(-1)){
+               this.availist.removeAvai(this.availist.getCabeza().getSlot());
+               return this.ReEscribirCabeza(rutaArchivo);
+           }
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al insertar registros: "+e.getMessage());
+            return false;
+        } 
+        
+        return true;
     }
 
     private boolean GuardarCampos(String rutaArchivo) {
@@ -130,7 +180,7 @@ public class Archivos {
         }
     }
 
-    public boolean ConstruirAvailist(String rutaArchivo, boolean isReadCabeza, int pos) {
+    private boolean ConstruirAvailist(String rutaArchivo, boolean isReadCabeza, int pos) {
         try (RandomAccessFile file = new RandomAccessFile(rutaArchivo, "rw")) {
             byte[] buffer;
             int bytesRead;
@@ -139,7 +189,7 @@ public class Archivos {
                 buffer = new byte[longitudTotalRegistro+2];
                 bytesRead = file.read(buffer);
             }else{
-                file.seek((this.longitudTotalCampos + 2 +this.longitudTotalRegistro+4)+((this.longitudTotalRegistro)*pos));
+                file.seek((this.longitudTotalDeMetadata)+((this.longitudTotalRegistro)*pos));
                 buffer = new byte[this.longitudTotalRegistro];
                 bytesRead = file.read(buffer);
             }
@@ -164,8 +214,9 @@ public class Archivos {
 
     public boolean Abrir(String rutaArchivo) {
         boolean campoIsOpen = this.AbrirCampos(rutaArchivo);
+        this.longitudTotalDeMetadata = this.longitudTotalCampos + 2 +this.longitudTotalRegistro+4;
         boolean isContructionAvai = this.ConstruirAvailist(rutaArchivo, true, -1);
-        this.availist.printList();
+        insertarRegistro("1234567890123|1234567890123456789012345678901234|1234567890123456789012345678901234567890123|123456789012|", rutaArchivo);
         return campoIsOpen && isContructionAvai;
     }
 
@@ -229,5 +280,22 @@ public class Archivos {
 
     public LinkedList getAvailist() {
         return this.availist;
+    }
+    
+    public void clear(){
+        this.listaCampos.clear();
+        this.availist.clearAvai();
+        this.longitudTotalRegistro = 0;
+        this.longitudTotalCampos = 0;
+        this.longitudTotalDeMetadata = 0;
+    }
+    
+    public boolean canBeEnableCampos (String rutaArchivo){
+        try (RandomAccessFile file = new RandomAccessFile(rutaArchivo, "rw")) {
+           return file.length() == 0 || file.length() == longitudTotalDeMetadata;
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al reescribir la cabeza de la metadata: "+e.getMessage());
+            return false;
+        } 
     }
 }
