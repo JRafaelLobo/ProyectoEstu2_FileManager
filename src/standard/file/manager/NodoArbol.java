@@ -47,24 +47,42 @@ public class NodoArbol implements Serializable {
 //Metodos Importantes
 
     /**
-     * Este metodo se utiliza para Ingresar una llave al arbol con el id(El plan
-     * que tengo es crear un objeto especifico para la llave
+     * Este metodo se utiliza para Ingresar una llave al arbol
      *
      * @param Revisar la descripcion de la Clase Llave
      * @return Retorna true si la accion se realizo de forma correcta.
      */
     public boolean Insertar(Llave dato) {
-        return true;
+        return false;
     }
 
+    /**
+     * Este metodo se utiliza para eliminar una llave al arbol
+     *
+     * @param Revisar la descripcion de la Clase Llave
+     * @return Retorna true si la accion se realizo de forma correcta.
+     */
     public boolean Eliminar(Llave dato) {
-        return true;
+        return false;
     }
 
+    /**
+     * Este metodo se utiliza para buscar una llave al arbol y retorna el rnn
+     *
+     * @param Revisar la descripcion de la Clase Llave
+     * @return Retorna true si la accion se realizo de forma correcta.
+     */
     public int Buscar(String llave) {
         return -1;
     }
 
+    /**
+     * Este metodo se utiliza para obtener el nodo que tiene todo desde un
+     * subnodo
+     *
+     * @param Revisar la descripcion de la Clase Llave
+     * @return Retorna true si la accion se realizo de forma correcta.
+     */
     public NodoArbol getArbol() {
         if (this.padre == null) {
             return this;
@@ -73,31 +91,32 @@ public class NodoArbol implements Serializable {
     }
 
     //Metodos para que funciones
-    public void addHijo(NodoArbol N) {
+    private void addHijo(NodoArbol N) {
         hijos.add(N);
     }
 
-    public NodoArbol GetHijo(int n) {
+    private NodoArbol GetHijo(int n) {
         return hijos.get(n);
     }
 
-    public void setRaiz(Llave N) {
-        if (this.getPadre() != null) {
-            if (this.getPadre().getHijos().size() < T - 1) {
-                this.getPadre().llaves.add(N);
-                Collections.sort(this.getPadre().llaves, Comparator.comparing(Object::toString));
-            } else {
+    private void setRaiz(Llave N) {
+
+        if (this.getPadre().getHijos().size() < T - 1) {
+            this.getPadre().llaves.add(N);
+            Collections.sort(this.getPadre().llaves, Comparator.comparing(Object::toString));
+        } else {
+            if (this.getPadre() != null) {
                 this.getPadre().llaves.add(N);
                 Collections.sort(this.getPadre().llaves, Comparator.comparing(Object::toString));
                 this.getPadre().split();
+                return;
             }
-            return;
+            Collections.sort(this.llaves, Comparator.comparing(Object::toString));
+            NodoArbol R = new NodoArbol(T);
+            R.getHijos().add(this);
+            this.padre = R;
+            setRaiz(N);
         }
-        Collections.sort(this.llaves, Comparator.comparing(Object::toString));
-        NodoArbol R = new NodoArbol(T);
-        R.getHijos().add(this);
-        this.setPadre(R);
-        setRaiz(N);
 
         //falta codigo
     }
@@ -106,8 +125,12 @@ public class NodoArbol implements Serializable {
         Collections.sort(this.llaves, Comparator.comparing(Object::toString));
         Llave medio = this.llaves.get((int) (this.llaves.size() / 2));
         this.setRaiz(medio);
-        this.llaves.remove(medio);
-
+        NodoArbol NA = new NodoArbol(this.padre, T);
+        for (int i = ((int) this.llaves.size() / 2); i < this.llaves.size(); i++) {
+            NA.GetLlaves().add(this.llaves.get(i));
+            this.llaves.remove(i);
+        }
+        Collections.sort(NA.GetLlaves(), Comparator.comparing(Object::toString));
         //Creacion del nuevo nodo
     }
 
@@ -124,26 +147,36 @@ public class NodoArbol implements Serializable {
         return hijos;
     }
 
-    public void setHijos(ArrayList<NodoArbol> hijos) {
-        this.hijos = hijos;
-    }
-
-    public NodoArbol getPadre() {
+    private NodoArbol getPadre() {
         return padre;
     }
 
-    private void setPadre(NodoArbol padre) {
+    /**
+     * Favor no utilizar este metodo
+     *
+     * @param Revisar la descripcion de la Clase Llave
+     * @return Retorna true si es hoja
+     */
+    public void setPadre(NodoArbol padre) {
         this.padre = padre;
     }
 
+    /**
+     * Favor no utilizar este metodo
+     *
+     * @param Revisar la descripcion de la Clase Llave
+     * @return Retorna true si es hoja
+     */
     public ArrayList<Llave> GetLlaves() {
         return llaves;
     }
 
-    public void setLLaves(ArrayList<Llave> llaves) {
-        this.llaves = llaves;
-    }
-
+    /**
+     * Este metodo verifica si el nodo actual es hoja
+     *
+     * @param Revisar la descripcion de la Clase Llave
+     * @return Retorna true si es hoja
+     */
     public boolean EsHoja() {
         if (hijos.isEmpty()) {
             return true;
