@@ -29,6 +29,10 @@ public class LinkedList {
         return this.last;
     }
 
+    public void clearAvai(){
+        this.cabeza = this.last = new Nodo(-1);
+    }
+
     public void constructionAvai(Object newSlot) {
         if (newSlot.equals(-1)) {
             return;

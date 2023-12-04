@@ -132,7 +132,6 @@ public class Archivos {
 
     public boolean ConstruirAvailist(String rutaArchivo, boolean isReadCabeza, int pos) {
         try (RandomAccessFile file = new RandomAccessFile(rutaArchivo, "rw")) {
-            // Coloca el puntero en la posición deseada
             byte[] buffer;
             int bytesRead;
             if (isReadCabeza) {
@@ -150,15 +149,14 @@ public class Archivos {
             }
             
             String contenido = new String(buffer, 0, bytesRead);
-            System.out.println(contenido);
             int slot = Integer.parseInt(contenido.trim().replace("*", ""));
             if(slot == -1){
                 return true;
             }
-            availist.constructionAvai(slot);
+            this.availist.constructionAvai(slot);
             this.ConstruirAvailist(rutaArchivo, false, slot);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Sucedio un error al construir la availist: "+e.getMessage());
             return false;
         }
         return true;
@@ -167,6 +165,7 @@ public class Archivos {
     public boolean Abrir(String rutaArchivo) {
         boolean campoIsOpen = this.AbrirCampos(rutaArchivo);
         boolean isContructionAvai = this.ConstruirAvailist(rutaArchivo, true, -1);
+        this.availist.printList();
         return campoIsOpen && isContructionAvai;
     }
 
