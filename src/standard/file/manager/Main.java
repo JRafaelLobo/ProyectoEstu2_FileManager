@@ -284,7 +284,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
-        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
+        I_Fondo_Archivos.setBounds(0, 0, 0, 0);
 
         ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -564,7 +564,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Registros.getContentPane().add(I_Fondo_Registro);
-        I_Fondo_Registro.setBounds(0, 0, 100, 100);
+        I_Fondo_Registro.setBounds(0, 0, 0, 0);
 
         Dialog_Introducir.getContentPane().setLayout(null);
 
@@ -722,7 +722,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Buscar.getContentPane().add(Panel_Decoracion_Buscar);
-        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 0);
 
         Panel_Buscar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -786,7 +786,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Listar.getContentPane().add(Panel_Decoracion_Listar);
-        Panel_Decoracion_Listar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Listar.setBounds(0, 0, 600, 0);
 
         Panel_Listar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -850,7 +850,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Borrar.getContentPane().add(Panel_Decoracion_Borrar);
-        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 0);
 
         Panel_Borrar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -914,7 +914,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Decoracion_Cruzar);
-        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 0);
 
         Panel_Cruzar.setBackground(new java.awt.Color(5, 23, 45));
 
