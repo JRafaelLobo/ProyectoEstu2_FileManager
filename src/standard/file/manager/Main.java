@@ -74,9 +74,6 @@ public class Main extends javax.swing.JFrame {
         B_BorrarCampo = new boton();
         I_Campo_Decoracion = new FondoPanel("./Imagenes\\Icono2.png");
         I_Fondo_Archivos = new javax.swing.JPanel();
-        Dialog_Abrir = new javax.swing.JDialog(this, "Abrir", true);
-        ListOfFiles = new javax.swing.JComboBox<>();
-        D_Abrir_Archivo = new javax.swing.JButton();
         JF_CrearCampo = new javax.swing.JFrame();
         P_CrearCapo_Decoracion = new javax.swing.JPanel();
         PanelCrearCampo = new javax.swing.JPanel();
@@ -303,39 +300,6 @@ public class Main extends javax.swing.JFrame {
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
         I_Fondo_Archivos.setBounds(0, 0, 0, 0);
-
-        ListOfFiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        D_Abrir_Archivo.setText("Abrir Archivo");
-        D_Abrir_Archivo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                D_Abrir_ArchivoMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout Dialog_AbrirLayout = new javax.swing.GroupLayout(Dialog_Abrir.getContentPane());
-        Dialog_Abrir.getContentPane().setLayout(Dialog_AbrirLayout);
-        Dialog_AbrirLayout.setHorizontalGroup(
-            Dialog_AbrirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Dialog_AbrirLayout.createSequentialGroup()
-                .addGroup(Dialog_AbrirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Dialog_AbrirLayout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(ListOfFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Dialog_AbrirLayout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(D_Abrir_Archivo)))
-                .addContainerGap(221, Short.MAX_VALUE))
-        );
-        Dialog_AbrirLayout.setVerticalGroup(
-            Dialog_AbrirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Dialog_AbrirLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(ListOfFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(D_Abrir_Archivo)
-                .addContainerGap(217, Short.MAX_VALUE))
-        );
 
         JF_CrearCampo.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         JF_CrearCampo.setTitle("Standard File Manager");
@@ -582,7 +546,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Registros.getContentPane().add(I_Fondo_Registro);
-        I_Fondo_Registro.setBounds(0, 0, 100, 100);
+        I_Fondo_Registro.setBounds(0, 0, 0, 0);
 
         Dialog_Introducir.getContentPane().setLayout(null);
 
@@ -612,7 +576,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Introducir.getContentPane().add(Panel_Decoracion_Introducir);
-        Panel_Decoracion_Introducir.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Introducir.setBounds(0, 0, 600, 0);
 
         Panel_Introducir.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -707,7 +671,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Modificar.getContentPane().add(Panel_Decoracion_Modificar);
-        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 0);
 
         Panel_Modificar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -821,7 +785,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Buscar.getContentPane().add(Panel_Decoracion_Buscar);
-        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 0);
 
         Panel_Buscar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -906,7 +870,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Listar.getContentPane().add(Panel_Decoracion_Listar);
-        Panel_Decoracion_Listar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Listar.setBounds(0, 0, 600, 0);
 
         Panel_Listar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -990,7 +954,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Borrar.getContentPane().add(Panel_Decoracion_Borrar);
-        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 0);
 
         Panel_Borrar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1054,7 +1018,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Decoracion_Cruzar);
-        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 0);
 
         Panel_Cruzar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1459,26 +1423,6 @@ public class Main extends javax.swing.JFrame {
         B_Estandarizacion.setEnabled(true);
         //Buen dias
     }//GEN-LAST:event_B_Archivo_AbrirActionPerformed
-
-    private void D_Abrir_ArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D_Abrir_ArchivoMouseClicked
-        // TODO add your handling code here:
-//        OpenFileName = (String) ListOfFiles.getSelectedItem();
-//        Campos = file.LecturaCampos(OpenFileName);
-//        if (Campos.equals("Hubo un error al leer campos")) {
-//            JOptionPane.showMessageDialog(null, "Hubo un error no se pudo leer campos", "Notificación", JOptionPane.ERROR_MESSAGE);
-//            Campos = "";
-//            return;
-//        }
-//        file.Abrir(OpenFileName);
-//
-//        Dialog_Abrir.setVisible(false);
-//        //Activando los botones
-//        B_Campos.setEnabled(true);
-//        B_Registros.setEnabled(true);
-//        B_Indices.setEnabled(true);
-//        B_Estandarizacion.setEnabled(true);
-
-    }//GEN-LAST:event_D_Abrir_ArchivoMouseClicked
 
     private void B_Archivo_CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_CerrarActionPerformed
         // TODO add your handling code here:
@@ -2209,10 +2153,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_ModificarRegistro;
     private javax.swing.JButton B_Registros;
     private javax.swing.JButton B_RegresarCrearCampo;
-    private javax.swing.JButton D_Abrir_Archivo;
     private javax.swing.JTable Datos_Campos;
     private javax.swing.JTable Datos_Registro;
-    private javax.swing.JDialog Dialog_Abrir;
     private javax.swing.JDialog Dialog_Borrar;
     private javax.swing.JDialog Dialog_Buscar;
     private javax.swing.JDialog Dialog_Cruzar;
@@ -2242,7 +2184,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel J_OrdenCampoInt;
     private javax.swing.JLabel J_OrdenCampos;
     private javax.swing.JLabel J_RegistroAnterior;
-    private javax.swing.JComboBox<String> ListOfFiles;
     private javax.swing.JPanel P_CrearCapo_Decoracion;
     private javax.swing.JPanel PanelCrearCampo;
     private javax.swing.JPanel Panel_Borrar;
