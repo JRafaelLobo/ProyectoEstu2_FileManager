@@ -158,6 +158,7 @@ public class Main extends javax.swing.JFrame {
         B_Archivo_Guardar = new javax.swing.JMenuItem();
         B_Archivo_Cerrar = new javax.swing.JMenuItem();
         B_Archivo_Salir = new javax.swing.JMenuItem();
+        B_Archivo_Regresar = new javax.swing.JMenuItem();
 
         Portadita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Portadita.setTitle("Standard File Manager");
@@ -1237,6 +1238,14 @@ public class Main extends javax.swing.JFrame {
         });
         jMenu1.add(B_Archivo_Salir);
 
+        B_Archivo_Regresar.setText("Regresar");
+        B_Archivo_Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_Archivo_RegresarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(B_Archivo_Regresar);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -1477,7 +1486,10 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha realizado ningun cambio", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-
+        if (JF_Registros.isVisible()){
+            JOptionPane.showMessageDialog(null, "En esta pantalla no se puede realizar esta accion", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         boolean IsSaved = false;
 
         if (JF_Campos.isVisible()) {
@@ -2102,6 +2114,16 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_B_DesplegarCamposRelacionadosActionPerformed
 
+    private void B_Archivo_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_RegresarActionPerformed
+        // TODO add your handling code here:
+        if(this.isVisible()) return;
+        JF_Campos.setVisible(false);
+        JF_Registros.setVisible(false);
+        this.setJMenuBar(jMenuBar1);
+        B_Campos.setEnabled(file.canBeEnableCampos());
+        this.setVisible(true);
+    }//GEN-LAST:event_B_Archivo_RegresarActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -2134,6 +2156,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem B_Archivo_Cerrar;
     private javax.swing.JMenuItem B_Archivo_Guardar;
     private javax.swing.JMenuItem B_Archivo_Nuevo;
+    private javax.swing.JMenuItem B_Archivo_Regresar;
     private javax.swing.JMenuItem B_Archivo_Salir;
     private javax.swing.JButton B_BorrarCampo;
     private javax.swing.JButton B_BorrarRegistro;
