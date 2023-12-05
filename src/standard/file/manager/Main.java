@@ -1460,7 +1460,7 @@ public class Main extends javax.swing.JFrame {
             file.setRutaArchivo("");
             //Desactivando JFrames
             JF_Campos.setVisible(false);
-            JF_CrearCampo.setVisible(false);
+            JF_Registros.setVisible(false);
 
             this.setVisible(true);
             this.setJMenuBar(jMenuBar1);
@@ -1847,7 +1847,11 @@ public class Main extends javax.swing.JFrame {
 
     private void B_ListarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarRegistroMouseClicked
         // TODO add your handling code here:
-        this.listarTablaRegistro();
+        if(file.canBeEnableCampos()){
+            JOptionPane.showMessageDialog(null, "No hay ningun registro para mostrar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        this.listarTablaRegistro(true);
     }//GEN-LAST:event_B_ListarRegistroMouseClicked
 
     private void B_ModificarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarRegistroMouseClicked
@@ -2003,27 +2007,13 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BuscarRegistroMouseClicked
         // TODO add your handling code here:
-        String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a buscar: ");
-        // buscar registro y setear en el Jlabel el registro encontrado
-        JF_Registros.setVisible(false);
-        Dialog_Buscar.setTitle("Standard File Manager");
-        Dialog_Buscar.pack();
-        Dialog_Buscar.setVisible(true);
-        Dialog_Buscar.setSize(600, 450);
-        Dialog_Buscar.setResizable(false);
-        Dialog_Buscar.setLocationRelativeTo(this);
-
-        Font f;
-        int x = Dialog_Buscar.getWidth();
-        int y = Dialog_Buscar.getHeight();
-        if (x > y) {
-            f = new Font("Dialog", 0, (int) y / 33);
-
-        } else {
-            f = new Font("Dialog", 0, (int) x / 33);
-        }
-        Regresar_Buscar.setSize(90, 25);
-        Regresar_Buscar.setFont(f);
+        //Comentado aproposito por Fer, mientras se implementa arbol
+//        String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a buscar: ");
+//        //Busqueda en el arbol mediante llave primaria
+//        int rnn = 1;
+//        //una vez encontro la posicion del registro lo lista en la tabla
+//        file.buscarUnRegistro(rnn);
+//        listarTablaRegistro(false);
     }//GEN-LAST:event_B_BuscarRegistroMouseClicked
 
     private void B_ListarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_ListarRegistroActionPerformed
@@ -2265,12 +2255,12 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-    public void listarTablaRegistro() {
+    public void listarTablaRegistro(boolean isListar) {
         DefaultTableModel T = (DefaultTableModel) Datos_Registro.getModel();
 
         // Limpiar la tabla
         T.setRowCount(0);
-        file.getAllRegistros();
+        if(isListar)file.getRegisterTest();
 
         if (!file.getListaRegistro().isEmpty()) {
             for (int i = 0; i < file.getListaRegistro().size(); i++){
