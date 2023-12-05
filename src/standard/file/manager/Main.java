@@ -37,8 +37,7 @@ public class Main extends javax.swing.JFrame {
         Dialog_Listar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Dialog_Borrar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Dialog_Cruzar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
-        
-        
+
         Music = playMusic("./Musica\\SonidoBoton.wav");
         Music.start();
         //Music.loop(Clip.LOOP_CONTINUOUSLY);
@@ -1358,7 +1357,6 @@ public class Main extends javax.swing.JFrame {
         lb_Archivo_Titulo.setForeground(Color.white);
         lb_Archivo_Titulo.setSize(anchoTexto, y / 2);
         lb_Archivo_Titulo.setLocation((int) ((x / 2) - (lb_Archivo_Titulo.getWidth() / 2)), (int) ((y / 12) - (lb_Archivo_Titulo.getHeight() / 2)));
-        
 
         //logito de al lado
         I_Campo_Decoracion.setSize(lb_Archivo_Titulo.getHeight() / 4, lb_Archivo_Titulo.getHeight() / 4);
@@ -1486,7 +1484,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha realizado ningun cambio", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        if (JF_Registros.isVisible()){
+        if (JF_Registros.isVisible()) {
             JOptionPane.showMessageDialog(null, "En esta pantalla no se puede realizar esta accion", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -1522,7 +1520,7 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
             }
-            IsSaved = file.Guardar( true);
+            IsSaved = file.Guardar(true);
         }
         if (IsSaved) {
             JOptionPane.showMessageDialog(null, "El archivo se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -1831,7 +1829,7 @@ public class Main extends javax.swing.JFrame {
         Dialog_Introducir.setSize(600, 450);
         Dialog_Introducir.setResizable(false);
         Dialog_Introducir.setLocationRelativeTo(this);
-        
+
         Font f;
         int x = Dialog_Introducir.getWidth();
         int y = Dialog_Introducir.getHeight();
@@ -1843,34 +1841,13 @@ public class Main extends javax.swing.JFrame {
         }
         Regresar_Introducir.setSize(90, 25);
         Regresar_Introducir.setFont(f);
-        
-        
-        
+
+
     }//GEN-LAST:event_B_IntroducirRegistroMouseClicked
 
     private void B_ListarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarRegistroMouseClicked
         // TODO add your handling code here:
-        //actualizar la tabla
-        
-        JF_Registros.setVisible(false);
-        Dialog_Listar.setTitle("Standard File Manager");
-        Dialog_Listar.pack();
-        Dialog_Listar.setVisible(true);
-        Dialog_Listar.setSize(600, 450);
-        Dialog_Listar.setResizable(false);
-        Dialog_Listar.setLocationRelativeTo(this);
-        
-        Font f;
-        int x = Dialog_Listar.getWidth();
-        int y = Dialog_Listar.getHeight();
-        if (x > y) {
-            f = new Font("Dialog", 0, (int) y / 33);
-
-        } else {
-            f = new Font("Dialog", 0, (int) x / 33);
-        }
-        Regresar_Listar.setSize(90, 25);
-        Regresar_Listar.setFont(f);
+        this.listarTablaRegistro();
     }//GEN-LAST:event_B_ListarRegistroMouseClicked
 
     private void B_ModificarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarRegistroMouseClicked
@@ -1884,7 +1861,7 @@ public class Main extends javax.swing.JFrame {
         Dialog_Modificar.setSize(600, 450);
         Dialog_Modificar.setResizable(false);
         Dialog_Modificar.setLocationRelativeTo(this);
-        
+
         Font f;
         int x = Dialog_Modificar.getWidth();
         int y = Dialog_Modificar.getHeight();
@@ -1903,7 +1880,7 @@ public class Main extends javax.swing.JFrame {
         int opcion = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?/n 1.Eliminar registro especifico/n 2. Eliminar registros segun un criterio "));
         if (opcion == 1) {
             String llavepimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a eliminar:");
-        } else if (opcion == 2){
+        } else if (opcion == 2) {
             String criterio = JOptionPane.showInputDialog(rootPane, "Ingrese el criterio de eliminacion: ");
         }
         // buscar registro y borrarlo, luego actualizar la tabla
@@ -1914,7 +1891,7 @@ public class Main extends javax.swing.JFrame {
         Dialog_Borrar.setSize(600, 450);
         Dialog_Borrar.setResizable(false);
         Dialog_Borrar.setLocationRelativeTo(this);
-        
+
         Font f;
         int x = Dialog_Borrar.getWidth();
         int y = Dialog_Borrar.getHeight();
@@ -1985,7 +1962,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             f = new Font("Dialog", 1, (int) x / 16);
         }
-        
+
         lb_Registro_Titulo.setFont(f);
         FontMetrics fontMetrics = lb_Registro_Titulo.getFontMetrics(lb_Registro_Titulo.getFont());
         int anchoTexto = fontMetrics.stringWidth(lb_Registro_Titulo.getText());
@@ -2002,7 +1979,7 @@ public class Main extends javax.swing.JFrame {
     private void B_CruzarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CruzarRegistroMouseClicked
         // TODO add your handling code here:
         //ArchivoCruzado = cruzado.LecturaPath();
-        
+
         JF_Registros.setVisible(false);
         Dialog_Cruzar.setTitle("Standard File Manager");
         Dialog_Cruzar.pack();
@@ -2010,7 +1987,7 @@ public class Main extends javax.swing.JFrame {
         Dialog_Cruzar.setSize(600, 450);
         Dialog_Cruzar.setResizable(false);
         Dialog_Cruzar.setLocationRelativeTo(this);
-        
+
         Font f;
         int x = Dialog_Cruzar.getWidth();
         int y = Dialog_Cruzar.getHeight();
@@ -2035,7 +2012,7 @@ public class Main extends javax.swing.JFrame {
         Dialog_Buscar.setSize(600, 450);
         Dialog_Buscar.setResizable(false);
         Dialog_Buscar.setLocationRelativeTo(this);
-        
+
         Font f;
         int x = Dialog_Buscar.getWidth();
         int y = Dialog_Buscar.getHeight();
@@ -2061,7 +2038,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         JF_Registros.setVisible(true);
         Dialog_Cruzar.setVisible(false);
-        
+
     }//GEN-LAST:event_Regresar_CruzarMouseClicked
 
     private void Regresar_BorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_BorrarMouseClicked
@@ -2116,7 +2093,9 @@ public class Main extends javax.swing.JFrame {
 
     private void B_Archivo_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_RegresarActionPerformed
         // TODO add your handling code here:
-        if(this.isVisible()) return;
+        if (this.isVisible()) {
+            return;
+        }
         JF_Campos.setVisible(false);
         JF_Registros.setVisible(false);
         this.setJMenuBar(jMenuBar1);
@@ -2258,13 +2237,12 @@ public class Main extends javax.swing.JFrame {
     //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     public Campo campo;
-    
+
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
     //Campo: Nombre,Tipo,Tamano
     //Registro: Lista de Campus
     //Indices:
     //Estandarizacion
-
     public void listarTabla() {
         DefaultTableModel T = (DefaultTableModel) Datos_Campos.getModel();
 
@@ -2285,6 +2263,22 @@ public class Main extends javax.swing.JFrame {
                 T.addRow(fila);
             }
         }
+    }
+
+    public void listarTablaRegistro() {
+        DefaultTableModel T = (DefaultTableModel) Datos_Registro.getModel();
+
+        // Limpiar la tabla
+        T.setRowCount(0);
+        file.getAllRegistros();
+
+        if (!file.getListaRegistro().isEmpty()) {
+            for (int i = 0; i < file.getListaRegistro().size(); i++){
+                T.addRow(file.getListaRegistro().get(i));
+            }
+            file.getListaRegistro().clear();
+        }
+        
     }
 
     //Este metodo es para reproducir sonidos en el programa

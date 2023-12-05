@@ -17,7 +17,7 @@ public class Archivos {
 
     private String nombre;
     private ArrayList<Campo> listaCampos = new ArrayList();
-    private ArrayList<String> registros = new ArrayList();
+    private ArrayList<Object []> registros = new ArrayList();
     private final LinkedList availist = new LinkedList(-1);
     private int longitudTotalRegistro = 0;
     private int longitudTotalCampos = 0;
@@ -104,7 +104,8 @@ public class Archivos {
               int bytesRead = file.read(buffer);
               String registro = new String(buffer, 0, bytesRead);
               if(registro.charAt(0)=='*') continue;
-              this.registros.add(registro.trim());
+              String [] register = registro.trim().split("\\|");
+              this.registros.add(register);
           }
         } catch (IOException e) {
             System.err.println("Sucedio un error al obtener todos los registros: "+e.getMessage());
@@ -343,5 +344,9 @@ public class Archivos {
     
     public String getRutaArchivo(){
         return this.rutaArchivo;
+    }
+    
+     public ArrayList<Object []> getListaRegistro() {
+        return this.registros;
     }
 }
