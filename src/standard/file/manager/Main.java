@@ -668,9 +668,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(J_OrdenCampoInt)
                 .addGap(44, 44, 44)
                 .addComponent(TF_NuevoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(B_GuardarRegistro)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(B_Anterior)
                     .addComponent(B_Siguiente))
@@ -790,14 +790,13 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(Panel_ModificarLayout.createSequentialGroup()
                                 .addComponent(B_AnteriorModif)
-                                .addGap(174, 174, 174)
+                                .addGap(50, 50, 50)
+                                .addComponent(B_GuardarModif)
+                                .addGap(41, 41, 41)
                                 .addComponent(B_SiguienteModif))))
                     .addGroup(Panel_ModificarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Regresar_Modificar))
-                    .addGroup(Panel_ModificarLayout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(B_GuardarModif)))
+                        .addComponent(Regresar_Modificar)))
                 .addContainerGap(123, Short.MAX_VALUE))
         );
         Panel_ModificarLayout.setVerticalGroup(
@@ -805,23 +804,27 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Regresar_Modificar)
-                .addGap(2, 2, 2)
-                .addComponent(Titulo_RegistroAnt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(J_RegistroAnterior)
-                .addGap(33, 33, 33)
-                .addComponent(Titulo_Instruccion)
-                .addGap(18, 18, 18)
-                .addComponent(J_OrdenCampos)
-                .addGap(27, 27, 27)
-                .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(B_GuardarModif)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(B_AnteriorModif)
-                    .addComponent(B_SiguienteModif))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_ModificarLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(Titulo_RegistroAnt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(J_RegistroAnterior)
+                        .addGap(33, 33, 33)
+                        .addComponent(Titulo_Instruccion)
+                        .addGap(18, 18, 18)
+                        .addComponent(J_OrdenCampos)
+                        .addGap(27, 27, 27)
+                        .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(B_AnteriorModif)
+                            .addComponent(B_SiguienteModif))
+                        .addContainerGap(71, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(B_GuardarModif)
+                        .addGap(95, 95, 95))))
         );
 
         Dialog_Modificar.getContentPane().add(Panel_Modificar);
@@ -1935,7 +1938,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BorrarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarRegistroMouseClicked
         // TODO add your handling code here:
-        int opcion = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?/n 1.Eliminar registro especifico/n 2. Eliminar registros segun un criterio "));
+        int opcion = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio "));
         if (opcion == 1) {
             String llavepimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a eliminar:");
         } else if (opcion == 2) {
