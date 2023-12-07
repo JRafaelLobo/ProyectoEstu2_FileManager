@@ -107,6 +107,7 @@ public class Main extends javax.swing.JFrame {
         Titulo_InstruccionIntroducir = new javax.swing.JLabel();
         B_Anterior = new javax.swing.JButton();
         B_Siguiente = new javax.swing.JButton();
+        B_GuardarRegistro = new javax.swing.JButton();
         Dialog_Modificar = new javax.swing.JDialog();
         Panel_Decoracion_Modificar = new javax.swing.JPanel();
         Titulo_Modificar = new javax.swing.JLabel();
@@ -119,6 +120,7 @@ public class Main extends javax.swing.JFrame {
         Titulo_RegistroAnt = new javax.swing.JLabel();
         B_AnteriorModif = new javax.swing.JButton();
         B_SiguienteModif = new javax.swing.JButton();
+        B_GuardarModif = new javax.swing.JButton();
         Dialog_Buscar = new javax.swing.JDialog();
         Panel_Decoracion_Buscar = new javax.swing.JPanel();
         Titulo_Buscar = new javax.swing.JLabel();
@@ -623,10 +625,20 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        B_GuardarRegistro.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        B_GuardarRegistro.setText("Guardar");
+        B_GuardarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_GuardarRegistroMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_IntroducirLayout = new javax.swing.GroupLayout(Panel_Introducir);
         Panel_Introducir.setLayout(Panel_IntroducirLayout);
         Panel_IntroducirLayout.setHorizontalGroup(
             Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Titulo_InstruccionIntroducir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(J_OrdenCampoInt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Panel_IntroducirLayout.createSequentialGroup()
                 .addGroup(Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_IntroducirLayout.createSequentialGroup()
@@ -639,10 +651,11 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(Panel_IntroducirLayout.createSequentialGroup()
                                 .addComponent(B_Anterior)
                                 .addGap(180, 180, 180)
-                                .addComponent(B_Siguiente)))))
+                                .addComponent(B_Siguiente))))
+                    .addGroup(Panel_IntroducirLayout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(B_GuardarRegistro)))
                 .addContainerGap(135, Short.MAX_VALUE))
-            .addComponent(Titulo_InstruccionIntroducir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(J_OrdenCampoInt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Panel_IntroducirLayout.setVerticalGroup(
             Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -655,7 +668,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(J_OrdenCampoInt)
                 .addGap(44, 44, 44)
                 .addComponent(TF_NuevoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(B_GuardarRegistro)
+                .addGap(32, 32, 32)
                 .addGroup(Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(B_Anterior)
                     .addComponent(B_Siguiente))
@@ -751,6 +766,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        B_GuardarModif.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        B_GuardarModif.setText("Guardar");
+        B_GuardarModif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_GuardarModifMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_ModificarLayout = new javax.swing.GroupLayout(Panel_Modificar);
         Panel_Modificar.setLayout(Panel_ModificarLayout);
         Panel_ModificarLayout.setHorizontalGroup(
@@ -767,11 +790,14 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(Panel_ModificarLayout.createSequentialGroup()
                                 .addComponent(B_AnteriorModif)
-                                .addGap(180, 180, 180)
+                                .addGap(174, 174, 174)
                                 .addComponent(B_SiguienteModif))))
                     .addGroup(Panel_ModificarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Regresar_Modificar)))
+                        .addComponent(Regresar_Modificar))
+                    .addGroup(Panel_ModificarLayout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(B_GuardarModif)))
                 .addContainerGap(123, Short.MAX_VALUE))
         );
         Panel_ModificarLayout.setVerticalGroup(
@@ -789,11 +815,13 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(J_OrdenCampos)
                 .addGap(27, 27, 27)
                 .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(31, 31, 31)
+                .addComponent(B_GuardarModif)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(B_AnteriorModif)
                     .addComponent(B_SiguienteModif))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         Dialog_Modificar.getContentPane().add(Panel_Modificar);
@@ -2133,7 +2161,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex - 1 + C.size()) % C.size();
         Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + "}");
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave()+ "}");
     }//GEN-LAST:event_B_AnteriorMouseClicked
 
     private void B_SiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SiguienteMouseClicked
@@ -2141,7 +2169,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex + 1) % C.size();
         Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + "}");
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave()+ "}");
     }//GEN-LAST:event_B_SiguienteMouseClicked
 
     private void B_AnteriorModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_AnteriorModifMouseClicked
@@ -2149,7 +2177,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex - 1 + C.size()) % C.size();
         Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + "}");
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave()+ "}");
     }//GEN-LAST:event_B_AnteriorModifMouseClicked
 
     private void B_SiguienteModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SiguienteModifMouseClicked
@@ -2157,8 +2185,23 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex + 1) % C.size();
         Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + "}");
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave()+ "}");
     }//GEN-LAST:event_B_SiguienteModifMouseClicked
+
+    private void B_GuardarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarRegistroMouseClicked
+        // TODO add your handling code here:
+        
+        //Metodo para guardar registro
+        JOptionPane.showMessageDialog(null, "El registro se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        TF_NuevoRegistro.setText("");
+    }//GEN-LAST:event_B_GuardarRegistroMouseClicked
+
+    private void B_GuardarModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarModifMouseClicked
+        // TODO add your handling code here:
+        //Metodo para guardar la modificacion
+        JOptionPane.showMessageDialog(null, "El registro se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        TF_Modificacion.setText("");
+    }//GEN-LAST:event_B_GuardarModifMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -2206,6 +2249,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_EnviarCamposTercerArchivo;
     private javax.swing.JButton B_Estandarizacion;
     private javax.swing.JButton B_GuardadCrearCampo;
+    private javax.swing.JButton B_GuardarModif;
+    private javax.swing.JButton B_GuardarRegistro;
     private javax.swing.JButton B_Indices;
     private javax.swing.JButton B_IntroducirRegistro;
     private javax.swing.JButton B_ListarCampo;
