@@ -601,7 +601,6 @@ public class Main extends javax.swing.JFrame {
         J_OrdenCampoInt.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         J_OrdenCampoInt.setForeground(new java.awt.Color(255, 255, 255));
         J_OrdenCampoInt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        J_OrdenCampoInt.setText("Mostrar orden de campos*");
 
         Titulo_InstruccionIntroducir.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         Titulo_InstruccionIntroducir.setForeground(new java.awt.Color(255, 255, 255));
@@ -656,7 +655,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(J_OrdenCampoInt)
                 .addGap(44, 44, 44)
                 .addComponent(TF_NuevoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(B_Anterior)
                     .addComponent(B_Siguiente))
@@ -816,23 +815,20 @@ public class Main extends javax.swing.JFrame {
             Panel_Decoracion_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
             .addGroup(Panel_Decoracion_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Panel_Decoracion_BuscarLayout.createSequentialGroup()
-                    .addGap(0, 218, Short.MAX_VALUE)
-                    .addComponent(Titulo_Buscar)
-                    .addGap(0, 218, Short.MAX_VALUE)))
+                .addComponent(Titulo_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
         );
         Panel_Decoracion_BuscarLayout.setVerticalGroup(
             Panel_Decoracion_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
             .addGroup(Panel_Decoracion_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Panel_Decoracion_BuscarLayout.createSequentialGroup()
-                    .addGap(0, 9, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Decoracion_BuscarLayout.createSequentialGroup()
+                    .addContainerGap(9, Short.MAX_VALUE)
                     .addComponent(Titulo_Buscar)
-                    .addGap(0, 10, Short.MAX_VALUE)))
+                    .addContainerGap(10, Short.MAX_VALUE)))
         );
 
         Dialog_Buscar.getContentPane().add(Panel_Decoracion_Buscar);
-        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 50);
 
         Panel_Buscar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -846,40 +842,35 @@ public class Main extends javax.swing.JFrame {
 
         Instruccion7.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         Instruccion7.setForeground(new java.awt.Color(255, 255, 255));
+        Instruccion7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Instruccion7.setText("Registro encontrado:");
 
         Instruccion8.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         Instruccion8.setForeground(new java.awt.Color(255, 255, 255));
+        Instruccion8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Instruccion8.setText("Impresion formateada del registro*");
 
         javax.swing.GroupLayout Panel_BuscarLayout = new javax.swing.GroupLayout(Panel_Buscar);
         Panel_Buscar.setLayout(Panel_BuscarLayout);
         Panel_BuscarLayout.setHorizontalGroup(
             Panel_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Instruccion7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Panel_BuscarLayout.createSequentialGroup()
-                .addGroup(Panel_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_BuscarLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(Regresar_Buscar))
-                    .addGroup(Panel_BuscarLayout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(Instruccion7)))
+                .addContainerGap()
+                .addComponent(Regresar_Buscar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_BuscarLayout.createSequentialGroup()
-                .addGap(0, 182, Short.MAX_VALUE)
-                .addComponent(Instruccion8)
-                .addGap(172, 172, 172))
+            .addComponent(Instruccion8, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         Panel_BuscarLayout.setVerticalGroup(
             Panel_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_BuscarLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addContainerGap()
+                .addComponent(Regresar_Buscar)
+                .addGap(21, 21, 21)
                 .addComponent(Instruccion7)
                 .addGap(18, 18, 18)
                 .addComponent(Instruccion8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                .addComponent(Regresar_Buscar)
-                .addGap(76, 76, 76))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
 
         Dialog_Buscar.getContentPane().add(Panel_Buscar);
@@ -901,23 +892,20 @@ public class Main extends javax.swing.JFrame {
             Panel_Decoracion_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
             .addGroup(Panel_Decoracion_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Panel_Decoracion_ListarLayout.createSequentialGroup()
-                    .addGap(0, 218, Short.MAX_VALUE)
-                    .addComponent(Titulo_Listar)
-                    .addGap(0, 219, Short.MAX_VALUE)))
+                .addComponent(Titulo_Listar, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
         );
         Panel_Decoracion_ListarLayout.setVerticalGroup(
             Panel_Decoracion_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
             .addGroup(Panel_Decoracion_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Panel_Decoracion_ListarLayout.createSequentialGroup()
-                    .addGap(0, 9, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Decoracion_ListarLayout.createSequentialGroup()
+                    .addContainerGap(9, Short.MAX_VALUE)
                     .addComponent(Titulo_Listar)
-                    .addGap(0, 10, Short.MAX_VALUE)))
+                    .addContainerGap(10, Short.MAX_VALUE)))
         );
 
         Dialog_Listar.getContentPane().add(Panel_Decoracion_Listar);
-        Panel_Decoracion_Listar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Listar.setBounds(0, 0, 600, 50);
 
         Panel_Listar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -931,10 +919,12 @@ public class Main extends javax.swing.JFrame {
 
         Instruccion9.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         Instruccion9.setForeground(new java.awt.Color(255, 255, 255));
+        Instruccion9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Instruccion9.setText("Registros existentes:");
 
         Instruccion10.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         Instruccion10.setForeground(new java.awt.Color(255, 255, 255));
+        Instruccion10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Instruccion10.setText("Impresion formateada de los registros encontrados*");
 
         javax.swing.GroupLayout Panel_ListarLayout = new javax.swing.GroupLayout(Panel_Listar);
@@ -942,28 +932,22 @@ public class Main extends javax.swing.JFrame {
         Panel_ListarLayout.setHorizontalGroup(
             Panel_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_ListarLayout.createSequentialGroup()
-                .addGroup(Panel_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_ListarLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(Regresar_Listar))
-                    .addGroup(Panel_ListarLayout.createSequentialGroup()
-                        .addGap(215, 215, 215)
-                        .addComponent(Instruccion9))
-                    .addGroup(Panel_ListarLayout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(Instruccion10)))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(Regresar_Listar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(Instruccion9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Instruccion10, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         Panel_ListarLayout.setVerticalGroup(
             Panel_ListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ListarLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(Instruccion9)
-                .addGap(45, 45, 45)
-                .addComponent(Instruccion10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(Regresar_Listar)
-                .addGap(68, 68, 68))
+                .addGap(18, 18, 18)
+                .addComponent(Instruccion9)
+                .addGap(29, 29, 29)
+                .addComponent(Instruccion10)
+                .addContainerGap(281, Short.MAX_VALUE))
         );
 
         Dialog_Listar.getContentPane().add(Panel_Listar);
@@ -1001,7 +985,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Borrar.getContentPane().add(Panel_Decoracion_Borrar);
-        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 50);
 
         Panel_Borrar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1018,16 +1002,16 @@ public class Main extends javax.swing.JFrame {
         Panel_BorrarLayout.setHorizontalGroup(
             Panel_BorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_BorrarLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addComponent(Regresar_Borrar)
-                .addContainerGap(481, Short.MAX_VALUE))
+                .addContainerGap(505, Short.MAX_VALUE))
         );
         Panel_BorrarLayout.setVerticalGroup(
             Panel_BorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_BorrarLayout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
+            .addGroup(Panel_BorrarLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(Regresar_Borrar)
-                .addGap(50, 50, 50))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
 
         Dialog_Borrar.getContentPane().add(Panel_Borrar);
@@ -1049,23 +1033,20 @@ public class Main extends javax.swing.JFrame {
             Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
             .addGroup(Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Panel_Decoracion_CruzarLayout.createSequentialGroup()
-                    .addGap(0, 217, Short.MAX_VALUE)
-                    .addComponent(Titulo_Cruzar)
-                    .addGap(0, 217, Short.MAX_VALUE)))
+                .addComponent(Titulo_Cruzar, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
         );
         Panel_Decoracion_CruzarLayout.setVerticalGroup(
             Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
             .addGroup(Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Panel_Decoracion_CruzarLayout.createSequentialGroup()
-                    .addGap(0, 9, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Decoracion_CruzarLayout.createSequentialGroup()
+                    .addContainerGap(9, Short.MAX_VALUE)
                     .addComponent(Titulo_Cruzar)
-                    .addGap(0, 10, Short.MAX_VALUE)))
+                    .addContainerGap(10, Short.MAX_VALUE)))
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Decoracion_Cruzar);
-        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 50);
 
         Panel_Cruzar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1079,14 +1060,17 @@ public class Main extends javax.swing.JFrame {
 
         Instruccion11.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         Instruccion11.setForeground(new java.awt.Color(255, 255, 255));
+        Instruccion11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Instruccion11.setText("Mostrar tabla de campos del archivo 1 (actual)*");
 
         Instruccion12.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         Instruccion12.setForeground(new java.awt.Color(255, 255, 255));
+        Instruccion12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Instruccion12.setText("Mostrar tabla de campos del archivo 2 (seleccionado para cruzar)*");
 
         Instruccion13.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         Instruccion13.setForeground(new java.awt.Color(255, 255, 255));
+        Instruccion13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Instruccion13.setText("Seleccionar campos para relacionar*");
 
         B_DesplegarCamposRelacionados.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -1117,40 +1101,34 @@ public class Main extends javax.swing.JFrame {
             .addGroup(Panel_CruzarLayout.createSequentialGroup()
                 .addGroup(Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_CruzarLayout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(Instruccion13))
-                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addComponent(B_DesplegarCamposRelacionados)
                         .addGap(28, 28, 28)
                         .addComponent(B_EnviarCamposTercerArchivo))
                     .addGroup(Panel_CruzarLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(Regresar_Cruzar))
-                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(Instruccion11))
-                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(Instruccion12)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(Regresar_Cruzar)))
+                .addContainerGap(96, Short.MAX_VALUE))
+            .addComponent(Instruccion11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Instruccion12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Instruccion13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Panel_CruzarLayout.setVerticalGroup(
             Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_CruzarLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
+                .addComponent(Regresar_Cruzar)
+                .addGap(50, 50, 50)
                 .addComponent(Instruccion11)
-                .addGap(61, 61, 61)
+                .addGap(31, 31, 31)
                 .addComponent(Instruccion12)
-                .addGap(77, 77, 77)
+                .addGap(29, 29, 29)
                 .addComponent(Instruccion13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(B_DesplegarCamposRelacionados)
                     .addComponent(B_EnviarCamposTercerArchivo))
-                .addGap(36, 36, 36)
-                .addComponent(Regresar_Cruzar)
-                .addGap(54, 54, 54))
+                .addGap(81, 81, 81))
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Cruzar);
@@ -1869,7 +1847,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_IntroducirRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IntroducirRegistroMouseClicked
         // TODO add your handling code here:
-        
+
         Dialog_Introducir.setTitle("Standard File Manager");
         Dialog_Introducir.setModal(true);
         Dialog_Introducir.pack();
@@ -1895,7 +1873,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_ListarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ListarRegistroMouseClicked
         // TODO add your handling code here:
-        if(file.canBeEnableCampos()){
+        if (file.canBeEnableCampos()) {
             JOptionPane.showMessageDialog(null, "No hay ningun registro para mostrar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -2056,7 +2034,7 @@ public class Main extends javax.swing.JFrame {
     private void B_BuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BuscarRegistroMouseClicked
         // TODO add your handling code here:
         String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a buscar: ");
-        
+
         Dialog_Buscar.setTitle("Standard File Manager");
         Dialog_Buscar.setModal(true);
         Dialog_Buscar.pack();
@@ -2065,7 +2043,7 @@ public class Main extends javax.swing.JFrame {
         Dialog_Buscar.setLocationRelativeTo(this);
         Dialog_Buscar.setVisible(true);
         //Comentado aproposito por Fer, mientras se implementa arbol
-        
+
 //        //Busqueda en el arbol mediante llave primaria
 //        int rnn = 1;
 //        //una vez encontro la posicion del registro lo lista en la tabla
@@ -2152,18 +2130,34 @@ public class Main extends javax.swing.JFrame {
 
     private void B_AnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_AnteriorMouseClicked
         // TODO add your handling code here:
+        ArrayList<Campo> C = file.getListaCampos();
+        currentIndex = (currentIndex - 1 + C.size()) % C.size();
+        Campo campoActual = C.get(currentIndex);
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + "}");
     }//GEN-LAST:event_B_AnteriorMouseClicked
 
     private void B_SiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SiguienteMouseClicked
         // TODO add your handling code here:
+        ArrayList<Campo> C = file.getListaCampos();
+        currentIndex = (currentIndex + 1) % C.size();
+        Campo campoActual = C.get(currentIndex);
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + "}");
     }//GEN-LAST:event_B_SiguienteMouseClicked
 
     private void B_AnteriorModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_AnteriorModifMouseClicked
         // TODO add your handling code here:
+        ArrayList<Campo> C = file.getListaCampos();
+        currentIndex = (currentIndex - 1 + C.size()) % C.size();
+        Campo campoActual = C.get(currentIndex);
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + "}");
     }//GEN-LAST:event_B_AnteriorModifMouseClicked
 
     private void B_SiguienteModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SiguienteModifMouseClicked
         // TODO add your handling code here:
+        ArrayList<Campo> C = file.getListaCampos();
+        currentIndex = (currentIndex + 1) % C.size();
+        Campo campoActual = C.get(currentIndex);
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + "}");
     }//GEN-LAST:event_B_SiguienteModifMouseClicked
 
     public static void main(String args[]) {
@@ -2304,6 +2298,7 @@ public class Main extends javax.swing.JFrame {
     //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     public Campo campo;
+    private int currentIndex;
 
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
     //Campo: Nombre,Tipo,Tamano
@@ -2337,15 +2332,17 @@ public class Main extends javax.swing.JFrame {
 
         // Limpiar la tabla
         T.setRowCount(0);
-        if(isListar)file.getRegisterTest();
+        if (isListar) {
+            file.getRegisterTest();
+        }
 
         if (!file.getListaRegistro().isEmpty()) {
-            for (int i = 0; i < file.getListaRegistro().size(); i++){
+            for (int i = 0; i < file.getListaRegistro().size(); i++) {
                 T.addRow(file.getListaRegistro().get(i));
             }
             file.getListaRegistro().clear();
         }
-        
+
     }
 
     //Este metodo es para reproducir sonidos en el programa
