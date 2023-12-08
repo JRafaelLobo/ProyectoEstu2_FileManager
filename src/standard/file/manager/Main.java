@@ -2291,6 +2291,7 @@ public class Main extends javax.swing.JFrame {
     private String ArchivoCruzado = "";
     private Archivos file = new Archivos();
     private Archivos cruzado = new Archivos();
+    private NodoArbol Arbol;
     //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     public Campo campo;

@@ -21,6 +21,7 @@ import java.util.Comparator;
  */
 public class NodoArbol implements Serializable {
 
+    //
     private ArrayList<NodoArbol> hijos = new ArrayList();
     private NodoArbol padre;
     private ArrayList<Llave> llaves = new ArrayList();
@@ -53,6 +54,21 @@ public class NodoArbol implements Serializable {
      * @return Retorna true si la accion se realizo de forma correcta.
      */
     public boolean Insertar(Llave dato) {
+        if (this.EsHoja()) {
+            this.llaves.add(dato);
+            if (this.llaves.size() >= T - 1) {
+                this.split();
+            }
+            return true;
+        }
+        for (int i = 0; i < this.llaves.size(); i++) {
+            if (compararAlfabeticamente(dato.toString(), this.llaves.get(i).toString())) {
+                return this.hijos.get(i).Insertar(dato);
+            }
+        }
+        if (compararAlfabeticamente(this.llaves.get(this.llaves.size() - 1).toString(), dato.toString())) {
+            return this.hijos.get(this.llaves.size()).Insertar(dato);
+        }
         return false;
     }
 
@@ -63,6 +79,20 @@ public class NodoArbol implements Serializable {
      * @return Retorna true si la accion se realizo de forma correcta.
      */
     public boolean Eliminar(Llave dato) {
+        for (int i = 0; i < this.llaves.size(); i++) {
+            if (this.llaves.get(i).toString().equals(dato)) {
+                this.llaves.remove(i);
+                if(this.llaves.size()<(T-1)/2){
+                    this.merch();
+                }
+            }
+            if (compararAlfabeticamente(dato.toString(), this.llaves.get(i).toString())) {
+                return this.GetHijo(i).Eliminar(dato);
+            }
+        }
+        if (compararAlfabeticamente(this.llaves.get(this.llaves.size() - 1).toString(), llave.toString())) {
+            return this.hijos.get(this.llaves.size()).Eliminar(dato);
+        }
         return false;
     }
 
@@ -73,6 +103,17 @@ public class NodoArbol implements Serializable {
      * @return Retorna true si la accion se realizo de forma correcta.
      */
     public int Buscar(String llave) {
+        for (int i = 0; i < this.llaves.size(); i++) {
+            if (this.llaves.get(i).toString().equals(llave)) {
+                return this.llaves.get(i).getRnn();
+            }
+            if (compararAlfabeticamente(llave.toString(), this.llaves.get(i).toString())) {
+                return this.GetHijo(i).Buscar(llave);
+            }
+        }
+        if (compararAlfabeticamente(this.llaves.get(this.llaves.size() - 1).toString(), llave.toString())) {
+            return this.hijos.get(this.llaves.size()).Buscar(llave);
+        }
         return -1;
     }
 
@@ -130,7 +171,10 @@ public class NodoArbol implements Serializable {
             NA.GetLlaves().add(this.llaves.get(i));
             this.llaves.remove(i);
         }
+        this.padre.addHijo(NA);
+        //No es necesario
         Collections.sort(NA.GetLlaves(), Comparator.comparing(Object::toString));
+
         //Creacion del nuevo nodo
     }
 
@@ -178,10 +222,7 @@ public class NodoArbol implements Serializable {
      * @return Retorna true si es hoja
      */
     public boolean EsHoja() {
-        if (hijos.isEmpty()) {
-            return true;
-        }
-        return false;
+        return hijos.isEmpty();
     }
 
     private boolean compararAlfabeticamente(String menor, String mayor) {
