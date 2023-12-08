@@ -553,7 +553,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Registros.getContentPane().add(I_Fondo_Registro);
-        I_Fondo_Registro.setBounds(0, 0, 100, 100);
+        I_Fondo_Registro.setBounds(0, 0, 0, 0);
 
         Jmenu_Regresar.setText("Regresar");
         Jmenu_Regresar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -593,7 +593,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Introducir.getContentPane().add(Panel_Decoracion_Introducir);
-        Panel_Decoracion_Introducir.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Introducir.setBounds(0, 0, 600, 0);
 
         Panel_Introducir.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -710,7 +710,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(Panel_Decoracion_ModificarLayout.createSequentialGroup()
                     .addGap(0, 202, Short.MAX_VALUE)
                     .addComponent(Titulo_Modificar)
-                    .addGap(0, 203, Short.MAX_VALUE)))
+                    .addGap(0, 202, Short.MAX_VALUE)))
         );
         Panel_Decoracion_ModificarLayout.setVerticalGroup(
             Panel_Decoracion_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -723,7 +723,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Modificar.getContentPane().add(Panel_Decoracion_Modificar);
-        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 50);
 
         Panel_Modificar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1921,14 +1921,24 @@ public class Main extends javax.swing.JFrame {
     private void B_ModificarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarRegistroMouseClicked
         // TODO add your handling code here:
         String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a modificar: ");
+        rnn = 0;
+        if (!file.buscarUnRegistro(rnn)) {
+            JOptionPane.showMessageDialog(null, "No se encontro el registro", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         // buscar registro y setear en el Jlabel el registro anterior para que vea como estaba antes e ingrese la modificacion
         Dialog_Modificar.setTitle("Standard File Manager");
-        Dialog_Modificar.setModal(true);
         Dialog_Modificar.pack();
         Dialog_Modificar.setSize(600, 450);
         Dialog_Modificar.setResizable(false);
         Dialog_Modificar.setLocationRelativeTo(this);
+        ArrayList<Campo> C = file.getListaCampos();
+        currentIndex = 0;
+        campoActual = C.get(currentIndex);
+        J_OrdenCampos.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
+        registroModificar = file.getListaRegistro().get(0);
 
+        J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
         Font f;
         int x = Dialog_Modificar.getWidth();
         int y = Dialog_Modificar.getHeight();
@@ -1940,6 +1950,7 @@ public class Main extends javax.swing.JFrame {
         }
         Regresar_Modificar.setSize(90, 25);
         Regresar_Modificar.setFont(f);
+        Dialog_Modificar.setModal(true);
         Dialog_Modificar.setVisible(true);
     }//GEN-LAST:event_B_ModificarRegistroMouseClicked
 
@@ -2124,7 +2135,6 @@ public class Main extends javax.swing.JFrame {
 
     private void Regresar_ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_ModificarMouseClicked
         // TODO add your handling code here:
-        JF_Registros.setVisible(true);
         Dialog_Modificar.setVisible(false);
     }//GEN-LAST:event_Regresar_ModificarMouseClicked
 
@@ -2195,11 +2205,16 @@ public class Main extends javax.swing.JFrame {
                 System.err.println("Error al convertir a double: " + e.getMessage());
                 return;
             }
-                break;
+            break;
         }
-        
-        if(text.length() > campoActual.getTamano()){
+
+        if (text.length() > campoActual.getTamano()) {
             JOptionPane.showMessageDialog(rootPane, "Los datos ingresados exceden la longitud estipulada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (campoActual.isEsLLave() && text.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El campo es una llave primaria por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         registroIngresar.add(currentIndex, text);
@@ -2212,18 +2227,67 @@ public class Main extends javax.swing.JFrame {
 
     private void B_AnteriorModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_AnteriorModifMouseClicked
         // TODO add your handling code here:
+        if (currentIndex == 0) {
+            return;
+        }
+        TF_Modificacion.setText("");
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex - 1 + C.size()) % C.size();
-        Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
+        campoActual = C.get(currentIndex);
+        registroIngresar.removeLast();
+        J_OrdenCampos.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
+        J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
     }//GEN-LAST:event_B_AnteriorModifMouseClicked
 
     private void B_SiguienteModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SiguienteModifMouseClicked
         // TODO add your handling code here:
+        if (currentIndex == file.getListaCampos().size() - 1) {
+            JOptionPane.showMessageDialog(null, "No hay mas campos si desea puede guardar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        String text = TF_Modificacion.getText();
+        if (text.length() == 0) {
+            text = (String) registroModificar[currentIndex];
+        }
+        switch (campoActual.getTipo()) {
+            case "int":
+                try {
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
+            case "double":
+                try {
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
+        }
+
+        if (text.length() > campoActual.getTamano()) {
+            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados exceden la longitud estipulada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (campoActual.isEsLLave() && text.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El campo es una llave primaria por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        registroIngresar.add(currentIndex, text);
+        TF_Modificacion.setText("");
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex + 1) % C.size();
-        Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
+        campoActual = C.get(currentIndex);
+        J_OrdenCampos.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
+        J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
     }//GEN-LAST:event_B_SiguienteModifMouseClicked
 
     private void B_GuardarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarRegistroMouseClicked
@@ -2253,21 +2317,21 @@ public class Main extends javax.swing.JFrame {
                 System.err.println("Error al convertir a double: " + e.getMessage());
                 return;
             }
-                break;
+            break;
         }
-        
-        if(text.length() > campoActual.getTamano()){
+
+        if (text.length() > campoActual.getTamano()) {
             JOptionPane.showMessageDialog(rootPane, "Los datos ingresados exceden la longitud estipulada", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         registroIngresar.add(currentIndex, text);
         //Metodo para guardar registro
         String registro = "";
-        for(int i=0; i < registroIngresar.size(); i++){
-            registro += registroIngresar.get(i)+"|";
+        for (int i = 0; i < registroIngresar.size(); i++) {
+            registro += registroIngresar.get(i) + "|";
         }
         boolean isInserto = file.insertarRegistro(registro);
-        if(!isInserto){
+        if (!isInserto) {
             JOptionPane.showMessageDialog(null, "El registro no se pudo guardar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         }
         JOptionPane.showMessageDialog(null, "El registro se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -2279,8 +2343,56 @@ public class Main extends javax.swing.JFrame {
     private void B_GuardarModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarModifMouseClicked
         // TODO add your handling code here:
         //Metodo para guardar la modificacion
+        if (currentIndex != file.getListaCampos().size() - 1) {
+            return;
+        }
+        String text = TF_Modificacion.getText();
+
+        if (text.length() == 0) {
+            text = (String) registroModificar[currentIndex];
+        }
+        switch (campoActual.getTipo()) {
+            case "int":
+                try {
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
+            case "double":
+                try {
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
+        }
+
+        if (text.length() > campoActual.getTamano()) {
+            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados exceden la longitud estipulada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        registroIngresar.add(currentIndex, text);
+        //Metodo para guardar registro
+        String registro = "";
+        for (int i = 0; i < registroIngresar.size(); i++) {
+            registro += registroIngresar.get(i) + "|";
+        }
+        boolean isModifico = file.modificarRegistro(registro, rnn);
+        if (!isModifico) {
+            JOptionPane.showMessageDialog(null, "El registro no se pudo modificar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        }
         JOptionPane.showMessageDialog(null, "El registro se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-        TF_Modificacion.setText("");
+        TF_Modificacion.setText("");        
+        registroIngresar.clear();
+        Dialog_Modificar.setVisible(false);
+        rnn = -1;
     }//GEN-LAST:event_B_GuardarModifMouseClicked
 
     private void Jmenu_RegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jmenu_RegresarMouseClicked
@@ -2432,6 +2544,8 @@ public class Main extends javax.swing.JFrame {
     private Clip Music;
     private Campo campoActual;
     private int currentIndex;
+    Object[] registroModificar;
+    int rnn = -1;
     private ArrayList<String> registroIngresar = new ArrayList();
 
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
