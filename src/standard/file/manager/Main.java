@@ -97,6 +97,8 @@ public class Main extends javax.swing.JFrame {
         B_ListarRegistro = new boton();
         I_Registro_Decoracion = new FondoPanel("./Imagenes\\Icono2.png");
         I_Fondo_Registro = new javax.swing.JPanel();
+        Menu_Regresar = new javax.swing.JMenuBar();
+        Jmenu_Regresar = new javax.swing.JMenu();
         Dialog_Introducir = new javax.swing.JDialog();
         Panel_Decoracion_Introducir = new javax.swing.JPanel();
         Titulo_Introducir = new javax.swing.JLabel();
@@ -163,7 +165,6 @@ public class Main extends javax.swing.JFrame {
         B_Archivo_Guardar = new javax.swing.JMenuItem();
         B_Archivo_Cerrar = new javax.swing.JMenuItem();
         B_Archivo_Salir = new javax.swing.JMenuItem();
-        B_Archivo_Regresar = new javax.swing.JMenuItem();
 
         Portadita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Portadita.setTitle("Standard File Manager");
@@ -552,7 +553,17 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Registros.getContentPane().add(I_Fondo_Registro);
-        I_Fondo_Registro.setBounds(0, 0, 0, 0);
+        I_Fondo_Registro.setBounds(0, 0, 100, 100);
+
+        Jmenu_Regresar.setText("Regresar");
+        Jmenu_Regresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Jmenu_RegresarMouseClicked(evt);
+            }
+        });
+        Menu_Regresar.add(Jmenu_Regresar);
+
+        JF_Registros.setJMenuBar(Menu_Regresar);
 
         Dialog_Introducir.getContentPane().setLayout(null);
 
@@ -655,7 +666,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(Panel_IntroducirLayout.createSequentialGroup()
                         .addGap(245, 245, 245)
                         .addComponent(B_GuardarRegistro)))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         Panel_IntroducirLayout.setVerticalGroup(
             Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,7 +723,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Modificar.getContentPane().add(Panel_Decoracion_Modificar);
-        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 0);
 
         Panel_Modificar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -859,7 +870,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Buscar.getContentPane().add(Panel_Decoracion_Buscar);
-        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 0);
 
         Panel_Buscar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -936,7 +947,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Listar.getContentPane().add(Panel_Decoracion_Listar);
-        Panel_Decoracion_Listar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Listar.setBounds(0, 0, 600, 0);
 
         Panel_Listar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1016,7 +1027,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Borrar.getContentPane().add(Panel_Decoracion_Borrar);
-        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Borrar.setBounds(0, 0, 600, 0);
 
         Panel_Borrar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1077,7 +1088,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Decoracion_Cruzar);
-        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 0);
 
         Panel_Cruzar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1292,14 +1303,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu1.add(B_Archivo_Salir);
-
-        B_Archivo_Regresar.setText("Regresar");
-        B_Archivo_Regresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_Archivo_RegresarActionPerformed(evt);
-            }
-        });
-        jMenu1.add(B_Archivo_Regresar);
 
         jMenuBar1.add(jMenu1);
 
@@ -1868,11 +1871,11 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         this.setVisible(false);
-        JF_Registros.setJMenuBar(jMenuBar1);
         JF_Registros.pack();
-        JF_Registros.setVisible(true);
         JF_Registros.setSize(this.getWidth(), this.getHeight());
         JF_Registros.setLocationRelativeTo(this);
+        JF_Registros.setVisible(true);
+
 
     }//GEN-LAST:event_B_RegistrosMouseClicked
 
@@ -1885,6 +1888,10 @@ public class Main extends javax.swing.JFrame {
         Dialog_Introducir.setSize(600, 450);
         Dialog_Introducir.setResizable(false);
         Dialog_Introducir.setLocationRelativeTo(this);
+        ArrayList<Campo> C = file.getListaCampos();
+        currentIndex = 0;
+        campoActual = C.get(currentIndex);
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
         Dialog_Introducir.setVisible(true);
 
         Font f;
@@ -1921,7 +1928,6 @@ public class Main extends javax.swing.JFrame {
         Dialog_Modificar.setSize(600, 450);
         Dialog_Modificar.setResizable(false);
         Dialog_Modificar.setLocationRelativeTo(this);
-        Dialog_Modificar.setVisible(true);
 
         Font f;
         int x = Dialog_Modificar.getWidth();
@@ -1934,6 +1940,7 @@ public class Main extends javax.swing.JFrame {
         }
         Regresar_Modificar.setSize(90, 25);
         Regresar_Modificar.setFont(f);
+        Dialog_Modificar.setVisible(true);
     }//GEN-LAST:event_B_ModificarRegistroMouseClicked
 
     private void B_BorrarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarRegistroMouseClicked
@@ -2147,32 +2154,60 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_B_DesplegarCamposRelacionadosActionPerformed
 
-    private void B_Archivo_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_RegresarActionPerformed
-        // TODO add your handling code here:
-        if (this.isVisible()) {
-            return;
-        }
-        JF_Campos.setVisible(false);
-        JF_Registros.setVisible(false);
-        this.setJMenuBar(jMenuBar1);
-        B_Campos.setEnabled(file.canBeEnableCampos());
-        this.setVisible(true);
-    }//GEN-LAST:event_B_Archivo_RegresarActionPerformed
-
     private void B_AnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_AnteriorMouseClicked
         // TODO add your handling code here:
+        if (currentIndex == 0) {
+            return;
+        }
+        TF_NuevoRegistro.setText("");
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex - 1 + C.size()) % C.size();
-        Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave()+ "}");
+        registroIngresar.removeLast();
+        campoActual = C.get(currentIndex);
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
     }//GEN-LAST:event_B_AnteriorMouseClicked
 
     private void B_SiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SiguienteMouseClicked
         // TODO add your handling code here:
+        if (currentIndex == file.getListaCampos().size() - 1) {
+            JOptionPane.showMessageDialog(null, "No hay mas campos si desea puede guardar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        String text = TF_NuevoRegistro.getText();
+
+        switch (campoActual.getTipo()) {
+            case "int":
+                try {
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
+            case "double":
+                try {
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+                break;
+        }
+        
+        if(text.length() > campoActual.getTamano()){
+            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados exceden la longitud estipulada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        registroIngresar.add(currentIndex, text);
+        TF_NuevoRegistro.setText("");
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex + 1) % C.size();
-        Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave()+ "}");
+        campoActual = C.get(currentIndex);
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
     }//GEN-LAST:event_B_SiguienteMouseClicked
 
     private void B_AnteriorModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_AnteriorModifMouseClicked
@@ -2180,7 +2215,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex - 1 + C.size()) % C.size();
         Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave()+ "}");
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
     }//GEN-LAST:event_B_AnteriorModifMouseClicked
 
     private void B_SiguienteModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SiguienteModifMouseClicked
@@ -2188,15 +2223,57 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Campo> C = file.getListaCampos();
         currentIndex = (currentIndex + 1) % C.size();
         Campo campoActual = C.get(currentIndex);
-        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave()+ "}");
+        J_OrdenCampoInt.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
     }//GEN-LAST:event_B_SiguienteModifMouseClicked
 
     private void B_GuardarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarRegistroMouseClicked
         // TODO add your handling code here:
+        if (currentIndex != file.getListaCampos().size() - 1) {
+            return;
+        }
+        String text = TF_NuevoRegistro.getText();
+
+        switch (campoActual.getTipo()) {
+            case "int":
+                try {
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
+            case "double":
+                try {
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+                break;
+        }
         
+        if(text.length() > campoActual.getTamano()){
+            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados exceden la longitud estipulada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        registroIngresar.add(currentIndex, text);
         //Metodo para guardar registro
+        String registro = "";
+        for(int i=0; i < registroIngresar.size(); i++){
+            registro += registroIngresar.get(i)+"|";
+        }
+        boolean isInserto = file.insertarRegistro(registro);
+        if(!isInserto){
+            JOptionPane.showMessageDialog(null, "El registro no se pudo guardar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        }
         JOptionPane.showMessageDialog(null, "El registro se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         TF_NuevoRegistro.setText("");
+        registroIngresar.clear();
+        Dialog_Introducir.setVisible(false);
     }//GEN-LAST:event_B_GuardarRegistroMouseClicked
 
     private void B_GuardarModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarModifMouseClicked
@@ -2205,6 +2282,13 @@ public class Main extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "El registro se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         TF_Modificacion.setText("");
     }//GEN-LAST:event_B_GuardarModifMouseClicked
+
+    private void Jmenu_RegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jmenu_RegresarMouseClicked
+        // TODO add your handling code here:
+        JF_Registros.setVisible(false);
+        B_Campos.setEnabled(file.canBeEnableCampos());
+        this.setVisible(true);
+    }//GEN-LAST:event_Jmenu_RegresarMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -2240,7 +2324,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem B_Archivo_Cerrar;
     private javax.swing.JMenuItem B_Archivo_Guardar;
     private javax.swing.JMenuItem B_Archivo_Nuevo;
-    private javax.swing.JMenuItem B_Archivo_Regresar;
     private javax.swing.JMenuItem B_Archivo_Salir;
     private javax.swing.JButton B_BorrarCampo;
     private javax.swing.JButton B_BorrarRegistro;
@@ -2295,6 +2378,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel J_OrdenCampoInt;
     private javax.swing.JLabel J_OrdenCampos;
     private javax.swing.JLabel J_RegistroAnterior;
+    private javax.swing.JMenu Jmenu_Regresar;
+    private javax.swing.JMenuBar Menu_Regresar;
     private javax.swing.JPanel P_CrearCapo_Decoracion;
     private javax.swing.JPanel PanelCrearCampo;
     private javax.swing.JPanel Panel_Borrar;
@@ -2345,8 +2430,9 @@ public class Main extends javax.swing.JFrame {
     private Archivos cruzado = new Archivos();
     //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
-    public Campo campo;
+    private Campo campoActual;
     private int currentIndex;
+    private ArrayList<String> registroIngresar = new ArrayList();
 
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
     //Campo: Nombre,Tipo,Tamano
