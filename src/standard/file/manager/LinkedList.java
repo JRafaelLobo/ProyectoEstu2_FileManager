@@ -25,6 +25,18 @@ public class LinkedList {
         return this.last;
     }
 
+    public void clearAvai(){
+        this.cabeza = this.last = new Nodo(-1);
+    }
+    private boolean Exist(Object slot){
+        Nodo temp = this.cabeza;
+        
+        while(temp != null && !temp.getSlot().equals(slot)){
+            temp = temp.getSiguiente();
+        }
+        
+        return temp== null? false: temp.getSlot().equals(slot);
+    }
     public void constructionAvai(Object newSlot) {
         if (newSlot.equals(-1)) {
             return;
