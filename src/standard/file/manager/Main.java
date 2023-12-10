@@ -56,52 +56,6 @@ public class Main extends javax.swing.JFrame {
         //05172d
         //FF7048
         //font Moncerath,Bethicai
-        BTree bTree = new BTree(6);
-//        BTreeSerialization fileTree = new BTreeSerialization();
-        // Crear llaves con IDs únicos de 8 dígitos
-        Llave[] keys = {
-            new Llave("A",0),
-            new Llave("B",1),
-            new Llave("C",2),
-            new Llave("D",3),
-            new Llave("F",4),
-            new Llave("G",5),
-            new Llave("H",6),
-            new Llave("I",7),
-            new Llave("J",8),            
-            new Llave("K",9),   
-            new Llave("L",10),   
-            new Llave("M",11),   
-            new Llave("N",12),   
-            new Llave("O",13),   
-            new Llave("P",14),   
-            new Llave("Q",15),   
-   
-        };
-        
-
-        // Insertar llaves en el árbol B
-        for (Llave key : keys) {
-            bTree.insert(key);
-        }
-        //bTree = fileTree.loadBTreeFromFile("Hola.tree");
-//        Llave hi = new Llave("11111111",888);
-//        bTree.delete(hi);
-//        System.out.println(bTree.search("99999999", bTree.getRoot()));
-        bTree.printBTree(bTree.getRoot(), "", true);
-        //System.out.println(bTree.search("22132928", bTree.getRoot()));
-    }
-
-    private static String generateRandomId(int i) {
-        Random random = new Random();
-        int randomId = 10000000 + random.nextInt(90000000); // Rango de 10^7 a 10^8 - 1
-        if (i == 887) {
-            return "11111111";
-        }
-        if (i == 765) {
-            return "99999999";
-        }
-        return String.valueOf(randomId);
     }
 
     @SuppressWarnings("unchecked")
