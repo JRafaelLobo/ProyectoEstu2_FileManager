@@ -738,11 +738,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-=======
                   <Component id="Titulo_InstruccionIntroducir" alignment="1" max="32767" attributes="0"/>
                   <Component id="J_OrdenCampoInt" alignment="0" max="32767" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -765,28 +762,14 @@
                               <Component id="B_GuardarRegistro" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-<<<<<<< HEAD
-                      <EmptySpace pref="145" max="32767" attributes="0"/>
-=======
                       <EmptySpace pref="134" max="32767" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-<<<<<<< HEAD
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                      <Component id="Titulo_InstruccionIntroducir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="J_OrdenCampoInt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="TF_NuevoRegistro" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace pref="81" max="32767" attributes="0"/>
-=======
                       <EmptySpace max="-2" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                       <Component id="Regresar_Introducir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="Titulo_InstruccionIntroducir" min="-2" max="-2" attributes="0"/>
@@ -846,8 +829,6 @@
                 <Property name="text" type="java.lang.String" value="Ingrese el nuevo registro en el siguiente orden:"/>
               </Properties>
             </Component>
-<<<<<<< HEAD
-=======
             <Component class="javax.swing.JButton" name="B_Anterior">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -881,7 +862,6 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B_GuardarRegistroMouseClicked"/>
               </Events>
             </Component>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
           </SubComponents>
         </Container>
       </SubComponents>
@@ -963,15 +943,11 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-                  <Group type="102" alignment="0" attributes="0">
-=======
                   <Component id="J_OrdenCampos" alignment="0" max="32767" attributes="0"/>
                   <Component id="Titulo_RegistroAnt" max="32767" attributes="0"/>
                   <Component id="J_RegistroAnterior" alignment="0" max="32767" attributes="0"/>
                   <Component id="Titulo_Instruccion" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
@@ -991,38 +967,14 @@
                               <Component id="Regresar_Modificar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-<<<<<<< HEAD
-                      <EmptySpace pref="126" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="Regresar_Modificar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-=======
                       <EmptySpace pref="123" max="32767" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-<<<<<<< HEAD
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="J_RegistroAnterior" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Titulo_RegistroAnt" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="Titulo_Instruccion" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="J_OrdenCampos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="TF_Modificacion" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace pref="74" max="32767" attributes="0"/>
-=======
                       <EmptySpace max="-2" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                       <Component id="Regresar_Modificar" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -1118,8 +1070,6 @@
                 <Property name="text" type="java.lang.String" value="Registro anterior:"/>
               </Properties>
             </Component>
-<<<<<<< HEAD
-=======
             <Component class="javax.swing.JButton" name="B_AnteriorModif">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1153,7 +1103,6 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B_GuardarModifMouseClicked"/>
               </Events>
             </Component>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
           </SubComponents>
         </Container>
       </SubComponents>
@@ -1231,38 +1180,18 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-=======
                   <Component id="Instruccion7" alignment="0" max="32767" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Regresar_Buscar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
-<<<<<<< HEAD
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="182" max="32767" attributes="0"/>
-                      <Component id="Instruccion8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
-                  </Group>
-=======
                   <Component id="Instruccion8" alignment="0" pref="600" max="32767" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-<<<<<<< HEAD
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Component id="Instruccion7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="Instruccion8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="171" max="32767" attributes="0"/>
-                      <Component id="Regresar_Buscar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-=======
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Regresar_Buscar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -1270,7 +1199,6 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Instruccion8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="289" max="32767" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1389,27 +1317,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-<<<<<<< HEAD
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="Regresar_Listar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
-                              <Component id="Instruccion9" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                              <Component id="Instruccion10" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="135" max="32767" attributes="0"/>
-=======
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Regresar_Listar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                   </Group>
                   <Component id="Instruccion9" max="32767" attributes="0"/>
                   <Component id="Instruccion10" alignment="0" pref="600" max="32767" attributes="0"/>
@@ -1418,15 +1328,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-<<<<<<< HEAD
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="Instruccion9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="Instruccion10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="187" max="32767" attributes="0"/>
-=======
                       <EmptySpace max="-2" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                       <Component id="Regresar_Listar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Instruccion9" min="-2" max="-2" attributes="0"/>
@@ -1673,11 +1575,7 @@
                               <Component id="Regresar_Cruzar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-<<<<<<< HEAD
-                      <EmptySpace pref="65" max="32767" attributes="0"/>
-=======
                       <EmptySpace pref="96" max="32767" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                   </Group>
                   <Component id="Instruccion11" max="32767" attributes="0"/>
                   <Component id="Instruccion12" alignment="0" max="32767" attributes="0"/>
@@ -1687,13 +1585,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-<<<<<<< HEAD
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-=======
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Regresar_Cruzar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                       <Component id="Instruccion11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="Instruccion12" min="-2" max="-2" attributes="0"/>
@@ -1704,13 +1598,7 @@
                           <Component id="B_DesplegarCamposRelacionados" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="B_EnviarCamposTercerArchivo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-<<<<<<< HEAD
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="Regresar_Cruzar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-=======
                       <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
                   </Group>
               </Group>
             </DimensionLayout>

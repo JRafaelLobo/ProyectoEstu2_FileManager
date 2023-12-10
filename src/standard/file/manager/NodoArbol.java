@@ -90,7 +90,7 @@ public class NodoArbol implements Serializable {
                 return this.GetHijo(i).Eliminar(dato);
             }
         }
-        if (compararAlfabeticamente(this.llaves.get(this.llaves.size() - 1).toString(), llave.toString())) {
+        if (compararAlfabeticamente(this.llaves.get(this.llaves.size() - 1).toString(), dato.toString())) {
             return this.hijos.get(this.llaves.size()).Eliminar(dato);
         }
         return false;

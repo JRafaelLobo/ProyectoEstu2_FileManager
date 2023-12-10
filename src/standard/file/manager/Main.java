@@ -22,6 +22,7 @@ import javax.swing.UIDefaults;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.Random;
 
 public class Main extends javax.swing.JFrame {
 
@@ -2389,7 +2390,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El registro no se pudo modificar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         }
         JOptionPane.showMessageDialog(null, "El registro se modifico con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-        TF_Modificacion.setText("");        
+        TF_Modificacion.setText("");
         registroIngresar.clear();
         Dialog_Modificar.setVisible(false);
         rnn = -1;

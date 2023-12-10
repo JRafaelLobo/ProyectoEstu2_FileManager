@@ -1,5 +1,5 @@
 package standard.file.manager;
-
+import java.io.Serializable;
 /**
  * La clase {@code Llave}
  *
@@ -15,7 +15,7 @@ package standard.file.manager;
  * @version  xd
  * @since 2023-12-3
  */
-public class Llave {
+public class Llave implements Serializable {
 
     private String nombre;
     private int rnn;
