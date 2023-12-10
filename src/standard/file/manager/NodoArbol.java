@@ -82,7 +82,7 @@ public class NodoArbol implements Serializable {
         for (int i = 0; i < this.llaves.size(); i++) {
             if (this.llaves.get(i).toString().equals(dato)) {
                 this.llaves.remove(i);
-                if(this.llaves.size()<(T-1)/2){
+                if (this.llaves.size() < (T - 1) / 2) {
                     this.merch();
                 }
             }
@@ -90,7 +90,7 @@ public class NodoArbol implements Serializable {
                 return this.GetHijo(i).Eliminar(dato);
             }
         }
-        if (compararAlfabeticamente(this.llaves.get(this.llaves.size() - 1).toString(), llave.toString())) {
+        if (compararAlfabeticamente(this.llaves.get(this.llaves.size() - 1).toString(), dato.toString())) {
             return this.hijos.get(this.llaves.size()).Eliminar(dato);
         }
         return false;
@@ -172,6 +172,13 @@ public class NodoArbol implements Serializable {
             this.llaves.remove(i);
         }
         this.padre.addHijo(NA);
+
+        if (!this.EsHoja()) {
+            for (int i = this.GetLlaves().size() + 1; i < this.getHijos().size(); i++) {
+                NA.addHijo(this.GetHijo(i));
+                this.getHijos().remove(i);
+            }
+        }
         //No es necesario
         Collections.sort(NA.GetLlaves(), Comparator.comparing(Object::toString));
 
@@ -179,7 +186,35 @@ public class NodoArbol implements Serializable {
     }
 
     private void merch() {
+        ArrayList<NodoArbol> HijosDePadre = this.padre.getHijos();
+        NodoArbol NodoACombinar;
+        int yo = QueHijoSoy();
+        int T1 = -1, T2 = -1, num = -1;
+        if (HijosDePadre.size() <= yo + 1) {
+            T2 = HijosDePadre.get(yo + 1).GetLlaves().size();
+        }
+        if (yo != 0) {
+            T1 = HijosDePadre.get(yo - 1).GetLlaves().size();
+        }
+        if (T1 < T2) {
+            NodoACombinar = HijosDePadre.get(T1);
+            num = T1;
+        } else {
+            NodoACombinar = HijosDePadre.get(T2);
+            num = T2 - 1;
+        }
+        if (this.EsHoja()) {
+            for (int i = 0; i < NodoACombinar.GetLlaves().size(); i++) {
+                this.llaves.add(NodoACombinar.GetLlaves().get(i));
 
+            }
+            this.llaves.add(this.padre.llaves.get(num));
+            this.padre.llaves.remove(num);
+            this.padre.hijos.remove(NodoACombinar);
+            if (this.llaves.size() >= (T + 1 / 2)) {
+                this.split();
+            }
+        }
     }
 
     private void EliminarNodo() {
@@ -223,6 +258,15 @@ public class NodoArbol implements Serializable {
      */
     public boolean EsHoja() {
         return hijos.isEmpty();
+    }
+
+    private int QueHijoSoy() {
+        for (int i = 0; i < this.padre.getHijos().size(); i++) {
+            if (this.padre.getHijos().get(i) == this) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private boolean compararAlfabeticamente(String menor, String mayor) {
