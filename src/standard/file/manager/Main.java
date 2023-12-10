@@ -1922,11 +1922,13 @@ public class Main extends javax.swing.JFrame {
     private void B_ModificarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarRegistroMouseClicked
         // TODO add your handling code here:
         String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a modificar: ");
-        rnn = 0;
-        if (!file.buscarUnRegistro(rnn)) {
-            JOptionPane.showMessageDialog(null, "No se encontro el registro", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        if (llaveprimaria == null) return;
+        rnn = file.getBTree().search(llaveprimaria);
+        if (rnn == -1) {
+            JOptionPane.showMessageDialog(null, "No se encontro el registro", "Notificación", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        file.buscarUnRegistro(rnn);
         // buscar registro y setear en el Jlabel el registro anterior para que vea como estaba antes e ingrese la modificacion
         Dialog_Modificar.setTitle("Standard File Manager");
         Dialog_Modificar.pack();
@@ -1938,8 +1940,9 @@ public class Main extends javax.swing.JFrame {
         campoActual = C.get(currentIndex);
         J_OrdenCampos.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
         registroModificar = file.getListaRegistro().get(0);
-
         J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
+        TF_Modificacion.setEnabled(!campoActual.isEsLLave());
+        
         Font f;
         int x = Dialog_Modificar.getWidth();
         int y = Dialog_Modificar.getHeight();
@@ -1957,32 +1960,32 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BorrarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarRegistroMouseClicked
         // TODO add your handling code here:
-        int opcion = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio "));
-        if (opcion == 1) {
-            String llavepimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a eliminar:");
-        } else if (opcion == 2) {
-            String criterio = JOptionPane.showInputDialog(rootPane, "Ingrese el criterio de eliminacion: ");
-        }
-        // buscar registro y borrarlo, luego actualizar la tabla
-        Dialog_Borrar.setTitle("Standard File Manager");
-        Dialog_Borrar.setModal(true);
-        Dialog_Borrar.pack();
-        Dialog_Borrar.setSize(600, 450);
-        Dialog_Borrar.setResizable(false);
-        Dialog_Borrar.setLocationRelativeTo(this);
-        Dialog_Borrar.setVisible(true);
+        try {
+            String llavepimaria;
+            String criterio;
+            int opcion = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio "));
+            if (opcion == 1) {
+                llavepimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a eliminar:");
+                if (llavepimaria == null) {
+                    return;
+                }
 
-        Font f;
-        int x = Dialog_Borrar.getWidth();
-        int y = Dialog_Borrar.getHeight();
-        if (x > y) {
-            f = new Font("Dialog", 0, (int) y / 33);
-
-        } else {
-            f = new Font("Dialog", 0, (int) x / 33);
+                boolean isDelete = file.deleteRegistro(llavepimaria);
+                if (!isDelete) {
+                    JOptionPane.showMessageDialog(null, "La llave ya fue eliminada antes o no existe", "Notificación", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+                this.listarTablaRegistro(true);
+            } else if (opcion == 2) {
+                criterio = JOptionPane.showInputDialog(rootPane, "Ingrese el criterio de eliminacion: ");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
-        Regresar_Borrar.setSize(90, 25);
-        Regresar_Borrar.setFont(f);
+
+
     }//GEN-LAST:event_B_BorrarRegistroMouseClicked
 
     private void JF_RegistrosComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_RegistrosComponentResized
@@ -2084,21 +2087,17 @@ public class Main extends javax.swing.JFrame {
     private void B_BuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BuscarRegistroMouseClicked
         // TODO add your handling code here:
         String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a buscar: ");
-
-        Dialog_Buscar.setTitle("Standard File Manager");
-        Dialog_Buscar.setModal(true);
-        Dialog_Buscar.pack();
-        Dialog_Buscar.setSize(600, 450);
-        Dialog_Buscar.setResizable(false);
-        Dialog_Buscar.setLocationRelativeTo(this);
-        Dialog_Buscar.setVisible(true);
-        //Comentado aproposito por Fer, mientras se implementa arbol
-
-//        //Busqueda en el arbol mediante llave primaria
-//        int rnn = 1;
-//        //una vez encontro la posicion del registro lo lista en la tabla
-//        file.buscarUnRegistro(rnn);
-//        listarTablaRegistro(false);
+        if (llaveprimaria == null) {
+            return;
+        }
+        rnn = file.getBTree().search(llaveprimaria);
+        if (rnn == -1) {
+            JOptionPane.showMessageDialog(rootPane, "La llave ingresada no existe en los registros", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        file.buscarUnRegistro(rnn);
+        listarTablaRegistro(false);
+        rnn = -1;
     }//GEN-LAST:event_B_BuscarRegistroMouseClicked
 
     private void B_ListarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_ListarRegistroActionPerformed
@@ -2186,6 +2185,11 @@ public class Main extends javax.swing.JFrame {
         }
         String text = TF_NuevoRegistro.getText();
 
+        if (campoActual.isEsLLave() && text.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El campo es una llave primaria por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         switch (campoActual.getTipo()) {
             case "int":
                 try {
@@ -2214,9 +2218,8 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        if (campoActual.isEsLLave() && text.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "El campo es una llave primaria por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        if (campoActual.isEsLLave()) {
+            LlaveIngresar = text;
         }
         registroIngresar.add(currentIndex, text);
         TF_NuevoRegistro.setText("");
@@ -2238,6 +2241,7 @@ public class Main extends javax.swing.JFrame {
         registroIngresar.removeLast();
         J_OrdenCampos.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
         J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
+        TF_Modificacion.setEnabled(!campoActual.isEsLLave());
     }//GEN-LAST:event_B_AnteriorModifMouseClicked
 
     private void B_SiguienteModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_SiguienteModifMouseClicked
@@ -2278,10 +2282,6 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        if (campoActual.isEsLLave() && text.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "El campo es una llave primaria por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         registroIngresar.add(currentIndex, text);
         TF_Modificacion.setText("");
         ArrayList<Campo> C = file.getListaCampos();
@@ -2289,6 +2289,7 @@ public class Main extends javax.swing.JFrame {
         campoActual = C.get(currentIndex);
         J_OrdenCampos.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
         J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
+        TF_Modificacion.setEnabled(!campoActual.isEsLLave());
     }//GEN-LAST:event_B_SiguienteModifMouseClicked
 
     private void B_GuardarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarRegistroMouseClicked
@@ -2297,6 +2298,11 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         String text = TF_NuevoRegistro.getText();
+
+        if (campoActual.isEsLLave() && text.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El campo es una llave primaria por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         switch (campoActual.getTipo()) {
             case "int":
@@ -2325,20 +2331,31 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Los datos ingresados exceden la longitud estipulada", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        if (campoActual.isEsLLave()) {
+            LlaveIngresar = text;
+        }
         registroIngresar.add(currentIndex, text);
         //Metodo para guardar registro
+        if (file.getBTree().search(LlaveIngresar) != -1) {
+            JOptionPane.showMessageDialog(null, "Ya existe un registro con esa llave primaria", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         String registro = "";
         for (int i = 0; i < registroIngresar.size(); i++) {
             registro += registroIngresar.get(i) + "|";
         }
-        boolean isInserto = file.insertarRegistro(registro);
+        boolean isInserto = file.insertarRegistro(registro, LlaveIngresar);
         if (!isInserto) {
-            JOptionPane.showMessageDialog(null, "El registro no se pudo guardar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El registro no se pudo guardar", "Notificación", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "El registro se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, "El registro se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         TF_NuevoRegistro.setText("");
         registroIngresar.clear();
+        LlaveIngresar = "";
         Dialog_Introducir.setVisible(false);
+        this.listarTablaRegistro(true);
     }//GEN-LAST:event_B_GuardarRegistroMouseClicked
 
     private void B_GuardarModifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarModifMouseClicked
@@ -2546,9 +2563,10 @@ public class Main extends javax.swing.JFrame {
     private Clip Music;
     private Campo campoActual;
     private int currentIndex;
-    Object[] registroModificar;
-    int rnn = -1;
+    private Object[] registroModificar;
+    private int rnn = -1;
     private ArrayList<String> registroIngresar = new ArrayList();
+    private String LlaveIngresar = "";
 
     //El Archivo tiene nombre,lista de campos(Arraylist),AvailList(LinkedList)
     //Campo: Nombre,Tipo,Tamano
