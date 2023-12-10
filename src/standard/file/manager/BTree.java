@@ -73,10 +73,14 @@ public class BTree implements Serializable {
             childNode.children.subList(order / 2 + 1, order).clear();
         }
     }
-
-    public int search(String key, BTreeNode temp) {
+    
+    public int search(String key){
+        return this.search(key, root);
+    }
+    
+    private int search(String key, BTreeNode temp) {
         if (temp == null) {
-            temp = root;
+            return -1;
         }
         int i = temp.keys.size() - 1;
 
@@ -103,8 +107,12 @@ public class BTree implements Serializable {
             return temp.keys.get(i).getRnn();
         }
     }
-
-    public void printBTree(BTreeNode node, String prefix, boolean isLeft) {
+    
+    public void printBTree(){
+        this.printBTree(root, "", true);
+    }
+    
+    private void printBTree(BTreeNode node, String prefix, boolean isLeft) {
         if (node != null) {
             System.out.println(prefix + (isLeft ? "├── " : "└── ") + node.keys);
 
@@ -117,11 +125,11 @@ public class BTree implements Serializable {
         }
     }
 
-    public void delete(Llave key) {
+    public void delete(String key) {
         delete(root, key);
     }
 
-    private void delete(BTreeNode node, Llave key) {
+    private void delete(BTreeNode node, String key) {
         if (node == null) {
             return;
         }
@@ -129,12 +137,12 @@ public class BTree implements Serializable {
         int index = findKeyIndex(node, key);
 
         // Eliminar la llave si se encuentra en el nodo actual
-        if (index != -1 && key.getId().equals(node.keys.get(index).getId())) {
+        if (index != -1 && key.equals(node.keys.get(index).getId())) {
             if (!node.children.isEmpty()) {
                 // Nodo interno
                 Llave predecessor = findPredecessor(node, index);
                 node.keys.set(index, predecessor);
-                delete(node.children.get(index), predecessor);
+                delete(node.children.get(index), predecessor.getId());
             } else {
                 // Nodo hoja
                 node.keys.remove(index);
@@ -175,19 +183,19 @@ public class BTree implements Serializable {
         adjustTree(node);
     }
 
-    private int findKeyIndex(BTreeNode node, Llave key) {
+    private int findKeyIndex(BTreeNode node, String key) {
         for (int i = 0; i < node.keys.size(); i++) {
-            if (key.getId().compareTo(node.keys.get(i).getId()) == 0) {
+            if (key.compareTo(node.keys.get(i).getId()) == 0) {
                 return i;
             }
         }
         return -1;
     }
 
-    private int findChildIndex(BTreeNode node, Llave key) {
+    private int findChildIndex(BTreeNode node, String key) {
         int i;
         for (i = 0; i < node.keys.size(); i++) {
-            if (key.getId().compareTo(node.keys.get(i).getId()) < 0) {
+            if (key.compareTo(node.keys.get(i).getId()) < 0) {
                 return i;
             }
         }
@@ -252,7 +260,7 @@ public class BTree implements Serializable {
     private void adjustTree(BTreeNode node) {
         if (node.keys.size() < (order / 2) - 1 && node != root) {
             BTreeNode parentNode = findParent(root, node);
-            int childIndex = findChildIndex(parentNode, node.keys.get(0));
+            int childIndex = findChildIndex(parentNode, node.keys.get(0).getId());
             boolean adjusted = false;
 
             if (childIndex < parentNode.children.size() - 1) {
