@@ -12,9 +12,11 @@ import java.io.Serializable;
 public class BTreeNode implements Serializable{
     ArrayList<Llave> keys;
     ArrayList<BTreeNode> children;
+    BTreeNode parent;
 
     public BTreeNode() {
         this.keys = new ArrayList<>();
         this.children = new ArrayList<>();
+        this.parent = null;
     }
 }
