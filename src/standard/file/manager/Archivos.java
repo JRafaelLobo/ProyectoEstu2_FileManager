@@ -28,7 +28,7 @@ public class Archivos {
 
     private boolean ReEscribirCabeza() {
         try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
-            file.seek(this.longitudTotalCampos + 4);
+            file.seek(this.longitudTotalCampos + 2);
             String newCabeza = "*";
             newCabeza += String.valueOf(this.availist.getCabeza().getSlot());
             newCabeza = String.format("%-" + this.longitudTotalRegistro + "s", newCabeza);
@@ -248,9 +248,10 @@ public class Archivos {
             for (int i = 0; i < divicion.length; i++) {
                 String[] arregloCampo = divicion[i].split(",");
                 listaCampos.add(new Campo(arregloCampo[0], arregloCampo[1], Integer.valueOf(arregloCampo[2]), (Integer.parseInt(arregloCampo[3]) == 1), (Integer.parseInt(arregloCampo[4]) == 1)));
-                this.longitudTotalRegistro += Integer.valueOf(arregloCampo[2]) + 1;
             }
-
+            for(int i=0; i < listaCampos.size(); i++){
+                this.longitudTotalRegistro += listaCampos.get(i).getTamano() +1;
+            }
             return true;
         } catch (IOException e) {
             System.err.println("Hubo un error al cargar los campos: " + e.getMessage());
@@ -292,7 +293,7 @@ public class Archivos {
 
     public boolean Abrir() {
         boolean campoIsOpen = this.AbrirCampos();
-        this.longitudTotalDeMetadata = this.longitudTotalCampos + 2 + this.longitudTotalRegistro + 4;
+        this.longitudTotalDeMetadata = this.longitudTotalCampos + 2 + this.longitudTotalRegistro + 2;
         boolean isContructionAvai = this.ConstruirAvailist(true, -1);
         if(fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree")) != null){
             bTree = fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree"));
