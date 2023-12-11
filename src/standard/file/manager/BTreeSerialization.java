@@ -13,9 +13,8 @@ public class BTreeSerialization {
     public void saveBTreeToFile(BTree bTree, String filename) {
         try ( ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(bTree);
-            System.out.println("Árbol B guardado en " + filename);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Sucedio un error no se pudo guardar el arbol: "+ e.getMessage());
         }
     }
 
@@ -23,9 +22,8 @@ public class BTreeSerialization {
         BTree bTree = null;
         try ( ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             bTree = (BTree) ois.readObject();
-            System.out.println("Árbol B cargado desde " + filename);
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("No existe el archivo o sucedio un error: "+ e.getMessage());
         }
         return bTree;
     }

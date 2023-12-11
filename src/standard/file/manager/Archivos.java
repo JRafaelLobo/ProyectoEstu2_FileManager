@@ -23,6 +23,8 @@ public class Archivos {
     private int longitudTotalCampos = 0;
     private int longitudTotalDeMetadata = 0;
     private String rutaArchivo = "";
+    private BTree bTree = new BTree(6);
+    private BTreeSerialization fileTree = new BTreeSerialization();
 
     private boolean ReEscribirCabeza() {
         try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
@@ -48,7 +50,7 @@ public class Archivos {
         return true;
     }
 
-    public boolean insertarRegistro(String Registro) {
+    public boolean insertarRegistro(String Registro, String Llave) {
         try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
             if (Registro.length() > this.longitudTotalRegistro) {
                 return false;
@@ -60,11 +62,14 @@ public class Archivos {
 
             if (this.availist.getCabeza().getSlot().equals(-1)) {
                 file.seek(file.length());
+                bTree.insert(new Llave(Llave, (int) (file.length() - longitudTotalDeMetadata)/(longitudTotalRegistro) ));
             } else {
                 file.seek((this.longitudTotalDeMetadata) + ((this.longitudTotalRegistro) * (int) this.availist.getCabeza().getSlot()));
+                bTree.insert(new Llave(Llave, (int)this.availist.getCabeza().getSlot()));
             }
 
             file.writeBytes(Registro);
+            fileTree.saveBTreeToFile(bTree, rutaArchivo.replace("txt", "tree"));
             if (!this.availist.getCabeza().getSlot().equals(-1)) {
                 this.availist.removeAvai(this.availist.getCabeza().getSlot());
                 return this.ReEscribirCabeza();
@@ -73,12 +78,17 @@ public class Archivos {
             System.err.println("Sucedio un error al insertar registros: " + e.getMessage());
             return false;
         }
-
         return true;
     }
 
-    public boolean deleteRegistro(int rnn) {
+    public boolean deleteRegistro(String Llave) {
+        int rnn = bTree.search(Llave);
+        if(rnn == -1){
+            return false;
+        }
+        bTree.delete(Llave);
         this.availist.addNewCabezaAvai(rnn);
+        fileTree.saveBTreeToFile(bTree, this.rutaArchivo.replace("txt", "tree"));
         return this.ReEscribirCabeza();
     }
 
@@ -284,6 +294,9 @@ public class Archivos {
         boolean campoIsOpen = this.AbrirCampos();
         this.longitudTotalDeMetadata = this.longitudTotalCampos + 2 + this.longitudTotalRegistro + 4;
         boolean isContructionAvai = this.ConstruirAvailist(true, -1);
+        if(fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree")) != null){
+            bTree = fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree"));
+        }
         return campoIsOpen && isContructionAvai;
     }
 
@@ -377,5 +390,8 @@ public class Archivos {
 
     public ArrayList<Object[]> getListaRegistro() {
         return this.registros;
+    }
+    public BTree getBTree(){
+        return bTree;
     }
 }
