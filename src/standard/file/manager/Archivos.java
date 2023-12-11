@@ -173,7 +173,7 @@ public class Archivos {
             if (!listaCampos.isEmpty()) {
                 temp += "{";
                 for (int i = 0; i < listaCampos.size(); i++) {
-                    temp += listaCampos.get(i).toString();
+                    temp += listaCampos.get(i).ParaGuardar();
                     if (i != listaCampos.size() - 1) {
                         temp += "|";
                     }
@@ -228,6 +228,7 @@ public class Archivos {
             if (primeraLinea.charAt(0) != '{') {
                 return false;
             }
+            this.longitudTotalCampos = primeraLinea.length();
             primeraLinea = primeraLinea.replace("{", "");
             primeraLinea = primeraLinea.replace("}", "");
             String[] divicion = primeraLinea.split("\\|");
@@ -236,10 +237,10 @@ public class Archivos {
             this.longitudTotalRegistro = 0;
             for (int i = 0; i < divicion.length; i++) {
                 String[] arregloCampo = divicion[i].split(",");
-                listaCampos.add(new Campo(arregloCampo[0], arregloCampo[1], Integer.valueOf(arregloCampo[2]), Boolean.parseBoolean(arregloCampo[3])));
+                listaCampos.add(new Campo(arregloCampo[0], arregloCampo[1], Integer.valueOf(arregloCampo[2]), (Integer.parseInt(arregloCampo[3]) == 1), (Integer.parseInt(arregloCampo[4]) == 1)));
                 this.longitudTotalRegistro += Integer.valueOf(arregloCampo[2]) + 1;
             }
-            this.longitudTotalCampos = primeraLinea.length();
+
             return true;
         } catch (IOException e) {
             System.err.println("Hubo un error al cargar los campos: " + e.getMessage());
