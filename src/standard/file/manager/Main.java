@@ -56,6 +56,33 @@ public class Main extends javax.swing.JFrame {
         //05172d
         //FF7048
         //font Moncerath,Bethicai
+        BTree2 bTree = new BTree2(6);
+
+        for (int i = 0; i < 150; i++) {
+            String llave = String.valueOf(i);
+            if (  i ==1 || i==8 || i==138 || i ==18 || i==89 || i==128) {
+                llave = "A";
+            }
+            bTree.insert(new Llave(llave, i));
+        }
+
+        bTree.printBTree();
+        ArrayList<Integer> hola = bTree.search("A");
+        
+        if(hola != null){
+            for (int i = 0; i < hola.size(); i++){
+                System.out.println(hola.get(i));
+            }
+        }
+        bTree.searchAnDelete("A");
+        ArrayList<Integer> hola2 = bTree.search("A");
+        
+        if(hola2 != null){
+            for (int i = 0; i < hola2.size(); i++){
+                System.out.println(hola.get(i));
+            }
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -1922,7 +1949,9 @@ public class Main extends javax.swing.JFrame {
     private void B_ModificarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarRegistroMouseClicked
         // TODO add your handling code here:
         String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a modificar: ");
-        if (llaveprimaria == null) return;
+        if (llaveprimaria == null) {
+            return;
+        }
         rnn = file.getBTree().search(llaveprimaria);
         if (rnn == -1) {
             JOptionPane.showMessageDialog(null, "No se encontro el registro", "Notificación", JOptionPane.ERROR_MESSAGE);
@@ -1942,7 +1971,7 @@ public class Main extends javax.swing.JFrame {
         registroModificar = file.getListaRegistro().get(0);
         J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
         TF_Modificacion.setEnabled(!campoActual.isEsLLave());
-        
+
         Font f;
         int x = Dialog_Modificar.getWidth();
         int y = Dialog_Modificar.getHeight();
@@ -2348,7 +2377,7 @@ public class Main extends javax.swing.JFrame {
         boolean isInserto = file.insertarRegistro(registro, LlaveIngresar);
         if (!isInserto) {
             JOptionPane.showMessageDialog(null, "El registro no se pudo guardar", "Notificación", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "El registro se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         }
         TF_NuevoRegistro.setText("");

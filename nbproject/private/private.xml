@@ -3,29 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/boton.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/CambiarPantallaTiempo.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/NodoArbol.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/GuardarNodoArbol.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Nodo.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Archivos.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Campo.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/LinkedList.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Main.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Registro.java</file>
-            <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Llave.java</file>
-=======
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/boton.java</file>
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/Archivos.java</file>
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/Main.java</file>
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/Campo.java</file>
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/Llave.java</file>
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/Escribir.java</file>
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/NodoArbol.java</file>
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/Nodo.java</file>
-            <file>file:/C:/Users/307000400/Documents/college/StructData2/ProyectoEstu2_FileManager/src/standard/file/manager/LinkedList.java</file>
->>>>>>> 64b8ce7d64905ab4cb4e90132a2ce33a62975dc8
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Campo.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/BTree.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Llave.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/LinkedList.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Main.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/BTreeNode.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Archivos.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/BTreeSerialization.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/boton.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Nodo.java</file>
         </group>
     </open-files>
 </project-private>
