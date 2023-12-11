@@ -56,33 +56,6 @@ public class Main extends javax.swing.JFrame {
         //05172d
         //FF7048
         //font Moncerath,Bethicai
-        BTree2 bTree = new BTree2(6);
-
-        for (int i = 0; i < 150; i++) {
-            String llave = String.valueOf(i);
-            if (  i ==1 || i==8 || i==138 || i ==18 || i==89 || i==128) {
-                llave = "A";
-            }
-            bTree.insert(new Llave(llave, i));
-        }
-
-        bTree.printBTree();
-        ArrayList<Integer> hola = bTree.search("A");
-        
-        if(hola != null){
-            for (int i = 0; i < hola.size(); i++){
-                System.out.println(hola.get(i));
-            }
-        }
-        bTree.searchAnDelete("A");
-        ArrayList<Integer> hola2 = bTree.search("A");
-        
-        if(hola2 != null){
-            for (int i = 0; i < hola2.size(); i++){
-                System.out.println(hola.get(i));
-            }
-        }
-
     }
 
     @SuppressWarnings("unchecked")
