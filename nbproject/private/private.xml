@@ -3,6 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Campo.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/BTree.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Llave.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/LinkedList.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Main.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/BTreeNode.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Archivos.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/BTreeSerialization.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/boton.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/Proyecto_ESTR2/ProyectoEstu2_FileManager/src/standard/file/manager/Nodo.java</file>
+=======
             <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/NodoArbol.java</file>
             <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/GuardarNodoArbol.java</file>
             <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Nodo.java</file>
@@ -11,6 +23,7 @@
             <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/BTree.java</file>
             <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Campo.java</file>
             <file>file:/C:/Users/rinal/OneDrive/Documentos/Trabajos/Classe/Classes%20Actuales/Estuctura%202/Proyecto%20Final/Standard%20File%20Manager/src/standard/file/manager/Main.java</file>
+>>>>>>> e1235dac297220d9366f691f56f19515097f34ba
         </group>
     </open-files>
 </project-private>
