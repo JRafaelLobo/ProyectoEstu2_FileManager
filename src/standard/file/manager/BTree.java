@@ -29,6 +29,7 @@ public class BTree implements Serializable {
         if (root.keys.size() == order - 1) {
             BTreeNode newRoot = new BTreeNode();
             newRoot.children.add(root);
+            root.parent = newRoot;
             splitChild(newRoot, 0);
             root = newRoot;
         }
@@ -63,19 +64,28 @@ public class BTree implements Serializable {
         BTreeNode childNode = parentNode.children.get(childIndex);
         BTreeNode newChildNode = new BTreeNode();
 
-        parentNode.keys.add(childIndex, childNode.keys.get(order / 2));
+        // Se determina el índice de la clave a subir al nodo padre
+        int midIndex = (order - 1) / 2;
+        if ((order - 1) % 2 == 0) { // Si el orden es par, se toma la clave anterior al medio
+            midIndex--;
+        }
+
+        parentNode.keys.add(childIndex, childNode.keys.get(midIndex));
         parentNode.children.add(childIndex + 1, newChildNode);
 
-        newChildNode.keys.addAll(childNode.keys.subList(order / 2 + 1, order - 1));
-        childNode.keys.subList(order / 2, order - 1).clear();
+        newChildNode.keys.addAll(childNode.keys.subList(midIndex + 1, order - 1));
+        childNode.keys.subList(midIndex, order - 1).clear();
 
         if (!childNode.children.isEmpty()) {
-            newChildNode.children.addAll(childNode.children.subList(order / 2 + 1, order));
-            childNode.children.subList(order / 2 + 1, order).clear();
+            newChildNode.children.addAll(childNode.children.subList(midIndex + 1, order));
+            childNode.children.subList(midIndex + 1, order).clear();
         }
+        
+        newChildNode.parent = parentNode;
+        childNode.parent = parentNode;
     }
 
-    public int search(String key){
+    public int search(String key) {
         return this.search(key, root);
     }
 
@@ -108,8 +118,8 @@ public class BTree implements Serializable {
             return temp.keys.get(i).getRnn();
         }
     }
-    
-    public void printBTree(){
+
+    public void printBTree() {
         this.printBTree(root, "", true);
     }
 
@@ -132,202 +142,158 @@ public class BTree implements Serializable {
 
     private void delete(BTreeNode node, String key) {
         if (node == null) {
+            System.out.println("La clave no existe en el árbol.");
             return;
         }
 
+        deleteInternal(node, key);
+
+        // Si la raíz se queda sin claves después de la eliminación, se actualiza la raíz
+        if (root.keys.isEmpty() && !root.children.isEmpty()) {
+            root = root.children.get(0);
+        }
+    }
+
+    private void deleteInternal(BTreeNode node, String key) {
         int index = findKeyIndex(node, key);
 
-        // Eliminar la llave si se encuentra en el nodo actual
-        if (index != -1 && key.equals(node.keys.get(index).getId())) {
+        // Si la clave está presente en el nodo actual
+        if (index != -1) {
             if (!node.children.isEmpty()) {
-                // Nodo interno
-                Llave predecessor = findPredecessor(node, index);
-                node.keys.set(index, predecessor);
-                delete(node.children.get(index), predecessor.getId());
+                // Caso 3: El nodo es un nodo interno con hijos
+                deleteInternalWithChildren(node, index);
             } else {
-                // Nodo hoja
+                // Caso 1: El nodo es una hoja
                 node.keys.remove(index);
             }
         } else {
-            // La llave no está en el nodo actual
+            // Si la clave no está presente en el nodo actual
             int childIndex = findChildIndex(node, key);
-            boolean merged = false;
+            BTreeNode child = node.children.get(childIndex);
 
-            if (childIndex < node.children.size()) {
-                // Descender al hijo correspondiente
-                BTreeNode child = node.children.get(childIndex);
-                if (child.keys.size() == (order / 2) - 1) {
-                    // Fusionar con el hermano derecho si es necesario
-                    merged = mergeWithRightSibling(node, childIndex);
-                }
-
-                if (!merged) {
-                    // Si no se fusiona con el hermano derecho, descender al hijo correspondiente
-                    delete(child, key);
-                }
-            } else {
-                // Descender al último hijo
-                BTreeNode child = node.children.get(node.children.size() - 1);
-                if (child.keys.size() == (order / 2) - 1) {
-                    // Fusionar con el hermano izquierdo si es necesario
-                    merged = mergeWithLeftSibling(node, node.children.size() - 1);
-                }
-
-                if (!merged) {
-                    // Si no se fusiona con el hermano izquierdo, descender al último hijo
-                    delete(child, key);
-                }
+            if (child.keys.size() == order - 1) {
+                // Caso 2: El hijo tiene el mínimo de claves
+                handleMinimumKeys(child, childIndex);
             }
-        }
 
-        // Ajustar el árbol si es necesario
-        adjustTree(node);
+            deleteInternal(child, key);
+        }
+    }
+
+    private void deleteInternalWithChildren(BTreeNode node, int index) {
+        Llave key = node.keys.get(index);
+        BTreeNode predecessorChild = node.children.get(index);
+        BTreeNode successorChild = node.children.get(index + 1);
+
+        // Caso 3a: El hijo que precede a la clave tiene al menos t claves
+        if (predecessorChild.keys.size() >= (order + 1) / 2) {
+            Llave predecessor = getPredecessor(predecessorChild);
+            deleteInternal(predecessorChild, predecessor.getId());
+            node.keys.set(index, predecessor);
+        } // Caso 3b: El hijo que precede a la clave tiene menos de t claves, pero el siguiente tiene al menos t claves
+        else if (successorChild.keys.size() >= (order + 1) / 2) {
+            Llave successor = getSuccessor(successorChild);
+            deleteInternal(successorChild, successor.getId());
+            node.keys.set(index, successor);
+        } // Caso 3c: Ambos hijos tienen el mínimo de claves, fusionar con el sucesor
+        else {
+            mergeNodes(node, index);
+            deleteInternal(predecessorChild, key.getId());
+        }
     }
 
     private int findKeyIndex(BTreeNode node, String key) {
-        for (int i = 0; i < node.keys.size(); i++) {
-            if (key.compareTo(node.keys.get(i).getId()) == 0) {
-                return i;
-            }
+        int index = 0;
+        while (index < node.keys.size() && key.compareTo(node.keys.get(index).getId()) > 0) {
+            index++;
         }
-        return -1;
+        return (index < node.keys.size() && key.compareTo(node.keys.get(index).getId()) == 0) ? index : -1;
     }
 
     private int findChildIndex(BTreeNode node, String key) {
-        int i;
-        for (i = 0; i < node.keys.size(); i++) {
-            if (key.compareTo(node.keys.get(i).getId()) < 0) {
-                return i;
-            }
+        int index = 0;
+        while (index < node.keys.size() && key.compareTo(node.keys.get(index).getId()) > 0) {
+            index++;
         }
-        return i;
+        return index;
     }
 
-    private Llave findPredecessor(BTreeNode node, int index) {
-        BTreeNode current = node.children.get(index);
-        while (!current.children.isEmpty()) {
-            current = current.children.get(current.children.size() - 1);
+    private Llave getPredecessor(BTreeNode node) {
+        while (!node.children.isEmpty()) {
+            node = node.children.get(node.children.size() - 1);
         }
-        return current.keys.get(current.keys.size() - 1);
+        return node.keys.get(node.keys.size() - 1);
     }
 
-    private boolean mergeWithRightSibling(BTreeNode parentNode, int childIndex) {
-        if (childIndex < parentNode.children.size() - 1) {
-            BTreeNode currentChild = parentNode.children.get(childIndex);
-            BTreeNode rightSibling = parentNode.children.get(childIndex + 1);
-
-            if (rightSibling.keys.size() > (order / 2) - 1) {
-                // Mover una llave del hermano derecho y su hijo asociado al nodo actual
-                currentChild.keys.add(parentNode.keys.get(childIndex));
-                currentChild.keys.addAll(rightSibling.keys.subList(0, 1));
-                rightSibling.keys.subList(0, 1).clear();
-
-                if (!rightSibling.children.isEmpty()) {
-                    currentChild.children.add(rightSibling.children.get(0));
-                    rightSibling.children.remove(0);
-                }
-
-                parentNode.keys.set(childIndex, rightSibling.keys.get(0));
-                rightSibling.keys.remove(0);
-
-                return true;
-            }
+    private Llave getSuccessor(BTreeNode node) {
+        while (!node.children.isEmpty()) {
+            node = node.children.get(0);
         }
-        return false;
+        return node.keys.get(0);
     }
 
-    private boolean mergeWithLeftSibling(BTreeNode parentNode, int childIndex) {
-        if (childIndex > 0) {
-            BTreeNode currentChild = parentNode.children.get(childIndex);
-            BTreeNode leftSibling = parentNode.children.get(childIndex - 1);
+    private void handleMinimumKeys(BTreeNode node, int childIndex) {
+        BTreeNode leftSibling = (childIndex > 0) ? node.parent.children.get(childIndex - 1) : null;
+        BTreeNode rightSibling = (childIndex < node.parent.children.size() - 1) ? node.parent.children.get(childIndex + 1) : null;
 
-            if (leftSibling.keys.size() > (order / 2) - 1) {
-                // Mover una llave del hermano izquierdo y su hijo asociado al nodo actual
-                currentChild.keys.add(0, parentNode.keys.get(childIndex - 1));
-                parentNode.keys.set(childIndex - 1, leftSibling.keys.get(leftSibling.keys.size() - 1));
-                leftSibling.keys.remove(leftSibling.keys.size() - 1);
-
-                if (!leftSibling.children.isEmpty()) {
-                    currentChild.children.add(0, leftSibling.children.get(leftSibling.children.size() - 1));
-                    leftSibling.children.remove(leftSibling.children.size() - 1);
-                }
-
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void adjustTree(BTreeNode node) {
-        if (node.keys.size() < (order / 2) - 1 && node != root) {
-            BTreeNode parentNode = findParent(root, node);
-            int childIndex = findChildIndex(parentNode, node.keys.get(0).getId());
-            boolean adjusted = false;
-
-            if (childIndex < parentNode.children.size() - 1) {
-                // Intentar tomar una llave del hermano derecho
-                adjusted = borrowFromRightSibling(parentNode, childIndex);
-            }
-
-            if (!adjusted && childIndex > 0) {
-                // Intentar tomar una llave del hermano izquierdo
-                borrowFromLeftSibling(parentNode, childIndex - 1);
-            }
-
-            if (!adjusted) {
-                // Fusionar con el hermano derecho si no se puede tomar una llave del hermano derecho o izquierdo
-                mergeWithRightSibling(parentNode, childIndex);
-            }
+        // Caso 2a: El hermano izquierdo tiene más de t claves
+        if (leftSibling != null && leftSibling.keys.size() >= (order + 1) / 2) {
+            borrowFromLeftSibling(node, leftSibling, childIndex);
+        } // Caso 2b: El hermano derecho tiene más de t claves
+        else if (rightSibling != null && rightSibling.keys.size() >= (order + 1) / 2) {
+            borrowFromRightSibling(node, rightSibling, childIndex);
+        } // Caso 2c: Ambos hermanos tienen el mínimo de claves, fusionar con el izquierdo
+        else if (leftSibling != null) {
+            mergeNodes(node.parent, childIndex - 1);
+        } // Caso 2d: Ambos hermanos tienen el mínimo de claves, fusionar con el derecho
+        else if (rightSibling != null) {
+            mergeNodes(node.parent, childIndex);
         }
     }
 
-    private boolean borrowFromRightSibling(BTreeNode parentNode, int childIndex) {
-        BTreeNode currentChild = parentNode.children.get(childIndex);
-        BTreeNode rightSibling = parentNode.children.get(childIndex + 1);
+    private void borrowFromLeftSibling(BTreeNode node, BTreeNode leftSibling, int childIndex) {
+        Llave parentKey = node.parent.keys.get(childIndex - 1);
+        Llave borrowedKey = leftSibling.keys.remove(leftSibling.keys.size() - 1);
 
-        if (rightSibling.keys.size() > (order / 2) - 1) {
-            // Tomar una llave del hermano derecho
-            currentChild.keys.add(parentNode.keys.get(childIndex));
-            parentNode.keys.set(childIndex, rightSibling.keys.get(0));
-            rightSibling.keys.remove(0);
-
-            if (!rightSibling.children.isEmpty()) {
-                currentChild.children.add(rightSibling.children.get(0));
-                rightSibling.children.remove(0);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    private void borrowFromLeftSibling(BTreeNode parentNode, int leftSiblingIndex) {
-        BTreeNode currentChild = parentNode.children.get(leftSiblingIndex + 1);
-        BTreeNode leftSibling = parentNode.children.get(leftSiblingIndex);
-
-        // Tomar una llave del hermano izquierdo
-        currentChild.keys.add(0, parentNode.keys.get(leftSiblingIndex));
-        parentNode.keys.set(leftSiblingIndex, leftSibling.keys.get(leftSibling.keys.size() - 1));
-        leftSibling.keys.remove(leftSibling.keys.size() - 1);
+        node.keys.add(0, parentKey);
+        node.parent.keys.set(childIndex - 1, borrowedKey);
 
         if (!leftSibling.children.isEmpty()) {
-            currentChild.children.add(0, leftSibling.children.get(leftSibling.children.size() - 1));
-            leftSibling.children.remove(leftSibling.children.size() - 1);
+            BTreeNode borrowedChild = leftSibling.children.remove(leftSibling.children.size() - 1);
+            node.children.add(0, borrowedChild);
+            borrowedChild.parent = node;
         }
     }
 
-    private BTreeNode findParent(BTreeNode current, BTreeNode child) {
-        if (current.children.contains(child)) {
-            return current;
-        } else {
-            for (BTreeNode c : current.children) {
-                BTreeNode result = findParent(c, child);
-                if (result != null) {
-                    return result;
-                }
+    private void borrowFromRightSibling(BTreeNode node, BTreeNode rightSibling, int childIndex) {
+        Llave parentKey = node.parent.keys.get(childIndex);
+        Llave borrowedKey = rightSibling.keys.remove(0);
+
+        node.keys.add(parentKey);
+        node.parent.keys.set(childIndex, borrowedKey);
+
+        if (!rightSibling.children.isEmpty()) {
+            BTreeNode borrowedChild = rightSibling.children.remove(0);
+            node.children.add(borrowedChild);
+            borrowedChild.parent = node;
+        }
+    }
+
+    private void mergeNodes(BTreeNode parentNode, int childIndex) {
+        BTreeNode leftChild = parentNode.children.get(childIndex);
+        BTreeNode rightChild = parentNode.children.get(childIndex + 1);
+
+        Llave parentKey = parentNode.keys.remove(childIndex);
+        leftChild.keys.add(parentKey);
+        leftChild.keys.addAll(rightChild.keys);
+
+        if (!rightChild.children.isEmpty()) {
+            leftChild.children.addAll(rightChild.children);
+            for (BTreeNode child : rightChild.children) {
+                child.parent = leftChild;
             }
         }
-        return null;
+
+        parentNode.children.remove(childIndex + 1);
     }
 }
