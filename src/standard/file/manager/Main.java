@@ -153,6 +153,11 @@ public class Main extends javax.swing.JFrame {
         Instruccion13 = new javax.swing.JLabel();
         B_DesplegarCamposRelacionados = new javax.swing.JButton();
         B_EnviarCamposTercerArchivo = new javax.swing.JButton();
+        JF_Indices = new javax.swing.JFrame();
+        jButton1 = new boton();
+        jButton2 = new boton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono2.png");
         B_Campos = new boton();
         B_Registros = new boton();
@@ -208,14 +213,14 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Tipo", "Tamano", "Es llave"
+                "Nombre", "Tipo", "Tamano", "Es llave Primaria", "Es llave Secundaria"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -233,7 +238,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Archivo_Titulo.setText("Datos Del Archivo");
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
-        lb_Archivo_Titulo.setBounds(60, 260, 150, 16);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
 
         B_CrearCampo.setText("Crear");
         B_CrearCampo.setBorderPainted(false);
@@ -244,7 +249,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_CrearCampo);
-        B_CrearCampo.setBounds(180, 260, 72, 23);
+        B_CrearCampo.setBounds(180, 260, 62, 25);
 
         B_ListarCampo.setText("Listar");
         B_ListarCampo.setBorderPainted(false);
@@ -255,7 +260,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_ListarCampo);
-        B_ListarCampo.setBounds(270, 260, 72, 23);
+        B_ListarCampo.setBounds(270, 260, 61, 25);
 
         B_ModificarCampo.setText("Modificar");
         B_ModificarCampo.setBorderPainted(false);
@@ -266,7 +271,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_ModificarCampo);
-        B_ModificarCampo.setBounds(370, 260, 81, 23);
+        B_ModificarCampo.setBounds(370, 260, 79, 25);
 
         B_BorrarCampo.setText("Borrar");
         B_BorrarCampo.setBorderPainted(false);
@@ -277,7 +282,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 72, 23);
+        B_BorrarCampo.setBounds(460, 260, 65, 25);
 
         javax.swing.GroupLayout I_Campo_DecoracionLayout = new javax.swing.GroupLayout(I_Campo_Decoracion);
         I_Campo_Decoracion.setLayout(I_Campo_DecoracionLayout);
@@ -453,7 +458,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Registro_Titulo.setText("Datos Del Archivo");
         JF_Registros.getContentPane().add(lb_Registro_Titulo);
-        lb_Registro_Titulo.setBounds(60, 260, 150, 16);
+        lb_Registro_Titulo.setBounds(60, 260, 150, 15);
 
         B_CruzarRegistro.setText("Cruzar");
         B_CruzarRegistro.setBorderPainted(false);
@@ -464,7 +469,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_CruzarRegistro);
-        B_CruzarRegistro.setBounds(270, 290, 72, 23);
+        B_CruzarRegistro.setBounds(270, 290, 67, 25);
 
         B_ModificarRegistro.setText("Modificar");
         B_ModificarRegistro.setBorderPainted(false);
@@ -475,7 +480,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_ModificarRegistro);
-        B_ModificarRegistro.setBounds(370, 260, 81, 23);
+        B_ModificarRegistro.setBounds(370, 260, 79, 25);
 
         B_BuscarRegistro.setText("Buscar");
         B_BuscarRegistro.setBorderPainted(false);
@@ -486,7 +491,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_BuscarRegistro);
-        B_BuscarRegistro.setBounds(370, 290, 72, 23);
+        B_BuscarRegistro.setBounds(370, 290, 69, 25);
 
         B_BorrarRegistro.setText("Borrar");
         B_BorrarRegistro.setBorderPainted(false);
@@ -497,7 +502,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_BorrarRegistro);
-        B_BorrarRegistro.setBounds(460, 260, 72, 23);
+        B_BorrarRegistro.setBounds(460, 260, 65, 25);
 
         B_IntroducirRegistro.setText("Introducir");
         B_IntroducirRegistro.setBorderPainted(false);
@@ -508,7 +513,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_IntroducirRegistro);
-        B_IntroducirRegistro.setBounds(170, 260, 81, 23);
+        B_IntroducirRegistro.setBounds(170, 260, 81, 25);
 
         B_ListarRegistro.setText("Listar");
         B_ListarRegistro.setBorderPainted(false);
@@ -524,7 +529,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_ListarRegistro);
-        B_ListarRegistro.setBounds(270, 260, 72, 23);
+        B_ListarRegistro.setBounds(270, 260, 61, 25);
 
         javax.swing.GroupLayout I_Registro_DecoracionLayout = new javax.swing.GroupLayout(I_Registro_Decoracion);
         I_Registro_Decoracion.setLayout(I_Registro_DecoracionLayout);
@@ -724,7 +729,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Modificar.getContentPane().add(Panel_Decoracion_Modificar);
-        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 50);
+        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 0);
 
         Panel_Modificar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1177,6 +1182,21 @@ public class Main extends javax.swing.JFrame {
         Dialog_Cruzar.getContentPane().add(Panel_Cruzar);
         Panel_Cruzar.setBounds(0, 50, 600, 400);
 
+        JF_Indices.getContentPane().setLayout(null);
+
+        jButton1.setText("Crear Indice");
+        JF_Indices.getContentPane().add(jButton1);
+        jButton1.setBounds(80, 240, 95, 25);
+
+        jButton2.setText("ReIndexar Indice");
+        JF_Indices.getContentPane().add(jButton2);
+        jButton2.setBounds(270, 230, 117, 25);
+
+        jScrollPane1.setViewportView(jList1);
+
+        JF_Indices.getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(100, 50, 230, 170);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
         setMinimumSize(new java.awt.Dimension(400, 400));
@@ -1210,7 +1230,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Campos);
-        B_Campos.setBounds(278, 268, 109, 23);
+        B_Campos.setBounds(278, 268, 109, 25);
 
         B_Registros.setText("Registros");
         B_Registros.setBorderPainted(false);
@@ -1226,7 +1246,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Registros);
-        B_Registros.setBounds(514, 268, 109, 23);
+        B_Registros.setBounds(514, 268, 109, 25);
 
         B_Indices.setBackground(new java.awt.Color(102, 102, 102));
         B_Indices.setText("Indices");
@@ -1234,13 +1254,13 @@ public class Main extends javax.swing.JFrame {
         B_Indices.setContentAreaFilled(false);
         B_Indices.setFocusPainted(false);
         getContentPane().add(B_Indices);
-        B_Indices.setBounds(153, 335, 112, 23);
+        B_Indices.setBounds(153, 335, 112, 25);
 
         B_Estandarizacion.setText("Estandarizacion");
         B_Estandarizacion.setBorderPainted(false);
         B_Estandarizacion.setFocusPainted(false);
         getContentPane().add(B_Estandarizacion);
-        B_Estandarizacion.setBounds(382, 335, 113, 23);
+        B_Estandarizacion.setBounds(382, 335, 112, 25);
 
         I_Fondo_Main.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1536,6 +1556,7 @@ public class Main extends javax.swing.JFrame {
 
     private void B_Archivo_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_GuardarActionPerformed
         // TODO add your handling code here:
+
         if (file.getRutaArchivo().equals("")) {
             JOptionPane.showMessageDialog(null, "No hay ningun archivo abierto para guardar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -1555,13 +1576,24 @@ public class Main extends javax.swing.JFrame {
             ArrayList<Campo> C = file.getListaCampos();
             DefaultTableModel D = (DefaultTableModel) Datos_Campos.getModel();
             int count = 0;
+            int count2 = 0;
             int pos = -1;
             for (int i = 0; i < C.size(); i++) {
                 if (Boolean.parseBoolean(D.getValueAt(i, 3).toString())) {
                     count++;
                     pos = i;
+                    if (Boolean.parseBoolean(D.getValueAt(i, 4).toString())) {
+                        JOptionPane.showMessageDialog(JF_Campos, "No puede ser llave primaria y secundaria al mismo tiempo", "Error", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
                 }
-
+                if (Boolean.parseBoolean(D.getValueAt(i, 4).toString())) {
+                    count2++;
+                }
+            }
+            if (count2 > 2) {
+                JOptionPane.showMessageDialog(JF_Campos, "No se puede ingresar mas de 2 llaves secundarias", "Error", JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
             if (count > 1) {
                 JOptionPane.showMessageDialog(JF_Campos, "No se puede guardar el Archivo con multiples llaves", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -1578,7 +1610,10 @@ public class Main extends javax.swing.JFrame {
                     } else {
                         C.get(i).setEsLLave(false);
                     }
+                    System.out.println(Boolean.parseBoolean(Datos_Campos.getValueAt(i, 4).toString()));
+                    C.get(i).setEsLlaveSecundaria(Boolean.parseBoolean(Datos_Campos.getValueAt(i, 4).toString()));
                 }
+
             }
             IsSaved = file.Guardar(true);
         }
@@ -1630,7 +1665,7 @@ public class Main extends javax.swing.JFrame {
                 return;
             }
 
-            Campo campoNuevo = new Campo(nombre, tipo, longitud, false);
+            Campo campoNuevo = new Campo(nombre, tipo, longitud, false, false);
             //listaCampos.add(campoNuevo);
             file.getListaCampos().add(campoNuevo);
 
@@ -2195,24 +2230,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2259,24 +2294,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2309,24 +2344,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2374,24 +2409,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2503,6 +2538,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel Instruccion9;
     private javax.swing.JFrame JF_Campos;
     private javax.swing.JFrame JF_CrearCampo;
+    private javax.swing.JFrame JF_Indices;
     private javax.swing.JFrame JF_Registros;
     private javax.swing.JLabel JL_Longitud;
     private javax.swing.JLabel JL_Nombre;
@@ -2547,8 +2583,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel Titulo_Listar;
     private javax.swing.JLabel Titulo_Modificar;
     private javax.swing.JLabel Titulo_RegistroAnt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_Archivo_Titulo;
     private javax.swing.JLabel lb_Registro_Titulo;
     private javax.swing.JTextField longitudCampo;
@@ -2589,7 +2629,8 @@ public class Main extends javax.swing.JFrame {
                     campo.getNombre(),
                     campo.getTipo(),
                     campo.getTamano(),
-                    campo.isEsLLave()
+                    campo.isEsLLave(),
+                    campo.isEsLlaveSecundaria()
                 };
                 //T.setColumnClass(3, Boolean.class);
                 T.addRow(fila);
