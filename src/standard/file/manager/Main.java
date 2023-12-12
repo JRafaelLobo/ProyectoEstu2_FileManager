@@ -1990,7 +1990,9 @@ public class Main extends javax.swing.JFrame {
     private void B_ModificarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ModificarRegistroMouseClicked
         // TODO add your handling code here:
         String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a modificar: ");
-        if (llaveprimaria == null) return;
+        if (llaveprimaria == null) {
+            return;
+        }
         rnn = file.getBTree().search(llaveprimaria);
         if (rnn == -1) {
             JOptionPane.showMessageDialog(null, "No se encontro el registro", "Notificación", JOptionPane.ERROR_MESSAGE);
@@ -2010,7 +2012,7 @@ public class Main extends javax.swing.JFrame {
         registroModificar = file.getListaRegistro().get(0);
         J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
         TF_Modificacion.setEnabled(!campoActual.isEsLLave());
-        
+
         Font f;
         int x = Dialog_Modificar.getWidth();
         int y = Dialog_Modificar.getHeight();
@@ -2412,7 +2414,7 @@ public class Main extends javax.swing.JFrame {
         boolean isInserto = file.insertarRegistro(registro, LlaveIngresar);
         if (!isInserto) {
             JOptionPane.showMessageDialog(null, "El registro no se pudo guardar", "Notificación", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "El registro se guardo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         }
         TF_NuevoRegistro.setText("");
