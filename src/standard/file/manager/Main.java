@@ -154,10 +154,13 @@ public class Main extends javax.swing.JFrame {
         B_DesplegarCamposRelacionados = new javax.swing.JButton();
         B_EnviarCamposTercerArchivo = new javax.swing.JButton();
         JF_Indices = new javax.swing.JFrame();
-        jButton1 = new boton();
-        jButton2 = new boton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        B_Indexar = new boton();
+        B_Reindexar = new boton();
+        JL_IndexarObject = new javax.swing.JScrollPane();
+        JL_IndexarData = new javax.swing.JList<>();
+        lb_IndiceTitulo = new javax.swing.JLabel();
+        B_RegresarIndice = new javax.swing.JButton();
+        I_FondoIdexar = new javax.swing.JPanel();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono2.png");
         B_Campos = new boton();
         B_Registros = new boton();
@@ -312,7 +315,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
-        I_Fondo_Archivos.setBounds(0, 0, 0, 0);
+        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
 
         JF_CrearCampo.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         JF_CrearCampo.setTitle("Standard File Manager");
@@ -1182,20 +1185,50 @@ public class Main extends javax.swing.JFrame {
         Dialog_Cruzar.getContentPane().add(Panel_Cruzar);
         Panel_Cruzar.setBounds(0, 50, 600, 400);
 
+        JF_Indices.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                JF_IndicesComponentResized(evt);
+            }
+        });
         JF_Indices.getContentPane().setLayout(null);
 
-        jButton1.setText("Crear Indice");
-        JF_Indices.getContentPane().add(jButton1);
-        jButton1.setBounds(80, 240, 95, 25);
+        B_Indexar.setText("Crear Indice");
+        JF_Indices.getContentPane().add(B_Indexar);
+        B_Indexar.setBounds(220, 300, 92, 25);
 
-        jButton2.setText("ReIndexar Indice");
-        JF_Indices.getContentPane().add(jButton2);
-        jButton2.setBounds(270, 230, 117, 25);
+        B_Reindexar.setText("ReIndexar Indice");
+        JF_Indices.getContentPane().add(B_Reindexar);
+        B_Reindexar.setBounds(370, 300, 114, 25);
 
-        jScrollPane1.setViewportView(jList1);
+        JL_IndexarObject.setViewportView(JL_IndexarData);
 
-        JF_Indices.getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(100, 50, 230, 170);
+        JF_Indices.getContentPane().add(JL_IndexarObject);
+        JL_IndexarObject.setBounds(100, 80, 360, 190);
+
+        lb_IndiceTitulo.setText("jLabel1");
+        JF_Indices.getContentPane().add(lb_IndiceTitulo);
+        lb_IndiceTitulo.setBounds(250, 30, 34, 15);
+
+        B_RegresarIndice.setText("Regresar");
+        JF_Indices.getContentPane().add(B_RegresarIndice);
+        B_RegresarIndice.setBounds(90, 290, 73, 25);
+
+        I_FondoIdexar.setBackground(new java.awt.Color(5, 23, 45));
+        I_FondoIdexar.setForeground(new java.awt.Color(5, 23, 45));
+
+        javax.swing.GroupLayout I_FondoIdexarLayout = new javax.swing.GroupLayout(I_FondoIdexar);
+        I_FondoIdexar.setLayout(I_FondoIdexarLayout);
+        I_FondoIdexarLayout.setHorizontalGroup(
+            I_FondoIdexarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        I_FondoIdexarLayout.setVerticalGroup(
+            I_FondoIdexarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        JF_Indices.getContentPane().add(I_FondoIdexar);
+        I_FondoIdexar.setBounds(0, 0, 100, 100);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
@@ -1240,11 +1273,6 @@ public class Main extends javax.swing.JFrame {
                 B_RegistrosMouseClicked(evt);
             }
         });
-        B_Registros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_RegistrosActionPerformed(evt);
-            }
-        });
         getContentPane().add(B_Registros);
         B_Registros.setBounds(514, 268, 109, 25);
 
@@ -1253,6 +1281,11 @@ public class Main extends javax.swing.JFrame {
         B_Indices.setBorderPainted(false);
         B_Indices.setContentAreaFilled(false);
         B_Indices.setFocusPainted(false);
+        B_Indices.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_IndicesMouseClicked(evt);
+            }
+        });
         getContentPane().add(B_Indices);
         B_Indices.setBounds(153, 335, 112, 25);
 
@@ -2139,10 +2172,6 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_B_ListarRegistroActionPerformed
 
-    private void B_RegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_RegistrosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_RegistrosActionPerformed
-
     private void Regresar_CruzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Regresar_CruzarMouseClicked
         // TODO add your handling code here:
         JF_Registros.setVisible(true);
@@ -2455,6 +2484,83 @@ public class Main extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_Jmenu_RegresarMouseClicked
 
+    private void JF_IndicesComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_IndicesComponentResized
+        // TODO add your handling code here:
+        DefaultMutableTreeNode J;
+        int y_decorated = JF_Indices.getInsets().top + JF_Indices.getInsets().bottom;
+        int y_JFMenuBar = JF_Indices.getJMenuBar().getHeight();
+        int x = JF_Indices.getWidth() - JF_Indices.getInsets().right - JF_Indices.getInsets().left;
+        int y = JF_Indices.getHeight() - y_decorated - y_JFMenuBar;
+        Font f;
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+//        for(int i=0;i<JF_Archivos.getComponentCount();i++){
+//            if(JF_Archivos.getComponent(i) instanceof javax.swing.JButton){
+//                JF_Archivos.getComponent(i).setFont(f);
+//            }
+//        }
+        B_IntroducirRegistro.setFont(f);
+        B_ModificarRegistro.setFont(f);
+        B_ListarRegistro.setFont(f);
+        B_BorrarRegistro.setFont(f);
+        B_CruzarRegistro.setFont(f);
+        B_BuscarRegistro.setFont(f);
+        //B_Regresar.setFont(f);
+
+        I_FondoIdexar.setSize(x, y);
+
+        //Botones de la lista
+        JL_IndexarData.setSize(3 * x / 4, y / 2);
+        JL_IndexarObject.setLocation((int) ((x / 2) - (JL_IndexarObject.getWidth() / 2)), (int) ((5 * y / 12) - (JL_IndexarObject.getHeight() / 2)));
+
+        //Botones Campo
+        B_Reindexar.setSize(3 * x / 17, 2 * y / 19);
+        B_Indexar.setSize(3 * x / 17, 2 * y / 19);
+        B_RegresarIndice.setSize(3 * x / 17, 2 * y / 19);
+        //B_Regresar.setSize(3 * x / 15, 2 * y /16);
+
+        B_IntroducirRegistro.setLocation((int) ((1 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_ModificarRegistro.setLocation((int) ((2.16 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_BuscarRegistro.setLocation((int) ((3.32 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_ListarRegistro.setLocation((int) ((4.48 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_CruzarRegistro.setLocation((int) ((5.64 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_BorrarRegistro.setLocation((int) ((6.8 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        //B_Regresar.setLocation((int) ((1.5 * x / 8) - (lb_Registro_Titulo.getWidth())), (int) ((y / 10) - (lb_Registro_Titulo.getHeight() / 2)));
+
+        //titulo
+        if (x > y) {
+            f = new Font("Dialog", 1, (int) y / 16);
+
+        } else {
+            f = new Font("Dialog", 1, (int) x / 16);
+        }
+
+        lb_IndiceTitulo.setFont(f);
+        FontMetrics fontMetrics = lb_IndiceTitulo.getFontMetrics(lb_IndiceTitulo.getFont());
+        int anchoTexto = fontMetrics.stringWidth(lb_Registro_Titulo.getText());
+        lb_IndiceTitulo.setForeground(Color.white);
+        lb_IndiceTitulo.setSize(anchoTexto, y / 2);
+        lb_IndiceTitulo.setLocation((int) ((x / 2) - (lb_IndiceTitulo.getWidth() / 2)), (int) ((y / 12) - (lb_IndiceTitulo.getHeight() / 2)));
+        lb_IndiceTitulo.setText(file.getNombre());
+
+        //logito de al lado
+        //I_Registro_Decoracion.setSize(lb_Registro_Titulo.getHeight() / 4, lb_Registro_Titulo.getHeight() / 4);
+        //I_Registro_Decoracion.setLocation((int) ((x / 2) - (I_Registro_Decoracion.getWidth() / 2)) + lb_Registro_Titulo.getWidth(), (int) ((y / 12) - (I_Registro_Decoracion.getHeight() / 2)));
+    }//GEN-LAST:event_JF_IndicesComponentResized
+
+    private void B_IndicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IndicesMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        JF_Indices.pack();
+        JF_Indices.setSize(this.getWidth(), this.getHeight());
+        JF_Indices.setLocationRelativeTo(this);
+        JF_Indices.setVisible(true);
+    }//GEN-LAST:event_B_IndicesMouseClicked
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -2502,6 +2608,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_GuardadCrearCampo;
     private javax.swing.JButton B_GuardarModif;
     private javax.swing.JButton B_GuardarRegistro;
+    private javax.swing.JButton B_Indexar;
     private javax.swing.JButton B_Indices;
     private javax.swing.JButton B_IntroducirRegistro;
     private javax.swing.JButton B_ListarCampo;
@@ -2510,6 +2617,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_ModificarRegistro;
     private javax.swing.JButton B_Registros;
     private javax.swing.JButton B_RegresarCrearCampo;
+    private javax.swing.JButton B_RegresarIndice;
+    private javax.swing.JButton B_Reindexar;
     private javax.swing.JButton B_Siguiente;
     private javax.swing.JButton B_SiguienteModif;
     private javax.swing.JTable Datos_Campos;
@@ -2521,6 +2630,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog Dialog_Listar;
     private javax.swing.JDialog Dialog_Modificar;
     private javax.swing.JPanel I_Campo_Decoracion;
+    private javax.swing.JPanel I_FondoIdexar;
     private javax.swing.JPanel I_Fondo_Archivos;
     private javax.swing.JPanel I_Fondo_Main;
     private javax.swing.JPanel I_Fondo_Registro;
@@ -2538,6 +2648,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JFrame JF_CrearCampo;
     private javax.swing.JFrame JF_Indices;
     private javax.swing.JFrame JF_Registros;
+    private javax.swing.JList<String> JL_IndexarData;
+    private javax.swing.JScrollPane JL_IndexarObject;
     private javax.swing.JLabel JL_Longitud;
     private javax.swing.JLabel JL_Nombre;
     private javax.swing.JLabel JL_Tipo;
@@ -2581,13 +2693,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel Titulo_Listar;
     private javax.swing.JLabel Titulo_Modificar;
     private javax.swing.JLabel Titulo_RegistroAnt;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_Archivo_Titulo;
+    private javax.swing.JLabel lb_IndiceTitulo;
     private javax.swing.JLabel lb_Registro_Titulo;
     private javax.swing.JTextField longitudCampo;
     private javax.swing.JTextField nombreCampo;
