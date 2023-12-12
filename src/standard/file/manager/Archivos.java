@@ -25,6 +25,31 @@ public class Archivos {
     private String rutaArchivo = "";
     private BTree bTree = new BTree(6);
     private BTreeSerialization fileTree = new BTreeSerialization();
+    
+    public void CruzarArchivos(Archivos file1, Archivos file2, String relacion){
+        if(!crearArchivoCruzado(file1.getRutaArchivo(), file1.getNombre(), file2.getNombre())){
+            return;
+        }
+        
+        
+    }
+    
+    private boolean crearArchivoCruzado(String ruta, String nombre1, String nombre2){
+        try {
+            File archivoOriginal = new File(ruta);
+            String rutaDirectorio = archivoOriginal.getParent();
+            
+            File archivo = new File(rutaDirectorio, "Cruzado_"+nombre1+"_"+nombre2+".txt");
+            if (archivo.createNewFile()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (IOException e) {
+            return false;
+        }
+    }
 
     private boolean ReEscribirCabeza() {
         try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
@@ -62,10 +87,10 @@ public class Archivos {
 
             if (this.availist.getCabeza().getSlot().equals(-1)) {
                 file.seek(file.length());
-                bTree.insert(new Llave(Llave, (int) (file.length() - longitudTotalDeMetadata)/(longitudTotalRegistro) ));
+                bTree.insert(new Llave(Llave, (int) (file.length() - longitudTotalDeMetadata) / (longitudTotalRegistro)));
             } else {
                 file.seek((this.longitudTotalDeMetadata) + ((this.longitudTotalRegistro) * (int) this.availist.getCabeza().getSlot()));
-                bTree.insert(new Llave(Llave, (int)this.availist.getCabeza().getSlot()));
+                bTree.insert(new Llave(Llave, (int) this.availist.getCabeza().getSlot()));
             }
 
             file.writeBytes(Registro);
@@ -83,7 +108,7 @@ public class Archivos {
 
     public boolean deleteRegistro(String Llave) {
         int rnn = bTree.search(Llave);
-        if(rnn == -1){
+        if (rnn == -1) {
             return false;
         }
         bTree.delete(Llave);
@@ -249,8 +274,8 @@ public class Archivos {
                 String[] arregloCampo = divicion[i].split(",");
                 listaCampos.add(new Campo(arregloCampo[0], arregloCampo[1], Integer.valueOf(arregloCampo[2]), (Integer.parseInt(arregloCampo[3]) == 1), (Integer.parseInt(arregloCampo[4]) == 1)));
             }
-            for(int i=0; i < listaCampos.size(); i++){
-                this.longitudTotalRegistro += listaCampos.get(i).getTamano() +1;
+            for (int i = 0; i < listaCampos.size(); i++) {
+                this.longitudTotalRegistro += listaCampos.get(i).getTamano() + 1;
             }
             return true;
         } catch (IOException e) {
@@ -295,7 +320,7 @@ public class Archivos {
         boolean campoIsOpen = this.AbrirCampos();
         this.longitudTotalDeMetadata = this.longitudTotalCampos + 2 + this.longitudTotalRegistro + 2;
         boolean isContructionAvai = this.ConstruirAvailist(true, -1);
-        if(fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree")) != null){
+        if (fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree")) != null) {
             bTree = fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree"));
         }
         return campoIsOpen && isContructionAvai;
@@ -381,6 +406,15 @@ public class Archivos {
         }
     }
 
+    public boolean canBeEnableRegistros() {
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+            return !(file.length() == 0);
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al reescribir la cabeza de la metadata: " + e.getMessage());
+            return false;
+        }
+    }
+
     public void setRutaArchivo(String rutaArchivo) {
         this.rutaArchivo = rutaArchivo;
     }
@@ -392,7 +426,8 @@ public class Archivos {
     public ArrayList<Object[]> getListaRegistro() {
         return this.registros;
     }
-    public BTree getBTree(){
+
+    public BTree getBTree() {
         return bTree;
     }
 }
