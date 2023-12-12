@@ -1,7 +1,6 @@
 package standard.file.manager;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -14,15 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.util.ArrayList;
-import java.util.Collection;
-import javax.swing.DefaultListModel;
-
-import javax.swing.JDialog;
-import javax.swing.UIDefaults;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.util.Random;
 
 public class Main extends javax.swing.JFrame {
 
