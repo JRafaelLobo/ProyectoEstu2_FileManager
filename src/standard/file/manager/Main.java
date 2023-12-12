@@ -2729,7 +2729,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         JF_estandarizacion.setVisible(false);
         this.pack();
-        this.setSize(this.getWidth(), this.getHeight());
+        this.setSize(JF_estandarizacion.getWidth(), JF_estandarizacion.getHeight());
         this.setLocationRelativeTo(this);
         this.setVisible(true);
     }//GEN-LAST:event_B_RegresarEstandarizacionMouseClicked
