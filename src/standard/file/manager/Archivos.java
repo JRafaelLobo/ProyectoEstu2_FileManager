@@ -12,6 +12,8 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Archivos {
 
@@ -25,21 +27,63 @@ public class Archivos {
     private String rutaArchivo = "";
     private BTree bTree = new BTree(6);
     private BTreeSerialization fileTree = new BTreeSerialization();
-    
-    public void CruzarArchivos(Archivos file1, Archivos file2, String relacion){
-        if(!crearArchivoCruzado(file1.getRutaArchivo(), file1.getNombre(), file2.getNombre())){
+
+    private  void insertar5MilRegistros() {
+        Set<String> generatedIDs = new HashSet<>();
+        int desiredNumberOfIDs = 5000;
+
+        while (generatedIDs.size() < desiredNumberOfIDs) {
+            String randomID = generateRandomID();
+            generatedIDs.add(randomID);
+        }
+
+        int i = 0;
+        for (String id : generatedIDs) {
+            String nombre = generateRandomString(20);
+            int edad = (int) (Math.random() * 100); // Edad de hasta 2 dígitos
+            this.insertarRegistro(id + "|" + nombre + "|" + edad + "|" + i + "|", id);
+            i++;
+        }
+    }
+
+    private String generateRandomID() {
+        StringBuilder randomID = new StringBuilder();
+        int maxLength = 6;
+
+        for (int i = 0; i < maxLength; i++) {
+            int digit = (int) (Math.random() * 10);
+            randomID.append(digit);
+        }
+
+        return randomID.toString();
+    }
+
+    private String generateRandomString(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder randomString = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            int index = (int) (Math.random() * characters.length());
+            char randomChar = characters.charAt(index);
+            randomString.append(randomChar);
+        }
+
+        return randomString.toString();
+    }
+
+    public void CruzarArchivos(Archivos file1, Archivos file2, String relacion) {
+        if (!crearArchivoCruzado(file1.getRutaArchivo(), file1.getNombre(), file2.getNombre())) {
             return;
         }
-        
-        
+
     }
-    
-    private boolean crearArchivoCruzado(String ruta, String nombre1, String nombre2){
+
+    private boolean crearArchivoCruzado(String ruta, String nombre1, String nombre2) {
         try {
             File archivoOriginal = new File(ruta);
             String rutaDirectorio = archivoOriginal.getParent();
-            
-            File archivo = new File(rutaDirectorio, "Cruzado_"+nombre1+"_"+nombre2+".txt");
+
+            File archivo = new File(rutaDirectorio, "Cruzado_" + nombre1 + "_" + nombre2 + ".txt");
             if (archivo.createNewFile()) {
                 return true;
             } else {
@@ -323,6 +367,8 @@ public class Archivos {
         if (fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree")) != null) {
             bTree = fileTree.loadBTreeFromFile(rutaArchivo.replace("txt", "tree"));
         }
+        //IMPORTANTE NO DESCOMENTAR A MENOS QUE SE QUIERA HACER PRUEBAS:
+        //this.insertar5MilRegistros();
         return campoIsOpen && isContructionAvai;
     }
 

@@ -1932,6 +1932,52 @@ public class Main extends javax.swing.JFrame {
 
     private void B_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_RegistrosMouseClicked
         // TODO add your handling code here:
+        if (!B_Registros.isEnabled() && file.getRutaArchivo().equals("")) {
+            int option = JOptionPane.showOptionDialog(null,
+                    "No tiene ningun archivo ¿desea abrir uno de prueba?",
+                    "Archivo de prueba",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new Object[]{"OK", "Cancel"},
+                    "OK");
+            if (option == JOptionPane.OK_OPTION) {
+                try {
+                    int op = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese el archivo de prueba que quiere abrir:\n 1. PersonFile. \n 2. CityFile."));
+                    if (op < 1 || op > 2) {
+                        JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de las opciones.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    switch (op) {
+                        case 1:
+                            file.setRutaArchivo("PersonFile.txt");
+                            file.setNombre("PersonFile");
+                            break;
+                        case 2:
+                            file.setRutaArchivo("CityFile.txt");
+                            file.setNombre("CityFile");
+                            break;
+                    }
+                    boolean isOpen = file.Abrir();
+                    if (isOpen == false) {
+                        JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    //Activando los botones
+                    B_Campos.setEnabled(file.canBeEnableCampos());
+                    B_Registros.setEnabled(file.canBeEnableRegistros());
+                    B_Indices.setEnabled(true);
+                    B_Estandarizacion.setEnabled(true);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de las opciones.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            return;
+        }
+        if (!B_Registros.isEnabled()) {
+            return;
+        }
         ArrayList<Campo> C = file.getListaCampos();
         String[] columnNames = new String[C.size()];
         for (int i = 0; i < C.size(); i++) {
@@ -1940,9 +1986,6 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel T = new DefaultTableModel(columnNames, 1);
         Datos_Registro.setModel(T);
         lb_Archivo_Titulo.setText(file.getNombre());
-        if (!B_Registros.isEnabled()) {
-            return;
-        }
         this.setVisible(false);
         JF_Registros.pack();
         JF_Registros.setSize(this.getWidth(), this.getHeight());
@@ -2034,10 +2077,18 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BorrarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarRegistroMouseClicked
         // TODO add your handling code here:
+        if (file.canBeEnableCampos()) {
+            JOptionPane.showMessageDialog(null, "No hay ningun registro para eliminar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         try {
             String llavepimaria;
             String criterio;
-            int opcion = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio "));
+            String opcionA = JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio ");
+            if(opcionA == null){
+                return;
+            }
+            int opcion = Integer.parseInt(opcionA);
             if (opcion == 1) {
                 llavepimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a eliminar:");
                 if (llavepimaria == null) {
@@ -2216,6 +2267,10 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BuscarRegistroMouseClicked
         // TODO add your handling code here:
+        if (file.canBeEnableCampos()) {
+            JOptionPane.showMessageDialog(null, "No hay ningun registro para buscar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a buscar: ");
         if (llaveprimaria == null) {
             return;
@@ -2341,6 +2396,10 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (campoActual.isEsLLave()) {
+            if (file.getBTree().search(text) != -1) {
+                JOptionPane.showMessageDialog(rootPane, "La llave ingresada ya existe en los registros", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             LlaveIngresar = text;
         }
         registroIngresar.add(currentIndex, text);
@@ -2455,14 +2514,14 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (campoActual.isEsLLave()) {
+            if (file.getBTree().search(text) != -1) {
+                JOptionPane.showMessageDialog(rootPane, "La llave ingresada ya existe en los registros", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             LlaveIngresar = text;
         }
         registroIngresar.add(currentIndex, text);
         //Metodo para guardar registro
-        if (file.getBTree().search(LlaveIngresar) != -1) {
-            JOptionPane.showMessageDialog(null, "Ya existe un registro con esa llave primaria", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
         String registro = "";
         for (int i = 0; i < registroIngresar.size(); i++) {
             registro += registroIngresar.get(i) + "|";
@@ -2544,12 +2603,12 @@ public class Main extends javax.swing.JFrame {
 
     private void B_EnviarCamposTercerArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_EnviarCamposTercerArchivoActionPerformed
         // TODO add your handling code here:
-        if(Combo_Cruzar.getSelectedItem() == null){
+        if (Combo_Cruzar.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(rootPane, "No existe relacion entre los dos archivos", "Error", JOptionPane.ERROR_MESSAGE);
             Dialog_Cruzar.setVisible(false);
             return;
         }
-        cruzado.CruzarArchivos(file, cruzado, (String)Combo_Cruzar.getSelectedItem());
+        cruzado.CruzarArchivos(file, cruzado, (String) Combo_Cruzar.getSelectedItem());
         Dialog_Cruzar.setVisible(false);
     }//GEN-LAST:event_B_EnviarCamposTercerArchivoActionPerformed
 

@@ -1,0 +1,2 @@
+{PersonId,int,6,1,0|PersonName,char,20,0,0|PersonAge,int,3,0,0|CityId,int,4,0,1}
+*-1                                  

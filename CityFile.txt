@@ -1,0 +1,2 @@
+{CityId,int,4,1,0|CityName,char,30,0,0}
+*-1                                 
