@@ -1,7 +1,6 @@
 package standard.file.manager;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -14,15 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.util.ArrayList;
-import java.util.Collection;
-import javax.swing.DefaultListModel;
-
-import javax.swing.JDialog;
-import javax.swing.UIDefaults;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.util.Random;
 
 public class Main extends javax.swing.JFrame {
 
@@ -149,11 +141,12 @@ public class Main extends javax.swing.JFrame {
         Titulo_Cruzar = new javax.swing.JLabel();
         Panel_Cruzar = new javax.swing.JPanel();
         Regresar_Cruzar = new javax.swing.JButton();
-        Instruccion11 = new javax.swing.JLabel();
-        Instruccion12 = new javax.swing.JLabel();
-        Instruccion13 = new javax.swing.JLabel();
-        B_DesplegarCamposRelacionados = new javax.swing.JButton();
         B_EnviarCamposTercerArchivo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TB_Campos_file1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TB_Campos_file2 = new javax.swing.JTable();
+        Combo_Cruzar = new javax.swing.JComboBox<>();
         JF_Indices = new javax.swing.JFrame();
         jButton1 = new boton();
         jButton2 = new boton();
@@ -1090,9 +1083,9 @@ public class Main extends javax.swing.JFrame {
         Panel_Decoracion_Cruzar.setLayout(Panel_Decoracion_CruzarLayout);
         Panel_Decoracion_CruzarLayout.setHorizontalGroup(
             Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
             .addGroup(Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(Titulo_Cruzar, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
+                .addComponent(Titulo_Cruzar, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE))
         );
         Panel_Decoracion_CruzarLayout.setVerticalGroup(
             Panel_Decoracion_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1105,7 +1098,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Decoracion_Cruzar);
-        Panel_Decoracion_Cruzar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Cruzar.setBounds(0, 0, 670, 50);
 
         Panel_Cruzar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1117,34 +1110,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Instruccion11.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
-        Instruccion11.setForeground(new java.awt.Color(255, 255, 255));
-        Instruccion11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Instruccion11.setText("Mostrar tabla de campos del archivo 1 (actual)*");
-
-        Instruccion12.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
-        Instruccion12.setForeground(new java.awt.Color(255, 255, 255));
-        Instruccion12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Instruccion12.setText("Mostrar tabla de campos del archivo 2 (seleccionado para cruzar)*");
-
-        Instruccion13.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
-        Instruccion13.setForeground(new java.awt.Color(255, 255, 255));
-        Instruccion13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Instruccion13.setText("Seleccionar campos para relacionar*");
-
-        B_DesplegarCamposRelacionados.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        B_DesplegarCamposRelacionados.setText("Desplegar en pantalla");
-        B_DesplegarCamposRelacionados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_DesplegarCamposRelacionadosMouseClicked(evt);
-            }
-        });
-        B_DesplegarCamposRelacionados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                B_DesplegarCamposRelacionadosActionPerformed(evt);
-            }
-        });
-
         B_EnviarCamposTercerArchivo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         B_EnviarCamposTercerArchivo.setText("Enviar a un tercer archivo");
         B_EnviarCamposTercerArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1152,6 +1117,69 @@ public class Main extends javax.swing.JFrame {
                 B_EnviarCamposTercerArchivoMouseClicked(evt);
             }
         });
+        B_EnviarCamposTercerArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_EnviarCamposTercerArchivoActionPerformed(evt);
+            }
+        });
+
+        TB_Campos_file1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Campos", "Agregar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(TB_Campos_file1);
+
+        TB_Campos_file2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Campos", "Agregar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(TB_Campos_file2);
+
+        Combo_Cruzar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout Panel_CruzarLayout = new javax.swing.GroupLayout(Panel_Cruzar);
         Panel_Cruzar.setLayout(Panel_CruzarLayout);
@@ -1160,38 +1188,39 @@ public class Main extends javax.swing.JFrame {
             .addGroup(Panel_CruzarLayout.createSequentialGroup()
                 .addGroup(Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_CruzarLayout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(B_DesplegarCamposRelacionados)
-                        .addGap(28, 28, 28)
-                        .addComponent(B_EnviarCamposTercerArchivo))
-                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Regresar_Cruzar)))
-                .addContainerGap(96, Short.MAX_VALUE))
-            .addComponent(Instruccion11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Instruccion12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Instruccion13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Regresar_Cruzar))
+                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addGroup(Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane2)))
+                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(B_EnviarCamposTercerArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(Combo_Cruzar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         Panel_CruzarLayout.setVerticalGroup(
             Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_CruzarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Regresar_Cruzar)
-                .addGap(50, 50, 50)
-                .addComponent(Instruccion11)
-                .addGap(31, 31, 31)
-                .addComponent(Instruccion12)
-                .addGap(29, 29, 29)
-                .addComponent(Instruccion13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addGroup(Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(B_DesplegarCamposRelacionados)
-                    .addComponent(B_EnviarCamposTercerArchivo))
-                .addGap(81, 81, 81))
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(Combo_Cruzar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(B_EnviarCamposTercerArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Cruzar);
-        Panel_Cruzar.setBounds(0, 50, 600, 400);
+        Panel_Cruzar.setBounds(0, 50, 670, 470);
 
         JF_Indices.getContentPane().setLayout(null);
 
@@ -1609,7 +1638,7 @@ public class Main extends javax.swing.JFrame {
         }
         //Activando los botones
         B_Campos.setEnabled(file.canBeEnableCampos());
-        B_Registros.setEnabled(true);
+        B_Registros.setEnabled(file.canBeEnableRegistros());
         B_Indices.setEnabled(true);
         B_Estandarizacion.setEnabled(true);
         //Buen dias
@@ -1999,6 +2028,52 @@ public class Main extends javax.swing.JFrame {
 
     private void B_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_RegistrosMouseClicked
         // TODO add your handling code here:
+        if (!B_Registros.isEnabled() && file.getRutaArchivo().equals("")) {
+            int option = JOptionPane.showOptionDialog(null,
+                    "No tiene ningun archivo ¿desea abrir uno de prueba?",
+                    "Archivo de prueba",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new Object[]{"OK", "Cancel"},
+                    "OK");
+            if (option == JOptionPane.OK_OPTION) {
+                try {
+                    int op = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Ingrese el archivo de prueba que quiere abrir:\n 1. PersonFile. \n 2. CityFile."));
+                    if (op < 1 || op > 2) {
+                        JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de las opciones.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    switch (op) {
+                        case 1:
+                            file.setRutaArchivo("PersonFile.txt");
+                            file.setNombre("PersonFile");
+                            break;
+                        case 2:
+                            file.setRutaArchivo("CityFile.txt");
+                            file.setNombre("CityFile");
+                            break;
+                    }
+                    boolean isOpen = file.Abrir();
+                    if (isOpen == false) {
+                        JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    //Activando los botones
+                    B_Campos.setEnabled(file.canBeEnableCampos());
+                    B_Registros.setEnabled(file.canBeEnableRegistros());
+                    B_Indices.setEnabled(true);
+                    B_Estandarizacion.setEnabled(true);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, "Por favor, seleccione un elemento de las opciones.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            return;
+        }
+        if (!B_Registros.isEnabled()) {
+            return;
+        }
         ArrayList<Campo> C = file.getListaCampos();
         String[] columnNames = new String[C.size()];
         for (int i = 0; i < C.size(); i++) {
@@ -2007,9 +2082,6 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel T = new DefaultTableModel(columnNames, 1);
         Datos_Registro.setModel(T);
         lb_Archivo_Titulo.setText(file.getNombre());
-        if (!B_Registros.isEnabled()) {
-            return;
-        }
         this.setVisible(false);
         JF_Registros.pack();
         JF_Registros.setSize(this.getWidth(), this.getHeight());
@@ -2082,7 +2154,7 @@ public class Main extends javax.swing.JFrame {
         J_OrdenCampos.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
         registroModificar = file.getListaRegistro().get(0);
         J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
-        TF_Modificacion.setEnabled(!campoActual.isEsLLave());
+        TF_Modificacion.setEnabled(!(campoActual.isEsLLave() || campoActual.isEsLlaveSecundaria()));
 
         Font f;
         int x = Dialog_Modificar.getWidth();
@@ -2101,10 +2173,18 @@ public class Main extends javax.swing.JFrame {
 
     private void B_BorrarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BorrarRegistroMouseClicked
         // TODO add your handling code here:
+        if (file.canBeEnableCampos()) {
+            JOptionPane.showMessageDialog(null, "No hay ningun registro para eliminar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         try {
             String llavepimaria;
             String criterio;
-            int opcion = Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio "));
+            String opcionA = JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio ");
+            if(opcionA == null){
+                return;
+            }
+            int opcion = Integer.parseInt(opcionA);
             if (opcion == 1) {
                 llavepimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a eliminar:");
                 if (llavepimaria == null) {
@@ -2202,12 +2282,67 @@ public class Main extends javax.swing.JFrame {
 
     private void B_CruzarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_CruzarRegistroMouseClicked
         // TODO add your handling code here:
-        //ArchivoCruzado = cruzado.LecturaPath();
+        cruzado.LecturaPath();
+        if (cruzado.getRutaArchivo().equals("")) {
+            return;
+        }
+        if (cruzado.getRutaArchivo().equals("F")) {
+            JOptionPane.showMessageDialog(null, "Hubo un error esta abriendo un archivo no permitido", "Error", JOptionPane.ERROR_MESSAGE);
+            cruzado.setRutaArchivo("");
+            return;
+        }
+
+        if (cruzado.getRutaArchivo().equals(file.getRutaArchivo())) {
+            JOptionPane.showMessageDialog(null, "Hubo un error esta abriendo el mismo archivo dos veces", "Error", JOptionPane.ERROR_MESSAGE);
+            cruzado.setRutaArchivo("");
+            return;
+        }
+        boolean isOpen = cruzado.Abrir();
+        if (isOpen == false) {
+            JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        DefaultTableModel T1 = (DefaultTableModel) TB_Campos_file1.getModel();
+        DefaultTableModel T2 = (DefaultTableModel) TB_Campos_file2.getModel();
+
+        Combo_Cruzar.removeAllItems();
+        T1.setRowCount(0);
+        T2.setRowCount(0);
+
+        for (int i = 0; i < cruzado.getListaCampos().size(); i++) {
+            if (!(cruzado.getListaCampos().get(i).isEsLLave() || cruzado.getListaCampos().get(i).isEsLlaveSecundaria())) {
+                continue;
+            }
+            for (int j = 0; j < file.getListaCampos().size(); j++) {
+                if (!(file.getListaCampos().get(j).isEsLLave() || file.getListaCampos().get(j).isEsLlaveSecundaria())) {
+                    continue;
+                }
+                if (cruzado.getListaCampos().get(i).getNombre().equals(file.getListaCampos().get(j).getNombre())) {
+                    Combo_Cruzar.addItem(cruzado.getListaCampos().get(i).getNombre());
+                }
+            }
+        }
+
+        for (Campo campo : file.getListaCampos()) {
+            Object[] fila = {
+                campo.getNombre(),
+                false
+            };
+            T1.addRow(fila);
+        }
+
+        for (Campo campo : cruzado.getListaCampos()) {
+            Object[] fila = {
+                campo.getNombre(),
+                false
+            };
+            T2.addRow(fila);
+        }
 
         Dialog_Cruzar.setTitle("Standard File Manager");
         Dialog_Cruzar.setModal(true);
         Dialog_Cruzar.pack();
-        Dialog_Cruzar.setSize(600, 450);
+        Dialog_Cruzar.setSize(676, 552);
         Dialog_Cruzar.setResizable(false);
         Dialog_Cruzar.setLocationRelativeTo(this);
         Dialog_Cruzar.setVisible(true);
@@ -2223,10 +2358,15 @@ public class Main extends javax.swing.JFrame {
         }
         Regresar_Cruzar.setSize(90, 25);
         Regresar_Cruzar.setFont(f);
+
     }//GEN-LAST:event_B_CruzarRegistroMouseClicked
 
     private void B_BuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BuscarRegistroMouseClicked
         // TODO add your handling code here:
+        if (file.canBeEnableCampos()) {
+            JOptionPane.showMessageDialog(null, "No hay ningun registro para buscar", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         String llaveprimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a buscar: ");
         if (llaveprimaria == null) {
             return;
@@ -2293,17 +2433,9 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TF_ModificacionActionPerformed
 
-    private void B_DesplegarCamposRelacionadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_DesplegarCamposRelacionadosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_DesplegarCamposRelacionadosMouseClicked
-
     private void B_EnviarCamposTercerArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_EnviarCamposTercerArchivoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_B_EnviarCamposTercerArchivoMouseClicked
-
-    private void B_DesplegarCamposRelacionadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_DesplegarCamposRelacionadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B_DesplegarCamposRelacionadosActionPerformed
 
     private void B_AnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_AnteriorMouseClicked
         // TODO add your handling code here:
@@ -2360,6 +2492,10 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (campoActual.isEsLLave()) {
+            if (file.getBTree().search(text) != -1) {
+                JOptionPane.showMessageDialog(rootPane, "La llave ingresada ya existe en los registros", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             LlaveIngresar = text;
         }
         registroIngresar.add(currentIndex, text);
@@ -2430,7 +2566,7 @@ public class Main extends javax.swing.JFrame {
         campoActual = C.get(currentIndex);
         J_OrdenCampos.setText("{" + campoActual.getNombre() + ',' + campoActual.getTipo() + ',' + campoActual.getTamano() + ',' + campoActual.isEsLLave() + "}");
         J_RegistroAnterior.setText((String) registroModificar[currentIndex]);
-        TF_Modificacion.setEnabled(!campoActual.isEsLLave());
+        TF_Modificacion.setEnabled(!(campoActual.isEsLLave() || campoActual.isEsLlaveSecundaria()));
     }//GEN-LAST:event_B_SiguienteModifMouseClicked
 
     private void B_GuardarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_GuardarRegistroMouseClicked
@@ -2474,14 +2610,14 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (campoActual.isEsLLave()) {
+            if (file.getBTree().search(text) != -1) {
+                JOptionPane.showMessageDialog(rootPane, "La llave ingresada ya existe en los registros", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             LlaveIngresar = text;
         }
         registroIngresar.add(currentIndex, text);
         //Metodo para guardar registro
-        if (file.getBTree().search(LlaveIngresar) != -1) {
-            JOptionPane.showMessageDialog(null, "Ya existe un registro con esa llave primaria", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
         String registro = "";
         for (int i = 0; i < registroIngresar.size(); i++) {
             registro += registroIngresar.get(i) + "|";
@@ -2561,6 +2697,16 @@ public class Main extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_Jmenu_RegresarMouseClicked
 
+    private void B_EnviarCamposTercerArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_EnviarCamposTercerArchivoActionPerformed
+        // TODO add your handling code here:
+        if (Combo_Cruzar.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(rootPane, "No existe relacion entre los dos archivos", "Error", JOptionPane.ERROR_MESSAGE);
+            Dialog_Cruzar.setVisible(false);
+            return;
+        }
+        cruzado.CruzarArchivos(file, cruzado, (String) Combo_Cruzar.getSelectedItem());
+        Dialog_Cruzar.setVisible(false);
+    }//GEN-LAST:event_B_EnviarCamposTercerArchivoActionPerformed
     private void JF_EstandarizacionComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_EstandarizacionComponentResized
         // TODO add your handling code here:
 
@@ -2699,6 +2845,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_RegresarCrearCampo;
     private javax.swing.JButton B_Siguiente;
     private javax.swing.JButton B_SiguienteModif;
+    private javax.swing.JComboBox<String> Combo_Cruzar;
     private javax.swing.JTable Datos_Campos;
     private javax.swing.JTable Datos_Registro;
     private javax.swing.JTable Datos_Registro1;
@@ -2720,9 +2867,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel I_Registro_Decoracion;
     private javax.swing.JPanel I_Registro_Decoracion1;
     private javax.swing.JLabel Instruccion10;
-    private javax.swing.JLabel Instruccion11;
-    private javax.swing.JLabel Instruccion12;
-    private javax.swing.JLabel Instruccion13;
     private javax.swing.JLabel Instruccion7;
     private javax.swing.JLabel Instruccion8;
     private javax.swing.JLabel Instruccion9;
@@ -2763,6 +2907,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton Regresar_Introducir;
     private javax.swing.JButton Regresar_Listar;
     private javax.swing.JButton Regresar_Modificar;
+    private javax.swing.JTable TB_Campos_file1;
+    private javax.swing.JTable TB_Campos_file2;
     private javax.swing.JTextField TF_Modificacion;
     private javax.swing.JTextField TF_NuevoRegistro;
     private javax.swing.JScrollPane Tabla_Camps;
@@ -2785,6 +2931,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lb_Archivo_Titulo;
     private javax.swing.JLabel lb_Archivo_TituloEst;
     private javax.swing.JLabel lb_Registro_Titulo;
@@ -2798,7 +2946,6 @@ public class Main extends javax.swing.JFrame {
     private String ArchivoCruzado = "";
     private Archivos file = new Archivos();
     private Archivos cruzado = new Archivos();
-    private NodoArbol Arbol;
     //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     private Campo campoActual;
