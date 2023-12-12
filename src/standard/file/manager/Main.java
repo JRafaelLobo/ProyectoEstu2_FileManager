@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.Random;
+import javax.swing.ListModel;
 
 public class Main extends javax.swing.JFrame {
 
@@ -38,6 +39,8 @@ public class Main extends javax.swing.JFrame {
         Dialog_Listar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Dialog_Borrar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         Dialog_Cruzar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        JF_Indices.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        JF_estandarizacion.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
 
         Music = playMusic("./Musica\\SonidoBoton.wav");
         Music.start();
@@ -159,8 +162,14 @@ public class Main extends javax.swing.JFrame {
         JL_IndexarObject = new javax.swing.JScrollPane();
         JL_IndexarData = new javax.swing.JList<>();
         lb_IndiceTitulo = new javax.swing.JLabel();
-        B_RegresarIndice = new javax.swing.JButton();
+        B_RegresarIndice = new boton();
         I_FondoIdexar = new javax.swing.JPanel();
+        JF_estandarizacion = new javax.swing.JFrame();
+        lb_TituloEstandarizacion = new javax.swing.JLabel();
+        B_ExportarExcel = new boton();
+        B_RegresarEstandarizacion = new boton();
+        B_ExportarXML = new boton();
+        P_FondoEstandarizacion = new javax.swing.JPanel();
         I_Icono_Main = new FondoPanel("./Imagenes\\Icono2.png");
         B_Campos = new boton();
         B_Registros = new boton();
@@ -315,9 +324,9 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Campos.getContentPane().add(I_Fondo_Archivos);
-        I_Fondo_Archivos.setBounds(0, 0, 100, 100);
+        I_Fondo_Archivos.setBounds(0, 0, 0, 0);
 
-        JF_CrearCampo.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        JF_CrearCampo.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         JF_CrearCampo.setTitle("Standard File Manager");
         JF_CrearCampo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JF_CrearCampo.setUndecorated(true);
@@ -1185,6 +1194,8 @@ public class Main extends javax.swing.JFrame {
         Dialog_Cruzar.getContentPane().add(Panel_Cruzar);
         Panel_Cruzar.setBounds(0, 50, 600, 400);
 
+        JF_Indices.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        JF_Indices.setTitle("Indices");
         JF_Indices.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 JF_IndicesComponentResized(evt);
@@ -1193,10 +1204,14 @@ public class Main extends javax.swing.JFrame {
         JF_Indices.getContentPane().setLayout(null);
 
         B_Indexar.setText("Crear Indice");
+        B_Indexar.setBorderPainted(false);
+        B_Indexar.setFocusPainted(false);
         JF_Indices.getContentPane().add(B_Indexar);
         B_Indexar.setBounds(220, 300, 92, 25);
 
         B_Reindexar.setText("ReIndexar Indice");
+        B_Reindexar.setBorderPainted(false);
+        B_Reindexar.setFocusPainted(false);
         JF_Indices.getContentPane().add(B_Reindexar);
         B_Reindexar.setBounds(370, 300, 114, 25);
 
@@ -1205,13 +1220,20 @@ public class Main extends javax.swing.JFrame {
         JF_Indices.getContentPane().add(JL_IndexarObject);
         JL_IndexarObject.setBounds(100, 80, 360, 190);
 
-        lb_IndiceTitulo.setText("jLabel1");
+        lb_IndiceTitulo.setText("Indices");
         JF_Indices.getContentPane().add(lb_IndiceTitulo);
-        lb_IndiceTitulo.setBounds(250, 30, 34, 15);
+        lb_IndiceTitulo.setBounds(250, 30, 90, 15);
 
         B_RegresarIndice.setText("Regresar");
+        B_RegresarIndice.setBorderPainted(false);
+        B_RegresarIndice.setFocusPainted(false);
+        B_RegresarIndice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_RegresarIndiceActionPerformed(evt);
+            }
+        });
         JF_Indices.getContentPane().add(B_RegresarIndice);
-        B_RegresarIndice.setBounds(90, 290, 73, 25);
+        B_RegresarIndice.setBounds(90, 310, 73, 25);
 
         I_FondoIdexar.setBackground(new java.awt.Color(5, 23, 45));
         I_FondoIdexar.setForeground(new java.awt.Color(5, 23, 45));
@@ -1228,7 +1250,64 @@ public class Main extends javax.swing.JFrame {
         );
 
         JF_Indices.getContentPane().add(I_FondoIdexar);
-        I_FondoIdexar.setBounds(0, 0, 100, 100);
+        I_FondoIdexar.setBounds(0, 0, 0, 0);
+
+        JF_estandarizacion.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        JF_estandarizacion.setTitle("Estandarizacion");
+        JF_estandarizacion.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                JF_estandarizacionComponentResized(evt);
+            }
+        });
+        JF_estandarizacion.getContentPane().setLayout(null);
+
+        lb_TituloEstandarizacion.setText("Estandarizacion");
+        JF_estandarizacion.getContentPane().add(lb_TituloEstandarizacion);
+        lb_TituloEstandarizacion.setBounds(240, 30, 78, 15);
+
+        B_ExportarExcel.setText("Exportar Excel");
+        B_ExportarExcel.setBorderPainted(false);
+        B_ExportarExcel.setFocusPainted(false);
+        B_ExportarExcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_ExportarExcelMouseClicked(evt);
+            }
+        });
+        JF_estandarizacion.getContentPane().add(B_ExportarExcel);
+        B_ExportarExcel.setBounds(240, 110, 104, 25);
+
+        B_RegresarEstandarizacion.setText("Regresar");
+        B_RegresarEstandarizacion.setBorderPainted(false);
+        B_RegresarEstandarizacion.setFocusPainted(false);
+        B_RegresarEstandarizacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_RegresarEstandarizacionMouseClicked(evt);
+            }
+        });
+        JF_estandarizacion.getContentPane().add(B_RegresarEstandarizacion);
+        B_RegresarEstandarizacion.setBounds(240, 250, 79, 25);
+
+        B_ExportarXML.setText("Exportar XML con Schema");
+        B_ExportarXML.setBorderPainted(false);
+        B_ExportarXML.setFocusPainted(false);
+        JF_estandarizacion.getContentPane().add(B_ExportarXML);
+        B_ExportarXML.setBounds(240, 170, 200, 25);
+
+        P_FondoEstandarizacion.setBackground(new java.awt.Color(5, 23, 45));
+
+        javax.swing.GroupLayout P_FondoEstandarizacionLayout = new javax.swing.GroupLayout(P_FondoEstandarizacion);
+        P_FondoEstandarizacion.setLayout(P_FondoEstandarizacionLayout);
+        P_FondoEstandarizacionLayout.setHorizontalGroup(
+            P_FondoEstandarizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+        P_FondoEstandarizacionLayout.setVerticalGroup(
+            P_FondoEstandarizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
+
+        JF_estandarizacion.getContentPane().add(P_FondoEstandarizacion);
+        P_FondoEstandarizacion.setBounds(0, 0, 110, 80);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Standard File Manager");
@@ -1292,6 +1371,11 @@ public class Main extends javax.swing.JFrame {
         B_Estandarizacion.setText("Estandarizacion");
         B_Estandarizacion.setBorderPainted(false);
         B_Estandarizacion.setFocusPainted(false);
+        B_Estandarizacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_EstandarizacionMouseClicked(evt);
+            }
+        });
         getContentPane().add(B_Estandarizacion);
         B_Estandarizacion.setBounds(382, 335, 112, 25);
 
@@ -2488,11 +2572,10 @@ public class Main extends javax.swing.JFrame {
 
     private void JF_IndicesComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_IndicesComponentResized
         // TODO add your handling code here:
-        DefaultMutableTreeNode J;
         int y_decorated = JF_Indices.getInsets().top + JF_Indices.getInsets().bottom;
-        int y_JFMenuBar = JF_Indices.getJMenuBar().getHeight();
+        //int y_JFMenuBar = JF_Indices.getJMenuBar().getHeight();
         int x = JF_Indices.getWidth() - JF_Indices.getInsets().right - JF_Indices.getInsets().left;
-        int y = JF_Indices.getHeight() - y_decorated - y_JFMenuBar;
+        int y = JF_Indices.getHeight() - y_decorated;
         Font f;
         if (x > y) {
             f = new Font("Dialog", 0, (int) y / 33);
@@ -2505,40 +2588,34 @@ public class Main extends javax.swing.JFrame {
 //                JF_Archivos.getComponent(i).setFont(f);
 //            }
 //        }
-        B_IntroducirRegistro.setFont(f);
-        B_ModificarRegistro.setFont(f);
-        B_ListarRegistro.setFont(f);
-        B_BorrarRegistro.setFont(f);
-        B_CruzarRegistro.setFont(f);
-        B_BuscarRegistro.setFont(f);
+        B_Indexar.setFont(f);
+        B_Reindexar.setFont(f);
+        B_RegresarIndice.setFont(f);
         //B_Regresar.setFont(f);
 
         I_FondoIdexar.setSize(x, y);
 
         //Botones de la lista
-        JL_IndexarData.setSize(3 * x / 4, y / 2);
+        JL_IndexarObject.setSize(3 * x / 4, y / 2);
         JL_IndexarObject.setLocation((int) ((x / 2) - (JL_IndexarObject.getWidth() / 2)), (int) ((5 * y / 12) - (JL_IndexarObject.getHeight() / 2)));
 
         //Botones Campo
-        B_Reindexar.setSize(3 * x / 17, 2 * y / 19);
+        B_Reindexar.setSize(3 * x / 10, 2 * y / 19);
         B_Indexar.setSize(3 * x / 17, 2 * y / 19);
         B_RegresarIndice.setSize(3 * x / 17, 2 * y / 19);
         //B_Regresar.setSize(3 * x / 15, 2 * y /16);
 
-        B_IntroducirRegistro.setLocation((int) ((1 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
-        B_ModificarRegistro.setLocation((int) ((2.16 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
-        B_BuscarRegistro.setLocation((int) ((3.32 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
-        B_ListarRegistro.setLocation((int) ((4.48 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
-        B_CruzarRegistro.setLocation((int) ((5.64 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
-        B_BorrarRegistro.setLocation((int) ((6.8 * x / 8) - (B_IntroducirRegistro.getWidth() / 2)), (int) ((11 * y / 13) - (B_IntroducirRegistro.getHeight() / 2)));
+        B_Reindexar.setLocation((int) ((5 * x / 6) - (B_Reindexar.getWidth() / 2)), (int) ((11 * y / 13) - (B_Reindexar.getHeight() / 2)));
+        B_Indexar.setLocation((int) ((3 * x / 6) - (B_Indexar.getWidth() / 2)), (int) ((11 * y / 13) - (B_Indexar.getHeight() / 2)));
+        B_RegresarIndice.setLocation((int) ((1 * x / 6) - (B_RegresarIndice.getWidth() / 2)), (int) ((11 * y / 13) - (B_RegresarIndice.getHeight() / 2)));
         //B_Regresar.setLocation((int) ((1.5 * x / 8) - (lb_Registro_Titulo.getWidth())), (int) ((y / 10) - (lb_Registro_Titulo.getHeight() / 2)));
 
         //titulo
         if (x > y) {
-            f = new Font("Dialog", 1, (int) y / 16);
+            f = new Font("Bold", 1, (int) y / 16);
 
         } else {
-            f = new Font("Dialog", 1, (int) x / 16);
+            f = new Font("Bold", 1, (int) x / 16);
         }
 
         lb_IndiceTitulo.setFont(f);
@@ -2556,12 +2633,117 @@ public class Main extends javax.swing.JFrame {
 
     private void B_IndicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IndicesMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
-        JF_Indices.pack();
-        JF_Indices.setSize(this.getWidth(), this.getHeight());
-        JF_Indices.setLocationRelativeTo(this);
-        JF_Indices.setVisible(true);
+        if (B_Indices.isEnabled()) {
+            this.setVisible(false);
+            JF_Indices.pack();
+            JF_Indices.setSize(this.getWidth(), this.getHeight());
+            JF_Indices.setLocationRelativeTo(this);
+            JF_Indices.setVisible(true);
+
+            //ListModel<Campo> listModel = JL_IndexarData.getModel();
+            DefaultListModel<Campo> lista = new DefaultListModel<>();
+            for (Campo campo : file.getListaCampos()) {
+                if (campo.isEsLLave() || campo.isEsLlaveSecundaria()) {
+                    lista.addElement(campo);
+                }
+            }
+            JL_IndexarData.setModel(lista);
+        }
     }//GEN-LAST:event_B_IndicesMouseClicked
+
+    private void B_RegresarIndiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_RegresarIndiceActionPerformed
+        // TODO add your handling code here:
+        JF_Indices.setVisible(false);
+        this.pack();
+        this.setSize(this.getWidth(), this.getHeight());
+        this.setLocationRelativeTo(this);
+        this.setVisible(true);
+    }//GEN-LAST:event_B_RegresarIndiceActionPerformed
+
+    private void JF_estandarizacionComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_JF_estandarizacionComponentResized
+        // TODO add your handling code here:
+
+        int y_decorated = JF_estandarizacion.getInsets().top + JF_estandarizacion.getInsets().bottom;
+        //int y_JFMenuBar = JF_Indices.getJMenuBar().getHeight();
+        int x = JF_estandarizacion.getWidth() - JF_estandarizacion.getInsets().right - JF_estandarizacion.getInsets().left;
+        int y = JF_estandarizacion.getHeight() - y_decorated;
+        Font f;
+        if (x > y) {
+            f = new Font("Dialog", 0, (int) y / 33);
+
+        } else {
+            f = new Font("Dialog", 0, (int) x / 33);
+        }
+//        for(int i=0;i<JF_Archivos.getComponentCount();i++){
+//            if(JF_Archivos.getComponent(i) instanceof javax.swing.JButton){
+//                JF_Archivos.getComponent(i).setFont(f);
+//            }
+//        }
+
+        B_RegresarEstandarizacion.setFont(f);
+        B_ExportarExcel.setFont(f);
+        B_ExportarXML.setFont(f);
+        //B_Regresar.setFont(f);
+
+        P_FondoEstandarizacion.setSize(x, y);
+        //Botones Campo
+        B_RegresarEstandarizacion.setSize(3 * x / 10, 2 * y / 19);
+        B_ExportarExcel.setSize(3 * x / 10, 2 * y / 19);
+        B_ExportarXML.setSize(3 * x / 10, 2 * y / 19);
+        //B_Regresar.setSize(3 * x / 15, 2 * y /16);
+
+        B_ExportarExcel.setLocation((int) ((3 * x / 6) - (B_ExportarExcel.getWidth() / 2)), (int) ((4 * y / 12) - (B_ExportarExcel.getHeight() / 2)));
+        B_ExportarXML.setLocation((int) ((3 * x / 6) - (B_ExportarXML.getWidth() / 2)), (int) ((7 * y / 12) - (B_ExportarXML.getHeight() / 2)));
+        B_RegresarEstandarizacion.setLocation((int) ((3 * x / 6) - (B_RegresarEstandarizacion.getWidth() / 2)), (int) ((10 * y / 12) - (B_RegresarEstandarizacion.getHeight() / 2)));
+        //B_Regresar.setLocation((int) ((1.5 * x / 8) - (lb_Registro_Titulo.getWidth())), (int) ((y / 10) - (lb_Registro_Titulo.getHeight() / 2)));
+
+        //titulo
+        if (x > y) {
+            f = new Font("Bold", 1, (int) y / 16);
+
+        } else {
+            f = new Font("Bold", 1, (int) x / 16);
+        }
+
+        lb_TituloEstandarizacion.setFont(f);
+        FontMetrics fontMetrics = lb_TituloEstandarizacion.getFontMetrics(lb_TituloEstandarizacion.getFont());
+        int anchoTexto = fontMetrics.stringWidth(lb_TituloEstandarizacion.getText());
+        lb_TituloEstandarizacion.setForeground(Color.white);
+        lb_TituloEstandarizacion.setSize(anchoTexto, y / 2);
+        lb_TituloEstandarizacion.setLocation((int) ((x / 2) - (lb_TituloEstandarizacion.getWidth() / 2)), (int) ((y / 12) - (lb_TituloEstandarizacion.getHeight() / 2)));
+        lb_TituloEstandarizacion.setText(file.getNombre());
+    }//GEN-LAST:event_JF_estandarizacionComponentResized
+
+    private void B_EstandarizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_EstandarizacionMouseClicked
+        // TODO add your handling code here:
+        if (B_Estandarizacion.isEnabled()) {
+            this.setVisible(false);
+            JF_estandarizacion.pack();
+            JF_estandarizacion.setSize(this.getWidth(), this.getHeight());
+            JF_estandarizacion.setLocationRelativeTo(this);
+            JF_estandarizacion.setVisible(true);
+        }
+    }//GEN-LAST:event_B_EstandarizacionMouseClicked
+
+    private void B_RegresarEstandarizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_RegresarEstandarizacionMouseClicked
+        // TODO add your handling code here:
+        JF_estandarizacion.setVisible(false);
+        this.pack();
+        this.setSize(this.getWidth(), this.getHeight());
+        this.setLocationRelativeTo(this);
+        this.setVisible(true);
+    }//GEN-LAST:event_B_RegresarEstandarizacionMouseClicked
+
+    private void B_ExportarExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ExportarExcelMouseClicked
+        // TODO add your handling code here:
+        Excel E = new Excel(file.getListaCampos());
+        boolean exportar = E.exportar();
+        if (exportar) {
+            JOptionPane.showMessageDialog(JF_estandarizacion, "Se exporto a excel", "Notificación", -1);
+        } else {
+            JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_B_ExportarExcelMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -2607,6 +2789,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_DesplegarCamposRelacionados;
     private javax.swing.JButton B_EnviarCamposTercerArchivo;
     private javax.swing.JButton B_Estandarizacion;
+    private javax.swing.JButton B_ExportarExcel;
+    private javax.swing.JButton B_ExportarXML;
     private javax.swing.JButton B_GuardadCrearCampo;
     private javax.swing.JButton B_GuardarModif;
     private javax.swing.JButton B_GuardarRegistro;
@@ -2619,6 +2803,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton B_ModificarRegistro;
     private javax.swing.JButton B_Registros;
     private javax.swing.JButton B_RegresarCrearCampo;
+    private javax.swing.JButton B_RegresarEstandarizacion;
     private javax.swing.JButton B_RegresarIndice;
     private javax.swing.JButton B_Reindexar;
     private javax.swing.JButton B_Siguiente;
@@ -2650,7 +2835,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JFrame JF_CrearCampo;
     private javax.swing.JFrame JF_Indices;
     private javax.swing.JFrame JF_Registros;
-    private javax.swing.JList<String> JL_IndexarData;
+    private javax.swing.JFrame JF_estandarizacion;
+    private javax.swing.JList<Campo> JL_IndexarData;
     private javax.swing.JScrollPane JL_IndexarObject;
     private javax.swing.JLabel JL_Longitud;
     private javax.swing.JLabel JL_Nombre;
@@ -2661,6 +2847,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu Jmenu_Regresar;
     private javax.swing.JMenuBar Menu_Regresar;
     private javax.swing.JPanel P_CrearCapo_Decoracion;
+    private javax.swing.JPanel P_FondoEstandarizacion;
     private javax.swing.JPanel PanelCrearCampo;
     private javax.swing.JPanel Panel_Borrar;
     private javax.swing.JPanel Panel_Buscar;
@@ -2700,6 +2887,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lb_Archivo_Titulo;
     private javax.swing.JLabel lb_IndiceTitulo;
     private javax.swing.JLabel lb_Registro_Titulo;
+    private javax.swing.JLabel lb_TituloEstandarizacion;
     private javax.swing.JTextField longitudCampo;
     private javax.swing.JTextField nombreCampo;
     private javax.swing.JComboBox<String> tipoCampo;
@@ -2709,7 +2897,7 @@ public class Main extends javax.swing.JFrame {
     private String ArchivoCruzado = "";
     private Archivos file = new Archivos();
     private Archivos cruzado = new Archivos();
-    private NodoArbol Arbol;
+    private BTree Arbol;
     //public ArrayList<Campo> listaCampos = new ArrayList<Campo>();
     private Clip Music;
     private Campo campoActual;
