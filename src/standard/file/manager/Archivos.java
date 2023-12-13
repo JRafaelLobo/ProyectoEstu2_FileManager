@@ -9,7 +9,9 @@ package standard.file.manager;
  * @author ADMIN
  */
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import javax.swing.JFileChooser;
@@ -73,7 +75,7 @@ public class Archivos {
         return randomString.toString();
     }
 
-    public boolean CruzarArchivos(Archivos file1, Archivos file2, String relacion) {
+    public boolean CruzarArchivos(Archivos file1, Archivos file2, String relacion, int[] datos1, int[] datos2) {
         BTree arbol = new BTree(6);
         int tipo1 = -1;
 
@@ -116,11 +118,15 @@ public class Archivos {
         file3.crearArchivoCruzado(file1.getRutaArchivo(), file1.nombre, file2.nombre);
         for (int j = 0; j < file1.listaCampos.size(); j++) {
             if (j != tipo1) {
-                file3.listaCampos.add(file1.listaCampos.get(j));
+                if (contieneNumero(datos1, j)) {
+                    file3.listaCampos.add(file1.listaCampos.get(j));
+                }
             }
         }
         for (int j = 0; j < file2.listaCampos.size(); j++) {
-            file3.listaCampos.add(file2.listaCampos.get(j));
+            if (contieneNumero(datos2, j)) {
+                file3.listaCampos.add(file2.listaCampos.get(j));
+            }
         }
         //file3.rutaArchivo = ruta;
         file3.GuardarCampos();
@@ -143,13 +149,15 @@ public class Archivos {
                 String l = "";
                 for (int j = 0; j < register.length; j++) {
                     if (tipo1 != j) {
-                        temp += register[j];
-                        temp += "|";
+                        if (contieneNumero(datos1, j)) {
+                            temp += register[j];
+                            temp += "|";
+                        }
                     } else {
                         l = register[j];
                     }
                 }
-                temp+=metodoparaCruzar2(file2, temp, arbol, l);
+                temp += metodoparaCruzar2(file2, temp, arbol, l, datos2);
                 file3.insertarRegistro(temp, l);
 
                 count++;
@@ -164,7 +172,7 @@ public class Archivos {
 
     }
 
-    private String metodoparaCruzar2(Archivos file3, String temp, BTree arbol, String buscar) {
+    private String metodoparaCruzar2(Archivos file3, String temp, BTree arbol, String buscar, int[] datos2) {
         int rnn;
         rnn = arbol.search(buscar);
         try (RandomAccessFile file = new RandomAccessFile(file3.rutaArchivo, "rw")) {
@@ -172,7 +180,13 @@ public class Archivos {
             byte[] buffer = new byte[this.longitudTotalRegistro];
             int bytesRead = file.read(buffer);
             String contenido = new String(buffer, 0, bytesRead);
-            temp += contenido.trim();
+            String[] linea = contenido.trim().split("\\|");
+            for (int i = 0; i < linea.length; i++) {
+                if (contieneNumero(datos2, i)) {
+                    temp += linea[i];
+                    temp += "|";
+                }
+            }
             return temp;
             //contenido.trim().split("\\|"));
 
@@ -189,7 +203,7 @@ public class Archivos {
 
             File archivo = new File(rutaDirectorio, "Cruzado_" + nombre1 + "_" + nombre2 + ".txt");
             if (archivo.createNewFile()) {
-                this.rutaArchivo=archivo.getAbsolutePath();
+                this.rutaArchivo = archivo.getAbsolutePath();
                 return true;
             } else {
                 return false;
@@ -198,6 +212,15 @@ public class Archivos {
         } catch (IOException e) {
             return false;
         }
+    }
+
+    private static boolean contieneNumero(int[] array, int numero) {
+        for (int elemento : array) {
+            if (elemento == numero) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean ReEscribirCabeza() {
@@ -546,7 +569,7 @@ public class Archivos {
         this.longitudTotalCampos = 0;
         this.longitudTotalDeMetadata = 0;
         this.registros.clear();
-        bTree=null;
+        bTree = null;
         bTree = new BTree(6);
 
     }
