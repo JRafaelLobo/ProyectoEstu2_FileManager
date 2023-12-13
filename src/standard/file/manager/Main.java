@@ -1245,16 +1245,6 @@ public class Main extends javax.swing.JFrame {
         B_Indexar.setText("Crear Indice");
         B_Indexar.setBorderPainted(false);
         B_Indexar.setFocusPainted(false);
-        B_Indexar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_IndexarMouseClicked(evt);
-            }
-        });
-        B_Indexar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B_IndexarMouseClicked(evt);
-            }
-        });
         JF_Indices.getContentPane().add(B_Indexar);
         B_Indexar.setBounds(220, 300, 92, 23);
 
@@ -2543,24 +2533,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                        int numeroEntero = Integer.parseInt(text);
-                        System.out.println("Número entero: " + numeroEntero);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.err.println("Error al convertir a entero: " + e.getMessage());
-                        return;
-                    }
-                    break;
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
             case "double":
                 try {
-                        Double numeroDouble = Double.parseDouble(text);
-                        System.out.println("Número double: " + numeroDouble);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.err.println("Error al convertir a double: " + e.getMessage());
-                        return;
-                    }
-                    break;
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2611,24 +2601,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                        int numeroEntero = Integer.parseInt(text);
-                        System.out.println("Número entero: " + numeroEntero);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.err.println("Error al convertir a entero: " + e.getMessage());
-                        return;
-                    }
-                    break;
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
             case "double":
                 try {
-                        Double numeroDouble = Double.parseDouble(text);
-                        System.out.println("Número double: " + numeroDouble);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.err.println("Error al convertir a double: " + e.getMessage());
-                        return;
-                    }
-                    break;
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2661,24 +2651,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                        int numeroEntero = Integer.parseInt(text);
-                        System.out.println("Número entero: " + numeroEntero);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.err.println("Error al convertir a entero: " + e.getMessage());
-                        return;
-                    }
-                    break;
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
             case "double":
                 try {
-                        Double numeroDouble = Double.parseDouble(text);
-                        System.out.println("Número double: " + numeroDouble);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.err.println("Error al convertir a double: " + e.getMessage());
-                        return;
-                    }
-                    break;
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2726,24 +2716,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                        int numeroEntero = Integer.parseInt(text);
-                        System.out.println("Número entero: " + numeroEntero);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.err.println("Error al convertir a entero: " + e.getMessage());
-                        return;
-                    }
-                    break;
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
             case "double":
                 try {
-                        Double numeroDouble = Double.parseDouble(text);
-                        System.out.println("Número double: " + numeroDouble);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                        System.err.println("Error al convertir a double: " + e.getMessage());
-                        return;
-                    }
-                    break;
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2944,45 +2934,25 @@ public class Main extends javax.swing.JFrame {
     private void B_ExportarExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ExportarExcelMouseClicked
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
         // Mostrar el cuadro de diálogo para abrir
         int returnValue = fileChooser.showOpenDialog(null);
-
         // Comprobar si el usuario seleccionó un archivo
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             // Obtener la dirección del archivo seleccionado
             String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-
-            JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
-        // Mostrar el cuadro de diálogo para abrir
-        int returnValue = fileChooser.showOpenDialog(null);
-
-        // Comprobar si el usuario seleccionó un archivo
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            // Obtener la dirección del archivo seleccionado
-            String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-
             Excel E = new Excel(file.getListaCampos());
-                boolean exportar = E.exportar(selectedFilePath, fileselectedFilePath, file);
-
-    
+            boolean exportar = E.exportar(selectedFilePath, file);
             if (exportar) {
-                    JOptionPane.showMessageDialog(JF_estandarizacion, "Se exporto a excel", "Notificación", -1);
-                } else {
-                    JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                JOptionPane.showMessageDialog(JF_estandarizacion, "Se exporto a excel", "Notificación", -1);
+            } else {
+                JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             System.out.println("Operación cancelada por el usuario.");
         }
-
-        } else {
-            System.out.println("Operación cancelada por el usuario.");
-        }
-
     }//GEN-LAST:event_B_ExportarExcelMouseClicked
 
-    private void B_IndexarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IndexarMouseClicked
+    private void B_IndexarMouseClicked(java.awt.event.MouseEvent evt) {                                       
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
@@ -3002,53 +2972,11 @@ public class Main extends javax.swing.JFrame {
         } else {
             System.out.println("Operación cancelada por el usuario.");
         }
-    }//GEN-LAST:event_B_IndexarMouseClicked
+    }                                      
 
-    private void B_ReindexarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ReindexarMouseClicked
-        // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arboles (*.tree)", "tree");
-        fileChooser.setFileFilter(filter);
+    private void B_ReindexarMouseClicked(java.awt.event.MouseEvent evt) {                                         
 
-        // Mostrar el cuadro de diálogo para abrir
-        int returnValue = fileChooser.showOpenDialog(null);
-
-        // Comprobar si el usuario seleccionó un archivo
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            // Obtener la dirección del archivo seleccionado
-            String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-            System.out.println(selectedFilePath);
-            if (file.Reindexar(selectedFilePath)) {
-                JOptionPane.showMessageDialog(JF_estandarizacion, "Se inserto para buscar", "Notificación", -1);
-            } else {
-                JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la insercion", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            System.out.println("Operación cancelada por el usuario.");
-        }
-    }//GEN-LAST:event_B_ReindexarMouseClicked
-    private void B_IndexarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IndexarMouseClicked
-        // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
-        // Mostrar el cuadro de diálogo para abrir
-        int returnValue = fileChooser.showOpenDialog(null);
-
-        // Comprobar si el usuario seleccionó un archivo
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            // Obtener la dirección del archivo seleccionado
-            String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-
-            if (file.CrearArbol(JL_IndexarData.getSelectedValue(), selectedFilePath)) {
-                JOptionPane.showMessageDialog(JF_estandarizacion, "Se creo el arbol", "Notificación", -1);
-            } else {
-                JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la creacion del arbol", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            System.out.println("Operación cancelada por el usuario.");
-        }
-    }//GEN-LAST:event_B_IndexarMouseClicked
-
+    }                                        
     private void B_ReindexarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ReindexarMouseClicked
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -3080,33 +3008,33 @@ public class Main extends javax.swing.JFrame {
         file.getAllRegisters();
 
         try {
-                    // Verificar si el archivo XSLT ya existe, si no, crearlo dinámicamente
-                    if (!new File(archivoXslt).exists()) {
-                        // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
-                        String estructura = ExportadorXML.obtenerEstructuraDesdeArchivoTxt(archivoTxt);
-                        String contenidoXSLT = ExportadorXML.generarContenidoXSLT(estructura);
+            // Verificar si el archivo XSLT ya existe, si no, crearlo dinámicamente
+            if (!new File(archivoXslt).exists()) {
+                // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
+                String estructura = ExportadorXML.obtenerEstructuraDesdeArchivoTxt(archivoTxt);
+                String contenidoXSLT = ExportadorXML.generarContenidoXSLT(estructura);
 
-                        // Guardar el contenido generado en el archivo XSLT
-                        ExportadorXML.guardarContenidoEnArchivo(archivoXslt, contenidoXSLT);
-                    }
-
-                // Verificar nuevamente si el archivo XSLT existe después de la generación
-                if (new File(archivoXslt).exists()) {
-                    // Aplicar la transformación XSLT al archivo TXT
-                    boolean xml = ExportadorXML.convertTxtToXml(file.getListaCampos(), file.registrosExportacion, archivoTxt, archivoXslt, archivoXml);
-
-                    if (xml) {
-                        JOptionPane.showMessageDialog(this, "Exportación exitosa a XML con Schema.", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Error: No se pudo generar el archivo XSLT.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Error durante la exportación a XML: ", "Error", JOptionPane.ERROR_MESSAGE);
+                // Guardar el contenido generado en el archivo XSLT
+                ExportadorXML.guardarContenidoEnArchivo(archivoXslt, contenidoXSLT);
             }
+
+            // Verificar nuevamente si el archivo XSLT existe después de la generación
+            if (new File(archivoXslt).exists()) {
+                // Aplicar la transformación XSLT al archivo TXT
+                boolean xml = ExportadorXML.convertTxtToXml(file.getListaCampos(), file.registrosExportacion, archivoTxt, archivoXslt, archivoXml);
+
+                if (xml) {
+                    JOptionPane.showMessageDialog(this, "Exportación exitosa a XML con Schema.", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error: No se pudo generar el archivo XSLT.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error durante la exportación a XML: ", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_B_ExportarXMLMouseClicked
 
     public static void main(String args[]) {
@@ -3115,16 +3043,28 @@ public class Main extends javax.swing.JFrame {
                 if ("nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -3331,23 +3271,24 @@ public class Main extends javax.swing.JFrame {
             e.printStackTrace();
         }
         return null;
-    }
+
+}
 
     //Esta Clase se utiliza para Poner Imagenes dentro de paneles
     class FondoPanel extends JPanel {
 
-        public FondoPanel(String direccion) {
-            this.direccion = direccion;
-        }
-
-        private String direccion;
-        private Image imagen;
-
-        public void paint(Graphics g) {
-            imagen = new ImageIcon(direccion).getImage();
-            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
-            setOpaque(false);
-            super.paint(g);
-        }
+    public FondoPanel(String direccion) {
+        this.direccion = direccion;
     }
+
+    private String direccion;
+    private Image imagen;
+
+    public void paint(Graphics g) {
+        imagen = new ImageIcon(direccion).getImage();
+        g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+        setOpaque(false);
+        super.paint(g);
+    }
+}
 }
