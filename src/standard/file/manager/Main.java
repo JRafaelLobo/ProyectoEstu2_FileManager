@@ -6,6 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
+import java.lang.reflect.Array;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -2473,8 +2474,38 @@ public class Main extends javax.swing.JFrame {
             Dialog_Cruzar.setVisible(false);
             return;
         }
-        cruzado.CruzarArchivos(file, cruzado, (String) Combo_Cruzar.getSelectedItem());
+        DefaultTableModel D1 = (DefaultTableModel) TB_Campos_file1.getModel();
+        D1.getValueAt(1, 0);
+
+        DefaultTableModel D2 = (DefaultTableModel) TB_Campos_file2.getModel();
+        D2.getValueAt(1, 0);
+
+        int[] a = new int[D1.getColumnCount()];
+        int[] b = new int[D2.getColumnCount()];
+        int n = 0;
+        for (int i = 0; i < D1.getColumnCount(); i++) {
+            if (Boolean.parseBoolean(D1.getValueAt(i, 1).toString())) {
+                a[n] = i;
+                n++;
+            }
+        }
+        n = 0;
+        for (int i = 0; i < D1.getColumnCount(); i++) {
+            if (Boolean.parseBoolean(D2.getValueAt(i, 1).toString())) {
+                b[n] = i;
+                n++;
+            }
+        }
+
+        boolean funciono = cruzado.CruzarArchivos(file, cruzado, (String) Combo_Cruzar.getSelectedItem(), a, b);
+        if (funciono) {
+            JOptionPane.showMessageDialog(null, "Se Creo el documento exitosamente", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ha fallado la creacion del doc", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
         Dialog_Cruzar.setVisible(false);
+
+
     }//GEN-LAST:event_B_EnviarCamposTercerArchivoMouseClicked
 
     private void B_AnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_AnteriorMouseClicked
@@ -2979,33 +3010,33 @@ public class Main extends javax.swing.JFrame {
         String archivoXml = "./" + file.getNombre() + ".xml";
 
         try {
-        // Verificar si el archivo XSLT ya existe, si no, crearlo dinámicamente
-        if (!new File(archivoXslt).exists()) {
-            // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
-            String estructura = ExportadorXML.obtenerEstructuraDesdeArchivoTxt(archivoTxt);
-            String contenidoXSLT = ExportadorXML.generarContenidoXSLT(estructura);
+            // Verificar si el archivo XSLT ya existe, si no, crearlo dinámicamente
+            if (!new File(archivoXslt).exists()) {
+                // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
+                String estructura = ExportadorXML.obtenerEstructuraDesdeArchivoTxt(archivoTxt);
+                String contenidoXSLT = ExportadorXML.generarContenidoXSLT(estructura);
 
-            // Guardar el contenido generado en el archivo XSLT
-            ExportadorXML.guardarContenidoEnArchivo(archivoXslt, contenidoXSLT);
-        }
-
-        // Verificar nuevamente si el archivo XSLT existe después de la generación
-        if (new File(archivoXslt).exists()) {
-            // Aplicar la transformación XSLT al archivo TXT
-            boolean xml = ExportadorXML.exportarConSchema(archivoTxt, archivoXslt, archivoXml);
-
-            if (xml) {
-                JOptionPane.showMessageDialog(this, "Exportación exitosa a XML con Schema.", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
+                // Guardar el contenido generado en el archivo XSLT
+                ExportadorXML.guardarContenidoEnArchivo(archivoXslt, contenidoXSLT);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Error: No se pudo generar el archivo XSLT.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            // Verificar nuevamente si el archivo XSLT existe después de la generación
+            if (new File(archivoXslt).exists()) {
+                // Aplicar la transformación XSLT al archivo TXT
+                boolean xml = ExportadorXML.exportarConSchema(archivoTxt, archivoXslt, archivoXml);
+
+                if (xml) {
+                    JOptionPane.showMessageDialog(this, "Exportación exitosa a XML con Schema.", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error: No se pudo generar el archivo XSLT.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error durante la exportación a XML: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error durante la exportación a XML: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_B_ExportarXMLMouseClicked
 
     public static void main(String args[]) {
