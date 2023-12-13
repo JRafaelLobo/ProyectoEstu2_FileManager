@@ -17,7 +17,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.Random;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.ListModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 public class Main extends javax.swing.JFrame {
 
@@ -35,6 +38,7 @@ public class Main extends javax.swing.JFrame {
         Dialog_Cruzar.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         JF_Indices.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
         JF_estandarizacion.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
+        JF_Registros.setIconImage(new ImageIcon("./Imagenes\\Icono.jpeg").getImage());
 
         Music = playMusic("./Musica\\SonidoBoton.wav");
         Music.start();
@@ -1235,12 +1239,22 @@ public class Main extends javax.swing.JFrame {
         B_Indexar.setText("Crear Indice");
         B_Indexar.setBorderPainted(false);
         B_Indexar.setFocusPainted(false);
+        B_Indexar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_IndexarMouseClicked(evt);
+            }
+        });
         JF_Indices.getContentPane().add(B_Indexar);
         B_Indexar.setBounds(220, 300, 92, 25);
 
         B_Reindexar.setText("ReIndexar Indice");
         B_Reindexar.setBorderPainted(false);
         B_Reindexar.setFocusPainted(false);
+        B_Reindexar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                B_ReindexarMouseClicked(evt);
+            }
+        });
         JF_Indices.getContentPane().add(B_Reindexar);
         B_Reindexar.setBounds(370, 300, 114, 25);
 
@@ -2194,7 +2208,7 @@ public class Main extends javax.swing.JFrame {
             String llavepimaria;
             String criterio;
             String opcionA = JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio ");
-            if(opcionA == null){
+            if (opcionA == null) {
                 return;
             }
             int opcion = Integer.parseInt(opcionA);
@@ -2483,24 +2497,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2551,24 +2565,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2601,24 +2615,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2666,24 +2680,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2745,8 +2759,8 @@ public class Main extends javax.swing.JFrame {
 
         //Botones Campo
         B_Reindexar.setSize(3 * x / 10, 2 * y / 19);
-        B_Indexar.setSize(3 * x / 17, 2 * y / 19);
-        B_RegresarIndice.setSize(3 * x / 17, 2 * y / 19);
+        B_Indexar.setSize(3 * x / 10, 2 * y / 19);
+        B_RegresarIndice.setSize(3 * x / 10, 2 * y / 19);
         //B_Regresar.setSize(3 * x / 15, 2 * y /16);
 
         B_Reindexar.setLocation((int) ((5 * x / 6) - (B_Reindexar.getWidth() / 2)), (int) ((11 * y / 13) - (B_Reindexar.getHeight() / 2)));
@@ -2799,7 +2813,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         JF_Indices.setVisible(false);
         this.pack();
-        this.setSize(this.getWidth(), this.getHeight());
+        this.setSize(JF_Indices.getWidth(), JF_Indices.getHeight());
         this.setLocationRelativeTo(this);
         this.setVisible(true);
     }//GEN-LAST:event_B_RegresarIndiceActionPerformed
@@ -2880,14 +2894,75 @@ public class Main extends javax.swing.JFrame {
 
     private void B_ExportarExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ExportarExcelMouseClicked
         // TODO add your handling code here:
-        Excel E = new Excel(file.getListaCampos());
-        boolean exportar = E.exportar();
-        if (exportar) {
-            JOptionPane.showMessageDialog(JF_estandarizacion, "Se exporto a excel", "Notificación", -1);
+        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+        // Mostrar el cuadro de diálogo para abrir
+        int returnValue = fileChooser.showOpenDialog(null);
+
+        // Comprobar si el usuario seleccionó un archivo
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            // Obtener la dirección del archivo seleccionado
+            String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+            Excel E = new Excel(file.getListaCampos());
+            boolean exportar = E.exportar(selectedFilePath, file);
+
+            if (exportar) {
+                JOptionPane.showMessageDialog(JF_estandarizacion, "Se exporto a excel", "Notificación", -1);
+            } else {
+                JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Operación cancelada por el usuario.");
         }
+
     }//GEN-LAST:event_B_ExportarExcelMouseClicked
+
+    private void B_IndexarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_IndexarMouseClicked
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+        // Mostrar el cuadro de diálogo para abrir
+        int returnValue = fileChooser.showOpenDialog(null);
+
+        // Comprobar si el usuario seleccionó un archivo
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            // Obtener la dirección del archivo seleccionado
+            String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+            if (file.CrearArbol(JL_IndexarData.getSelectedValue(), selectedFilePath)) {
+                JOptionPane.showMessageDialog(JF_estandarizacion, "Se creo el arbol", "Notificación", -1);
+            } else {
+                JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la creacion del arbol", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            System.out.println("Operación cancelada por el usuario.");
+        }
+    }//GEN-LAST:event_B_IndexarMouseClicked
+
+    private void B_ReindexarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ReindexarMouseClicked
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arboles (*.tree)", "tree");
+        fileChooser.setFileFilter(filter);
+
+        // Mostrar el cuadro de diálogo para abrir
+        int returnValue = fileChooser.showOpenDialog(null);
+
+        // Comprobar si el usuario seleccionó un archivo
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            // Obtener la dirección del archivo seleccionado
+            String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+            if (file.Reindexar(selectedFilePath)) {
+                JOptionPane.showMessageDialog(JF_estandarizacion, "Se inserto para buscar", "Notificación", -1);
+            } else {
+                JOptionPane.showMessageDialog(JF_estandarizacion, "Fallo la insercion", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            System.out.println("Operación cancelada por el usuario.");
+        }
+    }//GEN-LAST:event_B_ReindexarMouseClicked
 
     public static void main(String args[]) {
         try {

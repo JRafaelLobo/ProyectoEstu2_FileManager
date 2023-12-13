@@ -17,18 +17,18 @@ import java.util.Set;
 
 public class Archivos {
 
-    private String nombre;
-    private ArrayList<Campo> listaCampos = new ArrayList();
-    private ArrayList<Object[]> registros = new ArrayList();
-    private final LinkedList availist = new LinkedList(-1);
-    private int longitudTotalRegistro = 0;
-    private int longitudTotalCampos = 0;
-    private int longitudTotalDeMetadata = 0;
-    private String rutaArchivo = "";
-    private BTree bTree = new BTree(6);
-    private BTreeSerialization fileTree = new BTreeSerialization();
+    protected String nombre;
+    protected ArrayList<Campo> listaCampos = new ArrayList();
+    protected ArrayList<Object[]> registros = new ArrayList();
+    protected final LinkedList availist = new LinkedList(-1);
+    protected int longitudTotalRegistro = 0;
+    protected int longitudTotalCampos = 0;
+    protected int longitudTotalDeMetadata = 0;
+    protected String rutaArchivo = "";
+    protected BTree bTree = new BTree(6);
+    protected BTreeSerialization fileTree = new BTreeSerialization();
 
-    private  void insertar5MilRegistros() {
+    private void insertar5MilRegistros() {
         Set<String> generatedIDs = new HashSet<>();
         int desiredNumberOfIDs = 5000;
 
@@ -461,6 +461,54 @@ public class Archivos {
         }
     }
 
+    public boolean CrearArbol(Campo campo,String direccion) {
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+            int i = longitudTotalDeMetadata;
+            int count = 0;
+            int tipo=0;
+            int largo=0;
+            BTree arbol = new BTree(6);
+            boolean flag=false;
+            for (int j = 0; j < this.listaCampos.size(); j++) {
+                if (campo == this.listaCampos.get(j)) {
+                    tipo = j;
+                    flag=true;
+                    break;
+                } else {
+                    largo += this.listaCampos.get(j).getTamano() + 1;
+                }
+            }
+            if(!flag){
+                return false;
+            }
+            while (i < file.length()) {
+                file.seek(i);
+                byte[] buffer = new byte[this.longitudTotalRegistro];
+                int bytesRead = file.read(buffer);
+                String registro = new String(buffer, 0, bytesRead);
+                i += longitudTotalRegistro;
+                if (registro.charAt(0) == '*') {
+                    continue;
+                }
+                String[] register = registro.trim().split("\\|");
+                Llave l = new Llave(register[tipo], count);
+                arbol.insert(l);
+
+                count++;
+            }
+            BTreeSerialization S= new BTreeSerialization();
+            S.saveBTreeToFile(bTree, direccion+".tree");
+            return true;
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al obtener todos los registros: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean Reindexar(String ruta){
+        this.bTree=fileTree.loadBTreeFromFile(ruta);
+        return true;
+    }
     public void setRutaArchivo(String rutaArchivo) {
         this.rutaArchivo = rutaArchivo;
     }
