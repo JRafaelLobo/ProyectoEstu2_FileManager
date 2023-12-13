@@ -9,7 +9,11 @@ package standard.file.manager;
  * @author ADMIN
  */
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.HashSet;
@@ -17,19 +21,19 @@ import java.util.Set;
 
 public class Archivos {
 
-    private String nombre;
-    private ArrayList<Campo> listaCampos = new ArrayList();
-    private ArrayList<Object[]> registros = new ArrayList();
-    private final LinkedList availist = new LinkedList(-1);
-    private int longitudTotalRegistro = 0;
-    private int longitudTotalCampos = 0;
-    private int longitudTotalDeMetadata = 0;
-    private String rutaArchivo = "";
-    private BTree bTree = new BTree(6);
-    private BTreeSerialization fileTree = new BTreeSerialization();
+    protected String nombre;
+    protected ArrayList<Campo> listaCampos = new ArrayList();
+    protected ArrayList<Object[]> registros = new ArrayList();
+    protected final LinkedList availist = new LinkedList(-1);
+    protected int longitudTotalRegistro = 0;
+    protected int longitudTotalCampos = 0;
+    protected int longitudTotalDeMetadata = 0;
+    protected String rutaArchivo = "";
+    protected BTree bTree = new BTree(6);
+    protected BTreeSerialization fileTree = new BTreeSerialization();
     public ArrayList<String> registrosExportacion = new ArrayList();
 
-    private  void insertar5MilRegistros() {
+    private void insertar5MilRegistros() {
         Set<String> generatedIDs = new HashSet<>();
         int desiredNumberOfIDs = 5000;
 
@@ -72,20 +76,135 @@ public class Archivos {
         return randomString.toString();
     }
 
-    public void CruzarArchivos(Archivos file1, Archivos file2, String relacion) {
-        if (!crearArchivoCruzado(file1.getRutaArchivo(), file1.getNombre(), file2.getNombre())) {
-            return;
+    public boolean CruzarArchivos(Archivos file1, Archivos file2, String relacion, int[] datos1, int[] datos2) {
+        BTree arbol = new BTree(6);
+        int tipo1 = -1;
+
+        try (RandomAccessFile file = new RandomAccessFile(file1.rutaArchivo, "rw")) {
+            int i = file2.longitudTotalDeMetadata;
+            int count = 0;
+            boolean flag = false;
+            for (int j = 0; j < file2.listaCampos.size(); j++) {
+                if (relacion.equals(file2.listaCampos.get(j).getNombre())) {
+                    tipo1 = j;
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                return false;
+            }
+            while (i < file.length()) {
+                file.seek(i);
+                byte[] buffer = new byte[file2.longitudTotalRegistro];
+                int bytesRead = file.read(buffer);
+                String registro = new String(buffer, 0, bytesRead);
+                i += longitudTotalRegistro;
+                if (registro.charAt(0) == '*') {
+                    count++;
+                    continue;
+                }
+                String[] register = registro.trim().split("\\|");
+                Llave l = new Llave(register[tipo1], count);
+                arbol.insert(l);
+
+                count++;
+            }
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al obtener todos los registros: " + e.getMessage());
         }
+        //----------------------------
+
+        Archivos file3 = new Archivos();
+        file3.crearArchivoCruzado(file1.getRutaArchivo(), file1.nombre, file2.nombre);
+        for (int j = 0; j < file1.listaCampos.size(); j++) {
+            if (j != tipo1) {
+                if (contieneNumero(datos1, j)) {
+                    file3.listaCampos.add(file1.listaCampos.get(j));
+                }
+            }
+        }
+        for (int j = 0; j < file2.listaCampos.size(); j++) {
+            if (contieneNumero(datos2, j)) {
+                file3.listaCampos.add(file2.listaCampos.get(j));
+            }
+        }
+        //file3.rutaArchivo = ruta;
+        file3.GuardarCampos();
+        //---------------------------------------------
+        try (RandomAccessFile file = new RandomAccessFile(file1.rutaArchivo, "rw")) {
+            int i = file1.longitudTotalDeMetadata;
+            int count = 0;
+            while (i < file.length()) {
+                file.seek(i);
+                byte[] buffer = new byte[file1.longitudTotalRegistro];
+                int bytesRead = file.read(buffer);
+                String registro = new String(buffer, 0, bytesRead);
+                i += longitudTotalRegistro;
+                if (registro.charAt(0) == '*') {
+                    count++;
+                    continue;
+                }
+                String[] register = registro.trim().split("\\|");
+                String temp = "";
+                String l = "";
+                for (int j = 0; j < register.length; j++) {
+                    if (tipo1 != j) {
+                        if (contieneNumero(datos1, j)) {
+                            temp += register[j];
+                            temp += "|";
+                        }
+                    } else {
+                        l = register[j];
+                    }
+                }
+                temp += metodoparaCruzar2(file2, temp, arbol, l, datos2);
+                file3.insertarRegistro(temp, l);
+
+                count++;
+            }
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al obtener todos los registros: " + e.getMessage());
+        }
+        return true;
+//        if (!crearArchivoCruzado(file1.getRutaArchivo(), file1.getNombre(), file2.getNombre())) {
+//            return;
+//        }
 
     }
 
-    private boolean crearArchivoCruzado(String ruta, String nombre1, String nombre2) {
+    private String metodoparaCruzar2(Archivos file3, String temp, BTree arbol, String buscar, int[] datos2) {
+        int rnn;
+        rnn = arbol.search(buscar);
+        try (RandomAccessFile file = new RandomAccessFile(file3.rutaArchivo, "rw")) {
+            file.seek((this.longitudTotalDeMetadata) + ((this.longitudTotalRegistro) * rnn));
+            byte[] buffer = new byte[this.longitudTotalRegistro];
+            int bytesRead = file.read(buffer);
+            String contenido = new String(buffer, 0, bytesRead);
+            String[] linea = contenido.trim().split("\\|");
+            for (int i = 0; i < linea.length; i++) {
+                if (contieneNumero(datos2, i)) {
+                    temp += linea[i];
+                    temp += "|";
+                }
+            }
+            return temp;
+            //contenido.trim().split("\\|"));
+
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al buscar registros: " + e.getMessage());
+        }
+        return "";
+    }
+
+    public boolean crearArchivoCruzado(String ruta, String nombre1, String nombre2) {
         try {
             File archivoOriginal = new File(ruta);
             String rutaDirectorio = archivoOriginal.getParent();
 
             File archivo = new File(rutaDirectorio, "Cruzado_" + nombre1 + "_" + nombre2 + ".txt");
             if (archivo.createNewFile()) {
+                this.rutaArchivo = archivo.getAbsolutePath();
                 return true;
             } else {
                 return false;
@@ -94,6 +213,15 @@ public class Archivos {
         } catch (IOException e) {
             return false;
         }
+    }
+
+    private static boolean contieneNumero(int[] array, int numero) {
+        for (int elemento : array) {
+            if (elemento == numero) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean ReEscribirCabeza() {
@@ -462,6 +590,9 @@ public class Archivos {
         this.longitudTotalCampos = 0;
         this.longitudTotalDeMetadata = 0;
         this.registros.clear();
+        bTree = null;
+        bTree = new BTree(6);
+
     }
 
     public boolean canBeEnableCampos() {
@@ -480,6 +611,58 @@ public class Archivos {
             System.err.println("Sucedio un error al reescribir la cabeza de la metadata: " + e.getMessage());
             return false;
         }
+    }
+
+    public boolean CrearArbol(Campo campo, String direccion) {
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+            int i = longitudTotalDeMetadata;
+            int count = 0;
+            int tipo = -1;
+            int largo = 0;
+            BTree arbol = new BTree(6);
+            boolean flag = false;
+            for (int j = 0; j < this.listaCampos.size(); j++) {
+                if (campo == this.listaCampos.get(j)) {
+                    tipo = j;
+                    flag = true;
+                    break;
+                } else {
+                    largo += this.listaCampos.get(j).getTamano() + 1;
+                }
+            }
+            if (!flag) {
+                return false;
+            }
+            while (i < file.length()) {
+                file.seek(i);
+                byte[] buffer = new byte[this.longitudTotalRegistro];
+                int bytesRead = file.read(buffer);
+                String registro = new String(buffer, 0, bytesRead);
+                i += longitudTotalRegistro;
+                if (registro.charAt(0) == '*') {
+                    count++;
+                    continue;
+                }
+                String[] register = registro.trim().split("\\|");
+                Llave l = new Llave(register[tipo], count);
+                arbol.insert(l);
+
+                count++;
+            }
+
+            BTreeSerialization S = new BTreeSerialization();
+            S.saveBTreeToFile(arbol, direccion + ".tree");
+            return true;
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al obtener todos los registros: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean Reindexar(String ruta) {
+        this.bTree = fileTree.loadBTreeFromFile(ruta);
+        bTree.printBTree();
+        return true;
     }
 
     public void setRutaArchivo(String rutaArchivo) {
