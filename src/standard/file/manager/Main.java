@@ -2962,7 +2962,7 @@ public class Main extends javax.swing.JFrame {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             // Obtener la dirección del archivo seleccionado
             String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-
+            System.out.println(selectedFilePath);
             if (file.Reindexar(selectedFilePath)) {
                 JOptionPane.showMessageDialog(JF_estandarizacion, "Se inserto para buscar", "Notificación", -1);
             } else {
