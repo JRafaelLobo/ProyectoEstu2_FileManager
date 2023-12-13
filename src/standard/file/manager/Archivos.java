@@ -27,6 +27,7 @@ public class Archivos {
     private String rutaArchivo = "";
     private BTree bTree = new BTree(6);
     private BTreeSerialization fileTree = new BTreeSerialization();
+    public ArrayList<String> registrosExportacion = new ArrayList();
 
     private  void insertar5MilRegistros() {
         Set<String> generatedIDs = new HashSet<>();
@@ -197,6 +198,26 @@ public class Archivos {
                 String[] register = registro.trim().split("\\|");
                 this.registros.add(register);
                 count++;
+            }
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al obtener todos los registros: " + e.getMessage());
+        }
+    }
+    public void getAllRegisters() {
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+            int i = longitudTotalDeMetadata;
+            
+            while (i < file.length()) {
+                file.seek(i);
+                byte[] buffer = new byte[this.longitudTotalRegistro];
+                int bytesRead = file.read(buffer);
+                String registro = new String(buffer, 0, bytesRead);
+                i += longitudTotalRegistro;
+                if (registro.charAt(0) == '*') {
+                    continue;
+                }
+                System.out.println(registro);
+                registrosExportacion.add(registro);
             }
         } catch (IOException e) {
             System.err.println("Sucedio un error al obtener todos los registros: " + e.getMessage());

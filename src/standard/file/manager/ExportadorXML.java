@@ -9,36 +9,54 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.xml.transform.TransformerException;
 
 public class ExportadorXML {
 
-    public static boolean exportarConSchema(ArrayList<String> registros, String archivoTxt, String archivoXslt, String archivoXml) {
-        try {
-            // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
-            String estructura = obtenerEstructuraDesdeArchivoTxt(archivoTxt);
-            String contenidoXSLT = generarContenidoXSLT(estructura);
-
-            // Guardar el contenido generado en el archivo XSLT
-            guardarContenidoEnArchivo(archivoXslt, contenidoXSLT);
-
-            // Aplicar la transformación XSLT a cada registro y escribir en el archivo XML
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer(new StreamSource(new StringReader(contenidoXSLT)));
+    public static boolean convertTxtToXml(ArrayList<Campo> campos, ArrayList<String> registros, String archivoTxt, String xsltFilePath, String xmlOutputFilePath) throws IOException {
+        File newFile = new File("newFile");
+        System.out.println(newFile.getAbsolutePath());
+        try (PrintWriter writer = new PrintWriter(new FileWriter(newFile))) {
+//            // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
+//            String estructura = obtenerEstructuraDesdeArchivoTxt(archivoTxt);
+//            String contenidoXSLT = generarContenidoXSLT(estructura);
+//
+//            // Guardar el contenido generado en el archivo XSLT
+//            guardarContenidoEnArchivo(xsltFilePath, contenidoXSLT);
+            // Crear un archivo temporal con los datos del txt
+            // Escribir los campos y registros en el archivo temporal
+            for (Campo campo : campos) {
+                writer.print(campo.getNombre() + "|");
+            }
+            writer.println(); // Nueva línea después de los campos
 
             for (String registro : registros) {
-                // Aquí asumo que el método aplicarTransformacionXSLT devuelve el resultado de la transformación
-                String resultadoTransformacion = aplicarTransformacionXSLT(transformer, registro);
-                guardarContenidoEnArchivo(archivoXml, resultadoTransformacion);
+                writer.println(registro.trim());
             }
 
-            System.out.println("Exportación exitosa a XML con Schema.");
-            return true;
+            writer.close();
 
+// Leer el contenido del archivo temporal y limpiarlo
+            String contenido = new String(Files.readAllBytes(newFile.toPath()), StandardCharsets.UTF_8);
+            contenido = contenido.trim(); // Eliminar espacios en blanco al principio y al final
+
+            try (PrintWriter cleanWriter = new PrintWriter(new FileWriter(newFile))) {
+                cleanWriter.print(contenido);
+            }
+
+// Configurar la transformación XSLT
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Transformer transformer = factory.newTransformer(new StreamSource(new File(xsltFilePath)));
+            transformer.transform(new StreamSource(newFile), new StreamResult(new File(xmlOutputFilePath)));
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -46,9 +64,7 @@ public class ExportadorXML {
     }
 
     private static String aplicarTransformacionXSLT(Transformer transformer, String registro) throws TransformerException {
-        // Aquí aplicas la transformación XSLT a un registro individual
-        // Puedes utilizar un StringReader para convertir el registro en un StreamSource
-        // y StringWriter para capturar la salida de la transformación
+        // Transforma directamente el registro en lugar de usar StringReader
         StringWriter resultado = new StringWriter();
         transformer.transform(new StreamSource(new StringReader(registro)), new StreamResult(resultado));
         return resultado.toString();
