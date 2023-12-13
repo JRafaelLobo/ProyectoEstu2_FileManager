@@ -1,0 +1,3 @@
+{Nombre,char,20,1,0|Edad,int,3,0,1|Telefono,int,8,0,1|SaldoCuenta,double,10,0,0}
+*-1                                          
+Hector|019|32731977|710.70|                  Fernando|020|32722526|1290.45|               

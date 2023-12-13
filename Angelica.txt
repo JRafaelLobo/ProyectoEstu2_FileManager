@@ -1,0 +1,3 @@
+{Nombre,char,20,1,0|Apellido,char,25,0,0|Cel,int,8,0,1|Edad,int,3,0,1}
+*-1                                                         
+Angelica|Hernandez|32731988|020|                            Fernando|Jafet|23456789|21|                                 
