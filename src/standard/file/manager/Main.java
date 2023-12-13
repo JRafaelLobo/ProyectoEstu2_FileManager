@@ -3005,33 +3005,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_B_ReindexarMouseClicked
     private void B_ExportarXMLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ExportarXMLMouseClicked
         // TODO add your handling code here:
-        String archivoTxt = "./" + file.getNombre() + ".txt";
-        String archivoXslt = "./" + file.getNombre() + ".xslt";
-        String archivoXml = "./" + file.getNombre() + ".xml";
-
         try {
-            // Verificar si el archivo XSLT ya existe, si no, crearlo dinámicamente
-            if (!new File(archivoXslt).exists()) {
-                // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
-                String estructura = ExportadorXML.obtenerEstructuraDesdeArchivoTxt(archivoTxt);
-                String contenidoXSLT = ExportadorXML.generarContenidoXSLT(estructura);
-
-                // Guardar el contenido generado en el archivo XSLT
-                ExportadorXML.guardarContenidoEnArchivo(archivoXslt, contenidoXSLT);
-            }
-
-            // Verificar nuevamente si el archivo XSLT existe después de la generación
-            if (new File(archivoXslt).exists()) {
-                // Aplicar la transformación XSLT al archivo TXT
-                boolean xml = ExportadorXML.exportarConSchema(archivoTxt, archivoXslt, archivoXml);
-
-                if (xml) {
-                    JOptionPane.showMessageDialog(this, "Exportación exitosa a XML con Schema.", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Error: No se pudo generar el archivo XSLT.", "Error", JOptionPane.ERROR_MESSAGE);
+            ExportadorXML exp = new ExportadorXML();        
+            boolean isCreated = exp.exportarXML(file);
+            if (isCreated){
+                JOptionPane.showMessageDialog(this, "Se creo con exito el XML", "Notificacion", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();

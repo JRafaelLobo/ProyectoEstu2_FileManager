@@ -1,89 +1,108 @@
 package standard.file.manager;
 
-import java.io.BufferedReader;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
+import java.io.*;
+import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.swing.JOptionPane;
 
-public class ExportadorXML {
+public class ExportadorXML extends Archivos{
 
-    public static boolean exportarConSchema(String archivoTxt, String archivoXslt, String archivoXml) {
+    public boolean exportarXML( Archivos file) {
         try {
-            // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
-            String estructura = obtenerEstructuraDesdeArchivoTxt(archivoTxt);
-            String contenidoXSLT = generarContenidoXSLT(estructura);
+            this.listaCampos = file.listaCampos;
+            this.longitudTotalDeMetadata = file.longitudTotalDeMetadata;
+            this.rutaArchivo = file.rutaArchivo;
+            this.longitudTotalRegistro = file.longitudTotalRegistro;
+            crearXsl();
+            // Cargar la plantilla XSLT
+            Source xslt = new StreamSource(new FileInputStream(this.rutaArchivo.replace("txt", "xsl")));
 
-            // Guardar el contenido generado en el archivo XSLT
-            guardarContenidoEnArchivo(archivoXslt, contenidoXSLT);
+            // Crear la fábrica de transformadores
+            TransformerFactory factory = TransformerFactory.newInstance();
 
-            // Aplicar la transformación XSLT al archivo TXT
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer(new StreamSource(new File(archivoXslt)));
-            transformer.transform(new StreamSource(new File(archivoTxt)), new StreamResult(new File(archivoXml)));
+            // Crear un transformador para la plantilla XSLT
+            Transformer transformer = factory.newTransformer(xslt);
 
-            System.out.println("Exportación exitosa a XML con Schema.");
+            // Crear la fuente de entrada con los registros
+            Source registrosSource = new StreamSource(new StringReader(generarXML()));
+
+            // Crear la salida, en este caso, un archivo XML
+            Result outputTarget = new StreamResult(new File(this.rutaArchivo.replace("txt", "xml")));
+
+            // Aplicar la transformación y escribir el resultado en el archivo de salida
+            transformer.transform(registrosSource, outputTarget);
+
+            System.out.println("Transformación exitosa. El archivo XML se ha creado.");
             return true;
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public static String obtenerEstructuraDesdeArchivoTxt(String archivoTxt) throws IOException {
-        // Aquí implementa la lógica para leer el contenido del archivo TXT y extraer la estructura
-        // Puedes utilizar expresiones regulares o cualquier otro método que se ajuste a la estructura de tus datos
-        // El siguiente es un ejemplo básico basado en el formato proporcionado
-        try (BufferedReader reader = new BufferedReader(new FileReader(archivoTxt))) {
-            String primeraLinea = reader.readLine();
-            return primeraLinea.substring(1, primeraLinea.length() - 1); // Eliminar los corchetes al inicio y al final
+    private String generarXML() {
+        StringBuilder xml = new StringBuilder();
+        xml.append("<data>");
+        try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
+            int i = longitudTotalDeMetadata;
+            while (i < file.length()) {
+                file.seek(i);
+                byte[] buffer = new byte[this.longitudTotalRegistro];
+                int bytesRead = file.read(buffer);
+                String registro = new String(buffer, 0, bytesRead);
+                i += longitudTotalRegistro;
+                if (registro.charAt(0) == '*') {
+                    continue;
+                }
+                xml.append("<record>");
+                String[] register = registro.trim().split("\\|");
+                for (int j = 0; j < register.length; j++) {
+                    xml.append("        <").append(listaCampos.get(j).getNombre()).append(">").append(register[j]).append("</").append(listaCampos.get(j).getNombre()).append(">\n");
+                }
+                xml.append("</record>");
+            }
+
+        } catch (IOException e) {
+            System.err.println("Sucedio un error al obtener todos los registros: " + e.getMessage());
         }
+        xml.append("</data>");
+        return xml.toString();
     }
 
-    public static String generarContenidoXSLT(String estructura) {
-        // Aquí implementa la lógica para generar dinámicamente el contenido del archivo XSLT según la estructura proporcionada
-        // El siguiente es un ejemplo básico basado en el formato proporcionado
-        StringBuilder contenido = new StringBuilder();
-        contenido.append("<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n");
-        contenido.append("  <xsl:template match=\"/\">\n");
-        contenido.append("    <registros>\n");
-        
-        String[] campos = estructura.split("\\|");
-        for (String campo : campos) {
-            String[] atributos = campo.split(",");
-            String nombreCampo = atributos[0];
-            String tipoDato = atributos[1];
-            contenido.append("      <xsl:apply-templates select=\"").append(tipoDato).append("\"/>\n");
-        }
-        
-        contenido.append("    </registros>\n");
-        contenido.append("  </xsl:template>\n");
+    private void crearXsl() throws IOException {
+        try {
+            StringBuilder contenidoXSL = new StringBuilder();
+            contenidoXSL.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+                    .append("<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n")
+                    .append("    <xsl:output method=\"xml\" indent=\"yes\"/>\n\n")
+                    .append("    <xsl:template match=\"/\">\n")
+                    .append("        <root>\n")
+                    .append("            <xsl:for-each select=\"data/record\">\n")
+                    .append("                <registro>\n");
 
-        for (String campo : campos) {
-            String[] atributos = campo.split(",");
-            String nombreCampo = atributos[0];
-            String tipoDato = atributos[1];
-            
-            contenido.append("  <xsl:template match=\"").append(tipoDato).append("\">\n");
-            contenido.append("    <").append(tipoDato).append(">\n");
-            contenido.append("      <xsl:value-of select=\".\"/>\n");
-            contenido.append("    </").append(tipoDato).append(">\n");
-            contenido.append("  </xsl:template>\n");
+            for (Campo campos : this.listaCampos) {
+                contenidoXSL.append("                    <").append(campos.getNombre()).append("><xsl:value-of select=\"").append(campos.getNombre()).append("\"/></").append(campos.getNombre()).append(">\n");
+            }
+                    contenidoXSL.append("                </registro>\n")
+                    .append("            </xsl:for-each>\n")
+                    .append("        </root>\n")
+                    .append("    </xsl:template>\n")
+                    .append("</xsl:stylesheet>");
+
+            // Ruta del archivo XSL
+            String rutaArchivoXSL = this.rutaArchivo.replace("txt", "xsl");
+
+            // Crear el archivo XSL
+            BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivoXSL));
+            writer.write(contenidoXSL.toString());
+            writer.close();
+
+            System.out.println("Archivo XSL creado exitosamente.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        
-        contenido.append("</xsl:stylesheet>\n");
-        return contenido.toString();
+
     }
 
-    public static void guardarContenidoEnArchivo(String rutaArchivo, String contenido) throws IOException {
-        try (FileWriter writer = new FileWriter(rutaArchivo)) {
-            writer.write(contenido);
-        }
-    }
 }
