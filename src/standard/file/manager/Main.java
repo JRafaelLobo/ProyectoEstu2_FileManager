@@ -2930,7 +2930,7 @@ public class Main extends javax.swing.JFrame {
         }
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error durante la exportación a XML: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Error durante la exportación a XML: ", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_B_ExportarXMLMouseClicked
 
