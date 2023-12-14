@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.Random;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.ListModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -110,31 +111,31 @@ public class Main extends javax.swing.JFrame {
         Panel_Decoracion_Introducir = new javax.swing.JPanel();
         Titulo_Introducir = new javax.swing.JLabel();
         Panel_Introducir = new javax.swing.JPanel();
-        Regresar_Introducir = new javax.swing.JButton();
+        Regresar_Introducir = new boton();
         TF_NuevoRegistro = new javax.swing.JTextField();
         J_OrdenCampoInt = new javax.swing.JLabel();
         Titulo_InstruccionIntroducir = new javax.swing.JLabel();
-        B_Anterior = new javax.swing.JButton();
-        B_Siguiente = new javax.swing.JButton();
-        B_GuardarRegistro = new javax.swing.JButton();
+        B_Anterior = new boton();
+        B_Siguiente = new boton();
+        B_GuardarRegistro = new boton();
         Dialog_Modificar = new javax.swing.JDialog();
         Panel_Decoracion_Modificar = new javax.swing.JPanel();
         Titulo_Modificar = new javax.swing.JLabel();
         Panel_Modificar = new javax.swing.JPanel();
-        Regresar_Modificar = new javax.swing.JButton();
+        Regresar_Modificar = new boton();
         TF_Modificacion = new javax.swing.JTextField();
         J_RegistroAnterior = new javax.swing.JLabel();
         Titulo_Instruccion = new javax.swing.JLabel();
         J_OrdenCampos = new javax.swing.JLabel();
         Titulo_RegistroAnt = new javax.swing.JLabel();
-        B_AnteriorModif = new javax.swing.JButton();
-        B_SiguienteModif = new javax.swing.JButton();
-        B_GuardarModif = new javax.swing.JButton();
+        B_AnteriorModif = new boton();
+        B_SiguienteModif = new boton();
+        B_GuardarModif = new boton();
         Dialog_Buscar = new javax.swing.JDialog();
         Panel_Decoracion_Buscar = new javax.swing.JPanel();
         Titulo_Buscar = new javax.swing.JLabel();
         Panel_Buscar = new javax.swing.JPanel();
-        Regresar_Buscar = new javax.swing.JButton();
+        Regresar_Buscar = new boton();
         Instruccion7 = new javax.swing.JLabel();
         Instruccion8 = new javax.swing.JLabel();
         Dialog_Listar = new javax.swing.JDialog();
@@ -153,8 +154,8 @@ public class Main extends javax.swing.JFrame {
         Panel_Decoracion_Cruzar = new javax.swing.JPanel();
         Titulo_Cruzar = new javax.swing.JLabel();
         Panel_Cruzar = new javax.swing.JPanel();
-        Regresar_Cruzar = new javax.swing.JButton();
-        B_EnviarCamposTercerArchivo = new javax.swing.JButton();
+        Regresar_Cruzar = new boton();
+        B_EnviarCamposTercerArchivo = new boton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TB_Campos_file1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -619,15 +620,22 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Introducir.getContentPane().add(Panel_Decoracion_Introducir);
-        Panel_Decoracion_Introducir.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Introducir.setBounds(0, 0, 600, 50);
 
         Panel_Introducir.setBackground(new java.awt.Color(5, 23, 45));
 
         Regresar_Introducir.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         Regresar_Introducir.setText("Regresar");
+        Regresar_Introducir.setBorderPainted(false);
+        Regresar_Introducir.setFocusPainted(false);
         Regresar_Introducir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Regresar_IntroducirMouseClicked(evt);
+            }
+        });
+        Regresar_Introducir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Regresar_IntroducirActionPerformed(evt);
             }
         });
 
@@ -648,6 +656,8 @@ public class Main extends javax.swing.JFrame {
 
         B_Anterior.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         B_Anterior.setText("Anterior");
+        B_Anterior.setBorderPainted(false);
+        B_Anterior.setFocusPainted(false);
         B_Anterior.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_AnteriorMouseClicked(evt);
@@ -656,6 +666,8 @@ public class Main extends javax.swing.JFrame {
 
         B_Siguiente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         B_Siguiente.setText("Siguiente");
+        B_Siguiente.setBorderPainted(false);
+        B_Siguiente.setFocusPainted(false);
         B_Siguiente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_SiguienteMouseClicked(evt);
@@ -664,6 +676,8 @@ public class Main extends javax.swing.JFrame {
 
         B_GuardarRegistro.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         B_GuardarRegistro.setText("Guardar");
+        B_GuardarRegistro.setBorderPainted(false);
+        B_GuardarRegistro.setFocusPainted(false);
         B_GuardarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_GuardarRegistroMouseClicked(evt);
@@ -679,39 +693,40 @@ public class Main extends javax.swing.JFrame {
             .addGroup(Panel_IntroducirLayout.createSequentialGroup()
                 .addGroup(Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_IntroducirLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Regresar_Introducir))
-                    .addGroup(Panel_IntroducirLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addGroup(Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TF_NuevoRegistro)
+                            .addComponent(TF_NuevoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(Panel_IntroducirLayout.createSequentialGroup()
-                                .addComponent(B_Anterior)
-                                .addGap(180, 180, 180)
-                                .addComponent(B_Siguiente))))
+                                .addComponent(B_Anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(B_Siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(Panel_IntroducirLayout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(B_GuardarRegistro)))
-                .addContainerGap(134, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(Regresar_Introducir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(135, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_IntroducirLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(B_GuardarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(238, 238, 238))
         );
         Panel_IntroducirLayout.setVerticalGroup(
             Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_IntroducirLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Regresar_Introducir)
-                .addGap(40, 40, 40)
+                .addGap(15, 15, 15)
+                .addComponent(Regresar_Introducir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Titulo_InstruccionIntroducir)
                 .addGap(37, 37, 37)
                 .addComponent(J_OrdenCampoInt)
-                .addGap(44, 44, 44)
-                .addComponent(TF_NuevoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(B_GuardarRegistro)
                 .addGap(18, 18, 18)
+                .addComponent(TF_NuevoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(B_GuardarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(Panel_IntroducirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(B_Anterior)
-                    .addComponent(B_Siguiente))
-                .addGap(69, 69, 69))
+                    .addComponent(B_Anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(B_Siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(95, 95, 95))
         );
 
         Dialog_Introducir.getContentPane().add(Panel_Introducir);
@@ -736,7 +751,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(Panel_Decoracion_ModificarLayout.createSequentialGroup()
                     .addGap(0, 202, Short.MAX_VALUE)
                     .addComponent(Titulo_Modificar)
-                    .addGap(0, 202, Short.MAX_VALUE)))
+                    .addGap(0, 203, Short.MAX_VALUE)))
         );
         Panel_Decoracion_ModificarLayout.setVerticalGroup(
             Panel_Decoracion_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -749,12 +764,14 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Modificar.getContentPane().add(Panel_Decoracion_Modificar);
-        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Modificar.setBounds(0, 0, 600, 50);
 
         Panel_Modificar.setBackground(new java.awt.Color(5, 23, 45));
 
         Regresar_Modificar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         Regresar_Modificar.setText("Regresar");
+        Regresar_Modificar.setBorderPainted(false);
+        Regresar_Modificar.setFocusPainted(false);
         Regresar_Modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Regresar_ModificarMouseClicked(evt);
@@ -789,6 +806,8 @@ public class Main extends javax.swing.JFrame {
 
         B_AnteriorModif.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         B_AnteriorModif.setText("Anterior");
+        B_AnteriorModif.setBorderPainted(false);
+        B_AnteriorModif.setFocusPainted(false);
         B_AnteriorModif.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_AnteriorModifMouseClicked(evt);
@@ -797,6 +816,8 @@ public class Main extends javax.swing.JFrame {
 
         B_SiguienteModif.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         B_SiguienteModif.setText("Siguiente");
+        B_SiguienteModif.setBorderPainted(false);
+        B_SiguienteModif.setFocusPainted(false);
         B_SiguienteModif.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_SiguienteModifMouseClicked(evt);
@@ -805,6 +826,8 @@ public class Main extends javax.swing.JFrame {
 
         B_GuardarModif.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         B_GuardarModif.setText("Guardar");
+        B_GuardarModif.setBorderPainted(false);
+        B_GuardarModif.setFocusPainted(false);
         B_GuardarModif.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_GuardarModifMouseClicked(evt);
@@ -816,52 +839,54 @@ public class Main extends javax.swing.JFrame {
         Panel_ModificarLayout.setHorizontalGroup(
             Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(J_OrdenCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Titulo_RegistroAnt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(J_RegistroAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Titulo_Instruccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Panel_ModificarLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(Regresar_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Titulo_RegistroAnt, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(Titulo_Instruccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(J_RegistroAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
+                .addContainerGap(136, Short.MAX_VALUE)
                 .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_ModificarLayout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
+                        .addComponent(B_GuardarModif, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(230, 230, 230))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
+                        .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(Panel_ModificarLayout.createSequentialGroup()
-                                .addComponent(B_AnteriorModif)
-                                .addGap(50, 50, 50)
-                                .addComponent(B_GuardarModif)
-                                .addGap(41, 41, 41)
-                                .addComponent(B_SiguienteModif))))
-                    .addGroup(Panel_ModificarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Regresar_Modificar)))
-                .addContainerGap(123, Short.MAX_VALUE))
+                                .addComponent(B_AnteriorModif, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(B_SiguienteModif, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(115, 115, 115))))
         );
         Panel_ModificarLayout.setVerticalGroup(
             Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Regresar_Modificar)
-                .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_ModificarLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(Titulo_RegistroAnt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(J_RegistroAnterior)
-                        .addGap(33, 33, 33)
-                        .addComponent(Titulo_Instruccion)
-                        .addGap(18, 18, 18)
-                        .addComponent(J_OrdenCampos)
-                        .addGap(27, 27, 27)
-                        .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
-                        .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(B_AnteriorModif)
-                            .addComponent(B_SiguienteModif))
-                        .addContainerGap(71, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ModificarLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(B_GuardarModif)
-                        .addGap(95, 95, 95))))
+            .addGroup(Panel_ModificarLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Regresar_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Titulo_RegistroAnt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(J_RegistroAnterior)
+                .addGap(30, 30, 30)
+                .addComponent(Titulo_Instruccion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(J_OrdenCampos)
+                .addGap(18, 18, 18)
+                .addComponent(TF_Modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(B_GuardarModif, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Panel_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(B_SiguienteModif, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(B_AnteriorModif, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         Dialog_Modificar.getContentPane().add(Panel_Modificar);
@@ -896,12 +921,14 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Buscar.getContentPane().add(Panel_Decoracion_Buscar);
-        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Buscar.setBounds(0, 0, 600, 50);
 
         Panel_Buscar.setBackground(new java.awt.Color(5, 23, 45));
 
         Regresar_Buscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         Regresar_Buscar.setText("Regresar");
+        Regresar_Buscar.setBorderPainted(false);
+        Regresar_Buscar.setFocusPainted(false);
         Regresar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Regresar_BuscarMouseClicked(evt);
@@ -922,23 +949,24 @@ public class Main extends javax.swing.JFrame {
         Panel_Buscar.setLayout(Panel_BuscarLayout);
         Panel_BuscarLayout.setHorizontalGroup(
             Panel_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Instruccion7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Panel_BuscarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Regresar_Buscar)
+                .addGap(22, 22, 22)
+                .addComponent(Regresar_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Instruccion7, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(Instruccion8, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         Panel_BuscarLayout.setVerticalGroup(
             Panel_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_BuscarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Regresar_Buscar)
-                .addGap(21, 21, 21)
-                .addComponent(Instruccion7)
+                .addGap(19, 19, 19)
+                .addGroup(Panel_BuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Regresar_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Instruccion7))
                 .addGap(18, 18, 18)
                 .addComponent(Instruccion8)
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
 
         Dialog_Buscar.getContentPane().add(Panel_Buscar);
@@ -973,7 +1001,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Listar.getContentPane().add(Panel_Decoracion_Listar);
-        Panel_Decoracion_Listar.setBounds(0, 0, 600, 0);
+        Panel_Decoracion_Listar.setBounds(0, 0, 600, 50);
 
         Panel_Listar.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1114,12 +1142,14 @@ public class Main extends javax.swing.JFrame {
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Decoracion_Cruzar);
-        Panel_Decoracion_Cruzar.setBounds(0, 0, 670, 0);
+        Panel_Decoracion_Cruzar.setBounds(0, 0, 670, 50);
 
         Panel_Cruzar.setBackground(new java.awt.Color(5, 23, 45));
 
         Regresar_Cruzar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         Regresar_Cruzar.setText("Regresar");
+        Regresar_Cruzar.setBorderPainted(false);
+        Regresar_Cruzar.setFocusPainted(false);
         Regresar_Cruzar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Regresar_CruzarMouseClicked(evt);
@@ -1128,9 +1158,16 @@ public class Main extends javax.swing.JFrame {
 
         B_EnviarCamposTercerArchivo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         B_EnviarCamposTercerArchivo.setText("Enviar a un tercer archivo");
+        B_EnviarCamposTercerArchivo.setBorderPainted(false);
+        B_EnviarCamposTercerArchivo.setFocusPainted(false);
         B_EnviarCamposTercerArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 B_EnviarCamposTercerArchivoMouseClicked(evt);
+            }
+        });
+        B_EnviarCamposTercerArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_EnviarCamposTercerArchivoActionPerformed(evt);
             }
         });
 
@@ -1199,35 +1236,35 @@ public class Main extends javax.swing.JFrame {
             .addGroup(Panel_CruzarLayout.createSequentialGroup()
                 .addGroup(Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_CruzarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Regresar_Cruzar))
-                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addGroup(Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane3)
                             .addComponent(jScrollPane2)))
                     .addGroup(Panel_CruzarLayout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(B_EnviarCamposTercerArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(Regresar_Cruzar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Panel_CruzarLayout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(Combo_Cruzar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(243, 243, 243)
+                        .addComponent(Combo_Cruzar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Panel_CruzarLayout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(B_EnviarCamposTercerArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         Panel_CruzarLayout.setVerticalGroup(
             Panel_CruzarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_CruzarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Regresar_Cruzar)
-                .addGap(17, 17, 17)
+                .addComponent(Regresar_Cruzar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(Combo_Cruzar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(B_EnviarCamposTercerArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Combo_Cruzar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(B_EnviarCamposTercerArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         Dialog_Cruzar.getContentPane().add(Panel_Cruzar);
@@ -2407,7 +2444,6 @@ public class Main extends javax.swing.JFrame {
         }
         Regresar_Cruzar.setSize(90, 25);
         Regresar_Cruzar.setFont(f);
-
     }//GEN-LAST:event_B_CruzarRegistroMouseClicked
 
     private void B_BuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_BuscarRegistroMouseClicked
@@ -3053,6 +3089,14 @@ public class Main extends javax.swing.JFrame {
         this.setJMenuBar(jMenuBar1);
         this.setVisible(true);
     }//GEN-LAST:event_JM_RegresarActionPerformed
+
+    private void B_EnviarCamposTercerArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_EnviarCamposTercerArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_EnviarCamposTercerArchivoActionPerformed
+
+    private void Regresar_IntroducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar_IntroducirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Regresar_IntroducirActionPerformed
 
     public static void main(String args[]) {
         try {
