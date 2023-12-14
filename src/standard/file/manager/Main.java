@@ -1661,6 +1661,8 @@ public class Main extends javax.swing.JFrame {
                 break;
         }
         file.setRutaArchivo(isCreated);
+        File nombre = new File(isCreated);
+        file.setNombre(nombre.getName().replace(".txt", ""));
         boolean isOpen = file.Abrir();
         if (isOpen == false) {
             JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
@@ -1801,7 +1803,6 @@ public class Main extends javax.swing.JFrame {
                     } else {
                         C.get(i).setEsLLave(false);
                     }
-                    System.out.println(Boolean.parseBoolean(Datos_Campos.getValueAt(i, 4).toString()));
                     C.get(i).setEsLlaveSecundaria(Boolean.parseBoolean(Datos_Campos.getValueAt(i, 4).toString()));
                 }
 
@@ -2506,13 +2507,6 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i] + " ");
-        }
-        System.out.println("");
-        for (int i = 0; i < b.length; i++) {
-            System.out.print(b[i] + " ");
-        }
         boolean funciono = cruzado.CruzarArchivos(file, cruzado, (String) Combo_Cruzar.getSelectedItem(), a, b);
         if (funciono) {
             JOptionPane.showMessageDialog(null, "Se Creo el documento exitosamente", "Notificación", JOptionPane.INFORMATION_MESSAGE);

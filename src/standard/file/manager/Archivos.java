@@ -32,6 +32,34 @@ public class Archivos {
     protected BTree bTree = new BTree(6, true, false, null);
     protected BTreeSerialization fileTree = new BTreeSerialization();
 
+    private void insertar5MilCiudades(){
+        String[] ciudades = {
+            "Nueva York", "Los Ángeles", "Chicago", "Houston", "Phoenix",
+            "Filadelfia", "San Antonio", "San Diego", "Dallas", "San José",
+            "Austin", "Indianápolis", "Jacksonville", "San Francisco", "Columbus",
+            "Charlotte", "Fort Worth", "Detroit", "El Paso", "Memphis",
+            "Seattle", "Denver", "Washington", "Boston", "Nashville",
+            "Baltimore", "Oklahoma City", "Louisville", "Portland", "Las Vegas",
+            "Milwaukee", "Albuquerque", "Tucson", "Fresno", "Sacramento",
+            "Long Beach", "Kansas City", "Mesa", "Atlanta", "Virginia Beach",
+            "Raleigh", "Omaha", "Miami", "Oakland", "Minneapolis",
+            "Tulsa", "Wichita", "New Orleans", "Arlington", "Cleveland",
+            "Bakersfield", "Tampa", "Aurora", "Honolulu", "Anaheim",
+            "Santa Ana", "Corpus Christi", "Riverside", "St. Louis", "Lexington",
+            "Pittsburgh", "Stockton", "Anchorage", "Cincinnati", "Saint Paul",
+            "Greensboro", "Toledo", "Newark", "Plano", "Henderson",
+            "Lincoln", "Orlando", "Jersey City", "Chula Vista", "Buffalo",
+            "Fort Wayne", "Chandler", "St. Petersburg", "Laredo", "Durham",
+            "Irvine", "Madison", "Norfolk", "Lubbock", "Gilbert",
+            "Winston-Salem", "Glendale", "Reno", "Hialeah", "Garland",
+            "Chesapeake", "Irving", "North Las Vegas", "Scottsdale", "Baton Rouge"
+        };
+        
+        for(int i=0; i < 5000; i++){
+            int digit = (int) (Math.random() * 80);
+            this.insertarRegistro(String.valueOf(i) + "|" + ciudades[digit] + "|", String.valueOf(i));
+        }
+    }
     private void insertar5MilRegistros() {
         Set<String> generatedIDs = new HashSet<>();
         int desiredNumberOfIDs = 5000;
@@ -105,8 +133,6 @@ public class Archivos {
                     continue;
                 }
                 String[] register = registro.trim().split("\\|");
-                System.out.println(registro);
-                System.out.println("");
                 Llave l = new Llave(register[tipo1], count);
                 arbol.insert(l);
 
@@ -123,14 +149,12 @@ public class Archivos {
             if (j != tipo1) {
                 if (contieneNumero(datos1, j)) {
                     file3.listaCampos.add(file1.listaCampos.get(j));
-                    System.out.println(file1.listaCampos.get(j));
                 }
             }
         }
         for (int j = 0; j < file2.listaCampos.size(); j++) {
             if (contieneNumero(datos2, j)) {
                 file3.listaCampos.add(file2.listaCampos.get(j));
-                System.out.println(file2.listaCampos.get(j));
             }
         }
         //file3.rutaArchivo = ruta;
@@ -503,6 +527,7 @@ public class Archivos {
         }
         //IMPORTANTE NO DESCOMENTAR A MENOS QUE SE QUIERA HACER PRUEBAS:
         //this.insertar5MilRegistros();
+        //this.insertar5MilCiudades();
         return campoIsOpen && isContructionAvai;
     }
 
