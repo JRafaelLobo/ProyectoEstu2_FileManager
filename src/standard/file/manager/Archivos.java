@@ -32,7 +32,7 @@ public class Archivos {
     protected BTree bTree = new BTree(6, true, false, null);
     protected BTreeSerialization fileTree = new BTreeSerialization();
 
-    private void insertar5MilCiudades(){
+    private void insertar5MilCiudades() {
         String[] ciudades = {
             "Nueva York", "Los Ángeles", "Chicago", "Houston", "Phoenix",
             "Filadelfia", "San Antonio", "San Diego", "Dallas", "San José",
@@ -54,12 +54,13 @@ public class Archivos {
             "Winston-Salem", "Glendale", "Reno", "Hialeah", "Garland",
             "Chesapeake", "Irving", "North Las Vegas", "Scottsdale", "Baton Rouge"
         };
-        
-        for(int i=0; i < 5000; i++){
+
+        for (int i = 0; i < 5000; i++) {
             int digit = (int) (Math.random() * 80);
             this.insertarRegistro(String.valueOf(i) + "|" + ciudades[digit] + "|", String.valueOf(i));
         }
     }
+
     private void insertar5MilRegistros() {
         Set<String> generatedIDs = new HashSet<>();
         int desiredNumberOfIDs = 5000;
@@ -135,7 +136,6 @@ public class Archivos {
                 String[] register = registro.trim().split("\\|");
                 Llave l = new Llave(register[tipo1], count);
                 arbol.insert(l);
-
                 count++;
             }
         } catch (IOException e) {
@@ -146,10 +146,8 @@ public class Archivos {
         Archivos file3 = new Archivos();
         file3.crearArchivoCruzado(file1.getRutaArchivo(), file1.nombre, file2.nombre);
         for (int j = 0; j < file1.listaCampos.size(); j++) {
-            if (j != tipo1) {
-                if (contieneNumero(datos1, j)) {
-                    file3.listaCampos.add(file1.listaCampos.get(j));
-                }
+            if (contieneNumero(datos1, j)) {
+                file3.listaCampos.add(file1.listaCampos.get(j));
             }
         }
         for (int j = 0; j < file2.listaCampos.size(); j++) {
@@ -177,14 +175,14 @@ public class Archivos {
                 String temp = "";
                 String l = "";
                 for (int j = 0; j < register.length; j++) {
-                    if (tipo1 != j) {
-                        if (contieneNumero(datos1, j)) {
-                            temp += register[j];
-                            temp += "|";
-                        }
-                    } else {
+                    if (tipo1 == j) {
                         l = register[j];
                     }
+                    if (contieneNumero(datos1, j)) {
+                        temp += register[j];
+                        temp += "|";
+                    }
+
                 }
                 temp += metodoparaCruzar2(file2, temp, arbol, l, datos2);
                 file3.insertarRegistro(temp, l);
@@ -655,7 +653,7 @@ public class Archivos {
                 }
                 String[] register = registro.trim().split("\\|");
                 int repetido = arbol.search(register[tipo]);
-                if(repetido != -1){
+                if (repetido != -1) {
                     System.err.println("Las llaves estan repetida");
                     return false;
                 }
