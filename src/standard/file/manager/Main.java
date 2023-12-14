@@ -1648,18 +1648,30 @@ public class Main extends javax.swing.JFrame {
 
     private void B_Archivo_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_NuevoActionPerformed
         // TODO add your handling code here:
-        char isCreated = file.Nuevo();
+        String isCreated = file.Nuevo();
         switch (isCreated) {
-            case 'T':
+            case "F":
+                JOptionPane.showMessageDialog(null, "Hubo un error el archivo no se pudo crear", "Notificación", JOptionPane.ERROR_MESSAGE);
+                return;
+            case "E":
+                JOptionPane.showMessageDialog(null, "El archivo ya existe", "Notificación", JOptionPane.ERROR_MESSAGE);
+                return;
+             default:
                 JOptionPane.showMessageDialog(null, "El archivo se creo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
                 break;
-            case 'F':
-                JOptionPane.showMessageDialog(null, "Hubo un error el archivo no se pudo crear", "Notificación", JOptionPane.ERROR_MESSAGE);
-                break;
-            case 'E':
-                JOptionPane.showMessageDialog(null, "El archivo ya existe", "Notificación", JOptionPane.ERROR_MESSAGE);
-                break;
         }
+        file.setRutaArchivo(isCreated);
+        boolean isOpen = file.Abrir();
+        if (isOpen == false) {
+            JOptionPane.showMessageDialog(null, "Hubo un error al cargar el archivo", "Notificación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //Activando los botones
+        B_Campos.setEnabled(file.canBeEnableCampos());
+        B_Registros.setEnabled(file.canBeEnableRegistros());
+        B_Indices.setEnabled(!file.canBeEnableCampos());
+        B_Estandarizacion.setEnabled(!file.canBeEnableCampos());
+        //Buen dias
     }//GEN-LAST:event_B_Archivo_NuevoActionPerformed
 
     private void B_Archivo_AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Archivo_AbrirActionPerformed

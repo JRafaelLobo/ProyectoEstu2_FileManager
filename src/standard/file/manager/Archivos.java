@@ -506,7 +506,7 @@ public class Archivos {
         return campoIsOpen && isContructionAvai;
     }
 
-    public char Nuevo() {
+    public String Nuevo() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Guardar archivo de texto");
 
@@ -528,24 +528,24 @@ public class Archivos {
             // Verificar si el archivo ya existe antes de intentar crearlo
             if (fileToSave.exists()) {
                 System.out.println("El archivo ya existe en: " + filePath);
-                return 'E';
+                return "E";
             }
 
             try {
                 if (fileToSave.createNewFile()) {
                     System.out.println("Archivo creado con éxito en: " + filePath);
-                    return 'T';
+                    return fileToSave.getAbsolutePath();
                 } else {
                     System.out.println("El archivo no se pudo crear");
-                    return 'F';
+                    return "F";
                 }
 
             } catch (IOException e) {
                 System.err.println("El archivo no se pudo crear " + e.getMessage());
-                return 'F';
+                return "F";
             }
         }
-        return 'C'; // Cancelado
+        return "C"; // Cancelado
     }
 
     public String getNombre() {
