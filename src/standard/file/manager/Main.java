@@ -255,7 +255,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Archivo_Titulo.setText("Datos Del Archivo");
         JF_Campos.getContentPane().add(lb_Archivo_Titulo);
-        lb_Archivo_Titulo.setBounds(60, 260, 150, 16);
+        lb_Archivo_Titulo.setBounds(60, 260, 150, 15);
 
         B_CrearCampo.setText("Crear");
         B_CrearCampo.setBorderPainted(false);
@@ -266,7 +266,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_CrearCampo);
-        B_CrearCampo.setBounds(180, 260, 72, 23);
+        B_CrearCampo.setBounds(180, 260, 62, 25);
 
         B_ListarCampo.setText("Listar");
         B_ListarCampo.setBorderPainted(false);
@@ -277,7 +277,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_ListarCampo);
-        B_ListarCampo.setBounds(270, 260, 72, 23);
+        B_ListarCampo.setBounds(270, 260, 61, 25);
 
         B_ModificarCampo.setText("Modificar");
         B_ModificarCampo.setBorderPainted(false);
@@ -288,7 +288,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_ModificarCampo);
-        B_ModificarCampo.setBounds(370, 260, 81, 23);
+        B_ModificarCampo.setBounds(370, 260, 79, 25);
 
         B_BorrarCampo.setText("Borrar");
         B_BorrarCampo.setBorderPainted(false);
@@ -299,7 +299,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Campos.getContentPane().add(B_BorrarCampo);
-        B_BorrarCampo.setBounds(460, 260, 72, 23);
+        B_BorrarCampo.setBounds(460, 260, 65, 25);
 
         javax.swing.GroupLayout I_Campo_DecoracionLayout = new javax.swing.GroupLayout(I_Campo_Decoracion);
         I_Campo_Decoracion.setLayout(I_Campo_DecoracionLayout);
@@ -475,7 +475,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_Registro_Titulo.setText("Datos Del Archivo");
         JF_Registros.getContentPane().add(lb_Registro_Titulo);
-        lb_Registro_Titulo.setBounds(60, 260, 150, 16);
+        lb_Registro_Titulo.setBounds(60, 260, 150, 15);
 
         B_CruzarRegistro.setText("Cruzar");
         B_CruzarRegistro.setBorderPainted(false);
@@ -486,7 +486,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_CruzarRegistro);
-        B_CruzarRegistro.setBounds(270, 290, 72, 23);
+        B_CruzarRegistro.setBounds(270, 290, 67, 25);
 
         B_ModificarRegistro.setText("Modificar");
         B_ModificarRegistro.setBorderPainted(false);
@@ -497,7 +497,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_ModificarRegistro);
-        B_ModificarRegistro.setBounds(370, 260, 81, 23);
+        B_ModificarRegistro.setBounds(370, 260, 79, 25);
 
         B_BuscarRegistro.setText("Buscar");
         B_BuscarRegistro.setBorderPainted(false);
@@ -508,7 +508,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_BuscarRegistro);
-        B_BuscarRegistro.setBounds(370, 290, 72, 23);
+        B_BuscarRegistro.setBounds(370, 290, 69, 25);
 
         B_BorrarRegistro.setText("Borrar");
         B_BorrarRegistro.setBorderPainted(false);
@@ -519,7 +519,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_BorrarRegistro);
-        B_BorrarRegistro.setBounds(460, 260, 72, 23);
+        B_BorrarRegistro.setBounds(460, 260, 65, 25);
 
         B_IntroducirRegistro.setText("Introducir");
         B_IntroducirRegistro.setBorderPainted(false);
@@ -530,7 +530,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_IntroducirRegistro);
-        B_IntroducirRegistro.setBounds(170, 260, 81, 23);
+        B_IntroducirRegistro.setBounds(170, 260, 81, 25);
 
         B_ListarRegistro.setText("Listar");
         B_ListarRegistro.setBorderPainted(false);
@@ -546,7 +546,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Registros.getContentPane().add(B_ListarRegistro);
-        B_ListarRegistro.setBounds(270, 260, 72, 23);
+        B_ListarRegistro.setBounds(270, 260, 61, 25);
 
         javax.swing.GroupLayout I_Registro_DecoracionLayout = new javax.swing.GroupLayout(I_Registro_Decoracion);
         I_Registro_Decoracion.setLayout(I_Registro_DecoracionLayout);
@@ -1251,7 +1251,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Indices.getContentPane().add(B_Indexar);
-        B_Indexar.setBounds(220, 300, 92, 23);
+        B_Indexar.setBounds(220, 300, 92, 25);
 
         B_Reindexar.setText("ReIndexar Indice");
         B_Reindexar.setBorderPainted(false);
@@ -1262,7 +1262,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Indices.getContentPane().add(B_Reindexar);
-        B_Reindexar.setBounds(370, 300, 114, 23);
+        B_Reindexar.setBounds(370, 300, 114, 25);
 
         JL_IndexarObject.setViewportView(JL_IndexarData);
 
@@ -1271,7 +1271,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_IndiceTitulo.setText("Indices");
         JF_Indices.getContentPane().add(lb_IndiceTitulo);
-        lb_IndiceTitulo.setBounds(250, 30, 90, 16);
+        lb_IndiceTitulo.setBounds(250, 30, 90, 15);
 
         B_RegresarIndice.setText("Regresar");
         B_RegresarIndice.setBorderPainted(false);
@@ -1282,7 +1282,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_Indices.getContentPane().add(B_RegresarIndice);
-        B_RegresarIndice.setBounds(90, 310, 73, 23);
+        B_RegresarIndice.setBounds(90, 310, 73, 25);
 
         I_FondoIdexar.setBackground(new java.awt.Color(5, 23, 45));
         I_FondoIdexar.setForeground(new java.awt.Color(5, 23, 45));
@@ -1312,7 +1312,7 @@ public class Main extends javax.swing.JFrame {
 
         lb_TituloEstandarizacion.setText("Estandarizacion");
         JF_estandarizacion.getContentPane().add(lb_TituloEstandarizacion);
-        lb_TituloEstandarizacion.setBounds(240, 30, 83, 16);
+        lb_TituloEstandarizacion.setBounds(240, 30, 78, 15);
 
         B_ExportarExcel.setText("Exportar Excel");
         B_ExportarExcel.setBorderPainted(false);
@@ -1323,7 +1323,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_estandarizacion.getContentPane().add(B_ExportarExcel);
-        B_ExportarExcel.setBounds(240, 110, 105, 23);
+        B_ExportarExcel.setBounds(240, 110, 104, 25);
 
         B_RegresarEstandarizacion.setText("Regresar");
         B_RegresarEstandarizacion.setBorderPainted(false);
@@ -1334,7 +1334,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_estandarizacion.getContentPane().add(B_RegresarEstandarizacion);
-        B_RegresarEstandarizacion.setBounds(240, 250, 76, 23);
+        B_RegresarEstandarizacion.setBounds(240, 250, 79, 25);
 
         B_ExportarXML.setText("Exportar XML con Schema");
         B_ExportarXML.setBorderPainted(false);
@@ -1345,7 +1345,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JF_estandarizacion.getContentPane().add(B_ExportarXML);
-        B_ExportarXML.setBounds(240, 170, 200, 23);
+        B_ExportarXML.setBounds(240, 170, 200, 25);
 
         P_FondoEstandarizacion.setBackground(new java.awt.Color(5, 23, 45));
 
@@ -1396,7 +1396,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Campos);
-        B_Campos.setBounds(278, 268, 109, 23);
+        B_Campos.setBounds(278, 268, 109, 25);
 
         B_Registros.setText("Registros");
         B_Registros.setBorderPainted(false);
@@ -1407,7 +1407,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Registros);
-        B_Registros.setBounds(514, 268, 109, 23);
+        B_Registros.setBounds(514, 268, 109, 25);
 
         B_Indices.setBackground(new java.awt.Color(102, 102, 102));
         B_Indices.setText("Indices");
@@ -1420,7 +1420,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Indices);
-        B_Indices.setBounds(153, 335, 112, 23);
+        B_Indices.setBounds(153, 335, 112, 25);
 
         B_Estandarizacion.setText("Estandarizacion");
         B_Estandarizacion.setBorderPainted(false);
@@ -1431,7 +1431,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B_Estandarizacion);
-        B_Estandarizacion.setBounds(382, 335, 113, 23);
+        B_Estandarizacion.setBounds(382, 335, 112, 25);
 
         I_Fondo_Main.setBackground(new java.awt.Color(5, 23, 45));
 
