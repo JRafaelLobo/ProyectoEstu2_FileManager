@@ -384,7 +384,6 @@ public class Archivos {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar archivo de texto");
 
-        // Añadir un filtro para mostrar solo archivos con extensión .txt
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt");
         fileChooser.setFileFilter(filter);
 
@@ -392,13 +391,11 @@ public class Archivos {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
 
-            // Verificar si el archivo seleccionado tiene la extensión .txt
             if (selectedFile.getName().toLowerCase().endsWith(".txt")) {
                 nombre = selectedFile.getName().substring(0, selectedFile.getName().length() - 4);
                 this.rutaArchivo = selectedFile.getAbsolutePath();
             } else {
                 System.out.println("Selecciona un archivo con extensión .txt");
-                // Puedes mostrar un mensaje al usuario indicando que seleccione un archivo .txt
                 this.rutaArchivo = "F";
             }
         } else {
@@ -456,7 +453,6 @@ public class Archivos {
 
     private boolean AbrirCampos() {
         try {
-            // Leer la primera línea del archivo
             BufferedReader lector = new BufferedReader(new FileReader(this.rutaArchivo));
             String primeraLinea = lector.readLine();
             lector.close();
@@ -465,7 +461,6 @@ public class Archivos {
                 return true;
             }
 
-            //metodo para leer archivo
             if (primeraLinea.charAt(0) != '{') {
                 return false;
             }
@@ -539,7 +534,6 @@ public class Archivos {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Guardar archivo de texto");
 
-        // Añadir un filtro para mostrar solo archivos con extensión .txt
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt");
         fileChooser.setFileFilter(filter);
 
@@ -547,14 +541,12 @@ public class Archivos {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
 
-            // Asegurarse de que el nombre del archivo tenga la extensión .txt
             String filePath = fileToSave.getAbsolutePath();
             if (!filePath.toLowerCase().endsWith(".txt")) {
                 fileToSave = new File(filePath + ".txt");
                 filePath = fileToSave.getAbsolutePath();
             }
 
-            // Verificar si el archivo ya existe antes de intentar crearlo
             if (fileToSave.exists()) {
                 System.out.println("El archivo ya existe en: " + filePath);
                 return "E";
@@ -574,7 +566,7 @@ public class Archivos {
                 return "F";
             }
         }
-        return "C"; // Cancelado
+        return "C"; 
     }
 
     public String getNombre() {

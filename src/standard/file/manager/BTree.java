@@ -81,9 +81,8 @@ public class BTree implements Serializable {
         BTreeNode childNode = parentNode.children.get(childIndex);
         BTreeNode newChildNode = new BTreeNode();
 
-        // Se determina el índice de la clave a subir al nodo padre
         int midIndex = (order - 1) / 2;
-        if ((order - 1) % 2 == 0) { // Si el orden es par, se toma la clave anterior al medio
+        if ((order - 1) % 2 == 0) { 
             midIndex--;
         }
 
@@ -165,7 +164,6 @@ public class BTree implements Serializable {
 
         deleteInternal(node, key);
 
-        // Si la raíz se queda sin claves después de la eliminación, se actualiza la raíz
         if (root.keys.isEmpty() && !root.children.isEmpty()) {
             root = root.children.get(0);
         }
@@ -174,22 +172,17 @@ public class BTree implements Serializable {
     private void deleteInternal(BTreeNode node, String key) {
         int index = findKeyIndex(node, key);
 
-        // Si la clave está presente en el nodo actual
         if (index != -1) {
             if (!node.children.isEmpty()) {
-                // Caso 3: El nodo es un nodo interno con hijos
                 deleteInternalWithChildren(node, index);
             } else {
-                // Caso 1: El nodo es una hoja
                 node.keys.remove(index);
             }
         } else {
-            // Si la clave no está presente en el nodo actual
             int childIndex = findChildIndex(node, key);
             BTreeNode child = node.children.get(childIndex);
 
             if (child.keys.size() == order - 1) {
-                // Caso 2: El hijo tiene el mínimo de claves
                 handleMinimumKeys(child, childIndex);
             }
 
@@ -202,17 +195,16 @@ public class BTree implements Serializable {
         BTreeNode predecessorChild = node.children.get(index);
         BTreeNode successorChild = node.children.get(index + 1);
 
-        // Caso 3a: El hijo que precede a la clave tiene al menos t claves
         if (predecessorChild.keys.size() >= (order + 1) / 2) {
             Llave predecessor = getPredecessor(predecessorChild);
             deleteInternal(predecessorChild, predecessor.getId());
             node.keys.set(index, predecessor);
-        } // Caso 3b: El hijo que precede a la clave tiene menos de t claves, pero el siguiente tiene al menos t claves
+        }
         else if (successorChild.keys.size() >= (order + 1) / 2) {
             Llave successor = getSuccessor(successorChild);
             deleteInternal(successorChild, successor.getId());
             node.keys.set(index, successor);
-        } // Caso 3c: Ambos hijos tienen el mínimo de claves, fusionar con el sucesor
+        }
         else {
             mergeNodes(node, index);
             deleteInternal(predecessorChild, key.getId());
@@ -253,16 +245,15 @@ public class BTree implements Serializable {
         BTreeNode leftSibling = (childIndex > 0) ? node.parent.children.get(childIndex - 1) : null;
         BTreeNode rightSibling = (childIndex < node.parent.children.size() - 1) ? node.parent.children.get(childIndex + 1) : null;
 
-        // Caso 2a: El hermano izquierdo tiene más de t claves
         if (leftSibling != null && leftSibling.keys.size() >= (order + 1) / 2) {
             borrowFromLeftSibling(node, leftSibling, childIndex);
-        } // Caso 2b: El hermano derecho tiene más de t claves
+        }
         else if (rightSibling != null && rightSibling.keys.size() >= (order + 1) / 2) {
             borrowFromRightSibling(node, rightSibling, childIndex);
-        } // Caso 2c: Ambos hermanos tienen el mínimo de claves, fusionar con el izquierdo
+        }
         else if (leftSibling != null) {
             mergeNodes(node.parent, childIndex - 1);
-        } // Caso 2d: Ambos hermanos tienen el mínimo de claves, fusionar con el derecho
+        }
         else if (rightSibling != null) {
             mergeNodes(node.parent, childIndex);
         }

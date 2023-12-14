@@ -14,22 +14,11 @@ public class ExportadorXML extends Archivos{
             this.rutaArchivo = file.rutaArchivo;
             this.longitudTotalRegistro = file.longitudTotalRegistro;
             crearXsl();
-            // Cargar la plantilla XSLT
             Source xslt = new StreamSource(new FileInputStream(this.rutaArchivo.replace("txt", "xsl")));
-
-            // Crear la fábrica de transformadores
             TransformerFactory factory = TransformerFactory.newInstance();
-
-            // Crear un transformador para la plantilla XSLT
             Transformer transformer = factory.newTransformer(xslt);
-
-            // Crear la fuente de entrada con los registros
             Source registrosSource = new StreamSource(new StringReader(generarXML()));
-
-            // Crear la salida, en este caso, un archivo XML
             Result outputTarget = new StreamResult(new File(this.rutaArchivo.replace("txt", "xml")));
-
-            // Aplicar la transformación y escribir el resultado en el archivo de salida
             transformer.transform(registrosSource, outputTarget);
 
             System.out.println("Transformación exitosa. El archivo XML se ha creado.");

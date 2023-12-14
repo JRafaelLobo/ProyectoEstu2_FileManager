@@ -1,3 +1,0 @@
-{NOMBRE,char,20,1,0|EDAD,int,3,0,1}
-*1                       
-Angeloque|19|            *-1                      
