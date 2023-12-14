@@ -14,14 +14,32 @@ public class BTree implements Serializable {
 
     private BTreeNode root;
     private int order; // Orden del árbol B
+    private boolean isLlave;
+    private boolean isSecundaria;
+    private String name;
 
     public BTreeNode getRoot() {
         return root;
     }
 
-    public BTree(int order) {
+    public boolean getIsLlave() {
+        return isLlave;
+    }
+
+    public boolean getIsSecundaria() {
+        return isSecundaria;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BTree(int order, boolean  isLlave, boolean isSecundaria, String name) {
         this.root = new BTreeNode();
         this.order = order;
+        this.isLlave = isLlave;
+        this.isSecundaria = isSecundaria;
+        this.name = name;
     }
 
     public void insert(Llave key) {
