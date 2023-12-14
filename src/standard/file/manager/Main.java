@@ -187,6 +187,7 @@ public class Main extends javax.swing.JFrame {
         B_Archivo_Guardar = new javax.swing.JMenuItem();
         B_Archivo_Cerrar = new javax.swing.JMenuItem();
         B_Archivo_Salir = new javax.swing.JMenuItem();
+        JM_Regresar = new javax.swing.JMenuItem();
 
         Portadita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Portadita.setTitle("Standard File Manager");
@@ -1495,6 +1496,14 @@ public class Main extends javax.swing.JFrame {
         });
         jMenu1.add(B_Archivo_Salir);
 
+        JM_Regresar.setText("Regresar");
+        JM_Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JM_RegresarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(JM_Regresar);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -1676,8 +1685,8 @@ public class Main extends javax.swing.JFrame {
         //Activando los botones
         B_Campos.setEnabled(file.canBeEnableCampos());
         B_Registros.setEnabled(file.canBeEnableRegistros());
-        B_Indices.setEnabled(true);
-        B_Estandarizacion.setEnabled(true);
+        B_Indices.setEnabled(!file.canBeEnableCampos());
+        B_Estandarizacion.setEnabled(!file.canBeEnableCampos());
         //Buen dias
     }//GEN-LAST:event_B_Archivo_AbrirActionPerformed
 
@@ -2216,28 +2225,18 @@ public class Main extends javax.swing.JFrame {
         }
         try {
             String llavepimaria;
-            String criterio;
-            String opcionA = JOptionPane.showInputDialog(rootPane, "Como desea realizar la eliminacion?\n 1.Eliminar registro especifico\n 2. Eliminar registros segun un criterio ");
-            if (opcionA == null) {
+            llavepimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a eliminar:");
+            if (llavepimaria == null) {
                 return;
             }
-            int opcion = Integer.parseInt(opcionA);
-            if (opcion == 1) {
-                llavepimaria = JOptionPane.showInputDialog(rootPane, "Ingrese la llave primaria del registro a eliminar:");
-                if (llavepimaria == null) {
-                    return;
-                }
 
-                boolean isDelete = file.deleteRegistro(llavepimaria);
-                if (!isDelete) {
-                    JOptionPane.showMessageDialog(null, "La llave ya fue eliminada antes o no existe", "Notificación", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                this.listarTablaRegistro(true);
-            } else if (opcion == 2) {
-                criterio = JOptionPane.showInputDialog(rootPane, "Ingrese el criterio de eliminacion: ");
+            boolean isDelete = file.deleteRegistro(llavepimaria);
+            if (!isDelete) {
+                JOptionPane.showMessageDialog(null, "La llave ya fue eliminada antes o no existe", "Notificación", JOptionPane.ERROR_MESSAGE);
+                return;
             }
+            JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            this.listarTablaRegistro(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Entrada de datos inválida.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -2527,32 +2526,32 @@ public class Main extends javax.swing.JFrame {
         }
         String text = TF_NuevoRegistro.getText();
 
-        if (campoActual.isEsLLave() && text.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "El campo es una llave primaria por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
+        if ((campoActual.isEsLLave() || campoActual.isEsLlaveSecundaria()) && text.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El campo es una llave por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                    int numeroEntero = Integer.parseInt(text);
-                    System.out.println("Número entero: " + numeroEntero);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.err.println("Error al convertir a entero: " + e.getMessage());
-                    return;
-                }
-                break;
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
             case "double":
                 try {
-                    Double numeroDouble = Double.parseDouble(text);
-                    System.out.println("Número double: " + numeroDouble);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.err.println("Error al convertir a double: " + e.getMessage());
-                    return;
-                }
-                break;
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2560,7 +2559,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        if (campoActual.isEsLLave()) {
+        if ((campoActual.isEsLLave() && file.getBTree().getIsLlave()) || (campoActual.isEsLlaveSecundaria() && file.getBTree().getIsSecundaria() && campoActual.getNombre().equals(file.getBTree().getName()))) {
             if (file.getBTree().search(text) != -1) {
                 JOptionPane.showMessageDialog(rootPane, "La llave ingresada ya existe en los registros", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -2603,24 +2602,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                    int numeroEntero = Integer.parseInt(text);
-                    System.out.println("Número entero: " + numeroEntero);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.err.println("Error al convertir a entero: " + e.getMessage());
-                    return;
-                }
-                break;
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
             case "double":
                 try {
-                    Double numeroDouble = Double.parseDouble(text);
-                    System.out.println("Número double: " + numeroDouble);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.err.println("Error al convertir a double: " + e.getMessage());
-                    return;
-                }
-                break;
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2645,32 +2644,32 @@ public class Main extends javax.swing.JFrame {
         }
         String text = TF_NuevoRegistro.getText();
 
-        if (campoActual.isEsLLave() && text.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "El campo es una llave primaria por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
+        if ((campoActual.isEsLLave() || campoActual.isEsLlaveSecundaria()) && text.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El campo es una llave por favor ingresar los datos correpondientes", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                    int numeroEntero = Integer.parseInt(text);
-                    System.out.println("Número entero: " + numeroEntero);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.err.println("Error al convertir a entero: " + e.getMessage());
-                    return;
-                }
-                break;
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
             case "double":
                 try {
-                    Double numeroDouble = Double.parseDouble(text);
-                    System.out.println("Número double: " + numeroDouble);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.err.println("Error al convertir a double: " + e.getMessage());
-                    return;
-                }
-                break;
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2678,7 +2677,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        if (campoActual.isEsLLave()) {
+        if ((campoActual.isEsLLave() && file.getBTree().getIsLlave()) || (campoActual.isEsLlaveSecundaria() && file.getBTree().getIsSecundaria() && campoActual.getNombre().equals(file.getBTree().getName()))) {
             if (file.getBTree().search(text) != -1) {
                 JOptionPane.showMessageDialog(rootPane, "La llave ingresada ya existe en los registros", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -2718,24 +2717,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                    int numeroEntero = Integer.parseInt(text);
-                    System.out.println("Número entero: " + numeroEntero);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.err.println("Error al convertir a entero: " + e.getMessage());
-                    return;
-                }
-                break;
+                int numeroEntero = Integer.parseInt(text);
+                System.out.println("Número entero: " + numeroEntero);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a entero: " + e.getMessage());
+                return;
+            }
+            break;
             case "double":
                 try {
-                    Double numeroDouble = Double.parseDouble(text);
-                    System.out.println("Número double: " + numeroDouble);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.err.println("Error al convertir a double: " + e.getMessage());
-                    return;
-                }
-                break;
+                Double numeroDouble = Double.parseDouble(text);
+                System.out.println("Número double: " + numeroDouble);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Error al convertir a double: " + e.getMessage());
+                return;
+            }
+            break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2763,6 +2762,9 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         JF_Registros.setVisible(false);
         B_Campos.setEnabled(file.canBeEnableCampos());
+        B_Registros.setEnabled(file.canBeEnableRegistros());
+        B_Indices.setEnabled(!file.canBeEnableCampos());
+        B_Estandarizacion.setEnabled(!file.canBeEnableCampos());
         this.setVisible(true);
     }//GEN-LAST:event_Jmenu_RegresarMouseClicked
 
@@ -2850,6 +2852,10 @@ public class Main extends javax.swing.JFrame {
     private void B_RegresarIndiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_RegresarIndiceActionPerformed
         // TODO add your handling code here:
         JF_Indices.setVisible(false);
+        B_Campos.setEnabled(file.canBeEnableCampos());
+        B_Registros.setEnabled(file.canBeEnableRegistros());
+        B_Indices.setEnabled(!file.canBeEnableCampos());
+        B_Estandarizacion.setEnabled(!file.canBeEnableCampos());
         this.pack();
         this.setSize(JF_Indices.getWidth(), JF_Indices.getHeight());
         this.setLocationRelativeTo(this);
@@ -2924,6 +2930,10 @@ public class Main extends javax.swing.JFrame {
     private void B_RegresarEstandarizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_RegresarEstandarizacionMouseClicked
         // TODO add your handling code here:
         JF_estandarizacion.setVisible(false);
+        B_Campos.setEnabled(file.canBeEnableCampos());
+        B_Registros.setEnabled(file.canBeEnableRegistros());
+        B_Indices.setEnabled(!file.canBeEnableCampos());
+        B_Estandarizacion.setEnabled(!file.canBeEnableCampos());
         this.pack();
         this.setSize(JF_estandarizacion.getWidth(), JF_estandarizacion.getHeight());
         this.setLocationRelativeTo(this);
@@ -3003,39 +3013,33 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_B_ReindexarMouseClicked
     private void B_ExportarXMLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ExportarXMLMouseClicked
         // TODO add your handling code here:
-        String archivoTxt = "./" + file.getNombre() + ".txt";
-        String archivoXslt = "./" + file.getNombre() + ".xslt";
-        String archivoXml = "./" + file.getNombre() + ".xml";
-
         try {
-            // Verificar si el archivo XSLT ya existe, si no, crearlo dinámicamente
-            if (!new File(archivoXslt).exists()) {
-                // Analizar la estructura del archivo TXT y generar dinámicamente el contenido del archivo XSLT
-                String estructura = ExportadorXML.obtenerEstructuraDesdeArchivoTxt(archivoTxt);
-                String contenidoXSLT = ExportadorXML.generarContenidoXSLT(estructura);
-
-                // Guardar el contenido generado en el archivo XSLT
-                ExportadorXML.guardarContenidoEnArchivo(archivoXslt, contenidoXSLT);
-            }
-
-            // Verificar nuevamente si el archivo XSLT existe después de la generación
-            if (new File(archivoXslt).exists()) {
-                // Aplicar la transformación XSLT al archivo TXT
-                boolean xml = ExportadorXML.exportarConSchema(archivoTxt, archivoXslt, archivoXml);
-
-                if (xml) {
-                    JOptionPane.showMessageDialog(this, "Exportación exitosa a XML con Schema.", "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Fallo la Exportacion", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Error: No se pudo generar el archivo XSLT.", "Error", JOptionPane.ERROR_MESSAGE);
+            ExportadorXML exp = new ExportadorXML();
+            boolean isCreated = exp.exportarXML(file);
+            if (isCreated) {
+                JOptionPane.showMessageDialog(this, "Se creo con exito el XML", "Notificacion", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error durante la exportación a XML: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_B_ExportarXMLMouseClicked
+
+    private void JM_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JM_RegresarActionPerformed
+        // TODO add your handling code here:
+        if(this.isVisible()){
+            return;
+        }
+        file.clear();
+        file.Abrir();
+        B_Campos.setEnabled(true);
+        B_Registros.setEnabled(file.canBeEnableRegistros());
+        B_Indices.setEnabled(false);
+        B_Estandarizacion.setEnabled(false);
+        JF_Campos.setVisible(false);
+        this.setJMenuBar(jMenuBar1);
+        this.setVisible(true);
+    }//GEN-LAST:event_JM_RegresarActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -3130,6 +3134,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel JL_Longitud;
     private javax.swing.JLabel JL_Nombre;
     private javax.swing.JLabel JL_Tipo;
+    private javax.swing.JMenuItem JM_Regresar;
     private javax.swing.JLabel J_OrdenCampoInt;
     private javax.swing.JLabel J_OrdenCampos;
     private javax.swing.JLabel J_RegistroAnterior;

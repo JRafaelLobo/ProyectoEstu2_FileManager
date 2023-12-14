@@ -29,7 +29,7 @@ public class Archivos {
     protected int longitudTotalCampos = 0;
     protected int longitudTotalDeMetadata = 0;
     protected String rutaArchivo = "";
-    protected BTree bTree = new BTree(6);
+    protected BTree bTree = new BTree(6, true, false, null);
     protected BTreeSerialization fileTree = new BTreeSerialization();
 
     private void insertar5MilRegistros() {
@@ -76,9 +76,8 @@ public class Archivos {
     }
 
     public boolean CruzarArchivos(Archivos file1, Archivos file2, String relacion, int[] datos1, int[] datos2) {
-        BTree arbol = new BTree(6);
         int tipo1 = -1;
-
+        BTree arbol = null;
         try (RandomAccessFile file = new RandomAccessFile(file1.rutaArchivo, "rw")) {
             int i = file2.longitudTotalDeMetadata;
             int count = 0;
@@ -93,6 +92,8 @@ public class Archivos {
             if (!flag) {
                 return false;
             }
+            String name = listaCampos.get(tipo1).isEsLlaveSecundaria() ? listaCampos.get(tipo1).getNombre() : null;
+            arbol = new BTree(6, listaCampos.get(tipo1).isEsLLave(), listaCampos.get(tipo1).isEsLlaveSecundaria(), name);
             while (i < file.length()) {
                 file.seek(i);
                 byte[] buffer = new byte[file2.longitudTotalRegistro];
@@ -315,6 +316,7 @@ public class Archivos {
         try (RandomAccessFile file = new RandomAccessFile(this.rutaArchivo, "rw")) {
             int i = longitudTotalDeMetadata;
             int count = 0;
+            this.registros.clear();
             while (count < 10 && i < file.length()) {
                 file.seek(i);
                 byte[] buffer = new byte[this.longitudTotalRegistro];
@@ -572,8 +574,7 @@ public class Archivos {
         this.longitudTotalDeMetadata = 0;
         this.registros.clear();
         bTree = null;
-        bTree = new BTree(6);
-
+        bTree = new BTree(6, true, false, null);
     }
 
     public boolean canBeEnableCampos() {
@@ -600,7 +601,6 @@ public class Archivos {
             int count = 0;
             int tipo = -1;
             int largo = 0;
-            BTree arbol = new BTree(6);
             boolean flag = false;
             for (int j = 0; j < this.listaCampos.size(); j++) {
                 if (campo == this.listaCampos.get(j)) {
@@ -614,6 +614,8 @@ public class Archivos {
             if (!flag) {
                 return false;
             }
+            String name = listaCampos.get(tipo).isEsLlaveSecundaria() ? listaCampos.get(tipo).getNombre() : null;
+            BTree arbol = new BTree(6, listaCampos.get(tipo).isEsLLave(), listaCampos.get(tipo).isEsLlaveSecundaria(), name);
             while (i < file.length()) {
                 file.seek(i);
                 byte[] buffer = new byte[this.longitudTotalRegistro];
@@ -625,6 +627,11 @@ public class Archivos {
                     continue;
                 }
                 String[] register = registro.trim().split("\\|");
+                int repetido = arbol.search(register[tipo]);
+                if(repetido != -1){
+                    System.err.println("Las llaves estan repetida");
+                    return false;
+                }
                 Llave l = new Llave(register[tipo], count);
                 arbol.insert(l);
 
@@ -642,7 +649,6 @@ public class Archivos {
 
     public boolean Reindexar(String ruta) {
         this.bTree = fileTree.loadBTreeFromFile(ruta);
-        bTree.printBTree();
         return true;
     }
 
