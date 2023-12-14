@@ -184,7 +184,7 @@ public class Archivos {
                     }
 
                 }
-                temp += metodoparaCruzar2(file2, temp, arbol, l, datos2);
+                temp = metodoparaCruzar2(file2, temp, arbol, l, datos2);
                 file3.insertarRegistro(temp, l);
 
                 count++;
