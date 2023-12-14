@@ -2480,20 +2480,27 @@ public class Main extends javax.swing.JFrame {
         int[] a = new int[D1.getColumnCount()];
         int[] b = new int[D2.getColumnCount()];
         int n = 0;
-        for (int i = 0; i < D1.getColumnCount(); i++) {
+        for (int i = 0; i < D1.getRowCount(); i++) {
             if (Boolean.parseBoolean(D1.getValueAt(i, 1).toString())) {
                 a[n] = i;
                 n++;
             }
         }
         n = 0;
-        for (int i = 0; i < D2.getColumnCount(); i++) {
+        for (int i = 0; i < D2.getRowCount(); i++) {
             if (Boolean.parseBoolean(D2.getValueAt(i, 1).toString())) {
                 b[n] = i;
                 n++;
             }
         }
 
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + " ");
+        }
+        System.out.println("");
+        for (int i = 0; i < b.length; i++) {
+            System.out.print(b[i] + " ");
+        }
         boolean funciono = cruzado.CruzarArchivos(file, cruzado, (String) Combo_Cruzar.getSelectedItem(), a, b);
         if (funciono) {
             JOptionPane.showMessageDialog(null, "Se Creo el documento exitosamente", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -2534,24 +2541,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2602,24 +2609,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2652,24 +2659,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -2717,24 +2724,24 @@ public class Main extends javax.swing.JFrame {
         switch (campoActual.getTipo()) {
             case "int":
                 try {
-                int numeroEntero = Integer.parseInt(text);
-                System.out.println("Número entero: " + numeroEntero);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a entero: " + e.getMessage());
-                return;
-            }
-            break;
+                    int numeroEntero = Integer.parseInt(text);
+                    System.out.println("Número entero: " + numeroEntero);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo int", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a entero: " + e.getMessage());
+                    return;
+                }
+                break;
             case "double":
                 try {
-                Double numeroDouble = Double.parseDouble(text);
-                System.out.println("Número double: " + numeroDouble);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("Error al convertir a double: " + e.getMessage());
-                return;
-            }
-            break;
+                    Double numeroDouble = Double.parseDouble(text);
+                    System.out.println("Número double: " + numeroDouble);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son de tipo double", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error al convertir a double: " + e.getMessage());
+                    return;
+                }
+                break;
         }
 
         if (text.length() > campoActual.getTamano()) {
@@ -3027,7 +3034,7 @@ public class Main extends javax.swing.JFrame {
 
     private void JM_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JM_RegresarActionPerformed
         // TODO add your handling code here:
-        if(this.isVisible()){
+        if (this.isVisible()) {
             return;
         }
         file.clear();

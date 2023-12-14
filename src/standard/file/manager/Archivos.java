@@ -78,7 +78,7 @@ public class Archivos {
     public boolean CruzarArchivos(Archivos file1, Archivos file2, String relacion, int[] datos1, int[] datos2) {
         int tipo1 = -1;
         BTree arbol = null;
-        try (RandomAccessFile file = new RandomAccessFile(file1.rutaArchivo, "rw")) {
+        try (RandomAccessFile file = new RandomAccessFile(file2.rutaArchivo, "rw")) {
             int i = file2.longitudTotalDeMetadata;
             int count = 0;
             boolean flag = false;
@@ -99,12 +99,14 @@ public class Archivos {
                 byte[] buffer = new byte[file2.longitudTotalRegistro];
                 int bytesRead = file.read(buffer);
                 String registro = new String(buffer, 0, bytesRead);
-                i += longitudTotalRegistro;
+                i += file2.longitudTotalRegistro;
                 if (registro.charAt(0) == '*') {
                     count++;
                     continue;
                 }
                 String[] register = registro.trim().split("\\|");
+                System.out.println(registro);
+                System.out.println("");
                 Llave l = new Llave(register[tipo1], count);
                 arbol.insert(l);
 
@@ -142,7 +144,7 @@ public class Archivos {
                 byte[] buffer = new byte[file1.longitudTotalRegistro];
                 int bytesRead = file.read(buffer);
                 String registro = new String(buffer, 0, bytesRead);
-                i += longitudTotalRegistro;
+                i += file1.longitudTotalRegistro;
                 if (registro.charAt(0) == '*') {
                     count++;
                     continue;
@@ -179,8 +181,8 @@ public class Archivos {
         int rnn;
         rnn = arbol.search(buscar);
         try (RandomAccessFile file = new RandomAccessFile(file3.rutaArchivo, "rw")) {
-            file.seek((this.longitudTotalDeMetadata) + ((this.longitudTotalRegistro) * rnn));
-            byte[] buffer = new byte[this.longitudTotalRegistro];
+            file.seek((file3.longitudTotalDeMetadata) + ((file3.longitudTotalRegistro) * rnn));
+            byte[] buffer = new byte[file3.longitudTotalRegistro];
             int bytesRead = file.read(buffer);
             String contenido = new String(buffer, 0, bytesRead);
             String[] linea = contenido.trim().split("\\|");
