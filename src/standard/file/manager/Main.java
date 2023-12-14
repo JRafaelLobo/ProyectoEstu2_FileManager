@@ -1697,6 +1697,9 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El archivo se creo con exito", "Notificación", JOptionPane.INFORMATION_MESSAGE);
                 break;
         }
+        if (!file.getRutaArchivo().equals("")) {
+            return;
+        }
         file.setRutaArchivo(isCreated);
         File nombre = new File(isCreated);
         file.setNombre(nombre.getName().replace(".txt", ""));
@@ -2539,9 +2542,20 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel D1 = (DefaultTableModel) TB_Campos_file1.getModel();
 
         DefaultTableModel D2 = (DefaultTableModel) TB_Campos_file2.getModel();
-
-        int[] a = new int[D1.getColumnCount()];
-        int[] b = new int[D2.getColumnCount()];
+        int s = 0;
+        for (int i = 0; i < D1.getRowCount(); i++) {
+            if (Boolean.parseBoolean(D1.getValueAt(i, 1).toString())) {
+                s++;
+            }
+        }
+        int[] a = new int[s];
+        s=0;
+        for (int i = 0; i < D2.getRowCount(); i++) {
+            if (Boolean.parseBoolean(D2.getValueAt(i, 1).toString())) {
+                s++;
+            }
+        }
+        int[] b = new int[s];
         int n = 0;
         for (int i = 0; i < D1.getRowCount(); i++) {
             if (Boolean.parseBoolean(D1.getValueAt(i, 1).toString())) {
