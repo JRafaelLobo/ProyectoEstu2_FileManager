@@ -121,8 +121,8 @@ public class Archivos {
             if (!flag) {
                 return false;
             }
-            String name = listaCampos.get(tipo1).isEsLlaveSecundaria() ? listaCampos.get(tipo1).getNombre() : null;
-            arbol = new BTree(6, listaCampos.get(tipo1).isEsLLave(), listaCampos.get(tipo1).isEsLlaveSecundaria(), name);
+            String name = file2.getListaCampos().get(tipo1).isEsLlaveSecundaria() ? file2.getListaCampos().get(tipo1).getNombre() : null;
+            arbol = new BTree(6, file2.getListaCampos().get(tipo1).isEsLLave(), file2.getListaCampos().get(tipo1).isEsLlaveSecundaria(), name);
             while (i < file.length()) {
                 file.seek(i);
                 byte[] buffer = new byte[file2.longitudTotalRegistro];
@@ -145,7 +145,11 @@ public class Archivos {
 
         Archivos file3 = new Archivos();
         file3.crearArchivoCruzado(file1.getRutaArchivo(), file1.nombre, file2.nombre);
+        int tipo2 = -1;
         for (int j = 0; j < file1.listaCampos.size(); j++) {
+            if(file2.listaCampos.get(tipo1).getNombre().equals(file1.listaCampos.get(j).getNombre())){
+                tipo2 = j;
+            }
             if (contieneNumero(datos1, j)) {
                 file3.listaCampos.add(file1.listaCampos.get(j));
             }
@@ -175,7 +179,7 @@ public class Archivos {
                 String temp = "";
                 String l = "";
                 for (int j = 0; j < register.length; j++) {
-                    if (tipo1 == j) {
+                    if (tipo2 == j) {
                         l = register[j];
                     }
                     if (contieneNumero(datos1, j)) {
@@ -184,6 +188,7 @@ public class Archivos {
                     }
 
                 }
+                System.out.println(l);
                 temp = metodoparaCruzar2(file2, temp, arbol, l, datos2);
                 file3.insertarRegistro(temp, l);
 
@@ -211,6 +216,7 @@ public class Archivos {
             for (int i = 0; i < linea.length; i++) {
                 if (contieneNumero(datos2, i)) {
                     temp += linea[i];
+                    //System.out.println(linea[i]);
                     temp += "|";
                 }
             }
