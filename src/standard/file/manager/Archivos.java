@@ -120,12 +120,14 @@ public class Archivos {
             if (j != tipo1) {
                 if (contieneNumero(datos1, j)) {
                     file3.listaCampos.add(file1.listaCampos.get(j));
+                    System.out.println(file1.listaCampos.get(j));
                 }
             }
         }
         for (int j = 0; j < file2.listaCampos.size(); j++) {
             if (contieneNumero(datos2, j)) {
                 file3.listaCampos.add(file2.listaCampos.get(j));
+                System.out.println(file2.listaCampos.get(j));
             }
         }
         //file3.rutaArchivo = ruta;

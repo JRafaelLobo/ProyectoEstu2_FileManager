@@ -2475,10 +2475,8 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         DefaultTableModel D1 = (DefaultTableModel) TB_Campos_file1.getModel();
-        D1.getValueAt(1, 0);
 
         DefaultTableModel D2 = (DefaultTableModel) TB_Campos_file2.getModel();
-        D2.getValueAt(1, 0);
 
         int[] a = new int[D1.getColumnCount()];
         int[] b = new int[D2.getColumnCount()];
@@ -2490,7 +2488,7 @@ public class Main extends javax.swing.JFrame {
             }
         }
         n = 0;
-        for (int i = 0; i < D1.getColumnCount(); i++) {
+        for (int i = 0; i < D2.getColumnCount(); i++) {
             if (Boolean.parseBoolean(D2.getValueAt(i, 1).toString())) {
                 b[n] = i;
                 n++;
